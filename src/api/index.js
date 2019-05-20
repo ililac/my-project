@@ -512,7 +512,7 @@ export const relativeLock = (params) => {
 }
 //相对方对方中的同步
 export const relativeFindCompany = (params) => {
-    return postRequest('/counterpart/findCompany', params)
+    return postRequest('/contract/counterpart/findCompany', params)
 }
 //合同签署列表查询
 export const signContractList = (params) => {
