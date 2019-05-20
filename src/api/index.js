@@ -760,5 +760,5 @@ export const draftModelList = (params) => {
 }
 //合同用印中的用印确认
 export const parintConfirm = (params) => {
-	return postRequest('/fulfil/updateTcon',params)
+	return postRequest('/contract/fulfil/updateTcon',params)
 }
