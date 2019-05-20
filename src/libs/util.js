@@ -330,7 +330,7 @@ util.initRouter = function (vm) {
     }
     let accessToken = window.localStorage.getItem('accessToken')
     // 加载菜单
-    axios.get(getMenuList, { headers: { 'accessToken': accessToken } }).then(res => {
+    axios.get(getMenuList, { headers: { 'access_token': accessToken,"Authorization":'Bearer '+ accessToken} }).then(res => {
         let menuData = res.result;
         if (menuData === null || menuData === "" || menuData === undefined) {
             return;
