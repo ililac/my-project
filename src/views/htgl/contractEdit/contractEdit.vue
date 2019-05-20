@@ -968,7 +968,8 @@
 	            init() {
 	                this.getProcessList();
 	                this.accessToken = {
-	                    accessToken: this.getStore("accessToken")
+	                    access_token: this.getStore("accessToken"),
+	                    Authorization: 'Bearer '+this.getStore("accessToken")
 	                };
 	                this.getDictDataType();
 	                // 获取表单数据
