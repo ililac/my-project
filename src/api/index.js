@@ -609,7 +609,7 @@ export const feedbackConfirm = (params) => {
 }
 //合同查询中的所有合同查询
 export const contractSearch = (params) => {
-	return postRequest('/query/findContractByParams',params)
+	return postRequest('/contract/query/findContractByParams',params)
 }
 //审批人提交接口
 export const applyBusiness = (params) => {
