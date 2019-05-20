@@ -4,7 +4,7 @@ import { router } from '../router/index';
 import { Message } from 'iview';
 import Cookies from 'js-cookie';
 // 统一请求路径前缀
-let base = '/xboot';
+let base = '/zhfw';
 let base2 = '/compare';
 // 超时设定
 axios.defaults.timeout = 15000;
@@ -69,7 +69,8 @@ export const getRequest = (url, params) => {
         url: `${base}${url}`,
         params: params,
         headers: {
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -89,7 +90,8 @@ export const postRequest = (url, params) => {
         }],
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -109,7 +111,8 @@ export const putRequest = (url, params) => {
         }],
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -121,7 +124,8 @@ export const deleteRequest = (url, params) => {
         url: `${base}${url}`,
         params: params,
         headers: {
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -133,7 +137,8 @@ export const importRequest = (url, params) => {
         url: `${base}${url}`,
         data: params,
         headers: {
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -145,7 +150,8 @@ export const uploadFileRequest = (url, params) => {
         url: `${base}${url}`,
         params: params,
         headers: {
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
@@ -165,7 +171,8 @@ export const getTextCompare = (url,params) => {
         }],
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'accessToken': accessToken
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
         }
     });
 };
