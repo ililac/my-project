@@ -532,7 +532,7 @@ export const signCancelUpdate = (params) => {
 }
 //合同用印里的打印
 export const cantactPrint = (params) => {
-    return postRequest('/fulfil/updateContract', params)
+    return postRequest('/contract/fulfil/updateContract', params)
 }
 //合同审批中的列表接口
 export const findContractList = (params) => {
