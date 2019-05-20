@@ -520,7 +520,7 @@ export const signContractList = (params) => {
 }
 //合同签署中的签署
 export const signAture = (params) => {
-    return postRequest('/sign/addSignInfo', params)
+    return postRequest('/contract/sign/addSignInfo', params)
 }
 //合同签署中的作废
 export const signCancel = (params) => {
