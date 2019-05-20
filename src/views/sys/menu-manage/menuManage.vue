@@ -267,7 +267,7 @@ export default {
     },
     getAllList() {
       this.loading = true;
-      this.getRequest("/permission/getAllList").then(res => {
+      this.getRequest("/system/permission/getAllList").then(res => {
         this.loading = false;
         if (res.success === true) {
           // 仅展开指定级数 默认一级
