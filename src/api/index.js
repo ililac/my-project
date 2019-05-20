@@ -512,7 +512,7 @@ export const relativeLock = (params) => {
 }
 //相对方对方中的同步
 export const relativeFindCompany = (params) => {
-    return postRequest('/counterpart/findCompany', params)
+    return postRequest('/contract/counterpart/findCompany', params)
 }
 //合同签署列表查询
 export const signContractList = (params) => {
@@ -688,11 +688,11 @@ export const examineShow = (params) => {
 }
 //相对方中的模糊查询
 export const relativeName = (params) => {
-	return getRequest('/counterpart/findCompany/search/word',params)
+	return getRequest('/contract/counterpart/findCompany/search/word',params)
 }
 //获取相对方编号
 export const relativeNumber = (params) => {
-	return getRequest('/counterpart/generateCounterpartNum',params)
+	return getRequest('/contract/counterpart/generateCounterpartNum',params)
 }
 //查询已签署的合同
 export const signedContract = (params) => {
