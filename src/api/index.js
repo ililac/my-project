@@ -480,7 +480,7 @@ export const myDelete = (params) => {
 }
 
 export const findContractByParam = (params) => {
-    return postRequest('/draft/findContractByParam', params)
+    return postRequest('/contract/draft/findContractByParam', params)
 }
 //合同范本中的添加新数据
 export const addhtong = (params) => {
@@ -544,11 +544,11 @@ export const examineManList = (id,params) => {
 }
 //合同起草
 export const draftMyDelete = (params) => {
-    return postRequest('/draft/deleteContractById', params)
+    return postRequest('/contract/draft/deleteContractById', params)
 }
 //合同审批中的合同详情查询
 export const detailList = (params) => {
-    return postRequest('/draft/findContractDetailById', params)
+    return postRequest('/contract/draft/findContractDetailById', params)
 }
 //待办
 export const awaitDo = (params) => {
