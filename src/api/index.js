@@ -667,7 +667,7 @@ export const contractType = (params) => {
 }
 //合同类型快速搜索
 export const contractTypeRapid = (params) => {
-	return postRequest('/dictData/searchTypeByContract',params)
+	return postRequest('system/dictData/searchTypeByContract',params)
 }
 
 //合同起草中部门获取
