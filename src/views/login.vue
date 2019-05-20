@@ -216,7 +216,7 @@ export default {
               saveLogin: this.saveLogin
             }).then(res => {
               if (res.success === true) {
-                this.setStore("accessToken", res.result);
+                this.setStore("accessToken", res.result.access_token);
                 // 获取用户信息
                 userInfo().then(res => {
                   if (res.success === true) {
