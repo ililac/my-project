@@ -466,7 +466,7 @@ export const seeSecretSet = (settingName, params) => {
 }
 
 export const contractModelquery = (params) => {
-    return postRequest('/contractModel/query', params)
+    return postRequest('/contract/contractModel/query', params)
 }
 export const fromUp = (params) => {
     return postRequest('/u/info', params)
@@ -491,20 +491,20 @@ export const draftAddhtong = (params) => {
     return postRequest('/draft/editContractById', params)
 }
 export const eachOther = (params) => {
-    return postRequest('/counterpart/query', params)
+    return postRequest('/contract/counterpart/query', params)
 }
 //相对方的列表查询
 export const contractRelativequery = (params) => {
-    return postRequest('/counterpart/query', params)
+    return postRequest('/contract/counterpart/query', params)
 }
 //相对方数据提交
 export const relativeFromSave = (params) => {
-    return postRequest('/counterpart/save', params)
+    return postRequest('/contract/counterpart/save', params)
 }
 //相对方数据删除
 export const relativeDelete = (params) => {
     // return deleteRequest(`/counterpart/del/${ids}`, params)
-    return postRequest('/counterpart/del', params)
+    return postRequest('/contract/counterpart/del', params)
 }
 //相对方拉黑
 export const relativeLock = (params) => {
@@ -560,7 +560,7 @@ export const alreadyDo = (params) => {
 }
 //合同数量统计
 export const contractNumberStatistics = (params) => {
-    return getRequest('/index/contract/statis', params)
+    return getRequest('/contract/index/contract/statis', params)
 }
 //获取合同审批中的下一审批人的数据
 export const nextExamine = (id,params) => {
@@ -639,7 +639,7 @@ export const chooseFile = (params) => {
 }
 //合同范本和相对方中的详情
 export const modelRelativeDetail = (params) =>{
-	return postRequest('/contractModel/queryModelOrRelativeById',params)
+	return postRequest('/contract/contractModel/queryModelOrRelativeById',params)
 }
 //合同编号验证
 export const contractNumber = (params) => {
@@ -720,27 +720,27 @@ export const feedbackDetail = (ids, params) => {
 }
 //查询北大法宝合同类别列表
 export const queryContractType = (params) => {
-  return getRequest('/contractModel/queryContractType',params)
+  return getRequest('/contract/contractModel/queryContractType',params)
 }
 //查询北大法宝合同发布部门
 export const queryDepartmentTitle = (params) => {
-  return getRequest('/contractModel/queryDepartmentTitle',params)
+  return getRequest('/contract/contractModel/queryDepartmentTitle',params)
 }
 //查询北大法宝合同行业类别
 export const queryIndustryType = (params) => {
-  return getRequest('/contractModel/queryIndustryType',params)
+  return getRequest('/contract/contractModel/queryIndustryType',params)
 }
 //获取北大法宝范本库列表
 export const queryModelOnLine = (params) => {
-  return getRequest('/contractModel/queryModelOnLine',params)
+  return getRequest('/contract/contractModel/queryModelOnLine',params)
 }
 //查看合同范本详情
 export const getSingleRecord = (params) => {
-  return getRequest('/contractModel/getSingleRecord',params)
+  return getRequest('/contract/contractModel/getSingleRecord',params)
 }
 //选择一个在线范本会增加到本地范本库接口
 export const saveModelByIdOnLine = (params) => {
-  return getRequest('/contractModel/saveModelByIdOnLine',params)
+  return getRequest('/contract/contractModel/saveModelByIdOnLine',params)
 }
 //折线图数据
 export const echartsData = (params) => {
@@ -756,7 +756,7 @@ export const payRelativeList = (params) => {
 }
 //合同起草中查看范本列表
 export const draftModelList = (params) => {
-	return postRequest('/contractModel/query/release',params)
+	return postRequest('/contract/contractModel/query/release',params)
 }
 //合同用印中的用印确认
 export const parintConfirm = (params) => {
