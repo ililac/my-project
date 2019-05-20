@@ -20,7 +20,7 @@
 						            <span @click="draftBz" class="model-select" style="cursor:pointer">{{dictForm.contentname == "" ? "范本选择" : dictForm.contentname}}</span>
 								</FormItem>
 								<FormItem label="合同正文" v-else="chapter1 == 4" class="lef" prop="contentname">
-									<Upload action="/xboot/draft/upload/file?tag=contracturl-contentname"
+									<Upload action="/zhfw/contract/draft/upload/file?tag=contracturl-contentname"
 						                :headers="accessToken"
 										:on-success="handleSuccess2"
 										:on-error="handleError"
@@ -145,7 +145,7 @@
 										ref="up1">
 										<p id="attachmentname" class="upload" @click="getUpId('attachmentname')">{{dictForm.attachmentname == "" ? "点击上传文件" : dictForm.attachmentname}}</p>
 									</Upload> -->
-									<Upload action="/xboot/draft/upload/file?tag=accessoryurl-attachmentname"
+									<Upload action="/zhfw/contract/draft/upload/file?tag=accessoryurl-attachmentname"
 									    :headers="accessToken"
 										:on-success="handleSuccess"
 										:on-error="handleError"

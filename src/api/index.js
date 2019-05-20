@@ -643,14 +643,14 @@ export const modelRelativeDetail = (params) =>{
 }
 //合同编号验证
 export const contractNumber = (params) => {
-	return getRequest('/draft/checkContractNumber',params)
+	return getRequest('/contract/draft/checkContractNumber',params)
 }
 //合同地址验证
 // export const fileUpUrlAudit = (params) => {
 // 	return getRequest('/draft/checkFileEmpty',params)
 // }
 export const fileUpUrlAudit = (params) => {
-	return getRequest('/draft/uploadFileNew',params)
+	return getRequest('/contract/draft/uploadFileNew',params)
 }
 //申请人表单数据
 export const personSelect = (params) => {

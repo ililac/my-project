@@ -239,7 +239,7 @@
 							></DatePicker>
 						</Form-item>
 						<FormItem label="合同正文（扫描件）" class="lef" prop="title2">
-							<Upload action="/xboot/draft/upload/file?tag=contracturl-contentname"
+							<Upload action="/zhfw/contract/draft/upload/file?tag=contracturl-contentname"
 							    :headers="accessToken"
 							    :on-success="handleSuccess3"
 							    :on-error="handleError"
