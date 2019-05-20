@@ -392,7 +392,7 @@ export const deleteMessageSend = (ids, params) => {
 
 // 分页获取文件数据
 export const getFileListData = (params) => {
-    return getRequest('/file/getByCondition', params)
+    return getRequest('/system/file/getByCondition', params)
 }
 // 复制文件
 export const copyFile = (params) => {
@@ -480,7 +480,7 @@ export const myDelete = (params) => {
 }
 
 export const findContractByParam = (params) => {
-    return postRequest('/contract/draft/findContractByParam', params)
+    return postRequest('/draft/findContractByParam', params)
 }
 //合同范本中的添加新数据
 export const addhtong = (params) => {
@@ -544,7 +544,7 @@ export const examineManList = (id,params) => {
 }
 //合同起草
 export const draftMyDelete = (params) => {
-    return postRequest('/contract/draft/deleteContractById', params)
+    return postRequest('/draft/deleteContractById', params)
 }
 //合同审批中的合同详情查询
 export const detailList = (params) => {
