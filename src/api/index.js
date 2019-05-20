@@ -472,11 +472,11 @@ export const fromUp = (params) => {
     return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
-    return postRequest('/contract/contractModel/save', params)
+    return postRequest('/contractModel/save', params)
 }
 
 export const myDelete = (params) => {
-    return postRequest('/contract/contractModel/del', params)
+    return postRequest('/contractModel/del', params)
 }
 
 export const findContractByParam = (params) => {
@@ -744,7 +744,7 @@ export const saveModelByIdOnLine = (params) => {
 }
 //折线图数据
 export const echartsData = (params) => {
-	return getRequest('/query/getContractAmount',params)
+	return getRequest('/contract/query/getContractAmount',params)
 }
 //查询签订信息的详情
 export const signDetail = (params) => {
