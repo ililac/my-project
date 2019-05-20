@@ -469,7 +469,7 @@ export const contractModelquery = (params) => {
     return postRequest('/contract/contractModel/query', params)
 }
 export const fromUp = (params) => {
-    return postRequest('/u/info', params)
+    return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
     return postRequest('/contractModel/save', params)
@@ -516,7 +516,7 @@ export const relativeFindCompany = (params) => {
 }
 //合同签署列表查询
 export const signContractList = (params) => {
-    return postRequest('/fulfil/queryContractList', params)
+    return postRequest('/contract/fulfil/queryContractList', params)
 }
 //合同签署中的签署
 export const signAture = (params) => {
@@ -663,7 +663,7 @@ export const animateWidths = (params) => {
 }
 //合同类型查询
 export const contractType = (params) => {
-	return postRequest('/dictData/queryByDictId',params)
+	return postRequest('/system/dictData/queryByDictId',params)
 }
 //合同类型快速搜索
 export const contractTypeRapid = (params) => {
