@@ -5,7 +5,7 @@ import { getRequest, postRequest, putRequest, deleteRequest, importRequest, uplo
 // Vaptcha ID
 export const vaptchaID = "5bb9a277fc650e00a4155567"
 // 文件上传接口
-export const uploadFile = "/system/upload/file"
+export const uploadFile = "/zhfw/system/upload/file"
 // 验证码渲染图片接口
 export const drawCodeImage = "/zhfw/system/common/captcha/draw/"
 // 获取菜单
@@ -472,11 +472,11 @@ export const fromUp = (params) => {
     return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
-    return postRequest('/contract/contractModel/save', params)
+    return postRequest('/contractModel/save', params)
 }
 
 export const myDelete = (params) => {
-    return postRequest('/contract/contractModel/del', params)
+    return postRequest('/contractModel/del', params)
 }
 
 export const findContractByParam = (params) => {
@@ -744,7 +744,7 @@ export const saveModelByIdOnLine = (params) => {
 }
 //折线图数据
 export const echartsData = (params) => {
-	return getRequest('/query/getContractAmount',params)
+	return getRequest('/contract/query/getContractAmount',params)
 }
 //查询签订信息的详情
 export const signDetail = (params) => {
