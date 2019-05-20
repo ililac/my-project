@@ -469,7 +469,7 @@ export const contractModelquery = (params) => {
     return postRequest('/contract/contractModel/query', params)
 }
 export const fromUp = (params) => {
-    return postRequest('/u/info', params)
+    return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
     return postRequest('/contractModel/save', params)
@@ -663,11 +663,11 @@ export const animateWidths = (params) => {
 }
 //合同类型查询
 export const contractType = (params) => {
-	return postRequest('/dictData/queryByDictId',params)
+	return postRequest('/system/dictData/queryByDictId',params)
 }
 //合同类型快速搜索
 export const contractTypeRapid = (params) => {
-	return postRequest('/dictData/searchTypeByContract',params)
+	return postRequest('system/dictData/searchTypeByContract',params)
 }
 
 //合同起草中部门获取
