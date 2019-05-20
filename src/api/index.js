@@ -585,7 +585,7 @@ export const historyExamine = (id,params) => {
 export const flowExample = "/xboot/actProcess/getHighlightImg/"
 //合同履行计划详情
 export const performPlanDel = (params) => {
-    return postRequest('/seal/querySeal', params)
+    return postRequest('/contract/seal/querySeal', params)
 }
 //合同履行计划确认
 export const performPlanConfirm = (params) => {
@@ -748,11 +748,11 @@ export const echartsData = (params) => {
 }
 //查询签订信息的详情
 export const signDetail = (params) => {
-	return getRequest('/query/getContractSignInfoByContractId',params)
+	return getRequest('/contract/query/getContractSignInfoByContractId',params)
 }
 //收付款相对方列表查询
 export const payRelativeList = (params) => {
-	return getRequest('/counterpart/getCounterpartByCounterId',params)
+	return getRequest('/contract/counterpart/getCounterpartByCounterId',params)
 }
 //合同起草中查看范本列表
 export const draftModelList = (params) => {
