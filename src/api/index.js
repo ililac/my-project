@@ -516,7 +516,7 @@ export const relativeFindCompany = (params) => {
 }
 //合同签署列表查询
 export const signContractList = (params) => {
-    return postRequest('/fulfil/queryContractList', params)
+    return postRequest('/contract/fulfil/queryContractList', params)
 }
 //合同签署中的签署
 export const signAture = (params) => {
