@@ -86,7 +86,7 @@
 					</div>
 					<div class="ul">
 						<FormItem label="作废依据" class="lef">
-							<Upload action="/xboot/upload/file"
+							<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess"
 									:on-error="handleError"
@@ -181,7 +181,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag != 1">
 							<FormItem label="授权委托书">
-								<Upload action="/xboot/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -204,7 +204,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag == 1">
 							<FormItem label="授权委托书" prop="title">
-								<Upload action="/xboot/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"

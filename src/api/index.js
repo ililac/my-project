@@ -5,7 +5,7 @@ import { getRequest, postRequest, putRequest, deleteRequest, importRequest, uplo
 // Vaptcha ID
 export const vaptchaID = "5bb9a277fc650e00a4155567"
 // 文件上传接口
-export const uploadFile = "/system/upload/file"
+export const uploadFile = "/zhfw/system/upload/file"
 // 验证码渲染图片接口
 export const drawCodeImage = "/zhfw/system/common/captcha/draw/"
 // 获取菜单
