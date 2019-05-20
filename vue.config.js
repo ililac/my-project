@@ -3,8 +3,9 @@ module.exports = {
         host: '0.0.0.0',
         port: 9999,
         proxy: {
-            '/xboot': {
-                target: 'http://192.168.4.229:8888',  // 请求本地 需要xboot后台项目
+            '/zhfw': {
+                // target: 'http://139.198.16.175:8065',  // 请求本地 需要xboot后台项目
+                target: 'http://127.0.0.1:7072',
                 ws: false
             },
 			'/compare': {
@@ -13,7 +14,14 @@ module.exports = {
             },
             '/foo': {
                 target: '<other_url>'
+            },
+            '/ws':
+            {
+                // target: 'http://139.198.16.175:8075',  // 请求本地 需要xboot后台项目
+                target: 'http://127.0.0.1:7074',
+                ws: false
             }
+
         }
     },
     // 打包时不生成.map文件 避免看到源码
