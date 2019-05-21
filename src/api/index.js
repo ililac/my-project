@@ -779,3 +779,7 @@ export const archive = (params) => {
 export const getArchiveById = (id,params) => {
 	return getRequest(`/contract/archive/getArchiveById/${id}`,params)
 }
+//合同统计（院系负责人）接口
+export const statisticsDepartment = (params) => {
+    return getRequest('/contract/statistics/StatisticsContract',params)
+}
