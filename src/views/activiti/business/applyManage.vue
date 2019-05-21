@@ -1,5 +1,5 @@
 <style lang="less">
-	@import "./applyManage.less";
+    @import "./applyManage.less";
 </style>
 
 <template>
@@ -7,106 +7,106 @@
         <Card>
             <Row type="flex" justify="space-between" class="code-row-bg">
                 <Col :span="24">
-                <Row>
-                    <Form ref="searchForm" :model="searchForm" inline :label-width="60" class="search-form">
-                        <Form-item label="合同名称">
-                            <Input type="text" v-model="searchForm.name" placeholder="请输入" clearable/>
-                        </Form-item>
-                        <Form-item label="开始时间">
-                            <DatePicker
-                                    v-model="searchForm.startTime"
-                                    type="date"
-                                    format="yyyy-MM-dd"
-                                    clearable
-                                    placeholder="选择开始时间"
-                            ></DatePicker>
-                        </Form-item>
-						<Form-item label="结束时间">
-						    <DatePicker
-						            v-model="searchForm.endTime"
-						            type="date"
-						            format="yyyy-MM-dd"
-									@on-change="timeChange"
-						            clearable
-						            placeholder="选择结束时间"
-						    ></DatePicker>
-						</Form-item>
-                        <Form-item style="margin-left:-35px;" class="br">
-                            <Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
-                            <Button @click="handleReset" type="primary">重置</Button>
-                        </Form-item>
-                    </Form>
-                </Row>
-                <Row class="operation">
-                    <Button @click="add" type="primary" icon="md-add">添加数据</Button>
-                    <Button @click="getDataList" icon="md-refresh">刷新数据</Button>
-                </Row>
-                <!-- <Row>
-                    <Alert show-icon>已选择
-                        <span class="select-count">{{selectCount}}</span> 项
-                    </Alert>
-                </Row> -->
-                <Row>
-                    <Table
-                            :loading="loading"
-                            border
-                            :columns="columns"
-                            :data="data"
-                            sortable="custom"
-                            ref="table"
-                    ></Table>
-                </Row>
-                <Row type="flex" justify="end" class="page">
-                    <Page
-                            :current="searchForm.pageNumber"
-                            :total="total"
-                            :page-size="searchForm.pageSize"
-                            @on-change="changePage"
-                            @on-page-size-change="changePageSize"
-                            :page-size-opts="[10,20,50]"
-                            size="small"
-                            show-total
-                            show-elevator
-                            show-sizer
-                    ></Page>
-                </Row>
+                    <Row>
+                        <Form ref="searchForm" :model="searchForm" inline :label-width="60" class="search-form">
+                            <Form-item label="合同名称">
+                                <Input type="text" v-model="searchForm.name" placeholder="请输入" clearable/>
+                            </Form-item>
+                            <Form-item label="开始时间">
+                                <DatePicker
+                                        v-model="searchForm.startTime"
+                                        type="date"
+                                        format="yyyy-MM-dd"
+                                        clearable
+                                        placeholder="选择开始时间"
+                                ></DatePicker>
+                            </Form-item>
+                            <Form-item label="结束时间">
+                                <DatePicker
+                                        v-model="searchForm.endTime"
+                                        type="date"
+                                        format="yyyy-MM-dd"
+                                        @on-change="timeChange"
+                                        clearable
+                                        placeholder="选择结束时间"
+                                ></DatePicker>
+                            </Form-item>
+                            <Form-item style="margin-left:-35px;" class="br">
+                                <Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
+                                <Button @click="handleReset" type="primary">重置</Button>
+                            </Form-item>
+                        </Form>
+                    </Row>
+                    <Row class="operation">
+                        <Button @click="add" type="primary" icon="md-add">添加数据</Button>
+                        <Button @click="getDataList" icon="md-refresh">刷新数据</Button>
+                    </Row>
+                    <!-- <Row>
+                        <Alert show-icon>已选择
+                            <span class="select-count">{{selectCount}}</span> 项
+                        </Alert>
+                    </Row> -->
+                    <Row>
+                        <Table
+                                :loading="loading"
+                                border
+                                :columns="columns"
+                                :data="data"
+                                sortable="custom"
+                                ref="table"
+                        ></Table>
+                    </Row>
+                    <Row type="flex" justify="end" class="page">
+                        <Page
+                                :current="searchForm.pageNumber"
+                                :total="total"
+                                :page-size="searchForm.pageSize"
+                                @on-change="changePage"
+                                @on-page-size-change="changePageSize"
+                                :page-size-opts="[10,20,50]"
+                                size="small"
+                                show-total
+                                show-elevator
+                                show-sizer
+                        ></Page>
+                    </Row>
                 </Col>
             </Row>
         </Card>
-		<!-- <model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm" :relativeType.sync="counterpartArr"></model-choose> -->
-		<model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
+        <!-- <model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm" :relativeType.sync="counterpartArr"></model-choose> -->
+        <model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
     </div>
 </template>
 
 <script>
-	// import  md5 from 'js-md5';
-	import  modelChoose from "./modelChoose.vue";
-	// import  contractEdit from "../../htgl/contractEdit/contractEdit.vue";
-	// import  circleLoading from "../../htgl/circle-loading.vue";
+    // import  md5 from 'js-md5';
+    import  modelChoose from "./modelChoose.vue";
+    // import  contractEdit from "../../htgl/contractEdit/contractEdit.vue";
+    // import  circleLoading from "../../htgl/circle-loading.vue";
     import  {getProcessDataList } from "@/api/activiti";
     import {
         fromUp,
         myDelete,
         draftMyDelete,
-		applyBusiness,
+        applyBusiness,
         eachOther,
         findContractByParam,
-		lvxingDeleta,
-		getDictDataByType,
+        lvxingDeleta,
+        getDictDataByType,
         examineManList,
-		contractModelquery,
+        contractModelquery,
         wordEdit,
-		detailList,
+        detailList,
         chooseFile
     } from "@/api/index";
     export default {
         name: "applyManage",
         components: {
-			modelChoose
+            modelChoose
         },
         data() {
             return {
-				source:0,
+                source:0,
                 accessToken: {}, // 上传token鉴权
                 // counterpartArr: [], //相对方数据列表
                 processData: {},
@@ -143,39 +143,39 @@
                     {
                         title: "合同名称",
                         key: "name",
-						align: "center"
+                        align: "center"
                     },
-					{
-					    title: "收付款方式",
-					    // key: "paytype",
-						align: "center",
-						render: (h, params) => {
-						  let text = "",
-						    color = "default";
-						  if (params.row.istopay==1) {
-						    text = "收款";
-						  } else if(params.row.istopay==0){
-						    text = "付款";
-						  }else if(params.row.istopay==2){
-						    text = "不涉及";
-						  }
-						  return h("div", [
-						    h(
-						      "div",
-						      {
-						        props: {
-						          color: color
-						        }
-						      },
-						      text
-						    )
-						  ]);
-						}
-					},
+                    {
+                        title: "收付款方式",
+                        // key: "paytype",
+                        align: "center",
+                        render: (h, params) => {
+                            let text = "",
+                                color = "default";
+                            if (params.row.istopay==1) {
+                                text = "收款";
+                            } else if(params.row.istopay==0){
+                                text = "付款";
+                            }else if(params.row.istopay==2){
+                                text = "不涉及";
+                            }
+                            return h("div", [
+                                h(
+                                    "div",
+                                    {
+                                        props: {
+                                            color: color
+                                        }
+                                    },
+                                    text
+                                )
+                            ]);
+                        }
+                    },
                     {
                         title: "合同金额（万元）",
                         key: "money",
-						align: "center"
+                        align: "center"
                     },
                     {
                         title: "合同类型",
@@ -237,8 +237,8 @@
                     // 搜索框对应data对象
                     name: "",
                     number: "",
-					startTime:"",
-					endTime:"",
+                    startTime:"",
+                    endTime:"",
                     pageNumber: 1, // 当前页数
                     pageSize: 10, // 页面大小
                     order: "asc" // 默认排序方式
@@ -254,35 +254,35 @@
             };
         },
         methods: {
-			modalVisibleState(data){
-				this.modalVisible = data;
-				this.getDataList();
-			},
-			//搜索出时间校验
-			timeChange(){
-				if(!this.searchForm.startTime){
-					this.$Message.error("请先选择开始时间");
-					this.searchForm.endTime = "";
-					return;
-				}
-				if(this.searchForm.startTime >= this.searchForm.endTime){
-					this.$Message.error("开始时间不能大于等于结束时间");
-					this.searchForm.endTime = "";
-				}
-			},
+            modalVisibleState(data){
+                this.modalVisible = data;
+                this.getDataList();
+            },
+            //搜索出时间校验
+            timeChange(){
+                if(!this.searchForm.startTime){
+                    this.$Message.error("请先选择开始时间");
+                    this.searchForm.endTime = "";
+                    return;
+                }
+                if(this.searchForm.startTime >= this.searchForm.endTime){
+                    this.$Message.error("开始时间不能大于等于结束时间");
+                    this.searchForm.endTime = "";
+                }
+            },
             //模板选择
             getProcessList() {
                 getProcessDataList(this.searchProcessForm).then(res => {
                     if (res.message=="success") {
-						let arr = res.result.content;
-						for(var i = 0;i<arr.length;i++){
-							if(arr[i].processKey == "contract_approve"){
-								this.processData = arr[i];
-								this.form.procDefId = this.processData.id;
-								this.getDictDataType();
-								break;
-							}
-						}
+                        let arr = res.result.content;
+                        for(var i = 0;i<arr.length;i++){
+                            if(arr[i].processKey == "contract_approve"){
+                                this.processData = arr[i];
+                                this.form.procDefId = this.processData.id;
+                                this.getDictDataType();
+                                break;
+                            }
+                        }
                     }
                 });
             },
@@ -305,11 +305,11 @@
                     this.form_up.userName = res.nickName;
                     this.form_up.uName = res.userName;
                 });
-     //            eachOther().then(res => {
-					// if(res.success){
-					// 	this.counterpartArr = res.result.content;
-					// }
-     //            });
+                //            eachOther().then(res => {
+                // if(res.success){
+                // 	this.counterpartArr = res.result.content;
+                // }
+                //            });
                 this.getDataList();
             },
             remove(v) {
@@ -384,61 +384,61 @@
                     draftstime: "",
                     phone: this.form_up.mobile,
                     counterpartList: [
-						{
-							contractId:"",
-							counterpartId:"",
-							degreeId:"",
-							id:"",
-							removeExit:false
-						}
-					],
-					parentId:"",
-					uploadList:[]
+                        {
+                            contractId:"",
+                            counterpartId:"",
+                            degreeId:"",
+                            id:"",
+                            removeExit:false
+                        }
+                    ],
+                    parentId:"",
+                    uploadList:[]
                 };
                 this.modalVisible = true;
             },
             edit(v) {
-				detailList({id:v.id}).then(res => {
-					if(res.result == "success"){
-						this.dictForm = res.contract;
-						this.dictForm.counterpartList = res.counterpartList;
-						this.dictForm.parentContractName = res.parentContractName;
-						if(this.dictForm.counterpartList.length > 0){
-							for (let value of this.dictForm.counterpartList){
-								value.removeExit = true;
-							}
-							this.dictForm.counterpartList[0].removeExit = false;
-						}else{
-							this.dictForm.counterpartList = [
-								{
-									contractId:"",
-									counterpartId:"",
-									degreeId:"",
-									id:"",
-									removeExit:false
-								}
-							]
-						}
-						this.dictForm.delCounterpartIds = [];
-						this.dictForm.counterpartList[0]
-						this.dictForm.contractType = res.contractType;
-						this.modalVisible = true;
-						this.dictForm.uploadList = [];
-						if(this.dictForm.attachmentname){
-							let arr = this.dictForm.attachmentname.split(',');
-							let arr2 = this.dictForm.accessoryurl.split(',');
-							if(arr.length > 0){
-								for(let i = 0;i < arr.length;i++){
-									var obj = {name:"",url:"",fileDownUrl:""};
-									obj.name = arr[i];
-									obj.url = arr2[i];
-									obj.fileDownUrl = '/xboot/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
-									this.dictForm.uploadList.push(obj);
-								}
-							}
-						}
-					}
-				})
+                detailList({id:v.id}).then(res => {
+                    if(res.result == "success"){
+                        this.dictForm = res.contract;
+                        this.dictForm.counterpartList = res.counterpartList;
+                        this.dictForm.parentContractName = res.parentContractName;
+                        if(this.dictForm.counterpartList.length > 0){
+                            for (let value of this.dictForm.counterpartList){
+                                value.removeExit = true;
+                            }
+                            this.dictForm.counterpartList[0].removeExit = false;
+                        }else{
+                            this.dictForm.counterpartList = [
+                                {
+                                    contractId:"",
+                                    counterpartId:"",
+                                    degreeId:"",
+                                    id:"",
+                                    removeExit:false
+                                }
+                            ]
+                        }
+                        this.dictForm.delCounterpartIds = [];
+                        this.dictForm.counterpartList[0]
+                        this.dictForm.contractType = res.contractType;
+                        this.modalVisible = true;
+                        this.dictForm.uploadList = [];
+                        if(this.dictForm.attachmentname){
+                            let arr = this.dictForm.attachmentname.split(',');
+                            let arr2 = this.dictForm.accessoryurl.split(',');
+                            if(arr.length > 0){
+                                for(let i = 0;i < arr.length;i++){
+                                    var obj = {name:"",url:"",fileDownUrl:""};
+                                    obj.name = arr[i];
+                                    obj.url = arr2[i];
+                                    obj.fileDownUrl = '/xboot/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+                                    this.dictForm.uploadList.push(obj);
+                                }
+                            }
+                        }
+                    }
+                })
             },
             changePage(v) {
                 this.searchForm.pageNumber = v;
@@ -453,23 +453,23 @@
                 this.searchForm.pageSize = 10;
                 this.getDataList();
             },
-			handleReset(){
-				this.searchForm={
+            handleReset(){
+                this.searchForm={
                     name: "",
                     number: "",
                     time: "",
-                    pageNumber: 1, 
-                    pageSize: 10, 
+                    pageNumber: 1,
+                    pageSize: 10,
                     order: "asc"
                 }
-				this.getDataList();
-			},
+                this.getDataList();
+            },
             getDataList() {
                 this.loading = true;
                 findContractByParam(this.searchForm).then(res => {
-					this.loading = false;
-					this.data = res.data.queryContractBeanList;
-					this.total = res.data.total;
+                    this.loading = false;
+                    this.data = res.data.queryContractBeanList;
+                    this.total = res.data.total;
                 });
             }
         },

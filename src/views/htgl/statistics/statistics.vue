@@ -1,5 +1,5 @@
 <template>
-    <div>
+	<div>
 		<Card>
 			<Row type="flex" justify="space-between" class="code-row-bg">
 				<Col :span="24">
@@ -12,6 +12,7 @@
 									@on-change="yearChange"
 									clearable
 									placeholder="选择年份"
+									:editable="false"
 							></DatePicker>
 						</Form-item>
 						<Form-item label="月份">
@@ -22,69 +23,73 @@
 						<Button @click="dateChange" type="primary" icon="ios-search">搜索</Button>
 					</Form>
 				</Col>
-        	</Row>
-        </Card>
-        <div>
+			</Row>
+		</Card>
+		<div>
 			<Row :gutter="24" :style="{marginTop: '10px'}">
 				<Col :span="6" :style="{marginBottom: '10px'}">
-					<div class="info_card">
-						<div class="info_tip">
-							<span class="info_word">审批合同总量</span>
-							<Tooltip class="info_icon" placement="bottom" content="当前时间范围内,经本院审批的合同总量">
-								<Icon type="ios-information-circle-outline" color="#2d8cf0" size="20"/>
+					<Card class="info_card">
+						<div slot="title">
+							审批合同总量
+							<Tooltip class="info_icon" placement="top">
+								<Icon type="ios-information-circle-outline" color="#108DE9" size="20"/>
+								<div slot="content">当前时间范围内,经本院审批的合同总量</div>
 							</Tooltip>
 						</div>
 						<div class="info_con">
 							{{total.approveTotalSize}}份
 						</div>
-					</div>
+					</Card>
 				</Col>
 				<Col :span="6" :style="{marginBottom: '10px'}">
-					<div class="info_card">
-						<div class="info_tip">
-							<span class="info_word">签署合同总量</span>
-							<Tooltip class="info_icon" placement="bottom" content="当前时间范围内,完成签署的合同总量">
-								<Icon type="ios-information-circle-outline" color="#2d8cf0" size="20"/>
+					<Card class="info_card">
+						<div slot="title">
+							签署合同总量
+							<Tooltip class="info_icon" placement="top">
+								<Icon type="ios-information-circle-outline" color="#108DE9" size="20"/>
+								<div slot="content">当前时间范围内,完成签署的合同总量</div>
 							</Tooltip>
 						</div>
 						<div class="info_con">
-							{{total.signTotalSize}}份
+							{{total.approveTotalSize}}份
 						</div>
-					</div>
+					</Card>
 				</Col>
 				<Col :span="6" :style="{marginBottom: '10px'}">
-					<div class="info_card">
-						<div class="info_tip">
-							<span class="info_word">收款总额</span>
-							<Tooltip class="info_icon" placement="bottom" content="当前时间范围内,已签署收款合同的总金额">
-								<Icon type="ios-information-circle-outline" color="#2d8cf0" size="20"/>
+					<Card class="info_card">
+						<div slot="title">
+							收款总额
+							<Tooltip class="info_icon" placement="top">
+								<Icon type="ios-information-circle-outline" color="#108DE9" size="20"/>
+								<div slot="content">当前时间范围内,已签署收款合同的总金额</div>
 							</Tooltip>
 						</div>
 						<div class="info_con">
 							¥{{total.recieveResult.factmoney}}
 						</div>
 						<div>已收金额¥{{total.recieveResult.actualmoney}}</div>
-						<Progress v-show="total.recieveResult.percent" :percent="total.recieveResult.percent" />
-					</div>
+						<Progress v-show="total.recieveResult.percent" :percent="total.recieveResult.percent" hide-info/>
+					</Card>
 				</Col>
 				<Col :span="6" :style="{marginBottom: '10px'}">
-					<div class="info_card">
-						<div class="info_tip">
-							<span class="info_word">付款总额</span>
-							<Tooltip class="info_icon" placement="bottom" content="当前时间范围内,已签署付款合同的总金额">
-								<Icon type="ios-information-circle-outline" color="#2d8cf0" size="20"/>
+					<Card class="info_card">
+						<div slot="title">
+							付款总额
+							<Tooltip class="info_icon" placement="top">
+								<Icon type="ios-information-circle-outline" color="#108DE9" size="20"/>
+								<div slot="content">当前时间范围内,已签署付款合同的总金额</div>
 							</Tooltip>
 						</div>
 						<div class="info_con">
 							¥{{total.payResult.factmoney}}
 						</div>
 						<div>已付金额¥{{total.payResult.actualmoney}}</div>
-						<Progress v-show="total.payResult.percent" :percent="total.payResult.percent" />
-					</div>
+						<Progress v-show="total.payResult.percen" :percent="total.payResult.percent" hide-info/>
+					</Card>
 				</Col>
 			</Row>
-            <Row :gutter="8">
-                <Col :span="12" :style="{marginBottom: '10px'}">
+			<Row :gutter="8">
+				<Col :span="12" :style="{marginBottom: '10px'}">
 					<Card>
 						<p slot="title" class="card-title">
 							<Icon type="md-map"></Icon>
@@ -112,7 +117,7 @@
 						</div>
 					</Card>
 				</Col>
-					<Col :span="12" :style="{marginBottom: '10px'}">
+				<Col :span="12" :style="{marginBottom: '10px'}">
 					<Card>
 						<p slot="title" class="card-title">
 							<Icon type="md-map"></Icon>
@@ -126,7 +131,7 @@
 						</div>
 					</Card>
 				</Col>
-					<Col :span="12" :style="{marginBottom: '10px'}">
+				<Col :span="12" :style="{marginBottom: '10px'}">
 					<Card>
 						<p slot="title" class="card-title">
 							<Icon type="md-map"></Icon>
@@ -140,22 +145,22 @@
 						</div>
 					</Card>
 				</Col>
-            </Row>
-        </div>
-    </div>
+			</Row>
+		</div>
+	</div>
 </template>
 <script>
-    import echarts from 'echarts';
+	import echarts from 'echarts';
 	import {
 		statisticsDepartment
 	} from "@/api/index";
-    export default {
-        name: 'statistics',
-        components: {
-            // visiteVolume
-        },
-        data() {
-            return {
+	export default {
+		name: 'statistics',
+		components: {
+			// visiteVolume
+		},
+		data() {
+			return {
 				monthList:[],
 				relative_type:[],
 				total:{
@@ -164,15 +169,15 @@
 					payResult: {factmoney: 0, actualmoney: 0,percent:0},
 					recieveResult: {factmoney: 0, actualmoney: 0,percent:0}
 				},
-                searchForm: {
-                    year:"",
+				searchForm: {
+					year:"",
 					month:""
-                },
+				},
 				options: {
-                    disabledDate (date) {
-                        return date && date.valueOf() > Date.now() - 86400000;
-                    }
-                },
+					disabledDate (date) {
+						return date && date.valueOf() > Date.now() - 86400000;
+					}
+				},
 				optionShow:true,
 				optionShow2:true,
 				optionShow3:true,
@@ -181,15 +186,15 @@
 				visiteVolume2:"",
 				visiteVolume3:"",
 				visiteVolume4:""
-            }
-        },
-        methods: {
+			}
+		},
+		methods: {
 			//年份改变
 			yearChange(v){
 				console.log(v);
 				let date = new Date();
 				let year = date.getFullYear();
-				// this.searchForm.year = 
+				// this.searchForm.year =
 				this.monthList = [];
 				if(v == year){
 					for(let i = 0;i <= date.getMonth();i++){
@@ -207,10 +212,10 @@
 						data:[]
 					},
 					tooltip: {
-					  trigger: "axis",
-					  axisPointer: {
-					    type: "shadow"
-					  }
+						trigger: "axis",
+						axisPointer: {
+							type: "shadow"
+						}
 					},
 					grid: {
 						left: '3%',
@@ -232,7 +237,7 @@
 					series : []
 				};
 				const option2 = {
-				    tooltip: {
+					tooltip: {
 						trigger: 'axis'
 					},
 					xAxis:  {
@@ -252,7 +257,7 @@
 					]
 				};
 				const option3 = {
-				    tooltip : {
+					tooltip : {
 						trigger: 'item',
 						formatter: "{a} <br/>{b} : {c} ({d}%)"
 					},
@@ -285,11 +290,11 @@
 					]
 				};
 				const option4 = {
-				    tooltip : {
+					tooltip : {
 						trigger: 'item',
 						formatter: "{a} <br/>{b} : {c} ({d}%)"
 					},
-					
+
 					legend: {
 						bottom: 0,
 						left: 'center',
@@ -318,12 +323,12 @@
 							approveTotalSize:res.result.approveTotalSize,
 							signTotalSize:res.result.signTotalSize,
 							payResult:{
-								factmoney: res.result.payResult.factmoney, 
+								factmoney: res.result.payResult.factmoney,
 								actualmoney: res.result.payResult.actualmoney,
 								percent:(100*res.result.payResult.factmoney/res.result.payResult.actualmoney),
 							},
 							recieveResult:{
-								factmoney: res.result.recieveResult.factmoney, 
+								factmoney: res.result.recieveResult.factmoney,
 								actualmoney: res.result.recieveResult.actualmoney,
 								percent:(100*res.result.recieveResult.factmoney/res.result.recieveResult.actualmoney),
 							}
@@ -332,8 +337,8 @@
 						let arr = res.result.newApprovedContract.yValue;
 						for(var i = 0;i<arr.length;i++){
 							option.legend.data.push(arr[i].name);
-							arr[i].type = 'bar'; 
-							arr[i].stack = '广告'; 
+							arr[i].type = 'bar';
+							arr[i].stack = '广告';
 							option.series.push(arr[i]);
 						}
 						option2.xAxis.data = res.result.newSignedContract.xValue;
@@ -387,14 +392,14 @@
 							this.optionShow4 = false;
 						}
 						window.addEventListener('resize', function () {
-						    visiteVolume.resize();
-						    visiteVolume2.resize();
-						    visiteVolume3.resize();
-						    visiteVolume4.resize();
+							visiteVolume.resize();
+							visiteVolume2.resize();
+							visiteVolume3.resize();
+							visiteVolume4.resize();
 						});
 					}
 				})
-				
+
 			},
 			dateChange(){
 				let date = "";
@@ -413,31 +418,32 @@
 				this.init(date);
 			}
 		},
-        mounted() {
+		mounted() {
 			let date = new Date();
 			let d = date.getFullYear();
 			for(let i = 0;i <= date.getMonth();i++){
 				this.monthList.push(i+1);
 			};
 			this.searchForm.year = d+'';
-            this.init(d);
-        }
-    }
+			this.init(d);
+		}
+	}
 </script>
 <style lang="less" scoped>
 	.info_card{
 		width:100%;
-		height:130px;
-		padding: 10px;
+		height:160px;
+		// padding: 10px;
 		background-color: #fff;
 		.info_tip{
 			padding: 0 0 10px;
 			.info_word{
 				font-size: 14px;
 			}
-			.info_icon{
-				float: right;
-			}
+
+		}
+		.info_icon{
+			float: right;
 		}
 		.info_con{
 			color: #2d8cf0;
