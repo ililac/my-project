@@ -480,7 +480,7 @@ export const myDelete = (params) => {
 }
 
 export const findContractByParam = (params) => {
-    return postRequest('/draft/findContractByParam', params)
+    return postRequest('/contract/draft/findContractByParam', params)
 }
 //合同范本中的添加新数据
 export const addhtong = (params) => {
@@ -524,11 +524,11 @@ export const signAture = (params) => {
 }
 //合同签署中的作废
 export const signCancel = (params) => {
-    return postRequest('/sign/addCancel', params)
+    return postRequest('/contract/sign/addCancel', params)
 }
 //合同签署中的作废中的更新
 export const signCancelUpdate = (params) => {
-    return postRequest('/sign/updateCancel', params)
+    return postRequest('/contract/sign/updateCancel', params)
 }
 //合同用印里的打印
 export const cantactPrint = (params) => {
@@ -540,11 +540,11 @@ export const findContractList = (params) => {
 }
 //获取审批人列表
 export const examineManList = (id,params) => {
-    return getRequest(`/actProcess/getFirstNode/${id}`, params)
+    return getRequest(`/active/actProcess/getFirstNode/${id}`, params)
 }
 //合同起草
 export const draftMyDelete = (params) => {
-    return postRequest('/draft/deleteContractById', params)
+    return postRequest('/contract/draft/deleteContractById', params)
 }
 //合同审批中的合同详情查询
 export const detailList = (params) => {
@@ -568,36 +568,36 @@ export const nextExamine = (id,params) => {
 }
 //合同审批通过
 export const passExamine = (params) => {
-    return postRequest('/actTask/pass', params)
+    return postRequest('/active/actTask/pass', params)
 }
 //合同审批驳回
 export const rejectExamine = (params) => {
-    return postRequest('/actTask/back', params)
+    return postRequest('/active/actTask/back', params)
 }
 //合同审批历史
 export const historyExamine = (id,params) => {
-    return getRequest(`/actTask/historicFlow/${id}`, params)
+    return getRequest(`/active/actTask/historicFlow/${id}`, params)
 }
 //合同审批历史
 // export const flowExample = (id,params) => {
 //     return getRequest(`/actProcess/getHighlightImg/${id}`, params)
 // }
-export const flowExample = "/xboot/actProcess/getHighlightImg/"
+export const flowExample = "/zhfw/active/actProcess/getHighlightImg/"
 //合同履行计划详情
 export const performPlanDel = (params) => {
     return postRequest('/contract/seal/querySeal', params)
 }
 //合同履行计划确认
 export const performPlanConfirm = (params) => {
-    return postRequest('/fulfil/updateContract', params)
+    return postRequest('/contract/fulfil/updateContract', params)
 }
 //合同履行终止或者结束
 export const performPlanFinish = (params) => {
-    return postRequest('/seal/addPlayStateInfo', params)
+    return postRequest('/contract/seal/addPlayStateInfo', params)
 }
 //合同履行中的新建履行计划
 export const performNewBuild = (params) => {
-    return postRequest('/seal/addSeal', params)
+    return postRequest('/contract/seal/addSeal', params)
 }
 //合同履行中的更新履行计划
 export const performPlanUpdate = (params) => {
@@ -605,11 +605,11 @@ export const performPlanUpdate = (params) => {
 }
 //提交反馈内容
 export const feedbackConfirm = (params) => {
-	return postRequest('/seal/addPlayMonryInfo',params)
+	return postRequest('/contract/seal/addPlayMonryInfo',params)
 }
 //合同查询中的所有合同查询
 export const contractSearch = (params) => {
-	return postRequest('/query/findContractByParams',params)
+	return postRequest('/contract/query/findContractByParams',params)
 }
 //审批人提交接口
 export const applyBusiness = (params) => {
@@ -623,7 +623,7 @@ export const filesDown = (params) => {
 
 //履行计划中的删除
 export const lvxingDeleta = (params) =>{
-	return postRequest("/draft/deleteContractPlayById",params)
+	return postRequest("/contract/draft/deleteContractPlayById",params)
 }
 //上传文件的地址校验
 export const compareTextUrl = (params) => {
@@ -631,11 +631,11 @@ export const compareTextUrl = (params) => {
 }
 
 export const fileCompares = () => {
-    return getRequest('/draft/compare')
+    return getRequest('/contract/draft/compare')
 }
 
 export const chooseFile = (params) => {
-    return getRequest('/draft/setRedisFile',params)
+    return getRequest('/contract/draft/setRedisFile',params)
 }
 //合同范本和相对方中的详情
 export const modelRelativeDetail = (params) =>{
@@ -654,12 +654,12 @@ export const fileUpUrlAudit = (params) => {
 }
 //申请人表单数据
 export const personSelect = (params) => {
-	return postRequest('/department/searchUser',params)
+	return postRequest('/system/department/searchUser',params)
 }
 
 //相对方重复验证
 export const animateWidths = (params) => {
-	return postRequest('/counterpart/checkIsExist',params)
+	return postRequest('/contract/counterpart/checkIsExist',params)
 }
 //合同类型查询
 export const contractType = (params) => {
@@ -667,24 +667,24 @@ export const contractType = (params) => {
 }
 //合同类型快速搜索
 export const contractTypeRapid = (params) => {
-	return postRequest('system/dictData/searchTypeByContract',params)
+	return postRequest('/system/dictData/searchTypeByContract',params)
 }
 
 //合同起草中部门获取
 export const departmentGet = (params) => {
-	return getRequest('/draft/checkUser/functionalDepartment',params)
+	return getRequest('/contract/draft/checkUser/functionalDepartment',params)
 }
 //生成系统id
 export const getSystemId = (params) => {
-	return postRequest('/draft/generateSysNum',params)
+	return postRequest('/contract/draft/generateSysNum',params)
 }
 //合同编号更新
 export const contactNumberUpdate = (params) => {
-	return getRequest('/draft/updateNumber',params)
+	return getRequest('/contract/draft/updateNumber',params)
 }
 //审批人是否显示
 export const examineShow = (params) => {
-	return getRequest('/department/chooseUser/show',params)
+	return getRequest('/system/department/chooseUser/show',params)
 }
 //相对方中的模糊查询
 export const relativeName = (params) => {
@@ -696,7 +696,7 @@ export const relativeNumber = (params) => {
 }
 //查询已签署的合同
 export const signedContract = (params) => {
-	return getRequest('/draft/searchSignedContract',params)
+	return getRequest('/contract/draft/searchSignedContract',params)
 }
 //详情中查询审批历史
 export const examineDetail = (ids, params) => {
