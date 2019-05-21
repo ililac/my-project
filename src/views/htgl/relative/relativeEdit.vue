@@ -44,7 +44,7 @@
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
-							action="/xboot/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
+							action="/zhfw/system/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
 							ref="upload"
 							:headers="accessToken"
 							:show-upload-list="false"
@@ -399,7 +399,8 @@
 		methods: {
 			init() {
 			    this.accessToken = {
-			        accessToken: this.getStore("accessToken")
+					access_token: this.getStore("accessToken"),
+					Authorization: 'Bearer '+this.getStore("accessToken")
 			    };
 			    // 获取表单数据
 			    fromUp().then(res => {

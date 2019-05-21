@@ -144,7 +144,7 @@
         <Col :span="24">
           <FormItem label="相关附件">
             <Upload
-              action="/xboot/upload/uploadFiles?tag=accessoryurl-attachmentname"
+              action="/zhfw/system/upload/uploadFiles?tag=accessoryurl-attachmentname"
               ref="upload2"
               :headers="accessToken"
               :show-upload-list="false"

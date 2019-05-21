@@ -83,7 +83,7 @@
                       </div>
                   </Poptip>
                   <!-- 请记得修改图片上传请求url xboot需要header中带入token验证用户权限-->
-                  <Upload action="你的图片上传完整请求路径，例如：/xboot/upload/file"
+                  <Upload action="你的图片上传完整请求路径，例如：/zhfw/system/file"
                           :headers="accessToken" 
                           :on-success="handleSuccess"
                           :on-error="handleError"

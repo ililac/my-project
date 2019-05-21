@@ -45,7 +45,7 @@
         <FormItem label="范本文件：" prop="file">
           <Upload
             class="upLoad"
-            action="/xboot/upload/file?tag=modelAddress-fileName"
+            action="/zhfw/system/upload/file?tag=modelAddress-fileName"
             :headers="accessToken"
             :on-success="handleSuccess"
             :on-error="handleError"
@@ -178,7 +178,8 @@ export default {
       this.dictForm = this.formData;
       this.dictForm.contractType = this.formData.contractTypeName;
       this.accessToken = {
-        accessToken: this.getStore("accessToken")
+        access_token: this.getStore("accessToken"),
+        Authorization: 'Bearer '+this.getStore("accessToken")
       };
       fromUp().then(res => {
         this.form_up.updateBy = res.nickName;

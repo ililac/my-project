@@ -120,7 +120,7 @@
 						</div>
 						<div class="ul">
 							<FormItem label="终止依据" class="qualificationInfoName lef">
-								<Upload action="/xboot/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess"
 									:on-error="handleError"
