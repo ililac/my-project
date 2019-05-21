@@ -762,3 +762,20 @@ export const draftModelList = (params) => {
 export const parintConfirm = (params) => {
 	return postRequest('/contract/fulfil/updateTcon',params)
 }
+//合同统计(法律办、合同管理员)
+export const getSignedInfo = (params) => {
+    return getRequest('/contract/statistics/all/getSignedInfo',params)
+}
+// 合同归档
+// 根据条件分页查询合同列表
+export const getContractByPage = (params) => {
+	return getRequest('/contract/archive/getContractByPage',params)
+}
+// 添加归档信息
+export const archive = (params) => {
+	return postRequest('/contract/archive',params)
+}
+// 根据Id查询归档信息
+export const getArchiveById = (id,params) => {
+	return getRequest(`/contract/archive/getArchiveById/${id}`,params)
+}
