@@ -484,11 +484,11 @@ export const findContractByParam = (params) => {
 }
 //合同范本中的添加新数据
 export const addhtong = (params) => {
-    return postRequest('/draft/add', params)
+    return postRequest('/contract/draft/add', params)
 }
 //合同范本中的编辑中的添加
 export const draftAddhtong = (params) => {
-    return postRequest('/draft/editContractById', params)
+    return postRequest('/contract/draft/editContractById', params)
 }
 export const eachOther = (params) => {
     return postRequest('/contract/counterpart/query', params)
@@ -564,7 +564,7 @@ export const contractNumberStatistics = (params) => {
 }
 //获取合同审批中的下一审批人的数据
 export const nextExamine = (id,params) => {
-    return getRequest(`/actProcess/getNextNode/${id}`, params)
+    return getRequest(`/active/actProcess/getNextNode/${id}`, params)
 }
 //合同审批通过
 export const passExamine = (params) => {
@@ -601,7 +601,7 @@ export const performNewBuild = (params) => {
 }
 //合同履行中的更新履行计划
 export const performPlanUpdate = (params) => {
-    return postRequest('/seal/updateSeal', params)
+    return postRequest('/contract/seal/updateSeal', params)
 }
 //提交反馈内容
 export const feedbackConfirm = (params) => {
@@ -613,11 +613,11 @@ export const contractSearch = (params) => {
 }
 //审批人提交接口
 export const applyBusiness = (params) => {
-	return postRequest('/approve/apply',params)
+	return postRequest('/active/approve/apply',params)
 }
 //文件下载
 export const filesDown = (params) => {
-	return getRequest('/draft/download',params)
+	return getRequest('/contract/draft/download',params)
 }
 //合同正文处下载
 
@@ -700,23 +700,23 @@ export const signedContract = (params) => {
 }
 //详情中查询审批历史
 export const examineDetail = (ids, params) => {
-    return getRequest(`/query/getSingleContractHistoryById/${ids}`, params)
+    return getRequest(`/contract/query/getSingleContractHistoryById/${ids}`, params)
 }
 //详情中查询用印信息
 export const stampDetail = (ids, params) => {
-    return getRequest(`/query/getPrintInformationById/${ids}`, params)
+    return getRequest(`/contract/query/getPrintInformationById/${ids}`, params)
 }
 //详情中查询履行计划
 export const performDetail = (ids, params) => {
-    return getRequest(`/query/getFulfillmentById/${ids}`, params)
+    return getRequest(`/contract/query/getFulfillmentById/${ids}`, params)
 }
 //详情中查询履行中所有的反馈
 export const feedbackDetailAll = (ids, params) => {
-    return getRequest(`/query/getFulfillFeedbackByContractId/${ids}`, params)
+    return getRequest(`/contract/query/getFulfillFeedbackByContractId/${ids}`, params)
 }
 //详情中查询履行计划下的反馈
 export const feedbackDetail = (ids, params) => {
-    return getRequest(`/query/getFulfillFeedbackById/${ids}`, params)
+    return getRequest(`/contract/query/getFulfillFeedbackById/${ids}`, params)
 }
 //查询北大法宝合同类别列表
 export const queryContractType = (params) => {
