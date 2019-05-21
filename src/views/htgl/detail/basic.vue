@@ -1,5 +1,5 @@
 <template>
-	<Form ref="detailForm" :model="detailForm" :label-width="140">
+	<Form ref="detailForm" :model="detailForm" :label-width="120" :class="sourse==2?'borderForm':''">
 		<div class="ul">
 			<FormItem label="合同来源" class="lef">
 				<p>{{detailForm.sourceName}}</p>
@@ -15,7 +15,7 @@
 				<p>{{detailForm.name}}</p>
 			</FormItem>
 			<Form-item label="合同类型" class="lef">
-					<p>{{detailForm.contractType}}</p>
+				<p>{{detailForm.contractType}}</p>
 			</Form-item>
 		</div>
 		<div class="ul">
@@ -28,7 +28,7 @@
 		</div>
 		<div class="ul" v-for="(item,index) in detailForm.counterpartList" style="color: #515a6e;font-size: 12px;">
 			<div class="lef">
-				<label for="" style="text-align: right;width: 140px;display: inline-block;padding: 10px 12px 10px 0;">{{"相对方"+(index + 1)}}</label>
+				<label for="" style="text-align: right;width: 120px;display: inline-block;padding: 10px 12px 10px 0;">{{"相对方"+(index + 1)}}</label>
 				<span>{{item.counterpartName}}</span>
 			</div>
 			<Form-item label="合同地位" class="lef">
@@ -51,7 +51,7 @@
 				<p>{{detailForm.endtime}}</p>
 			</FormItem>
 		</div>
-		
+
 		<div class="ul">
 			<FormItem label="合同份数" class="lef">
 				<label for=""></label><span style="line-height: 10px;margin:0 5px;text-align: center;display: inline-block;width: 20px;border-bottom: 1px solid #E3E5E8;">{{detailForm.totalnum}}</span>
@@ -83,47 +83,74 @@
 				<span>{{detailForm.draftsoutfit}}</span>
 			</FormItem>
 		</div>
-		
+
 	</Form>
 </template>
 
 <script>
 	export default {
-	    name: "basicForm",
+		name: "basicForm",
 		props:{
 			formData:Object,
 			sourceType:Number,
 			fileDown:String
 		},
-	    data() {
-	        return {
+		data() {
+			return {
 				detailForm: this.formData,
-				fileDownUrl:this.fileDown
-	        };
-	    },
+				fileDownUrl:this.fileDown,
+				sourse:this.sourceType
+			};
+		},
 		watch:{
 			formData: {
-		　　 	handler(newValue, oldValue) {
+				handler(newValue, oldValue) {
 					this.detailForm = {...newValue};
-		　　　　	},
-		　　　　	deep: true
-		　　 },
+				},
+				deep: true
+			},
 			fileDown: {
-		　　 	handler(newValue, oldValue) {
+				handler(newValue, oldValue) {
 					this.fileDownUrl = newValue;
 				},
-		　　　　	deep: true
-		　　},
+				deep: true
+			},
 			sourceType(newValue, oldValue) {
 				if(newValue){
 					this.sourse = newValue;
 				}else{
 					this.sourse = oldValue;
 				}
-		　　 }
+			}
 		},
 	};
 </script>
 
-<style>
+<style scoped lang="less">
+	.borderForm{
+		.ul{
+			p{
+				box-sizing: border-box;
+				outline: 0;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				cursor: pointer;
+				position: relative;
+				background-color: #fff;
+				border-radius: 4px;
+				border: 1px solid #dcdee2;
+				transition: all .2s ease-in-out;
+				padding-left: 20px;
+				height: 40px;
+			}
+		}
+		.txtar{
+			p{
+				height: 80px;
+			}
+		}
+	}
+
 </style>

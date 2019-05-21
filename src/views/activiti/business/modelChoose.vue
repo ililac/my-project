@@ -1340,7 +1340,7 @@
 				}
 				file.url = res.result[0].url;
 				file.name = res.result[0].name;
-				file.fileDownUrl = /zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
+				file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
 				this.uploadList = this.$refs.upload2.fileList;
 				document.getElementById("attachmentname").innerHTML = "点击上传";
 			},
