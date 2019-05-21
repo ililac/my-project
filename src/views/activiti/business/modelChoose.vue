@@ -52,7 +52,7 @@
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
 					<FormItem label="合同正文" v-else="chapter1 == 2" class="lef" prop="contentname">
-						<Upload action="/xboot/draft/uploadFileNew"
+						<Upload action="/zhfw/contract/draft/uploadFileNew"
 							:data='{"generalNo":dictForm.generalNo,"url":""}'
 			                :headers="accessToken"
 							:on-success="handleSuccess2"
@@ -168,7 +168,7 @@
 				<Col :span="24">
 					<FormItem label="相关附件">
 						<Upload 
-							action="/xboot/upload/uploadFiles?tag=accessoryurl-attachmentname"
+							action="/zhfw/system/upload/uploadFiles?tag=accessoryurl-attachmentname"
 							ref="upload2"
 							:headers="accessToken"
 							:show-upload-list="false"
@@ -1161,7 +1161,8 @@
             },
             init() {
                 this.accessToken = {
-                    accessToken: this.getStore("accessToken")
+					access_token: this.getStore("accessToken"),
+					Authorization: 'Bearer '+ this.getStore("accessToken")
                 };
                 // 获取表单数据
                 fromUp().then(res => {
@@ -1200,7 +1201,7 @@
 			fileDowm(name,url){
 				fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:url}).then(res => {
 					if(res.result == "success"){
-						window.open("/xboot/draft/download?fileName="+name+"&url="+res.url+"&accessToken="+this.getStore("accessToken"));
+						window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+res.url+"&accessToken="+this.getStore("accessToken"));
 					}
 				})
 			},
@@ -1235,7 +1236,7 @@
                 this.dictForm.contracturl = v.modelAddress;
 //                 this.myOpenUrl = wordEdit+'/editURL.html?fromUrl='+fromUrl+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName+"&generalNo=2555";
 //                 this.myOpenUrl2 = wordEdit+'/editURL.html?fromUrl='+fromUrl2+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName;
-                this.fileDownUrl = '/xboot/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&accessToken='+this.getStore("accessToken");
+                this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&accessToken='+this.getStore("accessToken");
 				this.modalVisible5 = false;
             },
             changeSort1(e) {
@@ -1338,7 +1339,7 @@
 				}
                 file.url = res.result[0].url;
                 file.name = res.result[0].name;
-                file.fileDownUrl = '/xboot/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
+                file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&access_token='+this.getStore("accessToken");
 				this.uploadList = this.$refs.upload2.fileList;
 				document.getElementById("attachmentname").innerHTML = "点击上传";
             },
