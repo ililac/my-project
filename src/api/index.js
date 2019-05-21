@@ -508,7 +508,7 @@ export const relativeDelete = (params) => {
 }
 //相对方拉黑
 export const relativeLock = (params) => {
-    return postRequest('/counterpart/changeStatus', params)
+    return postRequest('/contract/counterpart/changeStatus', params)
 }
 //相对方对方中的同步
 export const relativeFindCompany = (params) => {
