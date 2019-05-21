@@ -476,7 +476,7 @@ export const formSeve = (params) => {
 }
 
 export const myDelete = (params) => {
-    return postRequest('/contractModel/del', params)
+    return postRequest('/contract/contractModel/del', params)
 }
 
 export const findContractByParam = (params) => {
