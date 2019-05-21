@@ -613,7 +613,7 @@ export const contractSearch = (params) => {
 }
 //审批人提交接口
 export const applyBusiness = (params) => {
-	return postRequest('/active/approve/apply',params)
+	return postRequest('/contract/approve/apply',params)
 }
 //文件下载
 export const filesDown = (params) => {
