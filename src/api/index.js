@@ -476,7 +476,7 @@ export const formSeve = (params) => {
 }
 
 export const myDelete = (params) => {
-    return postRequest('/contractModel/del', params)
+    return postRequest('/contract/contractModel/del', params)
 }
 
 export const findContractByParam = (params) => {
@@ -659,7 +659,7 @@ export const personSelect = (params) => {
 
 //相对方重复验证
 export const animateWidths = (params) => {
-	return postRequest('/counterpart/checkIsExist',params)
+	return postRequest('/contract/counterpart/checkIsExist',params)
 }
 //合同类型查询
 export const contractType = (params) => {
