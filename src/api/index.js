@@ -520,7 +520,7 @@ export const signContractList = (params) => {
 }
 //合同签署中的签署
 export const signAture = (params) => {
-    return postRequest('/sign/addSignInfo', params)
+    return postRequest('/contract/sign/addSignInfo', params)
 }
 //合同签署中的作废
 export const signCancel = (params) => {
@@ -532,7 +532,7 @@ export const signCancelUpdate = (params) => {
 }
 //合同用印里的打印
 export const cantactPrint = (params) => {
-    return postRequest('/fulfil/updateContract', params)
+    return postRequest('/contract/fulfil/updateContract', params)
 }
 //合同审批中的列表接口
 export const findContractList = (params) => {
@@ -643,14 +643,14 @@ export const modelRelativeDetail = (params) =>{
 }
 //合同编号验证
 export const contractNumber = (params) => {
-	return getRequest('/draft/checkContractNumber',params)
+	return getRequest('/contract/draft/checkContractNumber',params)
 }
 //合同地址验证
 // export const fileUpUrlAudit = (params) => {
 // 	return getRequest('/draft/checkFileEmpty',params)
 // }
 export const fileUpUrlAudit = (params) => {
-	return getRequest('/draft/uploadFileNew',params)
+	return getRequest('/contract/draft/uploadFileNew',params)
 }
 //申请人表单数据
 export const personSelect = (params) => {
@@ -760,5 +760,5 @@ export const draftModelList = (params) => {
 }
 //合同用印中的用印确认
 export const parintConfirm = (params) => {
-	return postRequest('/fulfil/updateTcon',params)
+	return postRequest('/contract/fulfil/updateTcon',params)
 }
