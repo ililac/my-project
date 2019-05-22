@@ -479,7 +479,8 @@ export default {
   methods: {
     init() {
       this.accessToken = {
-        accessToken: this.getStore("accessToken")
+        access_token: this.getStore("accessToken"),
+        Authorization: 'Bearer '+ this.getStore("accessToken")
       };
       checkOssSet().then(res => {
         if (!res.success) {
