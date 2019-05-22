@@ -4,13 +4,13 @@ import { getRequest, postRequest, putRequest, deleteRequest, importRequest, uplo
 
 
 // 导出模型
-export const exportModel = "/xboot/actModel/export/"
+export const exportModel = "/zhfw/active/actModel/export/"
 // 通过文件部署模型流程
-export const deployByFile = "/xboot/actModel/deployByFile"
+export const deployByFile = "/zhfw/active/actModel/deployByFile"
 // 导出流程资源
-export const exportResource = "/xboot/actProcess/export"
+export const exportResource = "/zhfw/active/actProcess/export"
 // 获取高亮实时流程图
-export const getHighlightImg = "/xboot/actProcess/getHighlightImg/"
+export const getHighlightImg = "/zhfw/active/actProcess/getHighlightImg/"
 
 
 

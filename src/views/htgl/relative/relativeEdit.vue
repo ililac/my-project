@@ -44,7 +44,7 @@
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
-							action="/xboot/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
+							action="/zhfw/contract/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
 							ref="upload"
 							:headers="accessToken"
 							:show-upload-list="false"
@@ -568,7 +568,7 @@
 				if(res.success){
 					file.url = res.result[0].url;
 					file.name = res.result[0].name;
-					file.fileDownUrl = '/xboot/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
+					file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
 					this.uploadList = this.$refs.upload.fileList;
 				}else{
 					this.$Message.error("上传失败")
