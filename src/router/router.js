@@ -102,7 +102,6 @@ export const otherRouter = {
         // { path: 'newContract', title: '合同起草', name: 'newContract', component: () => import('@/views/activiti/business/newContract.vue') },
         { path: 'sub', title: '合同审批', name: 'sub', component: () => import('@/views/htgl/examine/sub.vue') },
         { path: 'htgl/detail', title: '合同详情', name: 'detail', component: () => import('@/views/htgl/detail/detail.vue') },
-        { path: 'contractEdit', title: '合同编辑', name: 'contractEdit', component: () => import('@/views/htgl/contractEdit/contractEdit.vue') },
         { path: 'htgl/establishDetail', title: '合同范本详情', name: 'establishDetail', component: () => import('@/views/htgl/Template/establishDetail.vue') },
         { path: 'htgl/relativeDetail', title: '相对方详情', name: 'relativeDetail', component: () => import('@/views/htgl/relative/relativeDetail.vue') },
         { path: 'htgl/approve', title: '审批', name: 'contractApprove', component: () => import('@/views/activiti/todo-manage/approve.vue') }
