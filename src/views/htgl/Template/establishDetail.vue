@@ -126,7 +126,7 @@
 							if(res.success){
 								this.detailForm = res.result;
 								if(res.result.fileName){
-									this.fildDownUrl = "/xboot/contractModel/download?id="+res.result.id+"&accessToken="+this.getStore("accessToken");
+									this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+res.result.id+"&accessToken="+this.getStore("accessToken");
 								}
 							}
 						});

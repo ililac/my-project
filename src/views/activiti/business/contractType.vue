@@ -1,14 +1,14 @@
 <template>
 	<Poptip trigger="click" placement="bottom" title="选择合同类型">
-		<div :style="myStyle">
-			<Input v-model="typeName" readonly style="margin-right:13px;"/>
-			<!-- <Button icon="md-trash" @click="clearSelectDep">清空已选</Button> -->
-		</div>
-		<div slot="content" class="tree-bar">
-			<Input v-model="searchKey" suffix="ios-search" @on-change="searchDp" placeholder="输入合同类型" clearable/>
-			<Tree :data="dataDep" :load-data="loadDataTree" @on-select-change="selectTree"></Tree>
-			<Spin size="large" fix v-if="dpLoading"></Spin>
-		</div>
+	  <div :style="myStyle">
+	    <Input v-model="typeName" readonly style="margin-right:13px;"/>
+	    <!-- <Button icon="md-trash" @click="clearSelectDep">清空已选</Button> -->
+	  </div>
+	  <div slot="content" class="tree-bar">
+	    <Input v-model="searchKey" suffix="ios-search" @on-change="searchDp" placeholder="输入合同类型" clearable/>
+	    <Tree :data="dataDep" :load-data="loadDataTree" @on-select-change="selectTree"></Tree>
+	    <Spin size="large" fix v-if="dpLoading"></Spin>
+	  </div>
 	</Poptip>
 </template>
 
@@ -18,7 +18,7 @@
 		contractTypeRapid
 	} from "@/api/index";
 	export default {
-
+		
 		name: "travelPlan",
 		props: {
 			typeDate:Object,
@@ -39,21 +39,21 @@
 				this.initDepartmentTreeData();
 			},
 			initDepartmentTreeData() {
-				contractType({dictId:"95313343841046528"}).then(res => {
-					if (res.success === true) {
-						res.result.forEach(function(e) {
-							if (e.haveChild) {
-								e.loading = false;
-								e.children = [];
-							}
-							if (e.status === -1) {
-								e.title = "[已禁用] " + e.title;
-								e.disabled = true;
-							}
-						});
-						this.dataDep = res.result;
-					}
-				});
+			  contractType({dictId:"95313343841046528"}).then(res => {
+			    if (res.success === true) {
+			      res.result.forEach(function(e) {
+			        if (e.haveChild) {
+			          e.loading = false;
+			          e.children = [];
+			        }
+			        if (e.status === -1) {
+			          e.title = "[已禁用] " + e.title;
+			          e.disabled = true;
+			        }
+			      });
+			      this.dataDep = res.result;
+			    }
+			  });
 			},
 			searchDp() {
 				if (this.searchKey) {
@@ -112,7 +112,7 @@
 		},
 		watch:{
 			typeDate: {
-				handler(newValue, oldValue) {
+		　　 	handler(newValue, oldValue) {
 					if(newValue){
 						this.typeName=newValue.contractType;
 						this.typeid=newValue.typeid;
@@ -120,9 +120,9 @@
 						this.typeName=oldValue.contractType;
 						this.typeid=oldValue.typeid;
 					}
-				},
-				deep: true
-			},
+		　　　　	},
+		　　　　	deep: true
+		　　 },
 		},
 		mounted(){
 			this.init();
@@ -132,19 +132,19 @@
 
 <style lang="less" scoped>
 	.tree-bar {
-		max-height: 500px;
-		overflow: auto;
-		margin-top: 5px;
+	    max-height: 500px;
+	    overflow: auto;
+	    margin-top: 5px;
 	}
-
+	
 	.tree-bar::-webkit-scrollbar {
-		width: 6px;
-		height: 6px;
+	    width: 6px;
+	    height: 6px;
 	}
-
+	
 	.tree-bar::-webkit-scrollbar-thumb {
-		border-radius: 4px;
-		-webkit-box-shadow: inset 0 0 2px #d1d1d1;
-		background: #e4e4e4;
+	    border-radius: 4px;
+	    -webkit-box-shadow: inset 0 0 2px #d1d1d1;
+	    background: #e4e4e4;
 	}
 </style>

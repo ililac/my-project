@@ -135,7 +135,7 @@
 					<div class="clear"></div>
 					<row>
 						<div style="padding-top: 30px;float: right;">
-							<Button type="primary" @click="close">关闭</Button>
+						    <Button type="primary" @click="close">关闭</Button>
 						</div>
 					</row>
 				</Col>
@@ -151,7 +151,7 @@
 					</Col>
 					<Col :span="12">
 						<Alert show-icon>
-							已选择 <span class="select-count">{{selectCount}}</span> 项
+						    已选择 <span class="select-count">{{selectCount}}</span> 项
 						</Alert>
 						<Table :height="300" :loading="loading" border :columns="columns" :data="personData" ref="table1" @on-selection-change="showSelect"></Table>
 					</Col>
@@ -159,11 +159,11 @@
 			</div>
 			<div style="clear: both;"></div>
 			<div slot="footer">
-				<Button type="text" @click="modalVisible3=false">取消</Button>
-				<Button type="primary" :loading="btnLoading4" @click="examineSubmit">
-					<span v-if="!btnLoading4">提交</span>
-					<span v-else>Loading...</span>
-				</Button>
+			  <Button type="text" @click="modalVisible3=false">取消</Button>
+			  <Button type="primary" :loading="btnLoading4" @click="examineSubmit">
+			  	<span v-if="!btnLoading4">提交</span>
+			  	<span v-else>Loading...</span>
+			  </Button>
 			</div>
 		</Modal>
 		<Modal title="流程图" v-model="modalFlow" :mask-closable='false' :width="1000" class="modalFlow">
@@ -200,12 +200,12 @@
 	} from "@/api/index";
 	import circleLoading from "../../my-components/circle-loading.vue";
 	export default {
-		name: "contractApprove",
-		components: {
-			circleLoading
-		},
-		data() {
-			return {
+	    name: "contractApprove",
+	    components: {
+	        circleLoading
+	    },
+	    data() {
+	        return {
 				myOpenUrl:"",  //在线编辑打开地址
 				numberShow:false,  //合同编号和系统编号是否显示
 				numberShow2:true,  //合同编号是否可以编辑
@@ -216,7 +216,7 @@
 				btnLoading7:false, //智能审核按钮
 				btnLoading8:false, //文本对比按钮
 				applyCount:[],   //审批人添加
-				upId:'',
+	        	upId:'',
 				istopayText:"",
 				auditUrl: "",
 				modalFlow:false,
@@ -225,13 +225,13 @@
 				historyList: [],
 				assigneeListShow: true, //审批人列表是否显示
 				assigneeList: [], //审批人列表
-				accessToken: {}, // 上传token鉴权
+	            accessToken: {}, // 上传token鉴权
 				detailForm:{},
 				type:"",
 				backRoute:"",
 				fildDownUrl:"",
 				procDefId:"",
-				loading: false, // 表格加载状态
+	            loading: false, // 表格加载状态
 				modalVisible3:false, //审批人弹窗
 				DetailId: {
 					id: 137
@@ -240,13 +240,13 @@
 				columns: [
 					// 表头
 					{
-						type: "selection",
-						align: "center",
+					    type: "selection",
+					    align: "center",
 						width:134
 					},
 					{
-						title: "姓名",
-						key: "nickName",
+					    title: "姓名",
+					    key: "nickName",
 						align:"center"
 					}
 				],
@@ -257,7 +257,7 @@
 					name: '',
 					typeid: '',
 					typeName: '',
-
+				
 					//合同正文
 					ismoney: '',
 					issecret: '',
@@ -284,24 +284,24 @@
 					isurgent: '',
 					endtime: '',
 					counterpartid: '',
-
+				
 					draftstime: '',
 					phone: '',
 					contractPlayList: [],
 					uploadList:[]
 				},
 				form: {
-					procDefId: "",
+				    procDefId: "",
 					procInstId:"",
-					assignees: "",
-					priority: "",
-					id: "",
-					tableId: "",
-					title: ""
+				    assignees: "",
+				    priority: "",
+				    id: "",
+				    tableId: "",
+				    title: ""
 				},
 				treeData:[
-					{
-						createBy: "admin",
+				    {
+				        createBy: "admin",
 						createTime: "2019-01-08",
 						delFlag: 0,
 						haveChild: false,
@@ -316,8 +316,8 @@
 						updateTime: "2019-03-07",
 						users: null,
 						loading: false,
-						children: []
-					}
+				        children: []
+				    }
 				],
 				opinion: {
 					id: "",
@@ -332,16 +332,16 @@
 					procInstId: "",
 					comment: ""
 				},
-				form_up:{
-					createTime:'',
-					department:'',
-					mobile:'',
-					userId:'',
-					userName:''
-				}
-			};
-		},
-		methods: {
+	            form_up:{
+	                createTime:'',
+	                department:'',
+	                mobile:'',
+	                userId:'',
+	                userName:''
+	            }
+	        };
+	    },
+	    methods: {
 			//审批人提交
 			examineSubmit() {
 				this.applyCount = this.selectList;
@@ -404,24 +404,24 @@
 						}
 					})
 				}else{
-					this.$Message.error("请先选择或者上传合同正文");
+					 this.$Message.error("请先选择或者上传合同正文");
 				}
 				this.btnLoading8 = false;
 				// window.location = "/compareText";
 			},
 			//申请人中的树状结构数据加载
 			loadData(item, callback) {
-				loadDepartment(item.id).then(res => {
-					if (res.success === true) {
-						res.result.forEach(function(e) {
-							if (e.isParent) {
-								e.loading = false;
-								e.children = [];
-							}
-						});
-						callback(res.result);
-					}
-				});
+			  loadDepartment(item.id).then(res => {
+			    if (res.success === true) {
+			      res.result.forEach(function(e) {
+			        if (e.isParent) {
+			          e.loading = false;
+			          e.children = [];
+			        }
+			      });
+			      callback(res.result);
+			    }
+			  });
 			},
 			//申请人中的树状结构中的节点选中事件personData
 			selectTree(v){
@@ -431,8 +431,8 @@
 			},
 			//申请人选择事件
 			showSelect(e) {
-				this.selectList = e;
-				this.selectCount = e.length;
+			    this.selectList = e;
+			    this.selectCount = e.length;
 				this.form.assignees = [];
 				for(var i = 0;i < e.length;i++){
 					this.form.assignees.push(e[i].id);
@@ -445,8 +445,8 @@
 				this.personData = [];
 				this.selectCount = 0;
 				this.treeData=[
-					{
-						createBy: "admin",
+				    {
+				        createBy: "admin",
 						createTime: "2019-01-08",
 						delFlag: 0,
 						haveChild: false,
@@ -461,14 +461,14 @@
 						updateTime: "2019-03-07",
 						users: null,
 						loading: false,
-						children: []
-					}
+				        children: []
+				    }
 				]
 			},
 			//下一审批人删除
 			applyClose(event, name){
 				const index = this.applyCount.indexOf(name);
-				this.applyCount.splice(index, 1);
+                this.applyCount.splice(index, 1);
 			},
 			//获取历史审批意见
 			historyProcess(procInstId) {
@@ -538,7 +538,7 @@
 						})
 					}
 				}
-
+				
 			},
 			//返回修改
 			reject() {
@@ -603,7 +603,7 @@
 					}
 				});
 			},
-			init() {
+	        init() {
 				this.opinion = {
 					id: "",
 					procInstId: "",
@@ -616,7 +616,7 @@
 					procInstId: "",
 					comment: ""
 				}
-
+				
 				examineShow({procDefId:this.$route.query.procDefId,procInstId:this.$route.query.procInstId}).then(res => {
 					if(res.result){
 						this.assigneeListShow = true;
@@ -648,7 +648,7 @@
 				}
 				if(this.$route.query.id){
 					this.accessToken = {
-						accessToken: this.getStore("accessToken")
+					    accessToken: this.getStore("accessToken")
 					};
 					this.type = this.$route.query.type;
 					if(this.$route.query.type == 2){
@@ -668,25 +668,25 @@
 					this.opinion2.id = this.$route.query.id;
 					this.historyProcess(this.$route.query.procInstId);
 				}
-			},
+	        },
 			close(){
 				this.closeCurrentPage();
 			},
 			closeCurrentPage() {
 				this.$store.commit("removeTag", "contractApprove");
-				localStorage.pageOpenedList = JSON.stringify(
+				    localStorage.pageOpenedList = JSON.stringify(
 						this.$store.state.app.pageOpenedList
-				);
+				    );
 				this.$router.push({
 					name: this.backRoute
 				});
 			}
-		},
-		mounted() {
-			this.init();
-		},
+	    },
+	    mounted() {
+	        this.init();
+	    },
 		watch: {
-			// 监听路由变化
+		  // 监听路由变化
 // 			beforeRouteUpdate(to, from, next) {
 // 				const newId = to.query.tableId;
 // 				const oldId = from.query.tableId;

@@ -8,7 +8,7 @@
       <Col>
         <Card>
           <Row>
-            <Form ref="searchForm" :model="searchForm" inline :label-width="70" class="search-form">
+            <Form ref="searchForm" :model="searchForm" inline :label-width="120" class="search-form">
               <Form-item label="标题" prop="title">
                 <Input
                   type="text"
@@ -30,7 +30,7 @@
                   <Option value="1">已结束</Option>
                 </Select>
               </Form-item> -->
-              <span v-if="drop">
+              <!-- <span v-if="drop"> -->
                 <Form-item label="结果" prop="result">
                   <Select
                     v-model="searchForm.result"
@@ -51,18 +51,19 @@
                     format="yyyy-MM-dd"
                     clearable
                     @on-change="selectDateRange"
-                    placeholder="选择起始时间"
+                    placeholder="选择时间"
                     style="width: 200px"
+										:editable="false"
                   ></DatePicker>
                 </Form-item>
-              </span>
+              <!-- </span> -->
               <Form-item style="margin-left:-35px;" class="br">
                 <Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
                 <Button @click="handleReset">重置</Button>
-                <a class="drop-down" @click="dropDown">
+                <!-- <a class="drop-down" @click="dropDown">
                   {{dropDownContent}}
                   <Icon :type="dropDownIcon"></Icon>
-                </a>
+                </a> -->
               </Form-item>
             </Form>
           </Row>
@@ -334,7 +335,6 @@ export default {
         {
           title: "合同名称",
           key: "title",
-          width: 150,
           sortable: true,
 					render: (h, params) => {
 					  return h("div", [
@@ -355,13 +355,11 @@ export default {
         {
           title: "所属流程",
           key: "processName",
-          width: 150,
           tooltip: true
         },
         {
           title: "当前审批环节",
           key: "currTaskName",
-          width: 150,
           tooltip: true
         },
         {
@@ -402,7 +400,7 @@ export default {
         {
           title: "提交申请时间",
           key: "applyTime",
-          width: 150,
+          width: 180,
           sortable: true
         },
         {
@@ -905,7 +903,7 @@ export default {
 								var obj = {name:"",url:"",fileDownUrl:""};
 								obj.name = arr[i];
 								obj.url = arr2[i];
-								obj.fileDownUrl = '/xboot/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
 								this.dictForm.uploadList.push(obj);
 							}
 						}

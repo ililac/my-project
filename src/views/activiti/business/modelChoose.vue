@@ -25,9 +25,9 @@
 					<div class="ul">
 						<FormItem label="变更内容" class="asterisk">
 							<Input
-									type="textarea"
-									v-model="dictForm.changeContent"
-									:rows="2"
+								type="textarea"
+								v-model="dictForm.changeContent"
+								:rows="2"
 							/>
 						</FormItem>
 					</div>
@@ -49,22 +49,22 @@
 				</div>
 				<div class="ul three">
 					<FormItem label="合同正文"  v-if="chapter1 == 2" class="lef" prop="contentname">
-						<span @click="draftBz" class="model-select" style="cursor:pointer">范本选择</span>
+			            <span @click="draftBz" class="model-select" style="cursor:pointer">范本选择</span>
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
 					<FormItem label="合同正文" v-else="chapter1 == 2" class="lef" prop="contentname">
 						<Upload action="/zhfw/contract/draft/uploadFileNew"
-								:data='{"generalNo":dictForm.generalNo,"url":""}'
-								:headers="accessToken"
-								:on-success="handleSuccess2"
-								:on-error="handleError"
-								:max-size="10240"
-								:format="['doc','docx']"
-								:on-exceeded-size="handleMaxSize"
-								:on-format-error="handleFormatError"
-								:before-upload="beforeUpload"
-								type="drag"
-								ref="up1">
+							:data='{"generalNo":dictForm.generalNo,"url":""}'
+			                :headers="accessToken"
+							:on-success="handleSuccess2"
+							:on-error="handleError"
+							:max-size="10240"
+							:format="['doc','docx']"
+							:on-exceeded-size="handleMaxSize"
+							:on-format-error="handleFormatError"
+							:before-upload="beforeUpload"
+							type="drag"
+							ref="up1">
 							<p id="contentname" class="upload">点击上传</p>
 						</Upload>
 						<p style="color: #d3d3d3;">支持扩展名：doc,.docx文件大小：<=10MB</p>
@@ -126,7 +126,7 @@
 						<Input v-model="dictForm.money" v-on:input="nuMinput(dictForm.money)" style="width: calc(100% - 36px);"/>
 						<b style="position: absolute;right: -30px;top: 0;color: #ed4014; width: 66px;">（万元）</b>
 					</FormItem>
-				</div>
+				</div>	
 				<div class="ul">
 					<FormItem label="开始日期" class="data lef">
 						<DatePicker
@@ -151,7 +151,7 @@
 								:editable="false"
 						></DatePicker>
 					</FormItem>
-				</div>
+				</div>	
 				<div class="ul">
 					<FormItem label="合同份数" prop="name" class="lef">
 						<input v-on:input="nuMinput2(dictForm.totalnum,3)" class="number" type="number" v-model="dictForm.totalnum"/>
@@ -159,32 +159,32 @@
 					<FormItem label="关联主合同" class="lef">
 						<Button style="display: block;width: 100%;" @click="relevance">{{dictForm.parentContractName?dictForm.parentContractName:"选择主合同"}}</Button>
 					</FormItem>
-				</div>
+				</div>	
 				<div class="ul">
 					<FormItem label="备注">
 						<Input
-								type="textarea"
-								v-model="dictForm.description"
-								:rows="2"
+							type="textarea"
+							v-model="dictForm.description"
+							:rows="2"
 						/>
 					</FormItem>
 				</div>
 				<Col :span="24">
 					<FormItem label="相关附件">
-						<Upload
-								action="/zhfw/contract/upload/uploadFiles?tag=accessoryurl-attachmentname"
-								ref="upload2"
-								:headers="accessToken"
-								:show-upload-list="false"
-								:default-file-list="defaultList"
-								:on-success="affixHandleSuccess"
-								:max-size="10240"
-								:on-exceeded-size="affixHandleMaxSize"
-								:before-upload="affixhandleBeforeUpload"
-								multiple
-								type="drag"
-								class="upload"
-						>
+						<Upload 
+							action="/zhfw/contract/upload/uploadFiles?tag=accessoryurl-attachmentname"
+							ref="upload2"
+							:headers="accessToken"
+							:show-upload-list="false"
+							:default-file-list="defaultList"
+							:on-success="affixHandleSuccess"
+							:max-size="10240"
+							:on-exceeded-size="affixHandleMaxSize"
+							:before-upload="affixhandleBeforeUpload"
+							multiple
+							type="drag"
+							class="upload"
+							>
 							<p id="attachmentname" class="upload" @click="getUpId('attachmentname')">上传文件</p>
 						</Upload>
 						<p style="color: #d3d3d3;">支持文件大小：<=10MB</p>
@@ -201,15 +201,15 @@
 				<div style="clear:both"></div>
 			</Form>
 			<div slot="footer">
-				<Button type="text" @click="handleCancel(1)">取消</Button>
-				<Button type="primary" :loading="btnLoading" @click="handelSubmitDict(1)">
-					<span v-if="!btnLoading">提交</span>
-					<span v-else>Loading...</span>
-				</Button>
-				<Button v-if="dictForm.modalSource != 1" type="primary" :loading="btnLoading2" @click="handelSubmitDict(2)">
-					<span v-if="!btnLoading2">保存</span>
-					<span v-else>Loading...</span>
-				</Button>
+			  <Button type="text" @click="handleCancel(1)">取消</Button>
+			  <Button type="primary" :loading="btnLoading" @click="handelSubmitDict(1)">
+			  	<span v-if="!btnLoading">提交</span>
+			  	<span v-else>Loading...</span>
+			  </Button>
+			  <Button v-if="dictForm.modalSource != 1" type="primary" :loading="btnLoading2" @click="handelSubmitDict(2)">
+			  	<span v-if="!btnLoading2">保存</span>
+			  	<span v-else>Loading...</span>
+			  </Button>
 			</div>
 		</Modal>
 		<relative-edit :formData.sync="relativeDictForm" :visible.sync="relativeModalVisible" :sourceType.sync="source" v-on:relativelisten="childShow2"  v-on:listen="childShow"></relative-edit>
@@ -223,7 +223,7 @@
 					</Col>
 					<Col :span="12">
 						<Alert show-icon>
-							已选择 <span class="select-count">{{selectCount}}</span> 项
+						    已选择 <span class="select-count">{{selectCount}}</span> 项
 						</Alert>
 						<Table :height="300" :loading="loading" border :columns="columns" :data="personData" ref="table1" @on-selection-change="showSelect"></Table>
 					</Col>
@@ -231,42 +231,42 @@
 			</div>
 			<div style="clear: both;"></div>
 			<div slot="footer">
-				<Button type="text" @click="modalVisible3=false">取消</Button>
-				<Button type="primary" :loading="btnLoading4" @click="examineSubmit">
-					<span v-if="!btnLoading4">提交</span>
-					<span v-else>Loading...</span>
-				</Button>
+			  <Button type="text" @click="modalVisible3=false">取消</Button>
+			  <Button type="primary" :loading="btnLoading4" @click="examineSubmit">
+			  	<span v-if="!btnLoading4">提交</span>
+			  	<span v-else>Loading...</span>
+			  </Button>
 			</div>
 		</Modal>
 		<Modal title="范本选择" v-model="modalVisible5" :mask-closable="false" :width="1000" footer-hide>
-			<Form>
-				<Form-item label="范本名称">
-					<Input type="text" v-model="searchForm1.modelName" placeholder="请输入" clearable style="width: 300px"/>
-					<Button @click="handleSearch1(1)" type="primary" icon="ios-search" style="margin-left:35px;">查询</Button>
-				</Form-item>
-			</Form>
-
-			<Row>
-				<Table :loading="loading1" border :columns="columns3" :data="data1" sortable="custom" @on-sort-change="changeSort1" @on-selection-change="showSelect1" ref="table"></Table>
-			</Row>
-			<Row type="flex" justify="end" class="page">
-				<Page :current="searchForm1.pageNumber" :total="total1" :page-size="searchForm1.pageSize" @on-change="changePage1" @on-page-size-change="changePageSize1" :page-size-opts="[10,20,50]" size="small" show-total show-elevator show-sizer></Page>
-			</Row>
+		    <Form>
+		        <Form-item label="范本名称">
+		            <Input type="text" v-model="searchForm1.modelName" placeholder="请输入" clearable style="width: 300px"/>
+		            <Button @click="handleSearch1(1)" type="primary" icon="ios-search" style="margin-left:35px;">查询</Button>
+		        </Form-item>
+		    </Form>
+		    
+		    <Row>
+		        <Table :loading="loading1" border :columns="columns3" :data="data1" sortable="custom" @on-sort-change="changeSort1" @on-selection-change="showSelect1" ref="table"></Table>
+		    </Row>
+		    <Row type="flex" justify="end" class="page">
+		        <Page :current="searchForm1.pageNumber" :total="total1" :page-size="searchForm1.pageSize" @on-change="changePage1" @on-page-size-change="changePageSize1" :page-size-opts="[10,20,50]" size="small" show-total show-elevator show-sizer></Page>
+		    </Row>
 		</Modal>
 		<Modal title="主合同选择" v-model="modalVisible6" :mask-closable="false" :width="1000" footer-hide>
-			<Form>
-				<Form-item label="合同名称">
-					<Input type="text" v-model="signedForm.name" placeholder="请输入" clearable style="width: 300px"/>
-					<Button @click="signedSearch" type="primary" icon="ios-search" style="margin-left:35px;">查询</Button>
-				</Form-item>
-			</Form>
-
-			<Row>
-				<Table :loading="loading1" border :columns="columns4" :data="signedData" sortable="custom" @on-sort-change="changeSort1" @on-selection-change="showSelect1" ref="table"></Table>
-			</Row>
-			<Row type="flex" justify="end" class="page">
-				<Page :current="signedForm.pageNum" :total="signedTotal" :page-size="signedForm.pageSize" @on-change="changeSignedPage" size="small" show-total show-elevator show-sizer></Page>
-			</Row>
+		    <Form>
+		        <Form-item label="合同名称">
+		            <Input type="text" v-model="signedForm.name" placeholder="请输入" clearable style="width: 300px"/>
+		            <Button @click="signedSearch" type="primary" icon="ios-search" style="margin-left:35px;">查询</Button>
+		        </Form-item>
+		    </Form>
+		    
+		    <Row>
+		        <Table :loading="loading1" border :columns="columns4" :data="signedData" sortable="custom" @on-sort-change="changeSort1" @on-selection-change="showSelect1" ref="table"></Table>
+		    </Row>
+		    <Row type="flex" justify="end" class="page">
+		        <Page :current="signedForm.pageNum" :total="signedTotal" :page-size="signedForm.pageSize" @on-change="changeSignedPage" size="small" show-total show-elevator show-sizer></Page>
+		    </Row>
 		</Modal>
 	</div>
 </template>
@@ -276,71 +276,72 @@
 	import  md5 from 'js-md5';
 	import  contractType from "./contractType.vue";
 	import  relativeEdit from "../../htgl/relative/relativeEdit.vue";
-	import  {getProcessDataList } from "@/api/activiti";
-	import {
+    import  {getProcessDataList } from "@/api/activiti";
+    import {
 		addhtong,
 		draftAddhtong,
 		fileUpUrlAudit,
 		relativeFindCompany,
-		fromUp,
+        fromUp,
 		departmentGet,
 		personSelect,
 		applyBusiness,
-		eachOther,
+        eachOther,
 		loadDepartment,
 		getDictDataByType,
-		examineManList,
-		wordEdit,
+        examineManList,
+        wordEdit,
 		relativeNumber,
 		signedContract,
 		draftModelList,
-		chooseFile
-	} from "@/api/index";
-	export default {
-		name: "applyManage",
-		components: {
+        chooseFile
+    } from "@/api/index";
+    export default {
+        name: "applyManage",
+        components: {
 			relativeEdit,
 			contractType
-		},
+        },
 		props:{
 			formData33:Boolean,
 			formData1:Object,
 			modolSource:Number
 		},
-		data() {
-			return {
+        data() {
+            return {
 				modalTitle:'',
 				myStyle:{display:'flex',width:'365px'}, //合同类型宽度
 				defaultList:[],
 				uploadList:[],
 				file:[],
 				source:0,
-				myOpenUrl:'',//打开编辑器的url
-				myOpenUrl2:'',//打开编辑器的url
+                myOpenUrl:'',//打开编辑器的url
+                myOpenUrl2:'',//打开编辑器的url
 				chapter1:1,
-				upId: "",
+                upId: "",
 				oldNum:0,
 				selectCount:0, //已选择的数量
 				issatisfypay:true,      //是否满足收付款条件没有被点击
-				accessToken: {}, // 上传token鉴权
+                accessToken: {}, // 上传token鉴权
 				attachmentname:false,
 				contentname:false,
 				fileDownUrl:"",
+				auditUrl: "",
 				compareName:"",
 				selectDate: null,
 				edit2Click: false,
 				edit2ClickNum: false,
 				modalVisible5:false, //范本选择弹框
 				modalVisible6:false, //关联主合同弹框
-				relativeModalVisible: false, //相对方弹框
-				enable:false,          //相对方是否可选
-				ownership_type: [], //相对方
-				relative_type: [], //相对方
+                relativeModalVisible: false, //相对方弹框
+                enable:false,          //相对方是否可选
+                ownership_type: [], //相对方
+                relative_type: [], //相对方
 				signedData:[],    //关联的主合同的数据
 				signedTotal:0,    //关联的主合同的总数
 				// linkContractName:this.formData1.parentContractName,             // 关联主合同
 				retResRelative: {
-					id: '',
+                    id: '',
 					name : '',
 				},
 				relativeList:[
@@ -359,122 +360,122 @@
 					contentname: [{ required: true, message: "不能为空", trigger: "change" }],
 					type: [{ required: true, message: "不能为空", trigger: "blur" }]
 				},
-				counterpartArr: [], //相对方数据列表
-				degreeArr: [], //合同地位列表
-				typeArr: [], //合同类型数据列表
+                counterpartArr: [], //相对方数据列表
+                degreeArr: [], //合同地位列表
+                typeArr: [], //合同类型数据列表
 				reasonArr:[], //变更原因
-				processData: {},
-				searchProcessForm: {
-					showLatest: true,
-					name: "",
-					status: "1", // 激活状态
-					pageNumber: 1, // 当前页数
-					pageSize: 1000, // 页面大小
-					sort: "createTime", // 默认排序字段
-					order: "desc" // 默认排序方式
-				},
-				arr: [], //履行计划数组
-				processModalVisible: false,
-				assigneeList: [],
-				editClick: false, //是否点击了编辑按钮
-				dictPriority: [],
-				selectCount: 0,
-				contract_type: [],
-				modalVisible: this.formData33,
-				modalVisible2: false,
-				modalVisible3: false,
-				modalVisible44: false,
+                processData: {},
+                searchProcessForm: {
+                    showLatest: true,
+                    name: "",
+                    status: "1", // 激活状态
+                    pageNumber: 1, // 当前页数
+                    pageSize: 1000, // 页面大小
+                    sort: "createTime", // 默认排序字段
+                    order: "desc" // 默认排序方式
+                },
+                arr: [], //履行计划数组
+                processModalVisible: false,
+                assigneeList: [],
+                editClick: false, //是否点击了编辑按钮
+                dictPriority: [],
+                selectCount: 0,
+                contract_type: [],
+                modalVisible: this.formData33,
+                modalVisible2: false,
+                modalVisible3: false,
+                modalVisible44: false,
 				searchForm1: {      //范本选择弹出框
-					modelName: "",
-					contractTypeId: "",
-					pageNumber: 1, // 当前页数
-					pageSize: 10, // 页面大小
-					order: "desc" // 默认排序方式
-				},
+                    modelName: "",
+                    contractTypeId: "",
+                    pageNumber: 1, // 当前页数
+                    pageSize: 10, // 页面大小
+                    order: "desc" // 默认排序方式
+                },
 				//相对方form
-				relativeDictForm: {
-					counterpartTypeId:"",
-					counterpartName:"",
-					creditCode:"",
-					isSpecificSubject:0,
-					subjectTypeId:"",
-					companyControls:0,
-					isUnincorporate:0,
-					enterpriseId:"",
-					isListed:0,
-					isInland:1,
-					controlPerson:"",
-					phone:"",
-					facsimile:"",
-					isLicense:0,
-					systemOutside:0,
-					linkman:"",
-					bankAccount:"",
-					qualificationInfoAddr:"",
-					qualificationInfoName:"",
-					unincorpCertifiAddr:"",
-					unincorpCertifiName:"",
-					comment:"",
-					createTime:"",
-					createBy:"",
-					estiblishTime : '',
-					regCapital : '',
+                relativeDictForm: {
+                    counterpartTypeId:"",
+                    counterpartName:"",
+                    creditCode:"",
+                    isSpecificSubject:0,
+                    subjectTypeId:"",
+                    companyControls:0,
+                    isUnincorporate:0,
+                    enterpriseId:"",
+                    isListed:0,
+                    isInland:1,
+                    controlPerson:"",
+                    phone:"",
+                    facsimile:"",
+                    isLicense:0,
+                    systemOutside:0,
+                    linkman:"",
+                    bankAccount:"",
+                    qualificationInfoAddr:"",
+                    qualificationInfoName:"",
+                    unincorpCertifiAddr:"",
+                    unincorpCertifiName:"",
+                    comment:"",
+                    createTime:"",
+                    createBy:"",
+                    estiblishTime : '',
+                    regCapital : '',
 					flag:""
-				},
-				findCompanyDate:{
-					company:""
-				},
-				dictForm: {
-					isuse: "",
-					id: "",
-					name: "",
-					typeid: "",
-					typeName: "",
-					// typeArr:'',
-					//合同正文
-					ismoney: "",
-					issecret: "",
-					isbudget: "",
-					isbid: "",
-					starttime: "",
-					number: "",
-					contentnum: 0,
-					counterpartnum: 0,
-					totalnum: "",
-					chapter: "",
-					description: "",
-					//相关附件
-					draftsman: "",
-					draftsoutfit: "", //起草机构
-					draftsoutfitid: "",
-					//合同范本
-					source: "",
-					sourceName: "",
-					sourceArr: [],
-					money: "",
-					istopay: 0,
-					istime: "",
-					isurgent: "",
-					endtime: "",
-					counterpartid: "",
-					// counterpartArr:[],
-					draftstime: "",
-					phone: "",
+                },
+                findCompanyDate:{
+                    company:""
+                },
+                dictForm: {
+                    isuse: "",
+                    id: "",
+                    name: "",
+                    typeid: "",
+                    typeName: "",
+                    // typeArr:'',
+                    //合同正文
+                    ismoney: "",
+                    issecret: "",
+                    isbudget: "",
+                    isbid: "",
+                    starttime: "",
+                    number: "",
+                    contentnum: 0,
+                    counterpartnum: 0,
+                    totalnum: "",
+                    chapter: "",
+                    description: "",
+                    //相关附件
+                    draftsman: "",
+                    draftsoutfit: "", //起草机构
+                    draftsoutfitid: "",
+                    //合同范本
+                    source: "",
+                    sourceName: "",
+                    sourceArr: [],
+                    money: "",
+                    istopay: 0,
+                    istime: "",
+                    isurgent: "",
+                    endtime: "",
+                    counterpartid: "",
+                    // counterpartArr:[],
+                    draftstime: "",
+                    phone: "",
 					contentname:"",
-					contractPlayList: [],
+                    contractPlayList: [],
 					generalNo:""
-				},
+                },
 				contractPlayList2:[],    //履行计划临时存储
-				form: {
-					procDefId: "",
+                form: {
+                    procDefId: "",
 					procInstId:"",
-					assignees: "",
-					priority: "",
-					id: "",
-					tableId: "",
-					title: ""
-				},
-				loading: false, // 表格加载状态
+                    assignees: "",
+                    priority: "",
+                    id: "",
+                    tableId: "",
+                    title: ""
+                },
+                loading: false, // 表格加载状态
 				btnLoading:false, //合同起草中的提交按钮
 				btnLoading2:false, //合同起草中的保存按钮
 				btnLoading3:false, //履行计划中的保存按钮
@@ -483,168 +484,168 @@
 				btnLoading6:false, //在线编辑
 				btnLoading7:false, //智能审核
 				btnLoading8:false, //文本对比
-				data: [], //表单数据
-				total: 0, // 表单数据总数
+                data: [], //表单数据
+                total: 0, // 表单数据总数
 				loading1: false,
-				data1: [],
-				total1: 0,
+                data1: [],
+                total1: 0,
 				columns: [
 					// 表头
 					{
-						type: "selection",
-						align: "center",
+					    type: "selection",
+					    align: "center",
 						width:134
 					},
-					{
-						title: "姓名",
-						key: "nickName",
+				    {
+				        title: "姓名",
+				        key: "nickName",
 						align:"center"
-					}
+				    }
 				],
 				//范本中的选择
 				columns3: [
-					// 表头
-					{
-						title: "序号",
-						type: "index",
-						width: 80,
+                    // 表头
+                    {
+                        title: "序号",
+                        type: "index",
+                        width: 80,
+                        align: "center"
+                    },
+                    {
+                        title: "范本名称",
+                        key: "modelName",
+                        width: 240,
 						align: "center"
-					},
-					{
-						title: "范本名称",
-						key: "modelName",
-						width: 240,
+                    },
+                    {
+                        title: "合同类型",
+                        key: "contractTypeName",
+                        width: 200,
 						align: "center"
-					},
-					{
-						title: "合同类型",
-						key: "contractTypeName",
-						width: 200,
+                    },
+                    {
+                        title: "使用次数",
+                        key: "usedCount",
+                        width: 100,
 						align: "center"
-					},
-					{
-						title: "使用次数",
-						key: "usedCount",
-						width: 100,
+                    },
+                    {
+                        title: "发布人",
+                        key: "createBy",
+                        width: 100,
 						align: "center"
-					},
-					{
-						title: "发布人",
-						key: "createBy",
-						width: 100,
+                    },
+                    {
+                        title: "发布时间",
+                        key: "publishTime",
+                        width: 160,
 						align: "center"
-					},
-					{
-						title: "发布时间",
-						key: "publishTime",
-						width: 160,
-						align: "center"
-					},
-					{
-						title: "操作",
-						key: "action",
-						width: 80,
-						align: "center",
+                    },
+                    {
+                        title: "操作",
+                        key: "action",
+                        width: 80,
+                        align: "center",
 						fixed: "right",
-						render: (h, params) => {
-							return h("div", [
-								h(
-										"Button",
-										{
-											props: {
-												type: "primary",
-												size: "small"
-											},
-											style: {
-												marginRight: "5px"
-											},
-											on: {
-												click: () => {
-													this.chooseThis(params.row);
-												}
-											}
-										},
-										"选择"
-								),
-
-							]);
-						}
-					}
-				],
+                        render: (h, params) => {
+                            return h("div", [
+                                h(
+                                    "Button",
+                                    {
+                                        props: {
+                                            type: "primary",
+                                            size: "small"
+                                        },
+                                        style: {
+                                            marginRight: "5px"
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.chooseThis(params.row);
+                                            }
+                                        }
+                                    },
+                                    "选择"
+                                ),
+                                
+                            ]);
+                        }
+                    }
+                ],
 				//主合同中的列表项
 				columns4: [
-					// 表头
-					{
-						title: "序号",
-						type: "index",
-						width: 80,
+				    // 表头
+				    {
+				        title: "序号",
+				        type: "index",
+				        width: 80,
+				        align: "center"
+				    },
+				    {
+				        title: "合同名称",
+				        key: "name",
+				        width: 240,
 						align: "center"
-					},
-					{
-						title: "合同名称",
-						key: "name",
-						width: 240,
+				    },
+				    {
+				        title: "合同类型",
+				        key: "contractType",
+				        width: 200,
 						align: "center"
-					},
-					{
-						title: "合同类型",
-						key: "contractType",
-						width: 200,
-						align: "center"
-					},
-					{
-						title: "相对方",
-						key: "counterpartName",
+				    },
+				    {
+				        title: "相对方",
+				        key: "counterpartName",
 						align: "center",
-						width: 100
-					},
-					{
-						title: "备注",
-						key: "comment",
+				        width: 100
+				    },
+				    {
+				        title: "备注",
+				        key: "comment",
 						align: "center"
-					},
-					{
-						title: "操作",
-						key: "action",
-						width: 80,
-						align: "center",
+				    },
+				    {
+				        title: "操作",
+				        key: "action",
+				        width: 80,
+				        align: "center",
 						fixed: "right",
-						render: (h, params) => {
-							return h("div", [
-								h(
-										"Button",
-										{
-											props: {
-												type: "primary",
-												size: "small"
-											},
-											style: {
-												marginRight: "5px"
-											},
-											on: {
-												click: () => {
-													this.chooseSigeed(params.row);
-												}
-											}
-										},
-										"选择"
-								),
-
-							]);
-						}
-					}
+				        render: (h, params) => {
+				            return h("div", [
+				                h(
+				                    "Button",
+				                    {
+				                        props: {
+				                            type: "primary",
+				                            size: "small"
+				                        },
+				                        style: {
+				                            marginRight: "5px"
+				                        },
+				                        on: {
+				                            click: () => {
+				                                this.chooseSigeed(params.row);
+				                            }
+				                        }
+				                    },
+				                    "选择"
+				                ),
+				                
+				            ]);
+				        }
+				    }
 				],
-				form_up: {
-					createTime: "",
-					department: "",
-					mobile: "",
-					userId: "",
-					userName: "",
-					uName: ""
-				},
+                form_up: {
+                    createTime: "",
+                    department: "",
+                    mobile: "",
+                    userId: "",
+                    userName: "",
+                    uName: ""
+                },
 				treeData:[
-					{
-						createBy: "admin",
+                    {
+                        createBy: "admin",
 						createTime: "2019-01-08",
 						delFlag: 0,
 						haveChild: false,
@@ -659,9 +660,9 @@
 						updateTime: "2019-03-07",
 						users: null,
 						loading: false,
-						children: []
-					}
-				],
+                        children: []
+                    }
+                ],
 				http:"http://localhost:9999",
 				personData:[],
 				signedForm:{
@@ -669,13 +670,13 @@
 					pageSize:10,
 					name:""
 				}
-			};
-		},
-		methods: {
+            };
+        },
+        methods: {
 			//申请人选择事件
 			showSelect(e) {
-				this.selectList = e;
-				this.selectCount = e.length;
+			    this.selectList = e;
+			    this.selectCount = e.length;
 				this.form.assignees = [];
 				for(var i = 0;i < e.length;i++){
 					this.form.assignees.push(e[i].id);
@@ -686,28 +687,28 @@
 					eachOther().then(res => {
 						this.counterpartArr = res.result.content;
 						let arr = this.relativeList;
-						arr[data.order].counterpartId = data.data.result.id;
-						this.relativeList = [...arr];
-						this.dictForm.counterpartList = [...this.relativeList];
+					arr[data.order].counterpartId = data.data.result.id;
+					this.relativeList = [...arr];
+					this.dictForm.counterpartList = [...this.relativeList];
 					});
 				}
 			},
-			childShow2(data){
-				this.relativeModalVisible = data;
-			},
+		    childShow2(data){
+		    	this.relativeModalVisible = data;
+		    },
 			//申请人中的树状结构数据加载
 			loadData(item, callback) {
-				loadDepartment(item.id).then(res => {
-					if (res.success === true) {
-						res.result.forEach(function(e) {
-							if (e.isParent) {
-								e.loading = false;
-								e.children = [];
-							}
-						});
-						callback(res.result);
-					}
-				});
+			  loadDepartment(item.id).then(res => {
+			    if (res.success === true) {
+			      res.result.forEach(function(e) {
+			        if (e.isParent) {
+			          e.loading = false;
+			          e.children = [];
+			        }
+			      });
+			      callback(res.result);
+			    }
+			  });
 			},
 			//申请人中的树状结构中的节点选中事件personData
 			selectTree(v){
@@ -728,20 +729,24 @@
 // 					this.dictForm[res.result[0].tag.split("-")[1]] = res.result[0].name;
 					this.attachmentname = true;
 					this.$Message.success("上传文件 " + file.name + " 成功");
-
+					if(this.dictForm.typeid){
+						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					}
 				}else{
 					this.$Message.error("上传文件 " + file.name + " 失败");
 				}
 			},
 			handleSuccess2(res, file) {
 				if(res.result == "success"){
-
+					
 					this.dictForm.contracturl = res.url;
 					this.dictForm.name = res.fileName.substring(0,res.fileName.lastIndexOf("."));
 					this.dictForm.contentname = res.fileName;
 					this.attachmentname = true;
 					this.contracturl2 = res.url;
-
+					if(this.dictForm.typeid){
+						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					}
 					this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result.name+'&url='+res.result.url+'&accessToken='+this.getStore("accessToken");
 					this.dictForm.generalNo = res.generalNo;
 					document.getElementById("contentname").innerHTML = "点击上传";
@@ -758,10 +763,10 @@
 			},
 			beforeUpload(file) {
 				if (file.type.indexOf('word')>-1) {
-					document.getElementById("contentname").innerHTML = "文件上传中...";
+				document.getElementById("contentname").innerHTML = "文件上传中...";
 				}else{
-					document.getElementById("contentname").innerHTML = "点击上传";
-					this.$Message.error('请上传word文件！')
+				document.getElementById("contentname").innerHTML = "点击上传";
+				this.$Message.error('请上传word文件！')
 				}
 			},
 			//合同附件的多文件上传
@@ -773,7 +778,7 @@
 				return true;
 			},
 			//多文件上传的方法
-
+			
 			handleMaxSize(file) {
 				this.dictForm[this.upId] = "文件过大，请重新上传";
 				this.$Notice.warning({
@@ -784,14 +789,16 @@
 			//合同正文中上传文件的格式错误
 			handleFormatError(){
 				this.$Notice.warning({
-					title: '格式错误',
-					desc: "所选文件‘ " + file.name + " ’格式错误"
-				});
+                    title: '格式错误',
+                    desc: "所选文件‘ " + file.name + " ’格式错误"
+                });
 			},
 			typeChange(v){
 				this.dictForm.typeid = v.id;
 				this.dictForm.contractType = v.typeName;
-
+				if(v.id&&this.dictForm.contracturl){
+					this.auditUrl = "http://139.198.16.175:8073?id="+v.id+"&url="+this.dictForm.contracturl
+				}
 			},
 			handelSubmitDict(i) {
 				if(!this.dictForm.name){
@@ -802,7 +809,7 @@
 					this.$Message.error("合同类型没有填写");
 					return
 				}
-
+				
 				if(!this.dictForm.contentname){
 					this.$Message.error("合同正文没有填写");
 					return
@@ -902,9 +909,9 @@
 								}
 								if(typeof(dictForm.changeTime)=="object"){
 									let d = dictForm.changeTime;
-									var date = d.getFullYear() + "-" +
-											d.getMonth() + 1 + "-" +
-											d.getDate()
+									var date = d.getFullYear() + "-" + 
+											   d.getMonth() + 1 + "-" +
+											   d.getDate()
 									dictForm.changeTime = date;
 								}
 								addhtong(dictForm).then(res => {
@@ -962,7 +969,7 @@
 									this.btnLoading = false;
 								});
 							}
-
+							
 						}
 					}
 				})
@@ -1045,10 +1052,10 @@
 						this.btnLoading8 = false;
 					})
 				}else{
-					this.$Message.error("请先选择或者上传合同正文");
-					this.btnLoading8 = false;
+					 this.$Message.error("请先选择或者上传合同正文");
+					 this.btnLoading8 = false;
 				}
-
+				
 				// window.location = "/compareText";
 			},
 			applyShow(res){
@@ -1072,14 +1079,14 @@
 			},
 			//范本选择弹出框
 			draftBz() {
-				this.modalVisible5 = true;
-				this.getDataList1();
-			},
+                this.modalVisible5 = true;
+                this.getDataList1();
+            },
 			selectDateRange(v) {
-				if (v) {
-					this.searchForm.startTime = v[0];
-					this.searchForm.endTime = v[1];
-				}
+			  if (v) {
+			    this.searchForm.startTime = v[0];
+			    this.searchForm.endTime = v[1];
+			  }
 			},
 			nuMinput(v,min,max){
 				if(isNaN(v)){
@@ -1087,7 +1094,7 @@
 					return;
 				}
 				// this.dictForm2.factmoney = v.replace(/\b(0+)/gi,"");
-
+				
 				if(String(v).indexOf(".") > -1){
 					if(v.toString().split(".")[1].length > 2){
 						this.$Message.error("只能输入到小数点后两位");
@@ -1106,16 +1113,16 @@
 					}
 				}
 			},
-			getUpId(id) {
-				this.upId = id;
-			},
-			//模板选择
-			getProcessList() {
+            getUpId(id) {
+                this.upId = id;
+            },
+            //模板选择
+            getProcessList() {
 				departmentGet().then(res => {
 					let message = res.message;
 					let that = this;
 					getProcessDataList(this.searchProcessForm).then(res => {
-						if (res.message=="success") {
+					    if (res.message=="success") {
 							let arr = res.result.content;
 							if(message == "true"){
 								for(let i = 0;i<arr.length;i++){
@@ -1135,69 +1142,69 @@
 							that.form.procDefId = this.processData.id;
 							that.form.procInstId = "";
 							that.getDictDataType();
-						}
+					    }
 					});
 				})
-			},
-			getDictDataType() {
-				examineManList(this.processData.id).then(res => {
-					this.assigneeList = res.result.users;
-				});
-			},
-			//审批人提交
-			examineSubmit() {
+            },
+            getDictDataType() {
+                examineManList(this.processData.id).then(res => {
+                    this.assigneeList = res.result.users;
+                });
+            },
+            //审批人提交
+            examineSubmit() {
 				this.btnLoading4 = true;
 				this.form.priority = 0;
 				this.form.procDefId = this.processData.id;
 				this.form.title = this.dictForm.name;
 				applyBusiness(this.form).then(res => {
-					this.loading = false;
-					if (res.success === true) {
-						this.$Message.success("操作成功");
-						this.modalVisible3 = false;
+				    this.loading = false;
+				    if (res.success === true) {
+				        this.$Message.success("操作成功");
+				        this.modalVisible3 = false;
 						this.modalVisiblechange();
-					}
+				    }
 					this.btnLoading4 = false;
 				});
-			},
-			init() {
-				this.accessToken = {
+            },
+            init() {
+                this.accessToken = {
 					access_token: this.getStore("accessToken"),
 					Authorization: 'Bearer '+ this.getStore("accessToken")
 				};
 				// 获取表单数据
-				fromUp().then(res => {
-					this.form_up.createTime = res.createTime;
-					this.form_up.department = res.department;
-					this.form_up.mobile = res.mobile;
-					this.form_up.userId = res.userId;
-					this.form_up.userName = res.nickName;
-					this.form_up.uName = res.userName;
-				});
-				//企业所有制形式ownership_type
-				getDictDataByType("company_syzxs").then(res => {
-					if (res.success) {
-						this.ownership_type = res.result;
-					}
-				});
-				getDictDataByType("contract_type").then(res => {
-					if (res.success) {
-						this.typeArr = res.result;
-					}
-				});
+                fromUp().then(res => {
+                    this.form_up.createTime = res.createTime;
+                    this.form_up.department = res.department;
+                    this.form_up.mobile = res.mobile;
+                    this.form_up.userId = res.userId;
+                    this.form_up.userName = res.nickName;
+                    this.form_up.uName = res.userName;
+                });
+                //企业所有制形式ownership_type
+                getDictDataByType("company_syzxs").then(res => {
+                    if (res.success) {
+                        this.ownership_type = res.result;
+                    }
+                });
+                getDictDataByType("contract_type").then(res => {
+                    if (res.success) {
+                        this.typeArr = res.result;
+                    }
+                });
 				//获取合同地位列表
 				getDictDataByType("degreeType").then(res => {
-					if (res.success) {
-						this.degreeArr = res.result;
-					}
+				    if (res.success) {
+				        this.degreeArr = res.result;
+				    }
 				});
 				//获取变更原因数据列表
 				getDictDataByType("changeReason").then(res => {
-					if (res.success) {
-						this.reasonArr = res.result;
-					}
+				    if (res.success) {
+				        this.reasonArr = res.result;
+				    }
 				});
-			},
+            },
 			//文件下载
 			fileDowm(name,url){
 				fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:url}).then(res => {
@@ -1206,106 +1213,106 @@
 					}
 				})
 			},
-			findOp(arr, key) {
-				for (var i = 0; i < arr.length; i++) {
-					if (arr[i].value == key) {
-						obj[i].selected = true;
-						break;
-					}
-				}
-			},
+            findOp(arr, key) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].value == key) {
+                        obj[i].selected = true;
+                        break;
+                    }
+                }
+            },
 			handleCancel(){
 				this.modalVisible = false;
 			},
 			chooseThis(v) {
-				this.selectForm = v;
+                this.selectForm = v;
 				this.dictForm.generalNo = "";
-				this.dictForm.name = v.fileName.substring(0,v.fileName.lastIndexOf("."));;
-				var fname = v.fileName;
-				var fromUrl = v.modelAddress;
-				this.dictForm.contentname = v.fileName;
-				this.dictForm.contractModelId = v.id;
+                this.dictForm.name = v.fileName.substring(0,v.fileName.lastIndexOf("."));;
+                var fname = v.fileName;
+                var fromUrl = v.modelAddress;
+                this.dictForm.contentname = v.fileName;
+                this.dictForm.contractModelId = v.id;
 				this.contracturl2 = v.modelAddress;
-				var fTag = v.modelAddress;
-				var fileTag = md5(fTag.substring(fTag.lastIndexOf("/")+1,fTag.lastIndexOf(".")));//此处需要进行MD5加密
-				// var fileTag = md5(fTag.substring(fTag.lastIndexOf("/")+1,fTag.lastIndexOf(".")));//此处需要进行MD5加密generalNo
-				chooseFile({ fileUrl: v.modelAddress }).then(res => {});
+                var fTag = v.modelAddress;
+                var fileTag = md5(fTag.substring(fTag.lastIndexOf("/")+1,fTag.lastIndexOf(".")));//此处需要进行MD5加密
+                // var fileTag = md5(fTag.substring(fTag.lastIndexOf("/")+1,fTag.lastIndexOf(".")));//此处需要进行MD5加密generalNo
+                chooseFile({ fileUrl: v.modelAddress }).then(res => {});
 
-				//在线编辑后，最终保存的文本地址
-				var finalFileUrl = fTag.substring(0,fTag.lastIndexOf("/")+1) + fileTag + fTag.substring(fTag.lastIndexOf("."));
+                //在线编辑后，最终保存的文本地址
+                var finalFileUrl = fTag.substring(0,fTag.lastIndexOf("/")+1) + fileTag + fTag.substring(fTag.lastIndexOf("."));
 				var fromUrl2 = encodeURIComponent(finalFileUrl);
-				this.dictForm.contracturl = v.modelAddress;
+                this.dictForm.contracturl = v.modelAddress;
 //                 this.myOpenUrl = wordEdit+'/editURL.html?fromUrl='+fromUrl+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName+"&generalNo=2555";
 //                 this.myOpenUrl2 = wordEdit+'/editURL.html?fromUrl='+fromUrl2+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName;
-				this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&accessToken='+this.getStore("accessToken");
+                this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&accessToken='+this.getStore("accessToken");
 				this.modalVisible5 = false;
-			},
-			changeSort1(e) {
-				this.searchForm1.sort = e.key;
-				this.searchForm1.order = e.order;
-				if (e.order === "normal") {
-					this.searchForm1.order = "";
-				}
-			},
-			showSelect1(e) {
-				this.selectList = e;
-				this.selectCount = e.length;
-			},
-			changePage1(v) {
-				this.searchForm1.pageNumber = v;
-				this.getDataList1();
-			},
+            },
+            changeSort1(e) {
+                this.searchForm1.sort = e.key;
+                this.searchForm1.order = e.order;
+                if (e.order === "normal") {
+                    this.searchForm1.order = "";
+                }
+            },
+            showSelect1(e) {
+                this.selectList = e;
+                this.selectCount = e.length;
+            },
+            changePage1(v) {
+                this.searchForm1.pageNumber = v;
+                this.getDataList1();
+            },
 			//关联的主合同中的列表数据翻页事件
 			changeSignedPage(v){
 				this.signedForm.pageNum = v;
 				this.signedList();
 			},
-			changePageSize1(v) {
-				this.searchForm1.pageSize = v;
-				this.getDataList1();
-			},
-			handleSearch1(type) {
-				this.searchForm1.pageNumber = 1;
-				this.searchForm1.pageSize = 10;
-				this.getDataList1();
-			},
-			getDataList1() {
-				this.loading1 = true;
-				draftModelList(this.searchForm1).then(res => {
-					this.loading1 = false;
-					if (res.success === true) {
-						this.data1 = res.result.data;
-						this.total1 = res.result.totalSize;
-					}
-				});
-			},
-			unfoundCounterpart(index){
+            changePageSize1(v) {
+                this.searchForm1.pageSize = v;
+                this.getDataList1();
+            },
+            handleSearch1(type) {
+                this.searchForm1.pageNumber = 1;
+                this.searchForm1.pageSize = 10;
+                this.getDataList1();
+            },
+            getDataList1() {
+                this.loading1 = true;
+                draftModelList(this.searchForm1).then(res => {
+                    this.loading1 = false;
+                    if (res.success === true) {
+                        this.data1 = res.result.data;
+                        this.total1 = res.result.totalSize;
+                    }
+                });
+            },
+            unfoundCounterpart(index){
 				relativeNumber().then(res => {
 					if(res.success){
 						this.relativeDictForm = {
-							counterpartTypeId:"",
-							counterpartName:"",
-							creditCode:"",
-							isSpecificSubject:0,
-							subjectTypeId:"",
-							companyControls:0,
-							isUnincorporate:0,
-							enterpriseId:"",
-							isListed:0,
-							isInland:1,
-							controlPerson:"",
-							phone:"",
-							facsimile:"",
-							isLicense:0,
-							systemOutside:0,
-							linkman:"",
-							bankAccount:"",
-							qualificationInfoAddr:"",
-							qualificationInfoName:"",
-							unincorpCertifiAddr:"",
-							unincorpCertifiName:"",
-							comment:"",
-							createTime:"",
+						    counterpartTypeId:"",
+						    counterpartName:"",
+						    creditCode:"",
+						    isSpecificSubject:0,
+						    subjectTypeId:"",
+						    companyControls:0,
+						    isUnincorporate:0,
+						    enterpriseId:"",
+						    isListed:0,
+						    isInland:1,
+						    controlPerson:"",
+						    phone:"",
+						    facsimile:"",
+						    isLicense:0,
+						    systemOutside:0,
+						    linkman:"",
+						    bankAccount:"",
+						    qualificationInfoAddr:"",
+						    qualificationInfoName:"",
+						    unincorpCertifiAddr:"",
+						    unincorpCertifiName:"",
+						    comment:"",
+						    createTime:"",
 							createBy:"",
 							registerDate:"",
 							registerCapital:"",
@@ -1326,34 +1333,34 @@
 						this.source = 2;
 					}
 				})
-			},
+            },
 			//以下是附件上传的事件
 			handleRemove (file) {
-				const fileList = this.$refs.upload2.fileList;
-				this.$refs.upload2.fileList.splice(fileList.indexOf(file), 1);
-			},
-			affixHandleSuccess (res, file) {
+                const fileList = this.$refs.upload2.fileList;
+                this.$refs.upload2.fileList.splice(fileList.indexOf(file), 1);
+            },
+            affixHandleSuccess (res, file) {
 				if(!res.success){
 					this.$Message.error("上传失败");
 					document.getElementById("attachmentname").innerHTML = "点击上传";
 					return;
 				}
-				file.url = res.result[0].url;
-				file.name = res.result[0].name;
-				file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
+                file.url = res.result[0].url;
+                file.name = res.result[0].name;
+                file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
 				this.uploadList = this.$refs.upload2.fileList;
 				document.getElementById("attachmentname").innerHTML = "点击上传";
-			},
-			affixHandleMaxSize (file) {
-				this.$Notice.warning({
-					title: '文件太大',
-					desc: '文件  ' + file.name + ' 超过了10MB'
-				});
+            },
+            affixHandleMaxSize (file) {
+                this.$Notice.warning({
+                    title: '文件太大',
+                    desc: '文件  ' + file.name + ' 超过了10MB'
+                });
 				document.getElementById("attachmentname").innerHTML = "点击上传";
-			},
-			affixhandleBeforeUpload () {
+            },
+            affixhandleBeforeUpload () {
 				document.getElementById("attachmentname").innerHTML = "文件上传中...";
-			},
+            },
 			//以上是附件上传的事件
 			//相对方重复验证
 			relativeNameChange(v){
@@ -1414,13 +1421,13 @@
 			signedSearch(){
 				this.signedList();
 			}
-		},
-		mounted() {
-			this.init();
-		},
+        },
+        mounted() {
+            this.init();
+        },
 		watch:{
 			formData33: {
-				handler(newValue, oldValue) {
+		　　 	handler(newValue, oldValue) {
 					this.modalVisible = newValue;
 					if(newValue){
 						//合同类型
@@ -1433,16 +1440,16 @@
 						this.btnLoading7 = false;
 						this.btnLoading8 = false;
 						getDictDataByType("counterpart").then(res => {
-							if (res.success) {
-								this.relative_type = res.result;
-							}
+						    if (res.success) {
+						        this.relative_type = res.result;
+						    }
 						});
 					}
-				},
-				deep: true
-			},
+		　　　　	},
+		　　　　	deep: true
+		　　 },
 			formData1: {
-				handler(newValue, oldValue) {
+		　　 	handler(newValue, oldValue) {
 					eachOther().then(res => {
 						this.counterpartArr = res.result.content;
 						if(newValue){
@@ -1465,7 +1472,9 @@
 						}else{
 							this.fileDownUrl2 = "";
 						}
-
+						if(newValue.contracturl){
+							this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+						}
 						this.uploadList = this.dictForm.uploadList;
 						this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
 						this.relativeList = this.dictForm.counterpartList;
@@ -1475,50 +1484,50 @@
 							this.modalTitle = "合同起草";
 						}
 					});
-				},
-				deep: true
-			}
+		　　　　	},
+		　　　　	deep: true
+		　　}
 		},
-	};
+    };
 </script>
 
 <style scoped>
 	.tree-bar {
-		max-height: 500px;
-		overflow: auto;
-		margin-top: 5px;
+	    max-height: 500px;
+	    overflow: auto;
+	    margin-top: 5px;
 	}
-
+	
 	.tree-bar::-webkit-scrollbar {
-		width: 6px;
-		height: 6px;
+	    width: 6px;
+	    height: 6px;
 	}
-
+	
 	.tree-bar::-webkit-scrollbar-thumb {
-		border-radius: 4px;
-		-webkit-box-shadow: inset 0 0 2px #d1d1d1;
-		background: #e4e4e4;
+	    border-radius: 4px;
+	    -webkit-box-shadow: inset 0 0 2px #d1d1d1;
+	    background: #e4e4e4;
 	}
-
+	
 	.demo-upload-list{
-		display: inline-block;
-		text-align: center;
-		border-radius: 4px;
+        display: inline-block;
+        text-align: center;
+        border-radius: 4px;
 		background-color: #e3e3e3;
-		position: relative;
-		margin-right: 15px;
+        position: relative;
+        margin-right: 15px;
 		margin-bottom: 10px;
-	}
+    }
 	.demo-upload-list .affixList{
 		padding: 0 10px;
 	}
-	.demo-upload-list-cover i{
+    .demo-upload-list-cover i{
 		position: absolute;
 		right: -10px;
 		top: -10px;
 		font-size: 20px;
 		cursor: pointer;
-	}
+    }
 	.dome-relative-list{
 		float: left;
 		text-align: right;

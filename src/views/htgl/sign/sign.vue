@@ -86,7 +86,7 @@
 					</div>
 					<div class="ul">
 						<FormItem label="作废依据" class="lef">
-							<Upload action="/zhfw/system/upload/file"
+							<Upload action="/zhfw/contract/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess"
 									:on-error="handleError"
@@ -135,7 +135,7 @@
 							></DatePicker>
 						</FormItem>
 						<FormItem label="签约金额（万元）" class="lef">
-							<p>{{signForm.oursignmoney}}</p>
+							<p style="width: 300px;height: 30px;line-height: 30px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{signForm.oursignmoney}}</p>
 						</FormItem>
 					</div>
 					<div class="ul">
@@ -181,7 +181,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag != 1">
 							<FormItem label="授权委托书">
-								<Upload action="/zhfw/system/upload/file"
+								<Upload action="/zhfw/contract/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -204,7 +204,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag == 1">
 							<FormItem label="授权委托书" prop="title">
-								<Upload action="/zhfw/system/upload/file"
+								<Upload action="/zhfw/contract/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -691,7 +691,7 @@
 					this.counterpartSignList[res.result.tag].authorizeFileUrl = res.result.url;
 					document.querySelector("."+this.upName).innerHTML = "点击上传";
 			        this.$Message.success("上传文件 " + file.name + " 成功");
-					this.counterpartSignList[res.result.tag].fileDownUrl2 = "/xboot/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
+					this.counterpartSignList[res.result.tag].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
 					var arr = this.counterpartSignList;
 					this.counterpartSignList = [];
 					for(var i = 0;i < arr.length;i++){
@@ -708,15 +708,14 @@
 			        this.$Message.success("上传文件 " + file.name + " 成功");
 					this.signForm.contractContentUrl = res.result.url;
 					this.signForm.contractContentname = res.result.name;
-					this.signForm.fileDownUrl = "/xboot/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
+					this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
 			    } else {
 			        this.$Message.error(res.message);
 			    }
 			},
             init() {
                 this.accessToken = {
-                    access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+this.getStore("accessToken")
+                    accessToken: this.getStore("accessToken")
                 };
                 // 获取表单数据
                 fromUp().then(res => {
@@ -766,11 +765,15 @@
 				}
 				this.$refs.cancellationForm.resetFields();
 				this.modalVisible = true;
+				this.btnLoading = false;
+				this.btnLoading2 = false;
             },
             edit(v) {
                 this.modalSign = true;
 				this.signForm.contractId=v.id;
 				this.$refs.signForm.resetFields();
+				this.btnLoading3 = false;
+				this.btnLoading4 = false;
 				signDetail({contractId:v.id,isuse:0}).then(res =>{
 					if(res.success == "true"){
 						this.signForm = res.sign;
@@ -784,12 +787,12 @@
 						this.counterpartSignList = res.counterpartSignList;
 						for(var i = 0;i < res.counterpartSignList.length;i++){
 							if(res.counterpartSignList[i].authorizeFileUrl){
-								this.counterpartSignList[i].fileDownUrl2 = "/xboot/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
+								this.counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
 							}else{
 								this.counterpartSignList[i].fileDownUrl2 = "";
 							}
 						}
-						this.signForm.fileDownUrl = "/xboot/draft/download?fileName="+res.sign.contractContentname+"&url="+res.sign.contractContentUrl+'&accessToken='+this.getStore("accessToken");
+						this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.sign.contractContentname+"&url="+res.sign.contractContentUrl+'&accessToken='+this.getStore("accessToken");
 					}
 				})
             },
@@ -849,7 +852,6 @@
 				}
 				console.log(this.counterpartSignList);
 				for(var value of this.counterpartSignList){
-					console.log(value.counterpartName)
 					if(!value.counterpartName){
 						this.$Message.error("相对方名称没有填写");
 						return;
@@ -862,31 +864,13 @@
 						this.$Message.error("对方签约人没有填写");
 						return;
 					}
-					if(this.authorizeFlag){
+					if(value.authorizeFlag == 1){
 						if(!value.authorizeFileUrl){
 							this.$Message.error("授权委托书没有上传");
 							return;
 						}
 					}
 				}
-				// if(!this.signForm.counterpartname){
-				// 	this.$Message.error("相对方名称没有填写");
-				// 	return;
-				// }
-				// if(!this.signForm.counterparttime){
-				// 	this.$Message.error("对方签约时间没有填写");
-				// 	return;
-				// }
-				// if(!this.signForm.counterpartman){
-				// 	this.$Message.error("对方签约人没有填写");
-				// 	return;
-				// }
-				// if(this.isauthorize){
-				// 	if(!this.signForm.authorizeName){
-				// 		this.$Message.error("授权委托书没有上传");
-				// 		return;
-				// 	}
-				// }
 				if(!this.signForm.contracteffectivetime){
 					this.$Message.error("合同生效时间没有填写");
 					return;
@@ -919,7 +903,6 @@
 						signForm.counterpartSignList[i].signTime = date;
 					}
 				}
-				// console.log(signForm.counterpartSignList);
 				signForm.counterpartSignList = JSON.stringify(signForm.counterpartSignList);
 				if(!this.counterpartSignList.id){
 					this.counterpartSignList.id = "";
@@ -942,53 +925,6 @@
 					});
 				}
 			},
-			//签署中的保存
-			// handelSaveRelative(class){
-			// 	if(!this.signForm.oursigntime){
-			// 		this.$Message.error("我方签约时间没有填写");
-			// 		return;
-			// 	}
-			// 	if(!this.signForm.oursignman){
-			// 		this.$Message.error("签约人没有填写");
-			// 		return;
-			// 	}
-			// 	if(!this.signForm.counterpartname){
-			// 		this.$Message.error("相对方名称没有填写");
-			// 		return;
-			// 	}
-			// 	if(!this.signForm.counterparttime){
-			// 		this.$Message.error("签约时间没有填写");
-			// 		return;
-			// 	}
-			// 	if(!this.signForm.counterpartman){
-			// 		this.$Message.error("对方签约人没有填写");
-			// 		return;
-			// 	}
-			// 	if(this.isauthorize){
-			// 		if(!this.signForm.authorizeName){
-			// 			this.$Message.error("授权委托书没有上传");
-			// 			return;
-			// 		}
-			// 	}
-			// 	if(!this.signForm.contracteffectivetime){
-			// 		this.$Message.error("合同生效时间没有填写");
-			// 		return;
-			// 	}
-			// 	if(!this.signForm.contractContentname){
-			// 		this.$Message.error("合同正文没有上传");
-			// 		return;
-			// 	}
-			// 	for (let value of this.signForm.counterpartSignList) {
-			// 		if(value.counterpartSignList.)
-			// 	}
-			// 	this.btnLoading4 = true;
-			// 	this.signForm.isuse = 0;
-			// 	signAture(this.signForm).then(res => {
-			// 	    this.modalSign = false
-			// 		this.getDataList();
-			// 		this.btnLoading4 = false;
-			// 	});
-			// },
             changeSort(e) {
                 this.searchForm.sort = e.key;
                 this.searchForm.order = e.order;

@@ -20,14 +20,16 @@
 								  v-model="searchForm.startTime"
 								  format="yyyy-MM-dd"
 								  clearable
-								  placeholder="选择起始时间"
+								  placeholder="选择时间"
+								  :editable="false"
 								></DatePicker>
 								<DatePicker
 								  v-model="searchForm.endTime"
 								  format="yyyy-MM-dd"
 								  clearable
 								  @on-change="timeChange"
-								  placeholder="选择起始时间"
+								  placeholder="选择时间"
+								  :editable="false"
 								></DatePicker>
 							</Form-item>
 							<Form-item style="margin-left:-35px;" class="br">
@@ -93,8 +95,9 @@
 									type="date"
 									format="yyyy-MM-dd"
 									clearable
-									placeholder="选择起始时间"
+									placeholder="选择时间"
 									style="width: 275px"
+									:editable="false"
 								></DatePicker>
 							</Form-item>
 						</div>
@@ -120,7 +123,7 @@
 						</div>
 						<div class="ul">
 							<FormItem label="终止依据" class="qualificationInfoName lef">
-								<Upload action="/zhfw/system/upload/file"
+								<Upload action="/zhfw/contract/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess"
 									:on-error="handleError"
@@ -149,8 +152,9 @@
 										type="date"
 										format="yyyy-MM-dd"
 										clearable
-										placeholder="选择起始时间"
+										placeholder="选择时间"
 										style="width: 275px"
+										:editable="false"
 								></DatePicker>
 							</Form-item>
 						</div>
@@ -235,8 +239,9 @@
 									type="date"
 									format="yyyy-MM-dd"
 									clearable
-									placeholder="选择起始时间"
+									placeholder="选择时间"
 									style="width: 100%"
+									:editable="false"
 							></DatePicker>
 						</FormItem>
 						<FormItem label="计划结束日期" class="lef data" prop="endplaytime">
@@ -245,8 +250,9 @@
 									type="date"
 									format="yyyy-MM-dd"
 									clearable
-									placeholder="选择起始时间"
+									placeholder="选择时间"
 									style="width: 100%"
+									:editable="false"
 							></DatePicker>
 						</FormItem>
 					</div>
@@ -301,8 +307,9 @@
 									type="date"
 									format="yyyy-MM-dd"
 									clearable
-									placeholder="选择起始时间"
+									placeholder="选择时间"
 									style="width: 100%"
+									:editable="false"
 							></DatePicker>
 						</FormItem>
 						<FormItem label="开票时间" class="lef data" prop="invoiceTime">
@@ -313,6 +320,7 @@
 									clearable
 									placeholder="选择起始时间"
 									style="width: 100%"
+									:editable="false"
 							></DatePicker>
 						</FormItem>
 						
@@ -540,9 +548,23 @@
                     },
                     {
                         title: "合同名称",
-                        key: "name",
                         width: 150,
-						align: "center"
+						align: "center",
+						render: (h, params) => {
+						  return h("div", [
+						    h(
+						      "a",
+						      {
+						        on: {
+						          click: () => {
+						            this.see(params.row);
+						          }
+						        }
+						      },
+						      params.row.name
+						    )
+						  ]);
+						}
                     },
                     {
                         title: "合同编号",
@@ -604,24 +626,24 @@
 								])
 							}else{
 								return h("div", [
-								    h(
-								        "Button",
-								        {
-								            props: {
-								                type: "primary",
-								                size: "small"
-								            },
-								            style: {
-								                marginRight: "5px"
-								            },
-								            on: {
-								                click: () => {
-								                    this.termination(params.row);
-								                }
-								            }
-								        },
-								        "终止"
-								    ),
+								    // h(
+								    //     "Button",
+								    //     {
+								    //         props: {
+								    //             type: "primary",
+								    //             size: "small"
+								    //         },
+								    //         style: {
+								    //             marginRight: "5px"
+								    //         },
+								    //         on: {
+								    //             click: () => {
+								    //                 this.termination(params.row);
+								    //             }
+								    //         }
+								    //     },
+								    //     "终止"
+								    // ),
 									h(
 									    "Button",
 									    {
@@ -638,7 +660,7 @@
 									            }
 									        }
 									    },
-									    "结束"
+									    "履行结束"
 									),
 								    h(
 								        "Button",
@@ -653,7 +675,7 @@
 								                }
 								            }
 								        },
-								        "反馈"
+								        "履行反馈"
 								    )
 								]);
 							}
@@ -1192,9 +1214,10 @@
             },
             init() {
                 this.accessToken = {
-                    accessToken: this.getStore("accessToken")
-                };
-                // 获取表单数据
+					access_token: this.getStore("accessToken"),
+					Authorization: 'Bearer '+ this.getStore("accessToken")
+				};
+				// 获取表单数据
                 fromUp().then(res => {
                     this.form_up.updateBy = res.updateBy;
                     this.form_up.createTime = res.createTime;
@@ -1579,6 +1602,14 @@
 					this.total = res.total;
                 });
             },
+			//查看详情
+			see(v){
+				let query = { type: 1, id: v.id, backRoute: this.$route.name };
+				this.$router.push({
+				    name: "detail",
+				    query: query
+				}); 
+			},
         },
         mounted() {
             this.init();

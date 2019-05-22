@@ -45,7 +45,7 @@
         <FormItem label="范本文件：" prop="file">
           <Upload
             class="upLoad"
-            action="/zhfw/system/upload/file?tag=modelAddress-fileName"
+            action="/zhfw/contract/upload/file?tag=modelAddress-fileName"
             :headers="accessToken"
             :on-success="handleSuccess"
             :on-error="handleError"
@@ -179,7 +179,7 @@ export default {
       this.dictForm.contractType = this.formData.contractTypeName;
       this.accessToken = {
         access_token: this.getStore("accessToken"),
-        Authorization: 'Bearer '+this.getStore("accessToken")
+        Authorization: 'Bearer '+ this.getStore("accessToken")
       };
       fromUp().then(res => {
         this.form_up.updateBy = res.nickName;
@@ -216,7 +216,7 @@ export default {
         this.dictForm[res.result.tag.split("-")[0]] = res.result.url;
         this.dictForm[res.result.tag.split("-")[1]] = res.result.name;
         this.$Message.success("上传文件 " + file.name + " 成功");
-				this.fildDownUrl = "/xboot/draft/download?fileName="+res.result.name+"&url="+res.result.url+"&accessToken="+this.getStore("accessToken");
+				this.fildDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+"&accessToken="+this.getStore("accessToken");
       } else {
         this.$Message.error("上传文件 " + file.name + "失败");
 				document.getElementById("upload").innerHTML = "点击上传";
@@ -286,7 +286,7 @@ export default {
           this.dictForm.contractType = newValue.contractTypeName;
           if (newValue.modelAddress) {
             this.fildDownUrl =
-              "/xboot/draft/download?fileName=" +
+              "/zhfw/contract/draft/download?fileName=" +
               newValue.fileName +
               "&url=" +
               newValue.modelAddress +
@@ -298,13 +298,13 @@ export default {
           this.dictForm.contractType = oldValue.contractTypeName;
           if (oldValue.modelAddress) {
             this.fildDownUrl =
-              "/xboot/draft/download?fileName=" +
+              "/zhfw/contract/draft/download?fileName=" +
               newValue.fileName +
               "&url=" +
               newValue.modelAddress +
               "&accessToken=" +
               this.getStore("accessToken");
-            // this.fildDownUrl = "/xboot/contractModel/download?id="+oldValue.id+"&accessToken="+this.getStore("accessToken");
+            // this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+oldValue.id+"&accessToken="+this.getStore("accessToken");
           }
         }
       },

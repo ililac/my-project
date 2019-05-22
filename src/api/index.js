@@ -16,7 +16,8 @@ export const ws = "/ws"
 
 // export const wordEdit = "http://139.198.16.175:8065/"
 // 本地请求
-export const wordEdit = "http://127.0.0.1:7072"
+//export const wordEdit = "http://127.0.0.1:7072"
+export const wordEdit = "http://139.198.16.175:7072/"
 
 
 //验证数字

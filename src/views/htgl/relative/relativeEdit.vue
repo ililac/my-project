@@ -44,7 +44,7 @@
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
-							action="/zhfw/system/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
+							action="/xboot/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
 							ref="upload"
 							:headers="accessToken"
 							:show-upload-list="false"
@@ -92,10 +92,10 @@
 				</div>
 				<div class="ul">
 					<FormItem label="开户行:" class="lef">
-						<input type="text" v-model="dictForm.openBank" />
+						<Input type="text" v-model="dictForm.openBank" @on-change="valiText(dictForm.openBank)"></Input>
 					</FormItem>
 					<FormItem label="银行账号:" class="lef">
-						<input type="text" v-model="dictForm.bankAccount" />
+						<Input type="text" v-model="dictForm.bankAccount"></Input>
 					</FormItem>
 				</div>
 				<div class="ul txtar">
@@ -397,10 +397,18 @@
 			}
 		},
 		methods: {
+			valiText(v){
+				if(!v){
+					return;
+				}
+				if(!/^[\u4e00-\u9fa5]+$/gi.test(v)){
+					this.$Message.error("只能输入文字");
+					return;
+				}
+			},
 			init() {
 			    this.accessToken = {
-					access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+this.getStore("accessToken")
+			        accessToken: this.getStore("accessToken")
 			    };
 			    // 获取表单数据
 			    fromUp().then(res => {

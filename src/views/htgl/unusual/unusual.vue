@@ -16,7 +16,7 @@
 							</Form-item>
 							<Form-item style="margin-left:-35px;" class="br">
 								<Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
-								<Button @click="handleExport">excel导出</Button>
+								<!-- <Button @click="handleExport">excel导出</Button> -->
 							</Form-item>
 						</Form>
 					</Row>
@@ -32,7 +32,8 @@
 		<model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
 		<Modal title="合同解除" v-model="relieveVisible" :mask-closable='false' :width="1000" :styles="{top: '30px'}" class="formModel">
 			<Col :span="24">
-				<Form ref="relieveForm" :show-message="false" :model="relieveForm" :label-width="170">
+				<Form ref="relieveForm" :show-message="false" :model="relieveForm" :label-width="120">
+					<p style="font-size: 16px;">解除信息</p>
 					<div class="ul">
 						<Form-item label="解除原因" class="lef asterisk">
 							<Select v-model="relieveForm.releaseReason" style="float: left;width: 90%;">
@@ -45,13 +46,14 @@
 									type="date"
 									format="yyyy-MM-dd"
 									clearable
-									placeholder="选择起始时间"
+									placeholder="选择解除时间"
 									style="width: 100%;"
+									:editable="false"
 							></DatePicker>
 						</Form-item>
 					</div>
 					<div class="ul">
-						<FormItem label="备注" class="asterisk">
+						<FormItem label="备注">
 							<Input
 								type="textarea"
 								v-model="relieveForm.releaseRemark"
@@ -59,6 +61,7 @@
 							/>
 						</FormItem>
 					</div>
+					<p style="font-size: 16px;">基本信息</p>
 					<basic-form :formData.sync="dictForm" :fileDown.sync="fileDownUrl" :sourceType.sync="source"></basic-form>
 				</Form>
 			</Col>
@@ -247,10 +250,6 @@
 					{
 						name:"解除时间",
 						type:"releaseTime"
-					},
-					{
-						name:"备注",
-						type:"releaseRemark"
 					}
 				]
             };
@@ -372,7 +371,7 @@
 						this.dictForm.delCounterpartIds = [];
 						this.dictForm.counterpartList[0]
 						this.dictForm.contractType = res.contractType;
-						this.fileDownUrl = '/xboot/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
 						this.dictForm.uploadList = [];
 						if(this.dictForm.attachmentname){
 							let arr = this.dictForm.attachmentname.split(',');
@@ -382,7 +381,7 @@
 									var obj = {name:"",url:"",fileDownUrl:""};
 									obj.name = arr[i];
 									obj.url = arr2[i];
-									obj.fileDownUrl = '/xboot/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+									obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
 									this.dictForm.uploadList.push(obj);
 								}
 							}

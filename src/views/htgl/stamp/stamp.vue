@@ -21,6 +21,7 @@
 								  format="yyyy-MM-dd"
 								  clearable
 								  placeholder="选择起始时间"
+								  :editable="false"
 								></DatePicker>
 								<DatePicker
 								  v-model="searchForm.endTime"
@@ -28,6 +29,7 @@
 								  @on-change="timeChange"
 								  clearable
 								  placeholder="选择起始时间"
+								  :editable="false"
 								></DatePicker>
 							</Form-item>
 							<Form-item style="margin-left:-35px;" class="br">
@@ -60,7 +62,7 @@
 					<div class="ul">
 						<FormItem label="合同正文">
 							<!-- <p>{{dictForm.contentname}}</p> -->
-							<a :href="'/xboot/draft/download?fileName='+dictForm.contentname+'&url='+dictForm.contractUrl+'&accessToken='+accessToken.accessToken">{{dictForm.contentname}}</a>
+							<a :href="'/zhfw/contract/draft/download?fileName='+dictForm.contentname+'&url='+dictForm.contractUrl+'&accessToken='+accessToken.accessToken">{{dictForm.contentname}}</a>
 						</FormItem>
 					</div>
 					<div class="ul">

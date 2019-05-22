@@ -8,30 +8,30 @@
 			<Row type="flex" justify="space-between" class="code-row-bg">
 
 				<Col :span="24">
-					<Row>
-						<Form ref="searchForm" :model="searchForm" inline :label-width="60" class="search-form">
-							<Form-item label="合同名称">
-								<Input type="text" v-model="searchForm.name" placeholder="请输入" clearable style="width: 200px" />
-							</Form-item>
-							<!-- <FormItem label="审批情况">
-                                <RadioGroup v-model="searchForm.name">
-                                    <Radio label="1">审批</Radio>
-                                    <Radio label="0">未审批</Radio>
-                                </RadioGroup>
-                            </FormItem> -->
-							<Form-item style="margin-left:-35px;" class="br">
-								<Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
-							</Form-item>
-						</Form>
-					</Row>
-					<Row>
-						<Table :loading="loading" border :columns="columns" :data="data" sortable="custom" ref="table"></Table>
-					</Row>
-					<Row type="flex" justify="end" class="page">
-						<Page :current="searchForm.pageNumber" :total="total" :page-size="searchForm.pageSize" @on-change="changePage"
-							  @on-page-size-change="changePageSize" :page-size-opts="[10,20,50]" size="small" show-total show-elevator
-							  show-sizer></Page>
-					</Row>
+				<Row>
+					<Form ref="searchForm" :model="searchForm" inline :label-width="60" class="search-form">
+						<Form-item label="合同名称">
+							<Input type="text" v-model="searchForm.name" placeholder="请输入" clearable style="width: 200px" />
+						</Form-item>
+						<!-- <FormItem label="审批情况">
+							<RadioGroup v-model="searchForm.name">
+								<Radio label="1">审批</Radio>
+								<Radio label="0">未审批</Radio>
+							</RadioGroup>
+						</FormItem> -->
+						<Form-item style="margin-left:-35px;" class="br">
+							<Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
+						</Form-item>
+					</Form>
+				</Row>
+				<Row>
+					<Table :loading="loading" border :columns="columns" :data="data" sortable="custom" ref="table"></Table>
+				</Row>
+				<Row type="flex" justify="end" class="page">
+					<Page :current="searchForm.pageNumber" :total="total" :page-size="searchForm.pageSize" @on-change="changePage"
+					 @on-page-size-change="changePageSize" :page-size-opts="[10,20,50]" size="small" show-total show-elevator
+					 show-sizer></Page>
+				</Row>
 				</Col>
 			</Row>
 		</Card>
@@ -61,10 +61,10 @@
 				data: [], //表单数据
 				total: 0, // 表单数据总数
 				columns: [{
-					title: "序号",
-					type: "index",
-					align: "center"
-				},
+						title: "序号",
+						type: "index",
+						align: "center"
+					},
 					{
 						title: "合同名称",
 						key: "contractName",
@@ -94,21 +94,21 @@
 						render: (h, params) => {
 							return h("div", [
 								h(
-										"Button", {
-											props: {
-												type: "primary",
-												size: "small"
-											},
-											style: {
-												marginRight: "5px"
-											},
-											on: {
-												click: () => {
-													this.edit(params.row);
-												}
-											}
+									"Button", {
+										props: {
+											type: "primary",
+											size: "small"
 										},
-										"审批"
+										style: {
+											marginRight: "5px"
+										},
+										on: {
+											click: () => {
+												this.edit(params.row);
+											}
+										}
+									},
+									"审批"
 								)
 							]);
 						}
@@ -149,10 +149,10 @@
 			},
 			edit(v) {
 				let query = { type: 1, id: v.id, backRoute: this.$route.name,procInstId:v.procInstId ,tableId:v.tableId,procDefId:v.procDefId,key:v.key};
-				this.$router.push({
-					name: "contractApprove",
-					query: query
-				});
+							this.$router.push({
+							name: "contractApprove",
+							query: query
+						});
 			},
 			changePage(v) {
 				this.searchForm.pageNumber = v;
@@ -181,7 +181,7 @@
 			this.init();
 		},
 		watch: {
-			// 监听路由变化
+		  // 监听路由变化
 			$route(to, from) {
 				if(to.name == "todomanage"){
 					this.init();

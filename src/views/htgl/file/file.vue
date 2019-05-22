@@ -41,6 +41,26 @@
   font-size: 12px;
   color: #ed4014;
 }
+.dome-relative-label:before,.list-icon:before {
+  content: "*";
+  display: inline-block;
+  margin-right: 4px;
+  line-height: 1;
+  font-family: SimSun;
+  font-size: 12px;
+  color: #ed4014;
+}
+.list-icon{
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: -93px;
+  top: 0;
+}
+@deep: ~'>>>';
+@{deep} .ivu-table-row{
+  cursor: pointer;
+}
 </style>
 <template>
   <div class="search">
@@ -72,9 +92,6 @@
                 <Button @click="handleReset">重置</Button>
               </Form-item>
             </Form>
-          </Row>
-          <Row class="operation">
-            <Button @click="handleExport">excel导出</Button>
           </Row>
           <Row>
             <Table
@@ -129,10 +146,13 @@
         </div>
         <div class="ul">
           <FormItem label="档案保管人" prop="archivist">
-            <Input suffix="ios-arrow-down" v-model="dictForm.archivist" placeholder="请选择" @on-focus="handleArchivist" style="width: 320px" />
+            <Input  v-model="dictForm.archivist" placeholder="请选择" @on-focus="handleArchivist" style="width: 320px" >
+            <Button slot="append" icon="ios-arrow-down" @click="handleArchivist"></Button>
+            </Input>
           </FormItem>
         </div>
         <Form-item label="归档材料清单" prop="isTopayList" class="lef" style="width:900px">
+          <span class="list-icon"></span>
           <CheckboxGroup v-model="isTopayList">
             <Checkbox label="合同正文"></Checkbox>
             <Checkbox label="合同相关附件"></Checkbox>
@@ -144,7 +164,7 @@
         <Col :span="24">
           <FormItem label="相关附件">
             <Upload
-              action="/zhfw/system/upload/uploadFiles?tag=accessoryurl-attachmentname"
+              action="/zhfw/contract/upload/uploadFiles?tag=accessoryurl-attachmentname"
               ref="upload2"
               :headers="accessToken"
               :show-upload-list="false"
@@ -190,7 +210,7 @@
         </Button>
       </div>
     </Modal>
-    <Modal title="组织机构选人" v-model="applyModalVisible" :mask-closable="false" :width="700">
+    <Modal title="组织机构选人" v-model="applyModalVisible" class="model-apply" :mask-closable="false" :width="700">
       <div class="clear">
         <Col :span="24">
           <Col :span="12">
@@ -237,6 +257,7 @@ import {
   applyBusiness,
   loadDepartment,
   personSelect,
+  getArchiveNumber,
   fromUp
 } from "@/api/index";
 import circleLoading from "../../my-components/circle-loading.vue";
@@ -525,7 +546,7 @@ export default {
           archive(this.dictForm).then(res => {
             this.modalVisible = false;
             if (res.success) {
-              // this.$Message.success('成功')
+              this.$Message.success('归档成功')
               this.getDataList();
             }
           });
@@ -534,7 +555,8 @@ export default {
     },
     init() {
       this.accessToken = {
-        accessToken: this.getStore("accessToken")
+        access_token: this.getStore("accessToken"),
+        Authorization: 'Bearer '+ this.getStore("accessToken")
       };
       // 获取表单数据
       fromUp().then(res => {
@@ -564,7 +586,12 @@ export default {
       this.modalVisible = true;
       this.dictForm.contactId = v.id
       this.form.procDefId = v.procDefId;
-      this.form.procInstId = "";
+      this.form.procInstId = v.procInstId;
+      getArchiveNumber().then(res=>{
+        if (res.success) {
+          this.dictForm.number =res.result
+        }
+      })
     },
     changeSort(e) {
       this.searchForm.sort = e.key;
@@ -595,7 +622,7 @@ export default {
       file.url = res.result[0].url;
       file.name = res.result[0].name;
       file.fileDownUrl =
-        "/xboot/draft/download?fileName=" +
+        "/zhfw/contract/draft/download?fileName=" +
         res.result[0].name +
         "&url=" +
         res.result[0].url +
@@ -657,12 +684,15 @@ export default {
     //申请人中的树状结构中的节点选中事件personData
     selectTree(v) {
       if (v.length>0) {
+        console.log(v)
         personSelect({
         procDefId: this.form.procDefId,
         departmentId: v[0].id,
-        procInstId: ""
+        procInstId: this.form.procInstId
       }).then(res => {
+        if (res.success) {
         this.personData = res.result.userList;
+        }
       });
       }
     },

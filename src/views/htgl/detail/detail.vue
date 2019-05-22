@@ -86,7 +86,7 @@
 										<p style="color: #333;font-size: 16px;line-height: 50px;height: 50px;font-weight: 600;">基本信息</p>
 										<div class="ul">
 											<FormItem label="原合同名称" class="lef">
-												<span><a :href="'/xboot/draft/download?fileName='+item.originalContractName+'&url='+item.originalContractUrl+'&accessToken='+accessToken.accessToken">{{item.originalContractName}}</a></span>
+												<span><a :href="'/zhfw/contract/draft/download?fileName='+item.originalContractName+'&url='+item.originalContractUrl+'&accessToken='+accessToken.accessToken">{{item.originalContractName}}</a></span>
 											</FormItem>
 											<FormItem label="新合同编号" class="lef">
 												<span>{{item.changeContractSystenNum}}</span>
@@ -183,7 +183,7 @@
 											<span>{{signForm.contracteffectivetime}}</span>
 										</FormItem>
 										<FormItem label=" 合同正文（扫描件）" class="lef">
-											<p><a v-show="signForm.contractContentUrl" :href="'/xboot/draft/download?fileName='+signForm.contractContentname+'&url='+signForm.contractContentUrl+'&accessToken='+accessToken.accessToken">{{signForm.contractContentname}}</a></p>
+											<p><a v-show="signForm.contractContentUrl" :href="'/zhfw/contract/draft/download?fileName='+signForm.contractContentname+'&url='+signForm.contractContentUrl+'&accessToken='+accessToken.accessToken">{{signForm.contractContentname}}</a></p>
 										</FormItem>
 									</div>
 								</Form>
@@ -216,7 +216,7 @@
 										</div>
 										<div class="ul">
 											<FormItem label="新合同名称" class="lef">
-												<span><a :href="'/xboot/draft/download?fileName='+item.changeContractName+'&url='+item.changeContractUrl+'&accessToken='+accessToken.accessToken">{{item.changeContractName}}</a></span>
+												<span><a :href="'/zhfw/contract/draft/download?fileName='+item.changeContractName+'&url='+item.changeContractUrl+'&accessToken='+accessToken.accessToken">{{item.changeContractName}}</a></span>
 											</FormItem>
 											<FormItem label="新合同编号" class="lef">
 												<span>{{item.changeContractSystenNum}}</span>
@@ -300,7 +300,7 @@
 									  <td colspan="2">
 										<p style="float:left">相关附件：</p>
 										<div style="float:left" class="file-list">
-										  <p  v-for="item in fileData.archiveUrls" :key="item.id"><a :href="'/xboot/draft/download?fileName='+item.attachmentName+'&url='+item.attachmentUrl+'&accessToken='+accessToken.accessToken">{{item.attachmentName}}</a></p>
+										  <p  v-for="item in fileData.archiveUrls" :key="item.id"><a :href="'/zhfw/contract/draft/download?fileName='+item.attachmentName+'&url='+item.attachmentUrl+'&accessToken='+accessToken.accessToken">{{item.attachmentName}}</a></p>
 										</div>
 									  </td>
 									</tr>
@@ -348,7 +348,7 @@
     import circleLoading from "../../my-components/circle-loading.vue";
 	import basicForm from "./basic.vue";
     export default {
-        name: "contractEdit",
+        name: "detail",
         components: {
             circleLoading,
 			basicForm
@@ -581,7 +581,7 @@
 						}
 						this.detailForm.counterpartList = res.counterpartList;
 						this.detailForm.contractType = res.contractType;
-						this.fileDownUrl = '/xboot/draft/download?fileName='+this.detailForm.contentname+'&url='+this.detailForm.contracturl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.detailForm.contentname+'&url='+this.detailForm.contracturl+'&accessToken='+this.getStore("accessToken");
 						this.detailForm.uploadList = [];
 						this.detailForm.parentContractName = res.parentContractName;
 						if(res.contract.attachmentname){
@@ -591,7 +591,7 @@
 							for(let i = 0;i < arr.length;i++){
 								obj.name = arr[i];
 								obj.url = arr2[i];
-								obj.fileDownUrl = '/xboot/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
 								this.detailForm.uploadList.push(obj);
 							}
 						}
@@ -623,7 +623,7 @@
 						let counterpartSignList = res.counterpartSignList;
 						for(var i = 0;i < counterpartSignList.length;i++){
 							if(counterpartSignList[i].authorizeFileUrl){
-								counterpartSignList[i].fileDownUrl2 = "/xboot/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
+								counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
 							}else{
 								counterpartSignList[i].fileDownUrl2 = "";
 							}

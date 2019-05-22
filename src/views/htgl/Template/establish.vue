@@ -149,7 +149,7 @@
             </Select>
           </Form-item>
           <Form-item label="发布年份" prop="publicYear">
-            <DatePicker v-model="searchExForm.publicYear" type="year" placeholder="请选择" style="width: 260px" @on-change="HandleDate"></DatePicker>
+            <DatePicker :editable="false" v-model="searchExForm.publicYear" type="year" placeholder="请选择" style="width: 260px" @on-change="HandleDate"></DatePicker>
           </Form-item>
           <Form-item style="margin-top:-30px;" class="br">
             <Button @click="handleSearchEx" type="primary">搜&nbsp;索</Button>
