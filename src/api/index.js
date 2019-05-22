@@ -31,9 +31,11 @@ export const verificationNum = (params) =>{
 		}
 	}
 }
-//验证是否可以点击
-export const clickValidation = (params) =>{
-	
+//验证文本输入
+export const verifyText = (params,type) =>{
+    if(type == 1){
+
+    }
 }
 // 登陆
 export const login = (params) => {

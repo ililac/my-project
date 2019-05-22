@@ -87,7 +87,7 @@
 				</div>
 				<div class="ul">
 					<FormItem label="合同名称" prop="name" class="lef">
-						<Input v-model="dictForm.name"/>
+						<Input v-model="dictForm.name" @on-change="verifyInputText"/>
 					</FormItem>
 					<Form-item label="合同类型" prop="name" class="lef">
 						<contract-type style="width:365px" v-on:typeListen="typeChange" :typeDate.sync="formData1" :widthDate.sync="myStyle"></contract-type>
@@ -294,6 +294,7 @@
 		relativeNumber,
 		signedContract,
 		draftModelList,
+		verifyText,
         chooseFile
     } from "@/api/index";
     export default {
@@ -673,6 +674,9 @@
             };
         },
         methods: {
+			verifyInputText(){
+				console.log(verifyText("dd"));
+			},
 			//申请人选择事件
 			showSelect(e) {
 			    this.selectList = e;
@@ -910,7 +914,7 @@
 								if(typeof(dictForm.changeTime)=="object"){
 									let d = dictForm.changeTime;
 									var date = d.getFullYear() + "-" + 
-											   d.getMonth() + 1 + "-" +
+											(d.getMonth() + 1) + "-" +
 											   d.getDate()
 									dictForm.changeTime = date;
 								}

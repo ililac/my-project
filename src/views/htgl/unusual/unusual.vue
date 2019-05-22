@@ -320,6 +320,12 @@
 			finish(v){
 				this.getDetail(v);
 				this.relieveVisible = true;
+				this.relieveForm={
+					contractId:"",
+					releaseReason:"",
+					releaseTime:"",
+					releaseRemark:""
+				};
 				//获取解除原因数据列表
 				getDictDataByType("relieveReason").then(res => {
 				    if (res.success) {
