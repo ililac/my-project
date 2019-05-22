@@ -786,3 +786,6 @@ export const getArchiveById = (id,params) => {
 export const statisticsDepartment = (params) => {
     return getRequest('/contract/statistics/StatisticsContract',params)
 }
+export const getArchiveNumber = (id,params) => {
+	return getRequest(`/contract/archive/getArchiveNumber`,params)
+}
