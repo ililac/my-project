@@ -714,9 +714,10 @@
 			    }
 			},
             init() {
-                this.accessToken = {
-                    accessToken: this.getStore("accessToken")
-                };
+				this.accessToken = {
+					access_token: this.getStore("accessToken"),
+					Authorization: 'Bearer '+ this.getStore("accessToken")
+				};
                 // 获取表单数据
                 fromUp().then(res => {
                     this.form_up.updateBy = res.updateBy;
