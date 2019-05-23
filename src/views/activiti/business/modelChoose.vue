@@ -1078,6 +1078,11 @@
 				this.$emit("listenApply",v);
 			},
 			timeChange(){
+				if(!this.dictForm.starttime){
+					this.$Message.error("请先选择开始时间");
+					this.dictForm.endtime = "";
+					return;
+				}
 				if(this.dictForm.starttime >= this.dictForm.endtime){
 					this.$Message.error("开始时间不能大于等于结束时间");
 					this.dictForm.endtime = "";
