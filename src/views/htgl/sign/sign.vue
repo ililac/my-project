@@ -86,7 +86,7 @@
 					</div>
 					<div class="ul">
 						<FormItem label="作废依据" class="lef">
-							<Upload action="/zhfw/contract/upload/file"
+							<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess"
 									:on-error="handleError"
@@ -181,7 +181,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag != 1">
 							<FormItem label="授权委托书">
-								<Upload action="/zhfw/contract/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -204,7 +204,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag == 1">
 							<FormItem label="授权委托书" prop="title">
-								<Upload action="/zhfw/contract/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -239,7 +239,7 @@
 							></DatePicker>
 						</Form-item>
 						<FormItem label="合同正文（扫描件）" class="lef" prop="title2">
-							<Upload action="/zhfw/contract/draft/upload/file?tag=contracturl-contentname"
+							<Upload action="/zhfw/system/draft/upload/file?tag=contracturl-contentname"
 							    :headers="accessToken"
 							    :on-success="handleSuccess3"
 							    :on-error="handleError"

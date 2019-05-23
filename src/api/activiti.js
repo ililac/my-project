@@ -20,7 +20,7 @@ export const getModelDataList = (params) => {
 }
 // 添加模型
 export const addModel = (params) => {
-    return postRequest('/acitve/actModel/add', params)
+    return postRequest('/active/actModel/add', params)
 }
 // 部署模型
 export const deployModel = (id, params) => {
