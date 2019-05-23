@@ -386,7 +386,9 @@
             },
 			handleReset(){
 				this.indeterminate = false;
+				this.payIndeterminate = false;
 				this.checkAll = false;
+				this.payCheckAll = false;
 				this.stateList = [];
 				this.payStateList = [];
 				this.searchForm = {

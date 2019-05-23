@@ -986,7 +986,8 @@
 					}else if(type == 2){
 						this.dictForm.counterpartnum = 0;
 					}else if(type == 3){
-						this.dictForm.totalnum = v.replace(/\b(0+)/gi,"");
+						this.dictForm.totalnum = 1;
+						// this.dictForm.totalnum = v.replace(/\b(0+)/gi,"");
 					}
 					return;
 				}
@@ -997,7 +998,8 @@
 					}else if(type == 2){
 						this.dictForm.counterpartnum = 0;
 					}else if(type == 3){
-						this.dictForm.totalnum = v.replace(/\b(0+)/gi,"");
+						this.dictForm.totalnum = 1;
+						// this.dictForm.totalnum = v.replace(/\b(0+)/gi,"");
 					}
 					return;
 				}
@@ -1482,6 +1484,7 @@
 						this.uploadList = this.dictForm.uploadList;
 						this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
 						this.relativeList = this.dictForm.counterpartList;
+						this.$refs.upload2.fileList = this.dictForm.uploadList;
 						if(this.dictForm.modalSource == 1){
 							this.modalTitle = "合同变更";
 						}else{

@@ -86,7 +86,7 @@
 										<p style="color: #333;font-size: 16px;line-height: 50px;height: 50px;font-weight: 600;">基本信息</p>
 										<div class="ul">
 											<FormItem label="原合同名称" class="lef">
-												<span><a :href="'/zhfw/contract/draft/download?fileName='+item.originalContractName+'&url='+item.originalContractUrl+'&accessToken='+accessToken.accessToken">{{item.originalContractName}}</a></span>
+												<span><a @click="look(item.originalContractId)">{{item.originalContractName}}</a></span>
 											</FormItem>
 											<FormItem label="新合同编号" class="lef">
 												<span>{{item.changeContractSystenNum}}</span>
@@ -689,6 +689,14 @@
 						this.feedbackTotal = res.total;
 					}
 				})
+			},
+			//查看详情
+			look(v){
+				let query = { type: 1, id: v,backRoute: "search"};
+				this.$router.push({
+					name: "detail",
+					query: query
+				});
 			}
         },
         mounted() {

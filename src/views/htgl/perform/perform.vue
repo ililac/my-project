@@ -251,6 +251,7 @@
 									format="yyyy-MM-dd"
 									clearable
 									placeholder="选择时间"
+									@on-change="timeChange2"
 									style="width: 100%"
 									:editable="false"
 							></DatePicker>
@@ -1050,6 +1051,18 @@
 				if(this.searchForm.startTime >= this.searchForm.endTime){
 					this.$Message.error("开始时间不能大于等于结束时间");
 					this.searchForm.endTime = "";
+				}
+			},
+			//搜索出时间校验
+			timeChange2(){
+				if(!this.newPlanModelForm.startplaytime){
+					this.$Message.error("请先选择开始时间");
+					this.newPlanModelForm.endplaytime = "";
+					return;
+				}
+				if(this.newPlanModelForm.startplaytime >= this.newPlanModelForm.endplaytime){
+					this.$Message.error("开始时间不能大于等于结束时间");
+					this.newPlanModelForm.endplaytime = "";
 				}
 			},
 			nuMinput(v,max){
