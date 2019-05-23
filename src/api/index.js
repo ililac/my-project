@@ -659,7 +659,9 @@ export const fileUpUrlAudit = (params) => {
 export const personSelect = (params) => {
 	return postRequest('/system/department/searchUser',params)
 }
-
+export const searchAchiveUser = (params) => {
+	return postRequest('/system/department/searchAchiveUser',params)
+}
 //相对方重复验证
 export const animateWidths = (params) => {
 	return postRequest('/contract/counterpart/checkIsExist',params)

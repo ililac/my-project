@@ -256,7 +256,7 @@ import {
   archive,
   applyBusiness,
   loadDepartment,
-  personSelect,
+  searchAchiveUser,
   getArchiveNumber,
   fromUp
 } from "@/api/index";
@@ -684,11 +684,8 @@ export default {
     //申请人中的树状结构中的节点选中事件personData
     selectTree(v) {
       if (v.length>0) {
-        console.log(v)
-        personSelect({
-        procDefId: this.form.procDefId,
+        searchAchiveUser({
         departmentId: v[0].id,
-        procInstId: this.form.procInstId
       }).then(res => {
         if (res.success) {
         this.personData = res.result.userList;
