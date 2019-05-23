@@ -132,19 +132,19 @@ export const loadActCategory = (id, params) => {
 }
 // 添加类别
 export const addActCategory = (params) => {
-    return postRequest('/actCategory/add', params)
+    return postRequest('/active/actCategory/add', params)
 }
 // 编辑类别
 export const editActCategory = (params) => {
-    return postRequest('/actCategory/edit', params)
+    return postRequest('/active/actCategory/edit', params)
 }
 // 删除类别
 export const deleteActCategory = (ids, params) => {
-    return deleteRequest(`/actCategory/delByIds/${ids}`, params)
+    return deleteRequest(`/active/actCategory/delByIds/${ids}`, params)
 }
 // 搜索类别
 export const searchActCategory = (params) => {
-    return getRequest('/actCategory/search', params)
+    return getRequest('/active/actCategory/search', params)
 }
 
 

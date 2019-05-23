@@ -44,7 +44,7 @@
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
-							action="/zhfw/contract/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
+							action="/zhfw/syetem/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
 							ref="upload"
 							:headers="accessToken"
 							:show-upload-list="false"

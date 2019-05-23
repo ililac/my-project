@@ -47,86 +47,86 @@ export const userInfo = (params) => {
 }
 // 注册
 export const regist = (params) => {
-    return postRequest('/user/regist', params)
+    return postRequest('/system/user/regist', params)
 }
 // 初始化验证码
 export const initCaptcha = (params) => {
-    return getRequest('/common/captcha/init', params)
+    return getRequest('/system/common/captcha/init', params)
 }
 // 发送短信验证码
 export const sendSms = (mobile, params) => {
-    return getRequest(`/common/captcha/sendSms/${mobile}`, params)
+    return getRequest(`/system/common/captcha/sendSms/${mobile}`, params)
 }
 // 发送重置密码短信验证码
 export const sendResetSms = (params) => {
-    return postRequest('/common/captcha/sendResetSms', params)
+    return postRequest('/system/common/captcha/sendResetSms', params)
 }
 // 通过手机重置密码
 export const resetByMobile = (params) => {
-    return postRequest('/user/resetByMobile', params)
+    return postRequest('/system/user/resetByMobile', params)
 }
 // 发送重置密码邮件验证码
 export const sendResetEmail = (params) => {
-    return postRequest('/email/sendResetCode', params)
+    return postRequest('/system/email/sendResetCode', params)
 }
 // 通过邮件重置密码
 export const resetByEmail = (params) => {
-    return postRequest('/email/resetByEmail', params)
+    return postRequest('/system/email/resetByEmail', params)
 }
 // 短信验证码登录
 export const smsLogin = (params) => {
-    return postRequest('/user/smsLogin', params)
+    return postRequest('/system/user/smsLogin', params)
 }
 // IP天气信息
 export const ipInfo = (params) => {
-    return getRequest('/common/ip/info', params)
+    return getRequest('/system/common/ip/info', params)
 }
 // 个人中心编辑
 export const userInfoEdit = (params) => {
-    return postRequest('/user/edit', params)
+    return postRequest('/system/user/edit', params)
 }
 // 个人中心发送修改邮箱验证邮件
 export const sendCodeEmail = (email, params) => {
-    return getRequest(`/email/sendCode/${email}`, params)
+    return getRequest(`/system/email/sendCode/${email}`, params)
 }
 // 个人中心发送修改邮箱验证邮件
 export const editEmail = (params) => {
-    return postRequest('/email/editEmail', params)
+    return postRequest('/system/email/editEmail', params)
 }
 // 个人中心修改密码
 export const changePass = (params) => {
-    return postRequest('/user/modifyPass', params)
+    return postRequest('/system/user/modifyPass', params)
 }
 // 个人中心修改手机
 export const changeMobile = (params) => {
-    return postRequest('/user/changeMobile', params)
+    return postRequest('/system/user/changeMobile', params)
 }
 // 解锁
 export const unlock = (params) => {
-    return postRequest('/user/unlock', params)
+    return postRequest('/system/user/unlock', params)
 }
 
 
 
 // github登录
 export const githubLogin = (params) => {
-    return getRequest('/social/github/login', params)
+    return getRequest('/system/social/github/login', params)
 }
 // qq登录
 export const qqLogin = (params) => {
-    return getRequest('/social/qq/login', params)
+    return getRequest('/system/social/qq/login', params)
 }
 // 微博登录
 export const weiboLogin = (params) => {
-    return getRequest('/social/weibo/login', params)
+    return getRequest('/system/social/weibo/login', params)
 }
 // 绑定账号
 export const relate = (params) => {
-    return postRequest('/social/relate', params)
+    return postRequest('/system/social/relate', params)
 }
 // 获取JWT
 export const getJWT = (params) => {
-    return getRequest('/social/getJWT', params)
+    return getRequest('/system/social/getJWT', params)
 }
 
 
@@ -399,19 +399,19 @@ export const getFileListData = (params) => {
 }
 // 复制文件
 export const copyFile = (params) => {
-    return postRequest('/file/copy', params)
+    return postRequest('/system/file/copy', params)
 }
 // 重命名文件
 export const renameFile = (params) => {
-    return postRequest('/file/rename', params)
+    return postRequest('/system/file/rename', params)
 }
 // 删除文件
 export const deleteFile = (ids, params) => {
-    return deleteRequest(`/file/delete/${ids}`, params)
+    return deleteRequest(`/system/file/delete/${ids}`, params)
 }
 // 下载文件
 export const aliDownloadFile = (fKey, params) => {
-    return getRequest(`/file/ali/download/${fKey}`, params)
+    return getRequest(`/system/file/ali/download/${fKey}`, params)
 }
 
 
@@ -475,7 +475,7 @@ export const fromUp = (params) => {
     return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
-    return postRequest('/contractModel/save', params)
+    return postRequest('/system/contractModel/save', params)
 }
 
 export const myDelete = (params) => {
