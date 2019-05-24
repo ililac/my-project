@@ -475,7 +475,7 @@ export const fromUp = (params) => {
     return postRequest('/system/u/info', params)
 }
 export const formSeve = (params) => {
-    return postRequest('/system/contractModel/save', params)
+    return postRequest('/contract/contractModel/save', params)
 }
 
 export const myDelete = (params) => {
