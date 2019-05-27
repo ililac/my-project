@@ -44,16 +44,16 @@
 				</div>
 				<div class="ul">
 					<FormItem label="文本来源" prop="name">
-						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" name="chapter1" v-model="chapter1" value="1"/> 自行起草</label>
-						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" name="chapter1" v-model="chapter1" value="2"/> 标准文本 </label>
+						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" v-model="dictForm.chapter" value="1"/> 自行起草</label>
+						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" v-model="dictForm.chapter" value="2"/> 标准文本 </label>
 					</FormItem>
 				</div>
 				<div class="ul three">
-					<FormItem label="合同正文"  v-if="chapter1 == 2" class="lef" prop="contentname">
+					<FormItem label="合同正文"  v-if="dictForm.chapter == 2" class="lef" prop="contentname">
 			            <span @click="draftBz" class="model-select" style="cursor:pointer">范本选择</span>
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
-					<FormItem label="合同正文" v-else="chapter1 == 2" class="lef" prop="contentname">
+					<FormItem label="合同正文" v-else="dictForm.chapter == 1" class="lef" prop="contentname">
 						<Upload action="/zhfw/system/draft/uploadFileNew"
 							:data='{"generalNo":dictForm.generalNo,"url":""}'
 			                :headers="accessToken"
@@ -319,7 +319,6 @@
 				source:0,
                 myOpenUrl:'',//打开编辑器的url
                 myOpenUrl2:'',//打开编辑器的url
-				chapter1:1,
                 upId: "",
 				oldNum:0,
 				selectCount:0, //已选择的数量
@@ -881,7 +880,7 @@
 					this.dictForm.accessoryurl.push(arr[j].url);
 					this.dictForm.attachmentname.push(arr[j].name);
 				}
-				this.dictForm.source = this.chapter1;
+				this.dictForm.source = this.dictForm.chapter;
 				fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:this.dictForm.contracturl}).then(res => {
 					if(res.result == "success"){
 						let dictForm = {...this.dictForm};
@@ -1492,7 +1491,6 @@
 						this.$refs.upload2.fileList = this.dictForm.uploadList;
 						this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
 						this.relativeList = this.dictForm.counterpartList;
-						this.chapter1 = this.dictForm.chapter;
 						if(this.dictForm.modalSource == 1){
 							this.modalTitle = "合同变更";
 						}else{
