@@ -56,6 +56,7 @@
 						<FormItem label="备注">
 							<Input
 								type="textarea"
+								:maxlength="1000"
 								v-model="relieveForm.releaseRemark"
 								:rows="2"
 							/>
@@ -319,13 +320,13 @@
 			//合同解除
 			finish(v){
 				this.getDetail(v);
-				this.relieveVisible = true;
 				this.relieveForm={
 					contractId:"",
 					releaseReason:"",
 					releaseTime:"",
 					releaseRemark:""
 				};
+				this.relieveVisible = true;
 				//获取解除原因数据列表
 				getDictDataByType("relieveReason").then(res => {
 				    if (res.success) {

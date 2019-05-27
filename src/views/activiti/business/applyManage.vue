@@ -74,7 +74,7 @@
             </Row>
         </Card>
 		<!-- <model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm" :relativeType.sync="counterpartArr"></model-choose> -->
-		<model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
+		<model-choose :formData33.sync="modalVisible" :flag="true" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
     </div>
 </template>
 

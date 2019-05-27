@@ -38,7 +38,7 @@
                     clearable
                     style="width: 200px"
                   >
-                    <!-- <Option value="0">未提交</Option> -->
+                    <Option value="0">未提交</Option>
                     <Option value="1">处理中</Option>
                     <Option value="2">通过</Option>
                     <Option value="3">驳回</Option>
@@ -140,7 +140,7 @@
     >
       <Form ref="delForm" v-model="cancelForm" :label-width="70">
         <FormItem label="撤回原因" prop="reason">
-          <Input type="textarea" v-model="cancelForm.reason" :rows="4"/>
+          <Input type="textarea" :maxlength="1000" v-model="cancelForm.reason" :rows="4"/>
         </FormItem>
       </Form>
       <div slot="footer">

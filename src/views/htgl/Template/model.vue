@@ -45,7 +45,7 @@
         <FormItem label="范本文件：" prop="file">
           <Upload
             class="upLoad"
-            action="/zhfw/system/upload/file?tag=modelAddress-fileName"
+            action="/zhfw/syetem/upload/file?tag=modelAddress-fileName"
             :headers="accessToken"
             :on-success="handleSuccess"
             :on-error="handleError"
@@ -70,6 +70,7 @@
         <FormItem label="备注：">
           <Input
             type="textarea"
+						:maxlength="1000"
             v-model="dictForm.comment"
             :rows="5"
             placeholder="请输入详细情况"
@@ -178,8 +179,8 @@ export default {
       this.dictForm = this.formData;
       this.dictForm.contractType = this.formData.contractTypeName;
       this.accessToken = {
-        access_token: this.getStore("accessToken"),
-        Authorization: 'Bearer '+ this.getStore("accessToken")
+        'access_token': this.getStore("accessToken"),
+        'Authorization': 'Bearer '+this.getStore("accessToken")
       };
       fromUp().then(res => {
         this.form_up.updateBy = res.nickName;

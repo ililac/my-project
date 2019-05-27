@@ -27,6 +27,7 @@
 							<Input
 								type="textarea"
 								v-model="dictForm.changeContent"
+								:maxlength="1000"
 								:rows="2"
 							/>
 						</FormItem>
@@ -53,7 +54,7 @@
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
 					<FormItem label="合同正文" v-else="chapter1 == 2" class="lef" prop="contentname">
-						<Upload action="/zhfw/contract/draft/uploadFileNew"
+						<Upload action="/zhfw/system/draft/uploadFileNew"
 							:data='{"generalNo":dictForm.generalNo,"url":""}'
 			                :headers="accessToken"
 							:on-success="handleSuccess2"
@@ -75,10 +76,10 @@
 							<span v-if="!btnLoading6">在线编辑</span>
 							<span v-else>打开中...</span>
 						</Button> -->
-						<Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
+						<!-- <Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
 							<span v-if="!btnLoading7">智能审核</span>
 							<span v-else>打开中...</span>
-						</Button>
+						</Button> -->
 						<Button type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
 							<span v-if="!btnLoading8">文本对比</span>
 							<span v-else>打开中...</span>
@@ -87,7 +88,7 @@
 				</div>
 				<div class="ul">
 					<FormItem label="合同名称" prop="name" class="lef">
-						<Input v-model="dictForm.name" @on-change="verifyInputText"/>
+						<Input v-model="dictForm.name"/>
 					</FormItem>
 					<Form-item label="合同类型" prop="name" class="lef">
 						<contract-type style="width:365px" v-on:typeListen="typeChange" :typeDate.sync="formData1" :widthDate.sync="myStyle"></contract-type>
@@ -165,6 +166,7 @@
 						<Input
 							type="textarea"
 							v-model="dictForm.description"
+							:maxlength="1000"
 							:rows="2"
 						/>
 					</FormItem>
@@ -294,7 +296,6 @@
 		relativeNumber,
 		signedContract,
 		draftModelList,
-		verifyText,
         chooseFile
     } from "@/api/index";
     export default {
@@ -674,9 +675,6 @@
             };
         },
         methods: {
-			verifyInputText(){
-				console.log(verifyText("dd"));
-			},
 			//申请人选择事件
 			showSelect(e) {
 			    this.selectList = e;
@@ -914,7 +912,7 @@
 								if(typeof(dictForm.changeTime)=="object"){
 									let d = dictForm.changeTime;
 									var date = d.getFullYear() + "-" + 
-											(d.getMonth() + 1) + "-" +
+											   (d.getMonth() + 1) + "-" +
 											   d.getDate()
 									dictForm.changeTime = date;
 								}
@@ -1087,6 +1085,10 @@
 					this.$Message.error("开始时间不能大于等于结束时间");
 					this.dictForm.endtime = "";
 				}
+				// if(this.dictForm.starttime >= this.dictForm.endtime){
+				// 	this.$Message.error("开始时间不能大于等于结束时间");
+				// 	this.dictForm.endtime = "";
+				// }
 			},
 			//范本选择弹出框
 			draftBz() {
@@ -1180,10 +1182,10 @@
             },
             init() {
                 this.accessToken = {
-					access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+ this.getStore("accessToken")
-				};
-				// 获取表单数据
+					'access_token': this.getStore("accessToken"),
+					'Authorization': 'Bearer '+this.getStore("accessToken")
+                };
+                // 获取表单数据
                 fromUp().then(res => {
                     this.form_up.createTime = res.createTime;
                     this.form_up.department = res.department;
@@ -1487,9 +1489,10 @@
 							this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
 						}
 						this.uploadList = this.dictForm.uploadList;
+						this.$refs.upload2.fileList = this.dictForm.uploadList;
 						this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
 						this.relativeList = this.dictForm.counterpartList;
-						this.$refs.upload2.fileList = this.dictForm.uploadList;
+						this.chapter1 = this.dictForm.chapter;
 						if(this.dictForm.modalSource == 1){
 							this.modalTitle = "合同变更";
 						}else{

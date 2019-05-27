@@ -41,7 +41,8 @@
   font-size: 12px;
   color: #ed4014;
 }
-.dome-relative-label:before,.list-icon:before {
+.dome-relative-label:before,
+.list-icon:before {
   content: "*";
   display: inline-block;
   margin-right: 4px;
@@ -50,15 +51,15 @@
   font-size: 12px;
   color: #ed4014;
 }
-.list-icon{
+.list-icon {
   width: 10px;
   height: 10px;
   position: absolute;
   left: -93px;
   top: 0;
 }
-@deep: ~'>>>';
-@{deep} .ivu-table-row{
+@deep: ~">>>";
+@{deep} .ivu-table-row {
   cursor: pointer;
 }
 </style>
@@ -127,6 +128,7 @@
       :mask-closable="false"
       :width="1000"
       :styles="{top: '30px'}"
+      @on-cancel="handleModelClose"
       class="formModel"
     >
       <Form ref="dictForm" :model="dictForm" :label-width="120" :rules="dictFormValidate">
@@ -146,8 +148,13 @@
         </div>
         <div class="ul">
           <FormItem label="档案保管人" prop="archivist">
-            <Input  v-model="dictForm.archivist" placeholder="请选择" @on-focus="handleArchivist" style="width: 320px" >
-            <Button slot="append" icon="ios-arrow-down" @click="handleArchivist"></Button>
+            <Input
+              v-model="dictForm.archivist"
+              placeholder="请选择"
+              @on-focus="handleArchivist"
+              style="width: 320px"
+            >
+              <Button slot="append" icon="ios-arrow-down" @click="handleArchivist"></Button>
             </Input>
           </FormItem>
         </div>
@@ -164,7 +171,7 @@
         <Col :span="24">
           <FormItem label="相关附件">
             <Upload
-              action="/zhfw/syetem/upload/uploadFiles?tag=accessoryurl-attachmentname"
+              action="/zhfw/system/upload/uploadFiles?tag=accessoryurl-attachmentname"
               ref="upload2"
               :headers="accessToken"
               :show-upload-list="false"
@@ -196,21 +203,27 @@
           </FormItem>
         </Col>
         <div class="ul">
-          <FormItem label="备注" style="width:930px">
+          <FormItem label="备注" prop="remark" style="width:930px">
             <Input type="textarea" v-model="dictForm.remark" :rows="3"/>
           </FormItem>
         </div>
       </Form>
       <div style="clear:both"></div>
       <div slot="footer">
-        <Button type="text" @click="modalVisible=false">取消</Button>
+        <Button type="text" @click="handleModelClose">取消</Button>
         <Button :loading="btnLoading" type="primary" @click="planConfirm('dictForm')">
           <span v-if="!btnLoading">提交</span>
           <span v-else>Loading...</span>
         </Button>
       </div>
     </Modal>
-    <Modal title="组织机构选人" v-model="applyModalVisible" class="model-apply" :mask-closable="false" :width="700">
+    <Modal
+      title="组织机构选人"
+      v-model="applyModalVisible"
+      class="model-apply"
+      :mask-closable="false"
+      :width="700"
+    >
       <div class="clear">
         <Col :span="24">
           <Col :span="12">
@@ -244,7 +257,6 @@
       <div style="clear: both;"></div>
       <div slot="footer">
         <Button type="text" @click="handelCancel">取消</Button>
-        <Button type="primary" :loading="submitLoading" @click="handelSubmit">提交</Button>
       </div>
     </Modal>
   </div>
@@ -254,7 +266,6 @@ import {
   getContractByPage,
   getDictDataByType,
   archive,
-  applyBusiness,
   loadDepartment,
   searchAchiveUser,
   getArchiveNumber,
@@ -314,7 +325,7 @@ export default {
       dictFormValidate: {
         // 表单验证规则
         archivist: [{ required: true, message: "不能为空" }],
-        keepTime: [{ required: true, message: "不能为空" }],
+        keepTime: [{ required: true, message: "不能为空" }]
         // materialsBill: [{ required: true, message: "不能为空" }],
         // isTopayList: [
         //   {
@@ -528,35 +539,42 @@ export default {
   methods: {
     //确定履行计划
     planConfirm(name) {
-      this.$refs[name].validate((valid) => {
+      this.$refs[name].validate(valid => {
         if (valid) {
-      this.dictForm.materialsBill = this.isTopayList.join(",");
-      this.dictForm.keepTime = this._fmtDate(this.dictForm.keepTime);
-      let uploadList = this.uploadList.map((item, index) => {
-        return {
-          fileName: item.name,
-          fileUrl: item.url
-        };
-      });
-      this.dictForm.attachmentList = JSON.stringify(uploadList);
-      if (this.isTopayList.length==0) {
-        this.$Message.error('归档材料清单没有选择')
-        return
-      }
+          this.dictForm.materialsBill = this.isTopayList.join(",");
+          this.dictForm.keepTime = this._fmtDate("yyyy-MM-dd hh:mm:ss",this.dictForm.keepTime);
+          let uploadList = this.uploadList.map((item, index) => {
+            return {
+              fileName: item.name,
+              fileUrl: item.url
+            };
+          });
+          this.dictForm.attachmentList = JSON.stringify(uploadList);
+          if (this.isTopayList.length == 0) {
+            this.$Message.error("归档材料清单没有选择");
+            return;
+          }
           archive(this.dictForm).then(res => {
             this.modalVisible = false;
             if (res.success) {
-              this.$Message.success('归档成功')
+              this.$Message.success("归档成功");
               this.getDataList();
             }
           });
         }
       });
     },
+    handleModelClose() {
+      this.modalVisible = false;
+      this.$refs.dictForm.resetFields();
+      this.uploadList = [];
+      this.$refs.upload2.fileList = []
+      this.isTopayList = [];
+    },
     init() {
       this.accessToken = {
-        access_token: this.getStore("accessToken"),
-        Authorization: 'Bearer '+ this.getStore("accessToken")
+        'access_token': this.getStore("accessToken"),
+        'Authorization': 'Bearer '+this.getStore("accessToken")
       };
       // 获取表单数据
       fromUp().then(res => {
@@ -584,14 +602,12 @@ export default {
     //合同归档
     confirm(v) {
       this.modalVisible = true;
-      this.dictForm.contactId = v.id
-      this.form.procDefId = v.procDefId;
-      this.form.procInstId = v.procInstId;
-      getArchiveNumber().then(res=>{
+      this.dictForm.contactId = v.id;
+      getArchiveNumber().then(res => {
         if (res.success) {
-          this.dictForm.number =res.result
+          this.dictForm.number = res.result;
         }
-      })
+      });
     },
     changeSort(e) {
       this.searchForm.sort = e.key;
@@ -618,20 +634,19 @@ export default {
       if (!res.success) {
         this.$Message.error("上传失败");
         return;
-      }else{
-      file.url = res.result[0].url;
-      file.name = res.result[0].name;
-      file.fileDownUrl =
-        "/zhfw/contract/draft/download?fileName=" +
-        res.result[0].name +
-        "&url=" +
-        res.result[0].url +
-        "&accessToken=" +
-        this.getStore("accessToken");
-      this.uploadList = this.$refs.upload2.fileList;
+      } else {
+        file.url = res.result[0].url;
+        file.name = res.result[0].name;
+        file.fileDownUrl =
+          "/zhfw/contract/draft/download?fileName=" +
+          res.result[0].name +
+          "&url=" +
+          res.result[0].url +
+          "&accessToken=" +
+          this.getStore("accessToken");
+        this.uploadList = this.$refs.upload2.fileList;
       }
       document.getElementById("attachmentname").innerHTML = "点击上传";
-      
     },
     affixHandleMaxSize(file) {
       this.$Notice.warning({
@@ -683,14 +698,14 @@ export default {
     },
     //申请人中的树状结构中的节点选中事件personData
     selectTree(v) {
-      if (v.length>0) {
+      if (v.length > 0) {
         searchAchiveUser({
-        departmentId: v[0].id,
-      }).then(res => {
-        if (res.success) {
-        this.personData = res.result.userList;
-        }
-      });
+          departmentId: v[0].id
+        }).then(res => {
+          if (res.success) {
+            this.personData = res.result.userList;
+          }
+        });
       }
     },
     //申请人选择事件
@@ -705,17 +720,6 @@ export default {
     },
     handelCancel() {
       this.applyModalVisible = false;
-    },
-    handelSubmit() {
-      this.submitLoading = true;
-      applyBusiness(this.form).then(res => {
-        this.submitLoading = false;
-        if (res.success === true) {
-          this.$Message.success("操作成功");
-          this.getDataList();
-          this.applyModalVisible = false;
-        }
-      });
     },
     getDataList() {
       this.loading = true;
@@ -736,9 +740,23 @@ export default {
         }
       });
     },
-    _fmtDate(datetime){
-       var dateTime = new Date(datetime);
-       return dateTime.toLocaleDateString().replace(/\//g, "-") + " " + dateTime.toTimeString().substr(0, 8)
+    _fmtDate(fmt,date) {
+      var date = new Date(date)
+       var o = {   
+    "M+" : date.getMonth()+1,                 //月份   
+    "d+" : date.getDate(),                    //日   
+    "h+" : date.getHours(),                   //小时   
+    "m+" : date.getMinutes(),                 //分   
+    "s+" : date.getSeconds(),                 //秒   
+    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
+    "S"  : date.getMilliseconds()             //毫秒   
+  };   
+  if(/(y+)/.test(fmt))   
+    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+  for(var k in o)   
+    if(new RegExp("("+ k +")").test(fmt))   
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+  return fmt;   
     }
   },
   mounted() {

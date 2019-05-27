@@ -78,6 +78,7 @@
 							<Input
 								type="textarea"
 								v-model="dictForm.printRemark"
+								:maxlength="1000"
 								:rows="2"	
 							/>
 						</FormItem>

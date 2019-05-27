@@ -26,6 +26,12 @@
   right: 15px;
   top: 15px;
 }
+	.visit{
+		text-align: center;
+		line-height: 240px;
+		font-size: 30px;
+		font-weight: 900;
+	}
 </style>
 <template>
   <div>
@@ -35,6 +41,7 @@
           <Form  inline :label-width="120" class="search-form">
             <Form-item label="合同生效日期">
               <DatePicker
+              v-model="year"
                 type="year"
                 placeholder="选择年"
                 style="width: 200px;margin-right:20px;"
@@ -143,7 +150,8 @@
             </Tooltip>
             <div class="data-source-row">
               <div class="visit">
-                <div style="width:100%;height:240px;" id="visite_volume_con2"></div>
+                <div v-show="optionShow2" style="width:100%;height:240px;" id="visite_volume_con2"></div>
+								<p v-show="!optionShow2">暂无数据</p>
               </div>
             </div>
           </Card>
@@ -162,7 +170,8 @@
             </Tooltip>
             <div class="data-source-row">
               <div class="visit">
-                <div style="width:100%;height:240px;" id="visite_volume_con3"></div>
+                <div v-show="optionShow3" style="width:100%;height:240px;" id="visite_volume_con3"></div>
+								<p v-show="!optionShow3">暂无数据</p>
               </div>
             </div>
           </Card>
@@ -181,7 +190,8 @@
             </Tooltip>
             <div class="data-source-row">
               <div class="visit">
-                <div style="width:100%;min-height:240px;" id="visite_volume_con4"></div>
+                <div v-show="optionShow4" style="width:100%;min-height:240px;" id="visite_volume_con4"></div>
+								<p v-show="!optionShow4">暂无数据</p>
               </div>
             </div>
           </Card>
@@ -200,6 +210,9 @@ export default {
   },
   data() {
     return {
+				optionShow2:true,
+				optionShow3:true,
+				optionShow4:true,
       relative_type: [],
       total: 0,
       receiveInfo: {
@@ -467,6 +480,21 @@ export default {
         document.getElementById("visite_volume_con4")
       );
       visiteVolume4.setOption(option4);
+      if(option2.series[0].data.length > 0){
+							this.optionShow2 = true;
+						}else{
+							this.optionShow2 = false;
+            }
+            if(option3.series[0].data.length > 0){
+							this.optionShow3 = true;
+						}else{
+							this.optionShow3 = false;
+            }
+            if(option4.series[0].data.length > 0){
+							this.optionShow4 = true;
+						}else{
+							this.optionShow4 = false;
+						}
       window.addEventListener("resize", function() {
         visiteVolume1.resize();
         visiteVolume2.resize();
@@ -480,8 +508,9 @@ export default {
   },
   mounted() {
     let data = new Date()
-    this.time = new Date().getFullYear()
-    this.initCharts(this.time);
+    let time = new Date().getFullYear()
+    this.initCharts(time);
+    this.year =time.toString()
   }
 };
 </script>

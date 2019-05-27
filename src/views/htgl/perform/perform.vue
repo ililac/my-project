@@ -105,6 +105,7 @@
 							<FormItem label="终止说明" prop="explain">
 								<Input
 									type="textarea"
+									:maxlength="1000"
 									v-model="finishForm.explain"
 									:rows="5"
 									placeholder="请输入详细情况"
@@ -115,6 +116,7 @@
 							<FormItem label="备注">
 								<Input
 									type="textarea"
+									:maxlength="1000"
 									v-model="finishForm.remark"
 									:rows="5"
 									placeholder="请输入详细情况"
@@ -162,6 +164,7 @@
 							<FormItem label="结束说明" prop="explain">
 								<Input
 										type="textarea"
+										:maxlength="1000"
 										v-model="finishForm.explain"
 										:rows="5"
 										placeholder="请输入详细情况"
@@ -172,6 +175,7 @@
 							<FormItem label="备注">
 								<Input
 										type="textarea"
+										:maxlength="1000"
 										v-model="finishForm.remark"
 										:rows="5"
 										placeholder="请输入详细情况"
@@ -261,6 +265,7 @@
 						<FormItem label="履行内容" prop="content">
 							<Input
 									type="textarea"
+									:maxlength="1000"
 									v-model="newPlanModelForm.content"
 									:rows="5"
 									placeholder="请输入详细情况"
@@ -271,6 +276,7 @@
 						<FormItem label="备注">
 							<Input
 									type="textarea"
+									:maxlength="1000"
 									v-model="newPlanModelForm.remark"
 									:rows="5"
 									placeholder="请输入详细情况"
@@ -328,7 +334,7 @@
 					</div>
 					<div class="ul">
 						<FormItem label="开票金额(万元)" class="lef" prop="invoiceMoney">
-							<input type="text" v-model="feedbackModelForm.invoiceMoney" v-on:input="nuMinput(feedbackModelForm.invoiceMoney)"/>
+							<Input  :maxlength="10" type="text" v-model="feedbackModelForm.invoiceMoney" v-on:input="nuMinput(feedbackModelForm.invoiceMoney)"/>
 						</FormItem>
 						<FormItem label="发票编码" class="lef">
 							<input type="text" v-model="feedbackModelForm.invoiceNumber"/>
@@ -339,6 +345,7 @@
 						<FormItem label="履行内容">
 							<Input
 									type="textarea"
+									:maxlength="1000"
 									v-model="feedbackModelForm.remark"
 									:rows="5"
 									placeholder="请输入详细情况"
@@ -1227,10 +1234,10 @@
             },
             init() {
                 this.accessToken = {
-					access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+ this.getStore("accessToken")
-				};
-				// 获取表单数据
+					'access_token': this.getStore("accessToken"),
+					'Authorization': 'Bearer '+this.getStore("accessToken")
+                };
+                // 获取表单数据
                 fromUp().then(res => {
                     this.form_up.updateBy = res.updateBy;
                     this.form_up.createTime = res.createTime;

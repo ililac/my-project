@@ -21,10 +21,10 @@
 											<span v-if="!btnLoading6">在线编辑</span>
 											<span v-else>打开中...</span>
 										</Button> -->
-										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi auditLef">
+										<!-- <Button style="margin-left: 20px;" type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi auditLef">
 											<span v-if="!btnLoading7">智能审核</span>
 											<span v-else>打开中...</span>
-										</Button>
+										</Button> -->
 										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
 											<span v-if="!btnLoading8">文本对比</span>
 											<span v-else>打开中...</span>
@@ -109,7 +109,7 @@
 						<Col :span="6" class="opinion">
 							<div v-show="opinionShow">
 								<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;"><span style="color: red;">*</span>审批意见</p>
-								<Input type="textarea" :rows="5" style="width: 100%;height: 100px;" placeholder="请输入审批意见" v-model="opinion.comment" />
+								<Input type="textarea" :maxlength="1000" :rows="5" style="width: 100%;height: 100px;" placeholder="请输入审批意见" v-model="opinion.comment" />
 								<div v-show="assigneeListShow">
 									<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;"><span style="color: red;">*</span>下一审批人</p>
 									<Tag v-for="item in applyCount" closable @on-close="applyClose" :key="item.id">{{ item.nickName }}</Tag>
@@ -584,15 +584,15 @@
 						}else{
 							this.dictForm.sourceName = "标准文本";
 						}
-						this.detailForm.parentContractName = res.parentContractName;
+						this.dictForm.parentContractName = res.parentContractName;
 						this.dictForm.contractType = res.contractType;
 						this.fileDownUrl2 = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
 						this.dictForm.uploadList = [];
 						if(res.contract.attachmentname){
-							let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 							let arr = this.dictForm.attachmentname.split(',');
 							let arr2 = this.dictForm.accessoryurl.split(',');
 							for(let i = 0;i < arr.length;i++){
+								let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 								obj.name = arr[i];
 								obj.url = arr2[i];
 								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");

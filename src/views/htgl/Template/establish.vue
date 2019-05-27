@@ -737,7 +737,7 @@ export default {
       this.dictForm = v;
       document.getElementById("upload").innerHTML = v.fileName;
       // 				if(v.modelAddress){
-      // 					this.fildDownUrl = "/xboot/contractModel/download?id="+v.id+"&accessToken="+this.getStore("accessToken");
+      // 					this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+v.id+"&accessToken="+this.getStore("accessToken");
       // 				}
       // 				this.$refs.dictForm.resetFields();
     },

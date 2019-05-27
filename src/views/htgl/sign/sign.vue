@@ -78,6 +78,7 @@
 						<FormItem label="作废原因" prop="reason">
 							<Input
 								type="textarea"
+								:maxlength="1000"
 								v-model="cancellationForm.reason"
 								:rows="2"
 								placeholder="请输入"
@@ -181,7 +182,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag != 1">
 							<FormItem label="授权委托书">
-								<Upload action="/zhfw/system/upload/file"
+								<Upload action="/zhfw/syetem/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -204,7 +205,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag == 1">
 							<FormItem label="授权委托书" prop="title">
-								<Upload action="/zhfw/system/upload/file"
+								<Upload action="/zhfw/syetem/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -714,10 +715,10 @@
 			    }
 			},
             init() {
-				this.accessToken = {
-					access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+ this.getStore("accessToken")
-				};
+                this.accessToken = {
+					'access_token': this.getStore("accessToken"),
+					'Authorization': 'Bearer '+this.getStore("accessToken")
+                };
                 // 获取表单数据
                 fromUp().then(res => {
                     this.form_up.updateBy = res.updateBy;

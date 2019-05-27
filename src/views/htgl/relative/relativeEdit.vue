@@ -44,7 +44,7 @@
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
-							action="/zhfw/syetem/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
+							action="/zhfw/system/upload/uploadFiles?tag=qualificationInfoAddr-qualificationInfoName"
 							ref="upload"
 							:headers="accessToken"
 							:show-upload-list="false"
@@ -102,6 +102,7 @@
 					<FormItem label="经营范围:">
 						<Input
 								type="textarea"
+								:maxlength="1000"
 								v-model="dictForm.comment"
 								:rows="5"
 						/>
@@ -407,10 +408,10 @@
 				}
 			},
 			init() {
-				this.accessToken = {
-					access_token: this.getStore("accessToken"),
-					Authorization: 'Bearer '+ this.getStore("accessToken")
-				};
+			    this.accessToken = {
+					'access_token': this.getStore("accessToken"),
+					'Authorization': 'Bearer '+this.getStore("accessToken")
+			    };
 			    // 获取表单数据
 			    fromUp().then(res => {
 			        this.form_up.updateBy = res.updateBy;

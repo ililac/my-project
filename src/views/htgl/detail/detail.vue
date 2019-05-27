@@ -236,31 +236,31 @@
 											</FormItem>
 										</div>
 									</div>
-									<div v-else="detailForm.stateid == 9" v-for="item in unusualFormList">
+									<div v-if="detailForm.stateid == 10" v-for="item2 in unusualFormList">
 										<div class="ul">
 											<FormItem label="解除原因" class="lef">
-												<span>{{item.releaseReason}}</span>
+												<span>{{item2.releaseReason}}</span>
 											</FormItem>
 											<FormItem label="解除时间" class="lef">
-												<span>{{item.releaseTime}}</span>
+												<span>{{item2.releaseTime}}</span>
 											</FormItem>
 										</div>
 										<div class="ul">
 											<FormItem label="备注">
-												<span>{{item.releaseRemark}}</span>
+												<span>{{item2.releaseRemark}}</span>
 											</FormItem>
 										</div>
 										<div class="ul">
 											<FormItem label="操作人" class="lef">
-												<span>{{item.createBy}}</span>
+												<span>{{item2.createBy}}</span>
 											</FormItem>
 											<FormItem label="操作时间" class="lef">
-												<span>{{item.createTime}}</span>
+												<span>{{item2.createTime}}</span>
 											</FormItem>
 										</div>
 										<div class="ul">
 											<FormItem label="操作机构">
-												<span>{{item.createDepart}}</span>
+												<span>{{item2.createDepart}}</span>
 											</FormItem>
 										</div>
 									</div>
@@ -638,6 +638,7 @@
 				});
 				relieveDetail({contractId:this.procDefId}).then(res => {
 					this.unusualFormList = res.result;
+					console.log(this.unusualFormList);
 				});
 				alterationBeforeDetail({originalContractId:this.procDefId}).then(res => {
 					this.alterationFormList2 = res.result;
@@ -694,10 +695,10 @@
 			look(v){
 				let query = { type: 1, id: v,backRoute: "search"};
 				this.$router.push({
-					name: "detail",
-					query: query
-				});
-			}
+				    name: "detail",
+				    query: query
+				}); 
+			},
         },
         mounted() {
             this.init();
