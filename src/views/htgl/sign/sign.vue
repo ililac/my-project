@@ -182,7 +182,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag != 1">
 							<FormItem label="授权委托书">
-								<Upload action="/zhfw/syetem/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"
@@ -205,7 +205,7 @@
 						</div>
 						<div class="ul" v-show="item.authorizeFlag == 1">
 							<FormItem label="授权委托书" prop="title">
-								<Upload action="/zhfw/syetem/upload/file"
+								<Upload action="/zhfw/system/upload/file"
 									:headers="accessToken"
 									:on-success="handleSuccess2"
 									:on-error="handleError"

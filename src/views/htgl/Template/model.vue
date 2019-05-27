@@ -45,7 +45,7 @@
         <FormItem label="范本文件：" prop="file">
           <Upload
             class="upLoad"
-            action="/zhfw/syetem/upload/file?tag=modelAddress-fileName"
+            action="/zhfw/system/upload/file?tag=modelAddress-fileName"
             :headers="accessToken"
             :on-success="handleSuccess"
             :on-error="handleError"
