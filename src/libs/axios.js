@@ -64,15 +64,16 @@ axios.interceptors.response.use(response => {
 
 export const getRequest = (url, params) => {
     let accessToken = getStore('accessToken');
-    return axios({
-        method: 'get',
-        url: `${base}${url}`,
-        params: params,
-        headers: {
-            'access_token': accessToken,
-            'Authorization': 'Bearer '+accessToken
-        }
-    });
+	let date = Date.now();
+	return axios({
+	    method: 'get',
+	    url: `${base}${url}?d=${date}`,
+	    params: params,
+	    headers: {
+	        'access_token': accessToken,
+	        'Authorization': 'Bearer '+accessToken
+	    }
+	});
 };
 
 export const postRequest = (url, params) => {

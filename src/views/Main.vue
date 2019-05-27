@@ -151,7 +151,7 @@ export default {
           this.$store.commit("setMessageCount", res.result.totalElements);
         }
       });
-      this.connectSrv();
+      //this.connectSrv();
     },
     onConnected(frame) {
       // console.log("连接ws成功: " + frame);
