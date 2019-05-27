@@ -440,6 +440,7 @@ export default {
       this.getDataList();
     },
     handleSearch() {
+      this.isSearch = true
       this.searchForm.pageNum = 1;
       this.searchForm.pageSize = 10;
       this.getDataList();
@@ -476,7 +477,19 @@ export default {
 	  if (this.searchForm.endTime!=='') {
       this.searchForm.endTime = this._fmtDate("yyyy-MM-dd",this.searchForm.endTime);
 	  }
-      this.searchForm.stateIds = this.stateList;
+      // this.searchForm.stateIds = this.stateList;
+      if(!this.isSearch){
+        this.searchForm={
+        name: "",
+        number: "",
+        typeId: "", //合同类型id
+        isTopay: "",
+        startTime: "",
+        endTime: "",
+        draftsManName: "",
+        stateIds:""
+      }
+      }
       window.open(
         "/zhfw/contract/query/exportXls?pageSize=10&pageNum=1&stateIds=" +
           this.searchForm.stateIds +

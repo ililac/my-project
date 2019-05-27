@@ -308,6 +308,9 @@ export default {
 				nickName: [
           { required: true, message: "昵称不能为空", trigger: "blur" }
         ],
+        password:[
+          { required: true, message: "密码不能为空", trigger: "blur" }
+        ],
         mobile: [
           { required: true, message: "手机号不能为空", trigger: "blur" },
           { validator: validateMobile, trigger: "blur" }
@@ -947,13 +950,13 @@ export default {
             // 添加用户 避免编辑后传入id
             delete this.userForm.id;
             delete this.userForm.status;
-            if (
-              this.userForm.password == "" ||
-              this.userForm.password == undefined
-            ) {
-              this.errorPass = "密码不能为空";
-              return;
-            }
+            // if (
+            //   this.userForm.password == "" ||
+            //   this.userForm.password == undefined
+            // ) {
+            //   this.errorPass = "密码不能为空";
+            //   return;
+            // }
             if (this.userForm.password.length < 6) {
               this.errorPass = "密码长度不得少于6位";
               return;
