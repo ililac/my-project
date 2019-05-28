@@ -542,9 +542,9 @@ export const findContractList = (params) => {
     return getRequest('/active/actTask/todoList', params)
 }
 //获取审批人列表
-export const examineManList = (id,params) => {
-    return getRequest(`/active/actProcess/getFirstNode/${id}`, params)
-}
+// export const examineManList = (id,params) => {
+//     return getRequest(`/active/actProcess/getFirstNode/${id}`, params)
+// }
 //合同起草
 export const draftMyDelete = (params) => {
     return postRequest('/contract/draft/deleteContractById', params)

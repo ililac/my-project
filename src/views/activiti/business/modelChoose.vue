@@ -54,7 +54,7 @@
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
 					<FormItem label="合同正文" v-else="dictForm.chapter == 1" class="lef" prop="contentname">
-						<Upload action="/zhfw/system/draft/uploadFileNew"
+						<Upload action="/zhfw/contract/draft/uploadFileNew"
 							:data='{"generalNo":dictForm.generalNo,"url":""}'
 			                :headers="accessToken"
 							:on-success="handleSuccess2"
@@ -291,7 +291,7 @@
         eachOther,
 		loadDepartment,
 		getDictDataByType,
-        examineManList,
+//        examineManList,
         wordEdit,
 		relativeNumber,
 		signedContract,
@@ -377,7 +377,7 @@
                 },
                 arr: [], //履行计划数组
                 processModalVisible: false,
-                assigneeList: [],
+//                assigneeList: [],
                 editClick: false, //是否点击了编辑按钮
                 dictPriority: [],
                 selectCount: 0,
@@ -1158,11 +1158,11 @@
 					});
 				})
             },
-            getDictDataType() {
-                examineManList(this.processData.id).then(res => {
-                    this.assigneeList = res.result.users;
-                });
-            },
+//            getDictDataType() {
+//                examineManList(this.processData.id).then(res => {
+//                    this.assigneeList = res.result.users;
+//                });
+//            },
             //审批人提交
             examineSubmit() {
 				this.btnLoading4 = true;

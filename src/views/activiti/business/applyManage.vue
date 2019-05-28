@@ -90,7 +90,7 @@
         findContractByParam,
 		lvxingDeleta,
 		getDictDataByType,
-        examineManList,
+//        examineManList,
 		contractModelquery,
         wordEdit,
 		detailList,
@@ -116,7 +116,7 @@
                     sort: "createTime", // 默认排序字段
                     order: "desc" // 默认排序方式
                 },
-                assigneeList: [],
+//                assigneeList: [],
                 selectCount: 0,
                 modalVisible: false,
                 dictForm: {},
@@ -283,11 +283,11 @@
                     }
                 });
             },
-            getDictDataType() {
-                examineManList(this.processData.id).then(res => {
-                    this.assigneeList = res.result.users;
-                });
-            },
+//            getDictDataType() {
+//                examineManList(this.processData.id).then(res => {
+//                    this.assigneeList = res.result.users;
+//                });
+//            },
             init() {
                 this.getProcessList();
                 this.accessToken = {

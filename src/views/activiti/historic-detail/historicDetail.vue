@@ -73,14 +73,19 @@ export default {
           align: "center",
           sortable: true
         },
+//        {
+//          title: "耗时",
+//          key: "duration",
+//          align: "center",
+//          sortable: true,
+//          render: (h, params) => {
+//            return h("div", util.millsToTime(params.row.duration));
+//          }
+//        },
         {
-          title: "耗时",
-          key: "duration",
-          align: "center",
-          sortable: true,
-          render: (h, params) => {
-            return h("div", util.millsToTime(params.row.duration));
-          }
+            title: "相关附件",
+            key: "comment",
+            align: "center"
         },
         {
           title: "创建时间",

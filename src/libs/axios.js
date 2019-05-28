@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 let base = '/zhfw';
 let base2 = '/compare';
 // 超时设定
-axios.defaults.timeout = 15000;
+axios.defaults.timeout = 20000;
 
 axios.interceptors.request.use(config => {
     return config;
@@ -52,6 +52,7 @@ axios.interceptors.response.use(response => {
             }
             break;
         default:
+            console.log("我到后台了")
             return data;
     }
 
