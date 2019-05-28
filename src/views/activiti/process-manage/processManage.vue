@@ -560,7 +560,8 @@ export default {
   methods: {
     init() {
       this.accessToken = {
-        accessToken: this.getStore("accessToken")
+        'access_token': this.getStore("accessToken"),
+        'Authorization': 'Bearer '+this.getStore("accessToken")
       };
       this.deployByFileUrl = deployByFile;
       this.getDataList();
