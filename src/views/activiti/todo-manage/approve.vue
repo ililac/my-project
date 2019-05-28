@@ -109,7 +109,27 @@
 						<Col :span="6" class="opinion">
 							<div v-show="opinionShow">
 								<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;"><span style="color: red;">*</span>审批意见</p>
-								<Input type="textarea" :maxlength="1000" :rows="5" style="width: 100%;height: 100px;" placeholder="请输入审批意见" v-model="opinion.comment" />
+								<Input type="textarea" :maxlength="1000" :rows="5" style="width: 100%;" placeholder="请输入审批意见" v-model="opinion.comment" />
+								<div style="clear: both;height: 20px"></div>
+								<Form>
+									<FormItem>
+										<Upload action="/zhfw/contract/draft/uploadFileNew"
+												:headers="accessToken"
+												:on-success="handleSuccess"
+												:on-error="handleError"
+												:max-size="10240"
+												:format="['doc','docx']"
+												:on-exceeded-size="handleMaxSize"
+												:on-format-error="handleFormatError"
+												:before-upload="beforeUpload"
+												type="drag"
+												ref="up1">
+											<p id="contentname" class="upload">点击上传</p>
+										</Upload>
+										<p style="color: #d3d3d3;">支持扩展名：doc,.docx文件大小：<=10MB</p>
+										<p v-show="fileDownUrl" @click="fileDowm(dictForm.contentname,dictForm.contracturl)" style="color: #2B85E4;cursor: pointer;">{{dictForm.contentname}}</p>
+									</FormItem>
+								</Form>
 								<div v-show="assigneeListShow">
 									<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;"><span style="color: red;">*</span>下一审批人</p>
 									<Tag v-for="item in applyCount" closable @on-close="applyClose" :key="item.id">{{ item.nickName }}</Tag>
@@ -233,6 +253,7 @@
 				procDefId:"",
 	            loading: false, // 表格加载状态
 				modalVisible3:false, //审批人弹窗
+                fileDownUrl:'',     //审批人附件
 				DetailId: {
 					id: 137
 				},
@@ -484,6 +505,40 @@
 					}
 				})
 			},
+			//上传文件成功
+            handleSuccess(res, file){
+
+			},
+			//上传失败
+            handleError(error, file){
+
+			},
+			//大小超过限制
+            handleMaxSize(file) {
+                this.dictForm[this.upId] = "文件过大，请重新上传";
+                this.$Notice.warning({
+                    title: "文件大小过大",
+                    desc: "所选文件‘ " + file.name + " ’大小过大, 不得超过 5M."
+                });
+            },
+            //合同正文中上传文件的格式错误
+            handleFormatError(){
+                this.$Notice.warning({
+                    title: '格式错误',
+                    desc: "所选文件‘ " + file.name + " ’格式错误"
+                });
+            },
+            beforeUpload(file){
+
+			},
+            //文件下载
+            fileDowm(name,url){
+//                fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:url}).then(res => {
+//                    if(res.result == "success"){
+//                        window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+res.url+"&accessToken="+this.getStore("accessToken"));
+//                    }
+//                })
+            },
 			//意见提交opinion
 			pass() {
 				if(!this.opinion.comment){
@@ -648,7 +703,8 @@
 				}
 				if(this.$route.query.id){
 					this.accessToken = {
-					    accessToken: this.getStore("accessToken")
+                        'access_token': this.getStore("accessToken"),
+                        'Authorization': 'Bearer '+this.getStore("accessToken")
 					};
 					this.type = this.$route.query.type;
 					if(this.$route.query.type == 2){

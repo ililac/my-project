@@ -714,7 +714,17 @@
 			//申请人中的树状结构中的节点选中事件personData
 			selectTree(v){
 				personSelect({procDefId:this.form.procDefId,departmentId:v[0].id,procInstId:this.form.procInstId}).then(res => {
-					this.personData = res.result.userList
+					let personData = res.result.userList;
+					for(let i = 0;i < personData.length;i++){
+                        personData[i]._checked = true;
+					}
+				    this.personData = [...personData];
+                    this.selectList = this.personData;
+                    this.selectCount = this.personData.length;
+                    this.form.assignees = [];
+                    for(var i = 0;i < this.personData.length;i++){
+                        this.form.assignees.push(this.personData[i].id);
+                    };
 				})
 			},
 			clean1() {
@@ -1153,7 +1163,7 @@
 							}
 							that.form.procDefId = this.processData.id;
 							that.form.procInstId = "";
-							that.getDictDataType();
+//							that.getDictDataType();
 					    }
 					});
 				})

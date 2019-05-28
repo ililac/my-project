@@ -276,7 +276,7 @@
 							if(arr[i].processKey == "contract_approve"){
 								this.processData = arr[i];
 								this.form.procDefId = this.processData.id;
-								this.getDictDataType();
+//								this.getDictDataType();
 								break;
 							}
 						}
