@@ -702,7 +702,7 @@ export const relativeNumber = (params) => {
 }
 //查询已签署的合同
 export const signedContract = (params) => {
-	return getRequest('/contract/draft/searchSignedContract',params)
+	return getRequest('/contract/draft/searchMainContract',params)
 }
 //详情中查询审批历史
 export const examineDetail = (ids, params) => {

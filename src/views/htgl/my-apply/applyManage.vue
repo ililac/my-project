@@ -505,7 +505,7 @@ export default {
 								    "查看进度"
 								  )
 								];
-							}else if(params.row.procDefId.indexOf("contract_approve_zhineng") > -1 && params.row.currTaskName == "职能部门审批人审批"){
+							}else if(params.row.procDefId.indexOf("contract_approve_zhiNeng") > -1 && params.row.currTaskName == "职能部门审批人审批"){
 								re = [
 								  h(
 								    "Button",
