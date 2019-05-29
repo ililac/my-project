@@ -397,7 +397,7 @@ export default {
       this.modalVisible = true;
     },
     edit(v) {
-      this.modelerUrl = `${this.domain}/zhfw/contract//modeler.html?modelId=${
+      this.modelerUrl = `${this.domain}/zhfw/active/modeler.html?modelId=${
         v.id
       }&accessToken=${this.getStore("accessToken")}&time=${new Date()}`;
       this.showModeler = true;
