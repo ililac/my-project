@@ -1468,47 +1468,47 @@
 						        this.relative_type = res.result;
 						    }
 						});
+						eachOther().then(res => {
+							this.counterpartArr = res.result.content;
+						});
 					}
 		　　　　	},
 		　　　　	deep: true
 		　　 },
 			formData1: {
 		　　 	handler(newValue, oldValue) {
-					eachOther().then(res => {
-						this.counterpartArr = res.result.content;
-						if(newValue){
-							this.dictForm = newValue;
-						}else{
-							this.dictForm = oldValue;
-						}
-						if(this.dictForm.id){
-							this.editClick = true;
-						}else{
-							this.editClick = false;
-						}
-						if(this.dictForm.contentname){
-							this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
-						}else{
-							this.fileDownUrl = "";
-						}
-						if(this.dictForm.attachmentname){
-							this.fileDownUrl2 = "/zhfw/contract/draft/download?id="+this.dictForm.id+"&tag=2&accessToken="+this.getStore("accessToken");
-						}else{
-							this.fileDownUrl2 = "";
-						}
-						if(newValue.contracturl){
-							this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
-						}
-						this.uploadList = this.dictForm.uploadList;
-						this.$refs.upload2.fileList = this.dictForm.uploadList;
-						this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
-						this.relativeList = this.dictForm.counterpartList;
-						if(this.dictForm.modalSource == 1){
-							this.modalTitle = "合同变更";
-						}else{
-							this.modalTitle = "合同起草";
-						}
-					});
+					if(newValue){
+						this.dictForm = newValue;
+					}else{
+						this.dictForm = oldValue;
+					}
+					if(this.dictForm.id){
+						this.editClick = true;
+					}else{
+						this.editClick = false;
+					}
+					if(this.dictForm.contentname){
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
+					}else{
+						this.fileDownUrl = "";
+					}
+					if(this.dictForm.attachmentname){
+						this.fileDownUrl2 = "/zhfw/contract/draft/download?id="+this.dictForm.id+"&tag=2&accessToken="+this.getStore("accessToken");
+					}else{
+						this.fileDownUrl2 = "";
+					}
+					if(newValue.contracturl){
+						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					}
+					this.uploadList = this.dictForm.uploadList;
+					this.$refs.upload2.fileList = this.dictForm.uploadList;
+					this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
+					this.relativeList = this.dictForm.counterpartList;
+					if(this.dictForm.modalSource == 1){
+						this.modalTitle = "合同变更";
+					}else{
+						this.modalTitle = "合同起草";
+					}
 		　　　　	},
 		　　　　	deep: true
 		　　}
