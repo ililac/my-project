@@ -670,7 +670,7 @@
 				signedForm:{
 					pageNum:1,
 					pageSize:10,
-					stateIds:"7,8,11,12"
+					stateIds:"7,8,11,12",
 					name:""
 				}
             };
