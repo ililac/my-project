@@ -1116,7 +1116,9 @@
 					return;
 				}
 				// this.dictForm2.factmoney = v.replace(/\b(0+)/gi,"");
-				
+				if(parseInt(v)<0){
+					this.$Message.error("只能输入正数");	
+				}
 				if(String(v).indexOf(".") > -1){
 					if(v.toString().split(".")[1].length > 2){
 						this.$Message.error("只能输入到小数点后两位");
