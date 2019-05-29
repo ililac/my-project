@@ -21,10 +21,10 @@
 											<span v-if="!btnLoading6">在线编辑</span>
 											<span v-else>打开中...</span>
 										</Button> -->
-										<!-- <Button style="margin-left: 20px;" type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi auditLef">
+										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi auditLef">
 											<span v-if="!btnLoading7">智能审核</span>
 											<span v-else>打开中...</span>
-										</Button> -->
+										</Button>
 										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
 											<span v-if="!btnLoading8">文本对比</span>
 											<span v-else>打开中...</span>
@@ -216,6 +216,7 @@
 		passExamine, //通过
 		rejectExamine, //驳回
 		historyExamine, //历史
+		intelligentAudit,//智能审核地址
 		flowExample //流程实例
 	} from "@/api/index";
 	import circleLoading from "../../my-components/circle-loading.vue";
@@ -238,7 +239,7 @@
 				applyCount:[],   //审批人添加
 	        	upId:'',
 				istopayText:"",
-				auditUrl: "",
+				// auditUrl: "",
 				modalFlow:false,
 				imgUrl: "", //图片链接
 				opinionShow: false,
@@ -407,7 +408,7 @@
 				this.btnLoading7 = true;
 				fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:this.dictForm.contracturl}).then(res => {
 					if(res.result == "success"){
-						window.open("http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl);
+						window.open(intelligentAudit+"?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl);
 					}else{
 						this.message.error("打开出错");
 						this.btnLoading7 = false;
@@ -499,9 +500,9 @@
 						this.processData = res.result[0];
 						this.form.procDefId = res.result[0].procDefId;
 						this.form.procInstId = res.result[0].procInstId;
-						if (this.dictForm.contracturl) {
-							this.auditUrl = "http://139.198.16.175:8073?id=" + this.dictForm.id + "&url=" + this.dictForm.contracturl
-						}
+						// if (this.dictForm.contracturl) {
+						// 	this.auditUrl = "http://139.198.16.175:8073?id=" + this.dictForm.id + "&url=" + this.dictForm.contracturl
+						// }
 					}
 				})
 			},

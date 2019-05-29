@@ -18,7 +18,8 @@ export const ws = "/ws"
 // 本地请求
 //export const wordEdit = "http://127.0.0.1:7072"
 export const wordEdit = "http://192.168.4.25:8100/"
-
+//智能审核地址
+export const intelligentAudit = "http://139.198.16.175:8073"
 
 //验证数字
 export const verificationNum = (params) =>{

@@ -76,10 +76,10 @@
 							<span v-if="!btnLoading6">在线编辑</span>
 							<span v-else>打开中...</span>
 						</Button> -->
-						<!-- <Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
+						<Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
 							<span v-if="!btnLoading7">智能审核</span>
 							<span v-else>打开中...</span>
-						</Button> -->
+						</Button>
 						<Button type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
 							<span v-if="!btnLoading8">文本对比</span>
 							<span v-else>打开中...</span>
@@ -296,6 +296,7 @@
 		relativeNumber,
 		signedContract,
 		draftModelList,
+		intelligentAudit,
         chooseFile
     } from "@/api/index";
     export default {
@@ -327,7 +328,7 @@
 				attachmentname:false,
 				contentname:false,
 				fileDownUrl:"",
-				auditUrl: "",
+				// auditUrl: "",
 				compareName:"",
 				selectDate: null,
 				edit2Click: false,
@@ -740,9 +741,9 @@
 // 					this.dictForm[res.result[0].tag.split("-")[1]] = res.result[0].name;
 					this.attachmentname = true;
 					this.$Message.success("上传文件 " + file.name + " 成功");
-					if(this.dictForm.typeid){
-						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
-					}
+					// if(this.dictForm.typeid){
+					// 	this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					// }
 				}else{
 					this.$Message.error("上传文件 " + file.name + " 失败");
 				}
@@ -755,9 +756,9 @@
 					this.dictForm.contentname = res.fileName;
 					this.attachmentname = true;
 					this.contracturl2 = res.url;
-					if(this.dictForm.typeid){
-						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
-					}
+					// if(this.dictForm.typeid){
+					// 	this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					// }
 					this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result.name+'&url='+res.result.url+'&accessToken='+this.getStore("accessToken");
 					this.dictForm.generalNo = res.generalNo;
 					document.getElementById("contentname").innerHTML = "点击上传";
@@ -807,9 +808,9 @@
 			typeChange(v){
 				this.dictForm.typeid = v.id;
 				this.dictForm.contractType = v.typeName;
-				if(v.id&&this.dictForm.contracturl){
-					this.auditUrl = "http://139.198.16.175:8073?id="+v.id+"&url="+this.dictForm.contracturl
-				}
+				// if(v.id&&this.dictForm.contracturl){
+				// 	this.auditUrl = "http://139.198.16.175:8073?id="+v.id+"&url="+this.dictForm.contracturl
+				// }
 			},
 			handelSubmitDict(i) {
 				if(!this.dictForm.name){
@@ -1044,7 +1045,7 @@
 						this.btnLoading7 = false;
 						if(res.result == "success"){
 							if(this.dictForm.typeid){
-								window.open("http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl);
+								window.open(intelligentAudit+"?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl);
 							}else{
 								this.$Message.error("请先选择合同类型");
 							}
@@ -1497,9 +1498,9 @@
 					}else{
 						this.fileDownUrl2 = "";
 					}
-					if(newValue.contracturl){
-						this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
-					}
+					// if(newValue.contracturl){
+					// 	this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
+					// }
 					this.uploadList = this.dictForm.uploadList;
 					this.$refs.upload2.fileList = this.dictForm.uploadList;
 					this.dictForm.generalNo = this.dictForm.generalNo?this.dictForm.generalNo:"";
