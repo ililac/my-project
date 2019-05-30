@@ -6,8 +6,8 @@
     <Row>
       <Col>
         <Card style="margin-bottom:10px;">
-          <p slot="title">
-            <span>流程审批进度历史</span>
+          <p slot="title" style="height:32px;">
+            <span>流程审批进度历史 <Button type="primary" style="float:right" @click="handleExport">下载审批单</Button></span>
           </p>
           <Row style="position:relative">
             <Table :loading="loading" border :columns="columns" :data="data" ref="table"></Table>
@@ -41,11 +41,7 @@ export default {
       columns: [
         // 表头
         {
-          type: "selection",
-          width: 60,
-          align: "center"
-        },
-        {
+          title: "序号",
           type: "index",
           width: 60,
           align: "center"
@@ -85,7 +81,7 @@ export default {
         {
             title: "相关附件",
             key: "comment",
-            align: "center"
+            align: "center",
         },
         {
           title: "创建时间",
@@ -134,6 +130,17 @@ export default {
     };
   },
   methods: {
+    handleExport(){
+      window.open(
+        "/zhfw/active/actTask/downloadApprovalForm?" +
+          "tableId=" +
+          this.$route.query.tableId +
+          "&procInstId=" +
+          this.$route.query.id +
+          "&accessToken=" +
+         this.getStore("accessToken")
+      );
+    },
     init() {
       this.type = this.$route.query.type;
       this.backRoute = this.$route.query.backRoute;

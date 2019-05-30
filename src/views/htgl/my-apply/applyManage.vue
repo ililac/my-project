@@ -624,7 +624,24 @@ export default {
                 )
               ];
             } else {
-              re = [
+              re = [h(
+                  "Button",
+                  {
+                    props: {
+                      size: "small",
+                      type: "primary"
+                    },
+                    style: {
+                      marginRight: "5px"
+                    },
+                    on: {
+                      click: () => {
+                        this.export(params.row);
+                      }
+                    }
+                  },
+                  "下载审批单"
+                ),
                 h(
                   "Button",
                   {
@@ -912,7 +929,7 @@ export default {
 			});
     },
     detail(v) {
-      let query = { type: 2, id: v.tableId, backRoute: this.$route.name };
+      let query = { type: 2, id: v.tableId, backRoute: this.$route.name,status:v.status};
       this.$router.push({
         name: "detail",
         query: query
@@ -986,11 +1003,22 @@ export default {
         this.$Message.error("流程实例ID不存在");
         return;
       }
-      let query = { id: v.procInstId, backRoute: this.$route.name };
+      let query = { id: v.procInstId, backRoute: this.$route.name ,tableId:v.tableId};
       this.$router.push({
         name: "historic_detail",
         query: query
       });
+    },
+    export(v){
+      window.open(
+        "/zhfw/active/actTask/downloadApprovalForm?" +
+          "tableId=" +
+          v.tableId +
+          "&procInstId=" +
+          v.procInstId +
+          "&accessToken=" +
+          this.getStore("accessToken")
+      );
     },
     remove(v) {
       this.$Modal.confirm({

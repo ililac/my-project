@@ -581,9 +581,15 @@
 						}
 						this.detailForm.counterpartList = res.counterpartList;
 						this.detailForm.contractType = res.contractType;
+						let status = this.$route.query.status
+						if (status=='2') {
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.contractPdfName+'&url='+res.contractPdfUrl+'&accessToken='+this.getStore("accessToken");
+						this.detailForm.contentname = res.contractPdfName;
+						}else{
 						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.detailForm.contentname+'&url='+this.detailForm.contracturl+'&accessToken='+this.getStore("accessToken");
-						this.detailForm.uploadList = [];
 						this.detailForm.parentContractName = res.parentContractName;
+						}
+						this.detailForm.uploadList = [];
 						if(res.contract.attachmentname){
 							let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 							let arr = this.detailForm.attachmentname.split(',');
@@ -610,7 +616,6 @@
 				examineDetail(this.procDefId).then(res => {
 					if(res.success == "true"){
 						this.examineList = res.data;
-						console.log(this.examineList);
 					}
 				});
 				signDetail({contractId:this.procDefId,isuse:1}).then(res => {
@@ -638,7 +643,6 @@
 				});
 				relieveDetail({contractId:this.procDefId}).then(res => {
 					this.unusualFormList = res.result;
-					console.log(this.unusualFormList);
 				});
 				alterationBeforeDetail({originalContractId:this.procDefId}).then(res => {
 					this.alterationFormList2 = res.result;
