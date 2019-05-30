@@ -100,6 +100,7 @@
 					blackFlag:''
 				},
                 dictForm: {
+					counterpartNatureId:"企业",
                     counterpartTypeId:"",
 					counterpartName:"",
 					creditCode:"",
@@ -162,8 +163,8 @@
 						}
                     },
                     {
-                        title: "机构类型",
-                        key: "counterpartTypeName",
+                        title: "相对方类型",
+                        key: "counterpartNatureId",
 						align: "center"
                     },
                     {
@@ -402,6 +403,7 @@
 				relativeNumber().then(res => {
 					if(res.success){
 						this.dictForm = {
+							counterpartNatureId:"企业",
 						    counterpartTypeId:"",
 						    counterpartName:"",
 						    creditCode:"",

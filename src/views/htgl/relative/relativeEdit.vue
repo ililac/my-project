@@ -3,6 +3,21 @@
 		<Modal title="相对方管理" v-model="modalVisible" :mask-closable='false' :width="1000" :styles="{top: '30px'}" class="formModel" footer-hide @on-visible-change="visiblechange">
 			<Form ref="dictForm" :model="dictForm" :label-width="120" :rules="dictFormValidate">
 				<div class="ul">
+				<FormItem label="相对方类型:" class="lef code1">
+						<span class="span">*</span>
+						<Select v-model="dictForm.counterpartNatureId" @on-change="handelSelectNature" placeholder="请选择" clearable>
+							<Option value="企业" >企业</Option>
+							<Option value="国家机关" >国家机关</Option>
+							<Option value="事业单位" >事业单位</Option>
+							<Option value="社会团体" >社会团体</Option>
+							<Option value="其他组织机构" >其他组织机构</Option>
+							<Option value="自然人" >自然人</Option>
+						</Select>
+					</FormItem>
+					<Form-item label="相对方编号:" class="lef">
+						<span>{{dictForm.counterpartNumber}}</span>
+					</Form-item>
+				</div>
 					<FormItem label="相对方名称:" class="lef" prop="counterpartName" v-show="!dictForm.disable">
 						<AutoComplete
 							v-model="dictForm.counterpartName"
@@ -22,25 +37,26 @@
 							<span v-else>同步</span>
 						</Button>
 					</FormItem>
-					<Form-item label="相对方编号:" class="lef">
-						<span>{{dictForm.counterpartNumber}}</span>
-					</Form-item>
-				</div>
-				<div class="ul">
-					<Form-item label="机构类型:" class="lef">
+					<FormItem label="身份证号:"  v-show="dictForm.counterpartNatureId=='自然人'" class="lef code">
+						<span class="span">*</span>
+						<input type="text" value="" v-model="dictForm.creditCode"/>
+					</FormItem>
+					<!-- <Form-item label="机构类型:" class="lef">
 						<select v-model="dictForm.counterpartTypeId" placeholder="请选择" >
 							<option  v-for="item in relative_type" :value="item.id" >{{item.title}}</option>
 						</select>
-					</Form-item>
-					<FormItem label="企业类型:" class="lef">
-						<select v-model="dictForm.enterpriseId" placeholder="请选择" clearable>
-							<option  v-for="item in ownership_type" :value="item.id" >{{item.title}}</option>
-						</select>
+					</Form-item> -->
+					<FormItem label="企业类型:"  v-show="dictForm.counterpartNatureId=='企业'" class="lef code">
+						<span class="span">*</span>
+						<Select v-model="dictForm.enterpriseId" placeholder="请选择" clearable>
+							<Option  v-for="item in ownership_type" :value="item.id" >{{item.title}}</Option>
+						</Select>
 					</FormItem>
-				</div>
-				<div class="ul">
-					<FormItem label="统一社会信用代码:" class="lef">
+					<FormItem label="统一社会信用代码:"  v-show="dictForm.counterpartNatureId=='企业'" class="lef">
 						<input type="text" value="" v-model="dictForm.creditCode"/>
+					</FormItem>
+					<FormItem label="联系地址:" v-show="dictForm.counterpartNatureId=='自然人'" class="lef">
+						<input type="text" v-model="dictForm.officeAddress"/>
 					</FormItem>
 					<FormItem label="资质证书:" class="lef">
 						<Upload 
@@ -73,31 +89,24 @@
 							</div>
 						</div>
 					</FormItem>
-				</div>
-				<div class="ul">
-					<FormItem label="成立时间:" class="lef" prop="estiblishTime">
+					<FormItem label="成立时间:"  v-show="dictForm.counterpartNatureId=='企业'" class="lef" prop="estiblishTime">
 						<input type="text" value="" v-model="dictForm.registerDate"/>
 					</FormItem>
-					<FormItem label="注册资本:" class="lef" prop="regCapital">
+					<FormItem label="注册资本:" class="lef"  v-show="dictForm.counterpartNatureId=='企业'" prop="regCapital">
 						<input type="text" value="" v-model="dictForm.registerCapital"/>
 					</FormItem>
-				</div>
-				<div class="ul">
-					<FormItem label="法定代表人:" class="lef">
+					<FormItem label="法定代表人:" v-show="dictForm.counterpartNatureId!=='自然人'" class="lef">
 						<input type="text" v-model="dictForm.legalPersonName"/>
 					</FormItem>
-					<FormItem label="办公地址:" class="lef">
+					<FormItem label="办公地址:" v-show="dictForm.counterpartNatureId!=='自然人'" class="lef">
 						<input type="text" v-model="dictForm.officeAddress"/>
 					</FormItem>
-				</div>
-				<div class="ul">
 					<FormItem label="开户行:" class="lef">
 						<Input type="text" v-model="dictForm.openBank" @on-change="valiText(dictForm.openBank)"></Input>
 					</FormItem>
 					<FormItem label="银行账号:" class="lef">
 						<Input type="text" v-model="dictForm.bankAccount"></Input>
 					</FormItem>
-				</div>
 				<div class="ul txtar">
 					<FormItem label="经营范围:">
 						<Input
@@ -452,7 +461,6 @@
 				if(!this.dictForm.counterpartId){
 					this.dictForm.counterpartId = "";
 				}
-				console.log(this.dictForm.counterpartName);
 				if(this.dictForm.counterpartName){
 					animateWidths({"counterpartName":this.dictForm.counterpartName,"id":this.dictForm.counterpartId}).then(res => {
 						if(res != "success"){
@@ -465,7 +473,14 @@
 				if(!this.dictForm.counterpartName){
 					this.$Message.error("相对方名称没有选择");
 					return
+				}else if(!this.dictForm.enterpriseId&&this.dictForm.counterpartNatureId=='企业'){
+					this.$Message.error("企业类型没有选择");
+					return
+				}else if(!this.dictForm.creditCode&&this.dictForm.counterpartNatureId=='自然人'){
+					this.$Message.error("身份证号没有输入");
+					return
 				}else{
+					
 					this.btnLoading = true;
 					if(!this.dictForm.counterpartId){
 						this.dictForm.counterpartId = "";
@@ -662,6 +677,13 @@
 					this.$Message.error("手机格式错误");
 					
 				}
+			},
+			handelSelectNature(v){
+				this.dictForm.creditCode = ''
+				this.dictForm.registerCapital = ''
+				this.dictForm.registerDate = ''
+				this.dictForm.enterpriseId = ''
+				this.dictForm.legalPersonName = ''
 			}
 		},
 		watch:{
@@ -717,5 +739,18 @@
 		top: -10px;
 		font-size: 20px;
 		cursor: pointer;
+	}
+	.code,.code{
+		position: relative;
+	}
+	.code .span,.code1 .span{
+		position: absolute;
+		left: -75px;
+		top: 1px;
+		font-size: 14px;
+		color: #ed4014;font-family: SimSun;
+	}
+	.code1 .span{
+		left: -85px;
 	}
 </style>
