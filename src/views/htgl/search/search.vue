@@ -55,6 +55,17 @@
                   :widthDate.sync="myStyle"
                 ></contract-type>
               </Form-item>
+              <Form-item label="相对方">
+                <Select
+                  v-model="searchForm.counterpartId"
+                  filterable
+                  placeholder="请选择"
+                  clearable
+                  style="width: 200px"
+                >
+                  <Option v-for="item in counterpartArr" :value="item.id">{{item.counterpartName}}</Option>
+                </Select>
+              </Form-item>
               <Form-item label="收付款方式">
                 <Checkbox
                   :indeterminate="payIndeterminate"
@@ -189,37 +200,43 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 100,
+          width: 80,
           align: "center"
         },
         {
           title: "合同名称",
           key: "name",
-          width: 150,
-          align: "center"
+          width: 180,
+          align: "left"
         },
         {
           title: "合同编号",
           key: "number",
-          width: 150,
+          width: 120,
           align: "center"
         },
         {
           title: "合同金额",
           key: "money",
-          width: 180,
+          width: 100,
           align: "center"
+        },
+        {
+          title: "相对方",
+          key: "counterpartname",
+          width: 180,
+          align: "left"
         },
         {
           title: "收付款方式",
           key: "istopayState",
-          width: 180,
+          width: 120,
           align: "center"
         },
         {
           title: "合同状态",
           key: "state",
-          width: 180,
+          width: 160,
           align: "center"
         },
         {
@@ -351,6 +368,7 @@ export default {
         isTopay: "",
         startTime: "",
         endTime: "",
+        counterpartId: "",
         draftsManName: "",
         pageSize: 10,
         pageNum: 1
@@ -440,7 +458,7 @@ export default {
       this.getDataList();
     },
     handleSearch() {
-      this.isSearch = true
+      this.isSearch = true;
       this.searchForm.pageNum = 1;
       this.searchForm.pageSize = 10;
       this.getDataList();
@@ -471,24 +489,31 @@ export default {
     },
     //表格导出
     handleExport() {
-		if (this.searchForm.startTime!=='') {
-      this.searchForm.startTime = this._fmtDate("yyyy-MM-dd",this.searchForm.startTime);
-	  }
-	  if (this.searchForm.endTime!=='') {
-      this.searchForm.endTime = this._fmtDate("yyyy-MM-dd",this.searchForm.endTime);
-	  }
-      // this.searchForm.stateIds = this.stateList;
-      if(!this.isSearch){
-        this.searchForm={
-        name: "",
-        number: "",
-        typeId: "", //合同类型id
-        isTopay: "",
-        startTime: "",
-        endTime: "",
-        draftsManName: "",
-        stateIds:""
+      if (this.searchForm.startTime !== "") {
+        this.searchForm.startTime = this._fmtDate(
+          "yyyy-MM-dd",
+          this.searchForm.startTime
+        );
       }
+      if (this.searchForm.endTime !== "") {
+        this.searchForm.endTime = this._fmtDate(
+          "yyyy-MM-dd",
+          this.searchForm.endTime
+        );
+      }
+      // this.searchForm.stateIds = this.stateList;
+      if (!this.isSearch) {
+        this.searchForm = {
+          name: "",
+          number: "",
+          typeId: "", //合同类型id
+          isTopay: "",
+          startTime: "",
+          endTime: "",
+          draftsManName: "",
+          stateIds: "",
+          counterpartId: ""
+        };
       }
       window.open(
         "/zhfw/contract/query/exportXls?pageSize=10&pageNum=1&stateIds=" +
@@ -505,6 +530,8 @@ export default {
           this.searchForm.startTime +
           "&endTime=" +
           this.searchForm.endTime +
+          "&counterpartId=" +
+          this.searchForm.counterpartId +
           "&draftsManName=" +
           this.searchForm.draftsManName +
           "&accessToken=" +
@@ -581,35 +608,49 @@ export default {
         query: query
       });
     },
-    _fmtDate(fmt,date) {
-      var date = new Date(date)
-      var o = {   
-    "M+" : date.getMonth()+1,                 //月份   
-    "d+" : date.getDate(),                    //日   
-    "h+" : date.getHours(),                   //小时   
-    "m+" : date.getMinutes(),                 //分   
-    "s+" : date.getSeconds(),                 //秒   
-    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
-    "S"  : date.getMilliseconds()             //毫秒   
-  };   
-  if(/(y+)/.test(fmt))   
-    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
-  for(var k in o)   
-    if(new RegExp("("+ k +")").test(fmt))   
-  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
-  return fmt;   
+    _fmtDate(fmt, date) {
+      var date = new Date(date);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
     },
     getDataList() {
       this.loading = true;
       this.data = [];
       this.searchForm.stateIds = this.stateList;
-	  this.searchForm.isTopay = this.payStateList;
-	  if (this.searchForm.startTime!=='') {
-      this.searchForm.startTime = this._fmtDate("yyyy-MM-dd",this.searchForm.startTime);
-	  }
-	  if (this.searchForm.endTime!=='') {
-      this.searchForm.endTime = this._fmtDate("yyyy-MM-dd",this.searchForm.endTime);
-	  }
+      this.searchForm.isTopay = this.payStateList;
+      if (this.searchForm.startTime !== "") {
+        this.searchForm.startTime = this._fmtDate(
+          "yyyy-MM-dd",
+          this.searchForm.startTime
+        );
+      }
+      if (this.searchForm.endTime !== "") {
+        this.searchForm.endTime = this._fmtDate(
+          "yyyy-MM-dd",
+          this.searchForm.endTime
+        );
+      }
       contractSearch(this.searchForm).then(res => {
         this.loading = false;
         this.total = res.data.total;
