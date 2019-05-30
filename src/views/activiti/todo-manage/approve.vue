@@ -113,7 +113,16 @@
 								<div style="clear: both;height: 20px"></div>
 								<Form>
 									<FormItem>
-										<Upload action="/zhfw/contract/draft/uploadFileNew"
+										<Upload action="/zhfw/system/upload/file"
+												:headers="accessToken"
+												:on-success="handleSuccess"
+												:on-error="handleError"
+												:max-size="5120"
+												:on-exceeded-size="handleMaxSize"
+												:before-upload="beforeUpload"
+												ref="up"
+										>
+										<!-- <Upload action="/zhfw/contract/draft/uploadFileNew"
 												:headers="accessToken"
 												:on-success="handleSuccess"
 												:on-error="handleError"
@@ -124,10 +133,10 @@
 												:before-upload="beforeUpload"
 												type="drag"
 												ref="up1">
-											<p id="contentname" class="upload">点击上传</p>
+											<p id="contentname" class="upload">点击上传</p> -->
 										</Upload>
 										<p style="color: #d3d3d3;">支持扩展名：doc,.docx文件大小：<=10MB</p>
-										<p v-show="fileDownUrl" @click="fileDowm(dictForm.contentname,dictForm.contracturl)" style="color: #2B85E4;cursor: pointer;">{{dictForm.contentname}}</p>
+										<p v-show="fileDownUrl" @click="fileDowm(opinion.fileName,opinion.fileAddress)" style="color: #2B85E4;cursor: pointer;">{{dictForm.contentname}}</p>
 									</FormItem>
 								</Form>
 								<div v-show="assigneeListShow">
@@ -347,6 +356,8 @@
 					assignees: "",
 					priority: 0,
 					comment: "",
+					fileName:"",
+					fileAddress:"",
 					number:""
 				},
 				opinion2: {
