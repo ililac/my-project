@@ -66,9 +66,9 @@
 							</Tooltip>
 						</div>
 					  <div class="info_con">
-					  	¥{{total.recieveResult.factmoney}}
+					  	¥{{total.recieveResult.factmoney}}（万元）
 					  </div>
-						<div>已收金额¥{{total.recieveResult.actualmoney}}</div>
+						<div>已收金额¥{{total.recieveResult.actualmoney}}（万元）</div>
 						<Progress :percent="total.recieveResult.percent" hide-info/>
 					</Card>
 				</Col>
@@ -82,9 +82,9 @@
 							</Tooltip>
 						</div>
 					  <div class="info_con">
-					  	¥{{total.payResult.factmoney}}
+					  	¥{{total.payResult.factmoney}}（万元）
 					  </div>
-						<div>已付金额¥{{total.payResult.actualmoney}}</div>
+						<div>已付金额¥{{total.payResult.actualmoney}}（万元）</div>
 						<Progress :percent="total.payResult.percent" hide-info/>
 					</Card>
 				</Col>

@@ -206,7 +206,6 @@ export default {
         {
           title: "合同名称",
           key: "name",
-          width: 180,
           align: "left"
         },
         {
@@ -224,7 +223,7 @@ export default {
         {
           title: "相对方",
           key: "counterpartname",
-          width: 180,
+          width: 200,
           align: "left"
         },
         {

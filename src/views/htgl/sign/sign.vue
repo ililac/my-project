@@ -30,6 +30,7 @@
 								<DatePicker
 								  v-model="searchForm.startTime"
 								  format="yyyy-MM-dd"
+							  :editable="false"
 								  clearable
 								  placeholder="选择起始时间"
 								></DatePicker>
@@ -38,6 +39,7 @@
 								  format="yyyy-MM-dd"
 								  clearable
 								  @on-change="timeChange"
+							  :editable="false"
 								  placeholder="选择起始时间"
 								></DatePicker>
 							</Form-item>
@@ -131,6 +133,7 @@
 							  v-model="signForm.oursigntime"
 							  format="yyyy-MM-dd"
 							  clearable
+							  :editable="false"
 							  placeholder="选择起始时间"
 							  style="width: 100%;"
 							></DatePicker>
@@ -166,6 +169,7 @@
 								  v-model="item.signTime"
 								  format="yyyy-MM-dd"
 								  clearable
+							  :editable="false"
 								  placeholder="选择起始时间"
 								  style="width: 100%;"
 								></DatePicker>
@@ -235,6 +239,7 @@
 							  v-model="signForm.contracteffectivetime"
 							  format="yyyy-MM-dd"
 							  clearable
+							  :editable="false"
 							  placeholder="选择起始时间"
 							  style="width:100%"
 							></DatePicker>
@@ -404,7 +409,6 @@
                     {
                         title: "合同名称",
                         key: "name",
-                        width: 150,
 						align: "center",
 						render: (h, params) => {
 						  return h("div", [
