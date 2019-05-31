@@ -114,29 +114,20 @@
 								<Form>
 									<FormItem>
 										<Upload action="/zhfw/system/upload/file"
-												:headers="accessToken"
-												:on-success="handleSuccess"
-												:on-error="handleError"
-												:max-size="5120"
-												:on-exceeded-size="handleMaxSize"
-												:before-upload="beforeUpload"
-												ref="up"
+											:headers="accessToken"
+											:on-success="handleSuccess"
+											:on-error="handleError"
+											:max-size="5120"
+											:on-exceeded-size="handleMaxSize"
+											:before-upload="beforeUpload"
+											type="drag"
+											:show-upload-list="false"
+											ref="up"
 										>
-										<!-- <Upload action="/zhfw/contract/draft/uploadFileNew"
-												:headers="accessToken"
-												:on-success="handleSuccess"
-												:on-error="handleError"
-												:max-size="10240"
-												:format="['doc','docx']"
-												:on-exceeded-size="handleMaxSize"
-												:on-format-error="handleFormatError"
-												:before-upload="beforeUpload"
-												type="drag"
-												ref="up1">
-											<p id="contentname" class="upload">点击上传</p> -->
+											<p id="fileName" class="upload">点击上传</p>
 										</Upload>
 										<p style="color: #d3d3d3;">支持扩展名：doc,.docx文件大小：<=10MB</p>
-										<p v-show="fileDownUrl" @click="fileDowm(opinion.fileName,opinion.fileAddress)" style="color: #2B85E4;cursor: pointer;">{{dictForm.contentname}}</p>
+										<p @click="fileDowm(opinion.fileName,opinion.fileAddress)" style="color: #2B85E4;cursor: pointer;">{{opinion.fileName}}</p>
 									</FormItem>
 								</Form>
 								<div v-show="assigneeListShow">
@@ -519,11 +510,18 @@
 			},
 			//上传文件成功
             handleSuccess(res, file){
-
+				if(res.success){
+					this.opinion.fileName = res.result.name;
+					this.opinion.fileAddress = res.result.url;
+					document.getElementById("fileName").innerHTML = "点击上传";
+				}else{
+					this.$Message.error("上传文件 " + file.name + " 失败");
+					document.getElementById("fileName").innerHTML = "点击上传";
+				}
 			},
 			//上传失败
             handleError(error, file){
-
+				document.getElementById("fileName").innerHTML = "点击上传";
 			},
 			//大小超过限制
             handleMaxSize(file) {
@@ -541,15 +539,11 @@
                 });
             },
             beforeUpload(file){
-
+				document.getElementById("fileName").innerHTML = "文件上传中...";
 			},
             //文件下载
             fileDowm(name,url){
-//                fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:url}).then(res => {
-//                    if(res.result == "success"){
-//                        window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+res.url+"&accessToken="+this.getStore("accessToken"));
-//                    }
-//                })
+               window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+url+"&accessToken="+this.getStore("accessToken"));
             },
 			//意见提交opinion
 			pass() {
@@ -676,6 +670,8 @@
 					procInstId: "",
 					assignees: "",
 					priority: 0,
+					fileName:"",
+					fileAddress:"",
 					comment: ""
 				}
 				this.opinion2 = {
@@ -683,7 +679,6 @@
 					procInstId: "",
 					comment: ""
 				}
-				
 				examineShow({procDefId:this.$route.query.procDefId,procInstId:this.$route.query.procInstId}).then(res => {
 					if(res.result){
 						this.assigneeListShow = true;
