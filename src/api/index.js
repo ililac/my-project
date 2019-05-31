@@ -792,3 +792,19 @@ export const statisticsDepartment = (params) => {
 export const getArchiveNumber = (id,params) => {
 	return getRequest(`/contract/archive/getArchiveNumber`,params)
 }
+//合同解除接口
+export const relieveContract = (params) => {
+	return getRequest('/contract/release/save',params)
+}
+//解除信息
+export const relieveDetail = (params) => {
+	return getRequest('/contract/release/findReleaseByContractId',params)
+}
+//被变更的合同的变更信息
+export const alterationBeforeDetail = (params) => {
+	return getRequest('/contract/change/queryByOriginalContractId',params)
+}
+//变更后的合同的变更信息
+export const alterationAfterDetail = (params) => {
+	return getRequest('/contract/change/queryByChangeContractId',params)
+}
