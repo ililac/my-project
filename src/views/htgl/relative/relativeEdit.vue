@@ -629,7 +629,6 @@ export default {
                 this.childNum(true, res, this.dictForm._index);
                 this.$Message.success("保存成功");
               } else {
-                this.$Message.error(res);
                 this.btnLoading = false;
               }
             });
