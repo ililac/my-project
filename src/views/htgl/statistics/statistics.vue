@@ -19,7 +19,6 @@
 							</Select>
 						</Form-item>
 						<Form-item>
-							
 						</Form-item>
 						<Button @click="dateChange" type="primary" icon="ios-search">搜索</Button>
 					</Form>
@@ -66,9 +65,9 @@
 							</Tooltip>
 						</div>
 					  <div class="info_con">
-					  	¥{{total.recieveResult.factmoney}}（万元）
+					  	¥{{total.recieveResult.factmoney}}(万元)
 					  </div>
-						<div>已收金额¥{{total.recieveResult.actualmoney}}（万元）</div>
+						<div>已收金额¥{{total.recieveResult.actualmoney}}(万元)</div>
 						<Progress :percent="total.recieveResult.percent" hide-info/>
 					</Card>
 				</Col>
@@ -82,9 +81,9 @@
 							</Tooltip>
 						</div>
 					  <div class="info_con">
-					  	¥{{total.payResult.factmoney}}（万元）
+					  	¥{{total.payResult.factmoney}}(万元)
 					  </div>
-						<div>已付金额¥{{total.payResult.actualmoney}}（万元）</div>
+						<div>已付金额¥{{total.payResult.actualmoney}}(万元)</div>
 						<Progress :percent="total.payResult.percent" hide-info/>
 					</Card>
 				</Col>
@@ -190,7 +189,7 @@
         },
         data() {
             return {
-				monthList:[],
+				monthList:[], 
 				relative_type:[],
 				total:{
 					approveTotalSize:0,
@@ -220,7 +219,6 @@
         methods: {
 			//年份改变
 			yearChange(v){
-				console.log(v);
 				let date = new Date();
 				let year = date.getFullYear();
 				// this.searchForm.year = 

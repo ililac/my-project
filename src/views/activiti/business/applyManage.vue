@@ -134,13 +134,15 @@
                 columns: [
                     {
                         title: "序号",
+                        width:80,
                         type: "index",
                         align: "center"
                     },
                     {
                         title: "合同名称",
+                        width:280,
                         key: "name",
-						align: "center"
+						align: "left"
                     },
 					{
 					    title: "收付款方式",

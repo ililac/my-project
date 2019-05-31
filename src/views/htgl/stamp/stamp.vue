@@ -124,14 +124,14 @@
                     {
                         title: "序号",
                         type: "index",
-                        width: 100,
+                        width: 80,
                         align: "center"
                     },
                     {
                         title: "合同名称",
                         key: "name",
-                        width: 150,
-						align: "center",
+                        width: 280,
+						align: "left",
 						render: (h, params) => {
 						  return h("div", [
 						    h(
@@ -151,37 +151,32 @@
                     {
                         title: "合同编号",
                         key: "number",
-                        width: 150,
 						align: "center"
                     },
                     {
                         title: "合同金额",
                         key: "money",
-                        width: 180,
 						align: "center"
                     },
                     {
                         title: "起草人",
                         key: "draftsman",
-                        width: 100,
 						align: "center"
                     },
 					{
 					    title: "起草时间",
 					    key: "draftstime",
-					    width: 100,
 						align: "center"
 					},
 					{
 					    title: "合同状态",
 					    key: "state",
-					    width: 180,
 						align: "center"
 					},
                     {
                         title: "操作",
                         key: "action",
-                        width: 180,
+                        width: 200,
                         align: "center",
                         fixed: "right",
                         render: (h, params) => {

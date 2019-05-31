@@ -211,19 +211,19 @@ export default {
         {
           title: "合同编号",
           key: "number",
-          width: 120,
+          width: 100,
           align: "center"
         },
         {
           title: "合同金额",
           key: "money",
-          width: 100,
+          width: 110,
           align: "center"
         },
         {
           title: "相对方",
           key: "counterpartname",
-          width: 200,
+          width: 220,
           align: "left"
         },
         {
@@ -235,13 +235,13 @@ export default {
         {
           title: "合同状态",
           key: "state",
-          width: 160,
+          width: 150,
           align: "center"
         },
         {
           title: "起草人",
           key: "draftsman",
-          width: 100,
+          width: 110,
           align: "center"
         },
         {
