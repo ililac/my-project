@@ -478,9 +478,7 @@
 				});	
 			},
             edit(v) {
-				
 				modelRelativeDetail({id:v.id,type:2}).then(res=>{
-					debugger
 					if(res.success){
 						var result = res.result.counterpartDetail;
 						Object.keys(result).forEach(function(key){
