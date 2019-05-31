@@ -738,7 +738,6 @@
 			handleSuccess(res, file) {
 				if(res.message == "success"){
 					this.dictForm[this.upId] = res.result[0].name;
-// 					this.dictForm[res.result[0].tag.split("-")[0]] = res.result[0].url;
 // 					this.dictForm[res.result[0].tag.split("-")[1]] = res.result[0].name;
 					this.attachmentname = true;
 					this.$Message.success("上传文件 " + file.name + " 成功");
