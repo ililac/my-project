@@ -437,6 +437,26 @@
 					    align: "center"
 					},
 					{
+					    title: "相关附件",
+					    key: "fileName",
+					    align: "center",
+							render: (h, params) => {
+							  return h("div", [
+							    h(
+							      "a",
+							      {
+							        on: {
+							          click: () => {
+							            this.fileDown(params.row);
+							          }
+							        }
+							      },
+							      params.row.fileName
+							    )
+							  ]);
+							}
+					},
+					{
 					    title: "完成时间",
 					    key: "endTime",
 					    align: "center"
@@ -703,6 +723,10 @@
 				    query: query
 				}); 
 			},
+			//相关附件下载
+			fileDown(v){
+				window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&accessToken="+this.getStore("accessToken"));
+			}
         },
         mounted() {
             this.init();

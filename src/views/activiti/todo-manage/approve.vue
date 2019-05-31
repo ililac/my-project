@@ -145,8 +145,9 @@
 							<div class="history" style="padding-bottom: 20px;">
 								<div class="li" v-for="(item,i) in historyList" :key="i">
 									<div class="icon"></div>
-									<p class="tips"><span>{{item.name}}</span><span>{{item.assignees}}</span><br /><span>{{item.createTime}}</span></p>
-									<div class="cons">{{item.comment}}</div>
+									<p class="tips"><span>{{item.name}}</span><span>{{item.assignee}}</span><span>{{item.createTime}}</span></p>
+									<div class="cons" v-show="item.comment">审批意见:{{item.comment}}</div>
+									<p v-show="item.fileName">相关附件: <span @click="fileDowm(item.fileName,item.fileAddress)" style="color: #1890FF;cursor: pointer;">{{item.fileName}}</span></p>
 								</div>
 							</div>
 						</Col>
@@ -450,7 +451,18 @@
 			//申请人中的树状结构中的节点选中事件personData
 			selectTree(v){
 				personSelect({procDefId:this.form.procDefId,departmentId:v[0].id,procInstId:this.form.procInstId}).then(res => {
-					this.personData = res.result.userList
+					// this.personData = res.result.userList;
+					let personData = res.result.userList;
+					for(let i = 0;i < personData.length;i++){
+					    personData[i]._checked = true;
+					}
+					this.personData = [...personData];
+					this.selectList = this.personData;
+					this.selectCount = this.personData.length;
+					this.form.assignees = [];
+					for(var i = 0;i < this.personData.length;i++){
+					    this.form.assignees.push(this.personData[i].id);
+					};
 				})
 			},
 			//申请人选择事件

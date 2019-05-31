@@ -119,7 +119,7 @@
 					</Col>
 					<Col :span="12">
 						<Alert show-icon>
-						    已选择 <span class="select-count">{{selectCount}}</span> 项
+						    已选择 <span class="select-count">{{selectCount2}}</span> 项
 						</Alert>
 						<Table :height="300" :loading="loading" border :columns="columns1" :data="personData" ref="table1" @on-selection-change="showSelect2"></Table>
 					</Col>
@@ -178,7 +178,8 @@ export default {
   },
   data() {
     return {
-			selectCount:0,   ///选中的审批人数量
+			selectCount2:0,   ///选中的审批人数量
+			selectList2:[],   ///选中的审批人列表
 			submitSubmitClick:true, // 审批人是否显示
 			btnLoading4:false, //下一审批人中的提交按钮
 			applyCount:[],   //审批人添加
@@ -754,13 +755,23 @@ export default {
 		selectTree(v){
 			console.log(this.form);
 			personSelect({procDefId:this.form.procDefId,departmentId:v[0].id,procInstId:this.form.procInstId}).then(res => {
-				this.personData = res.result.userList
+				// this.personData = res.result.userList
+				let personData = res.result.userList;
+				for(let i = 0;i < personData.length;i++){
+				    personData[i]._checked = true;
+				}
+				this.personData = [...personData];
+				this.selectCount2 = this.personData.length;
+				this.form.assignees = [];
+				for(var i = 0;i < this.personData.length;i++){
+				    this.form.assignees.push(this.personData[i].id);
+				};
 			})
 		},
 		//申请人选择事件
 		showSelect2(e) {
 		    this.selectList = e;
-		    this.selectCount = e.length;
+		    this.selectCount2 = e.length;
 				this.form.assignees = [];
 			for(var i = 0;i < e.length;i++){
 				this.form.assignees.push(e[i].id);
@@ -960,7 +971,7 @@ export default {
       });
       this.applyModalVisible = true;
 			this.personData = [];
-			this.selectCount = 0;
+			this.selectCount2 = 0;
 			this.treeData=[
 			    {
 			        createBy: "admin",

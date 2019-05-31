@@ -80,8 +80,23 @@ export default {
 //        },
         {
             title: "相关附件",
-            key: "comment",
+            key: "fileName",
             align: "center",
+						render: (h, params) => {
+						  return h("div", [
+						    h(
+						      "a",
+						      {
+						        on: {
+						          click: () => {
+						            this.fileDown(params.row);
+						          }
+						        }
+						      },
+						      params.row.fileName
+						    )
+						  ]);
+						}
         },
         {
           title: "创建时间",
@@ -172,7 +187,11 @@ export default {
       this.$router.push({
         name: this.backRoute
       });
-    }
+    },
+		//相关附件下载
+		fileDown(v){
+			window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&accessToken="+this.getStore("accessToken"));
+		}
   },
   mounted() {
     this.init();
