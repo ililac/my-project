@@ -89,9 +89,9 @@
                 <p>已签署收款合同的总金额。</p>
               </div>
             </Tooltip>
-            <p class="desc">￥{{receiveInfo.factmoney}}</p>
+            <p class="desc">￥{{receiveInfo.factmoney}}（万元）</p>
             <div v-show="receiveInfo.actualmoney>0">
-              <p>已收金额￥{{receiveInfo.actualmoney}}</p>
+              <p>已收金额￥{{receiveInfo.actualmoney}}（万元）</p>
               <Progress :percent="receive" hide-info/>
             </div>
           </Card>
@@ -106,9 +106,9 @@
                 <p>已签署付款合同的总金额。</p>
               </div>
             </Tooltip>
-            <p class="desc">￥{{payInfo.factmoney}}</p>
+            <p class="desc">￥{{payInfo.factmoney}}（万元）</p>
             <div v-show="payInfo.actualmoney>0">
-              <p>已收金额￥{{payInfo.actualmoney}}</p>
+              <p>已收金额￥{{payInfo.actualmoney}}（万元）</p>
               <Progress :percent="pay" hide-info/>
             </div>
           </Card>
@@ -246,7 +246,7 @@ export default {
     },
     handleSearch() {
       let time ='';
-      if (this.year.length>0) {
+      if (this.year) {
         time = this.year
          if (this.month) {
            let month;
@@ -510,7 +510,7 @@ export default {
     let data = new Date()
     let time = new Date().getFullYear()
     this.initCharts(time);
-    this.year =time.toString()
+    this.year =time;
   }
 };
 </script>

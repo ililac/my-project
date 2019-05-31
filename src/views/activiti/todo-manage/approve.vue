@@ -1,23 +1,25 @@
 <style lang="less" scoped>
-	@import "../../htgl/detail/detail.less";
+@import "../../htgl/detail/detail.less";
 </style>
 <template>
-	<div class="detail">
-		<Card>
-			<Row type="flex" justify="space-between" class="code-row-bg search">
-				<Col :span="24">
-					<Row>
-						<Col :span="18" class="screen">
-							<Form ref="dictForm" :model="dictForm" :label-width="120">
-								<div class="ul">
-									<FormItem label="合同来源" class="lef">
-										<p>{{dictForm.sourceName}}</p>
-									</FormItem>
-								</div>
-								<div class="ul">
-									<FormItem label="合同正文">
-										<p class="auditLef" v-show="fileDownUrl2"><a v-bind:href="fileDownUrl2">{{dictForm.contentname}}</a></p>
-										<!-- <Button style="margin-left: 20px;" type="dashed" :loading="btnLoading6" @click="onlineEdit" icon="ios-create-outline" class="btnLi auditLef">
+  <div class="detail">
+    <Card>
+      <Row type="flex" justify="space-between" class="code-row-bg search">
+        <Col :span="24">
+          <Row>
+            <Col :span="18" class="screen">
+              <Form ref="dictForm" :model="dictForm" :label-width="120">
+                <div class="ul">
+                  <FormItem label="合同来源" class="lef">
+                    <p>{{dictForm.sourceName}}</p>
+                  </FormItem>
+                </div>
+                <div class="ul">
+                  <FormItem label="合同正文">
+                    <p class="auditLef" v-show="fileDownUrl2">
+                      <a v-bind:href="fileDownUrl2">{{dictForm.contentname}}</a>
+                    </p>
+                    <!-- <Button style="margin-left: 20px;" type="dashed" :loading="btnLoading6" @click="onlineEdit" icon="ios-create-outline" class="btnLi auditLef">
 											<span v-if="!btnLoading6">在线编辑</span>
 											<span v-else>打开中...</span>
 										</Button> -->
@@ -565,6 +567,12 @@
 				}
 				if(this.dictForm.number){
 					contractNumber({id:this.$route.query.tableId,number:this.dictForm.number}).then(res => {
+						if (this.numberShow2) {
+					if (res.data != "true") {
+					this.$Message.error("合同编号重复");
+					return
+          			}
+				}
 						this.opinion.number = this.dictForm.number;
 						if(this.assigneeListShow){
 							if(this.opinion.assignees){

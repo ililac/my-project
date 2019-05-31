@@ -139,13 +139,14 @@
                     },
                     {
                         title: "序号",
+                        width: 80,
                         type: "index",
                         align: "center"
                     },
                     {
                         title: "相对方名称",
                         key: "counterpartName",
-						align: "center",
+						align: "left",
 						render: (h, params) => {
 						  return h("div", [
 						    h(
@@ -509,6 +510,9 @@
 									this.dictForm.uploadList.push(obj);
 								}
 							}
+						}
+						if (v.counterpartNatureId==null) {
+							this.dictForm.counterpartNatureId = "企业"
 						}
 						this.source = 1;
 						this.modalVisible = true;

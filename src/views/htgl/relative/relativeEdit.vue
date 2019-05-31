@@ -37,7 +37,7 @@
             label="相对方名称:"
             class="lef"
             prop="counterpartName"
-            v-show="dictForm.counterpartNatureId=='企业'&&!dictForm.disable"
+            v-show="dictForm.counterpartNatureId=='企业'"
           >
             <AutoComplete
               v-model="dictForm.counterpartName"
@@ -56,7 +56,7 @@
               <span v-else>同步</span>
             </Button>
           </FormItem>
-          <FormItem
+          <!-- <FormItem
             label="相对方名称:"
             class="lef"
             prop="counterpartName"
@@ -73,7 +73,7 @@
               <span v-if="!btnLoading2">同步</span>
               <span v-else>同步</span>
             </Button>
-          </FormItem>
+          </FormItem> -->
           <FormItem
             label="相对方名称:"
             class="lef"
@@ -650,10 +650,10 @@ export default {
     },
     //同步数据
     findCompany() {
-      if (this.dictForm.disable) {
-        this.$Message.error("编辑时此按钮禁用");
-        return;
-      }
+      // if (this.dictForm.disable) {
+      //   this.$Message.error("编辑时此按钮禁用");
+      //   return;
+      // }
       this.btnLoading2 = true;
       this.findCompanyDate.company = this.dictForm.counterpartName;
       relativeFindCompany(this.findCompanyDate).then(res => {
@@ -892,7 +892,7 @@ export default {
   display: inline-block;
   width: 100%;
   height: 32px;
-  border: 1px solid #f9f9f9;
+  border: 1px solid #dcdee2;
   border-radius: 4px;
   color: #515a6e;
   background-color: #fff;
@@ -900,7 +900,7 @@ export default {
   padding: 4px 7px;
 }
 .txtar .input-disable {
-  border: 1px solid #f9f9f9;
+  border: 1px solid #dcdee2;
   height: 115px;
 }
 </style>
