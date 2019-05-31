@@ -328,8 +328,9 @@ export default {
           align: "center"
         },
         {
+          title: "序号",
           type: "index",
-          width: 60,
+          width: 80,
           align: "center"
         },
         {
@@ -360,6 +361,7 @@ export default {
         {
           title: "当前审批环节",
           key: "currTaskName",
+          width: 150,
           tooltip: true
         },
         {

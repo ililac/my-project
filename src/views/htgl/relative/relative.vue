@@ -139,13 +139,14 @@
                     },
                     {
                         title: "序号",
+                        width: 80,
                         type: "index",
                         align: "center"
                     },
                     {
                         title: "相对方名称",
                         key: "counterpartName",
-						align: "center",
+						align: "left",
 						render: (h, params) => {
 						  return h("div", [
 						    h(
@@ -477,7 +478,9 @@
 				});	
 			},
             edit(v) {
+				
 				modelRelativeDetail({id:v.id,type:2}).then(res=>{
+					debugger
 					if(res.success){
 						var result = res.result.counterpartDetail;
 						Object.keys(result).forEach(function(key){
@@ -509,6 +512,9 @@
 									this.dictForm.uploadList.push(obj);
 								}
 							}
+						}
+						if (v.counterpartNatureId==null) {
+							this.dictForm.counterpartNatureId = "企业"
 						}
 						this.source = 1;
 						this.modalVisible = true;
