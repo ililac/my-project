@@ -759,7 +759,7 @@
 					// if(this.dictForm.typeid){
 					// 	this.auditUrl = "http://139.198.16.175:8073?id="+this.dictForm.typeid+"&url="+this.dictForm.contracturl
 					// }
-					this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result.name+'&url='+res.result.url+'&accessToken='+this.getStore("accessToken");
+					this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result.name+'&url='+res.result.url+'&access_token='+this.getStore("accessToken");
 					this.dictForm.generalNo = res.generalNo;
 					document.getElementById("contentname").innerHTML = "点击上传";
 					console.log(this.dictForm);
@@ -778,7 +778,7 @@
 				document.getElementById("contentname").innerHTML = "文件上传中...";
 				}else{
 				document.getElementById("contentname").innerHTML = "点击上传";
-				this.$Message.error('请上传word文件！')
+				// this.$Message.error('请上传word文件！')
 				}
 			},
 			//合同附件的多文件上传
@@ -799,7 +799,7 @@
 				});
 			},
 			//合同正文中上传文件的格式错误
-			handleFormatError(){
+			handleFormatError(file){
 				this.$Notice.warning({
                     title: '格式错误',
                     desc: "所选文件‘ " + file.name + " ’格式错误"
@@ -1234,7 +1234,7 @@
 			fileDowm(name,url){
 				fileUpUrlAudit({file:"",generalNo:this.dictForm.generalNo,url:url}).then(res => {
 					if(res.result == "success"){
-						window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+res.url+"&accessToken="+this.getStore("accessToken"));
+						window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+res.url+"&access_token="+this.getStore("accessToken"));
 					}
 				})
 			},
@@ -1269,7 +1269,7 @@
                 this.dictForm.contracturl = v.modelAddress;
 //                 this.myOpenUrl = wordEdit+'/editURL.html?fromUrl='+fromUrl+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName+"&generalNo=2555";
 //                 this.myOpenUrl2 = wordEdit+'/editURL.html?fromUrl='+fromUrl2+"&fname="+fname+"&fileTag="+fileTag+"&uName="+this.form_up.uName;
-                this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&accessToken='+this.getStore("accessToken");
+                this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+v.fileName+'&url='+v.modelAddress+'&access_token='+this.getStore("accessToken");
 				this.modalVisible5 = false;
             },
             changeSort1(e) {
@@ -1365,6 +1365,11 @@
                 this.$refs.upload2.fileList.splice(fileList.indexOf(file), 1);
             },
             affixHandleSuccess (res, file) {
+				if(this.uploadList.length >= 10){
+					this.$Message.error("最多只能上传10个附件");
+					document.getElementById("attachmentname").innerHTML = "点击上传";
+					return;
+				}
 				if(!res.success){
 					this.$Message.error("上传失败");
 					document.getElementById("attachmentname").innerHTML = "点击上传";
@@ -1372,7 +1377,7 @@
 				}
                 file.url = res.result[0].url;
                 file.name = res.result[0].name;
-                file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&accessToken='+this.getStore("accessToken");
+                file.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.result[0].name+'&url='+res.result[0].url+'&access_token='+this.getStore("accessToken");
 				this.uploadList = this.$refs.upload2.fileList;
 				document.getElementById("attachmentname").innerHTML = "点击上传";
             },
@@ -1385,6 +1390,7 @@
             },
             affixhandleBeforeUpload () {
 				document.getElementById("attachmentname").innerHTML = "文件上传中...";
+				return false;
             },
 			//以上是附件上传的事件
 			//相对方重复验证
@@ -1489,12 +1495,12 @@
 						this.editClick = false;
 					}
 					if(this.dictForm.contentname){
-						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&access_token='+this.getStore("accessToken");
 					}else{
 						this.fileDownUrl = "";
 					}
 					if(this.dictForm.attachmentname){
-						this.fileDownUrl2 = "/zhfw/contract/draft/download?id="+this.dictForm.id+"&tag=2&accessToken="+this.getStore("accessToken");
+						this.fileDownUrl2 = "/zhfw/contract/draft/download?id="+this.dictForm.id+"&tag=2&access_token="+this.getStore("accessToken");
 					}else{
 						this.fileDownUrl2 = "";
 					}

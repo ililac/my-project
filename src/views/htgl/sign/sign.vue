@@ -696,7 +696,7 @@
 					this.counterpartSignList[res.result.tag].authorizeFileUrl = res.result.url;
 					document.querySelector("."+this.upName).innerHTML = "点击上传";
 			        this.$Message.success("上传文件 " + file.name + " 成功");
-					this.counterpartSignList[res.result.tag].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
+					this.counterpartSignList[res.result.tag].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&access_token='+this.getStore("accessToken");
 					var arr = this.counterpartSignList;
 					this.counterpartSignList = [];
 					for(var i = 0;i < arr.length;i++){
@@ -713,7 +713,7 @@
 			        this.$Message.success("上传文件 " + file.name + " 成功");
 					this.signForm.contractContentUrl = res.result.url;
 					this.signForm.contractContentname = res.result.name;
-					this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&accessToken='+this.getStore("accessToken");
+					this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+'&access_token='+this.getStore("accessToken");
 			    } else {
 			        this.$Message.error(res.message);
 			    }
@@ -793,12 +793,12 @@
 						this.counterpartSignList = res.counterpartSignList;
 						for(var i = 0;i < res.counterpartSignList.length;i++){
 							if(res.counterpartSignList[i].authorizeFileUrl){
-								this.counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
+								this.counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&access_token='+this.getStore("accessToken");
 							}else{
 								this.counterpartSignList[i].fileDownUrl2 = "";
 							}
 						}
-						this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.sign.contractContentname+"&url="+res.sign.contractContentUrl+'&accessToken='+this.getStore("accessToken");
+						this.signForm.fileDownUrl = "/zhfw/contract/draft/download?fileName="+res.sign.contractContentname+"&url="+res.sign.contractContentUrl+'&access_token='+this.getStore("accessToken");
 					}
 				})
             },

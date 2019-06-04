@@ -183,7 +183,7 @@
 											<span>{{signForm.contracteffectivetime}}</span>
 										</FormItem>
 										<FormItem label=" 合同正文（扫描件）" class="lef">
-											<p><a v-show="signForm.contractContentUrl" :href="'/zhfw/contract/draft/download?fileName='+signForm.contractContentname+'&url='+signForm.contractContentUrl+'&accessToken='+accessToken.accessToken">{{signForm.contractContentname}}</a></p>
+											<p><a v-show="signForm.contractContentUrl" :href="'/zhfw/contract/draft/download?fileName='+signForm.contractContentname+'&url='+signForm.contractContentUrl+'&access_token='+accessToken.accessToken">{{signForm.contractContentname}}</a></p>
 										</FormItem>
 									</div>
 								</Form>
@@ -216,7 +216,7 @@
 										</div>
 										<div class="ul">
 											<FormItem label="新合同名称" class="lef">
-												<span><a :href="'/zhfw/contract/draft/download?fileName='+item.changeContractName+'&url='+item.changeContractUrl+'&accessToken='+accessToken.accessToken">{{item.changeContractName}}</a></span>
+												<span><a :href="'/zhfw/contract/draft/download?fileName='+item.changeContractName+'&url='+item.changeContractUrl+'&access_token='+accessToken.accessToken">{{item.changeContractName}}</a></span>
 											</FormItem>
 											<FormItem label="新合同编号" class="lef">
 												<span>{{item.changeContractSystenNum}}</span>
@@ -300,7 +300,7 @@
 									  <td colspan="2">
 										<p style="float:left">相关附件：</p>
 										<div style="float:left" class="file-list">
-										  <p  v-for="item in fileData.archiveUrls" :key="item.id"><a :href="'/zhfw/contract/draft/download?fileName='+item.attachmentName+'&url='+item.attachmentUrl+'&accessToken='+accessToken.accessToken">{{item.attachmentName}}</a></p>
+										  <p  v-for="item in fileData.archiveUrls" :key="item.id"><a :href="'/zhfw/contract/draft/download?fileName='+item.attachmentName+'&url='+item.attachmentUrl+'&access_token='+accessToken.accessToken">{{item.attachmentName}}</a></p>
 										</div>
 									  </td>
 									</tr>
@@ -603,10 +603,10 @@
 						this.detailForm.contractType = res.contractType;
 						let status = this.$route.query.status
 						if (status=='2') {
-						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.contractPdfName+'&url='+res.contractPdfUrl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+res.contractPdfName+'&url='+res.contractPdfUrl+'&access_token='+this.getStore("accessToken");
 						this.detailForm.contentname = res.contractPdfName;
 						}else{
-						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.detailForm.contentname+'&url='+this.detailForm.contracturl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl = '/zhfw/contract/draft/download?fileName='+this.detailForm.contentname+'&url='+this.detailForm.contracturl+'&access_token='+this.getStore("accessToken");
 						this.detailForm.parentContractName = res.parentContractName;
 						}
 						this.detailForm.uploadList = [];
@@ -617,7 +617,7 @@
 							for(let i = 0;i < arr.length;i++){
 								obj.name = arr[i];
 								obj.url = arr2[i];
-								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&access_token='+this.getStore("accessToken");
 								this.detailForm.uploadList.push(obj);
 							}
 						}
@@ -648,7 +648,7 @@
 						let counterpartSignList = res.counterpartSignList;
 						for(var i = 0;i < counterpartSignList.length;i++){
 							if(counterpartSignList[i].authorizeFileUrl){
-								counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&accessToken='+this.getStore("accessToken");
+								counterpartSignList[i].fileDownUrl2 = "/zhfw/contract/draft/download?fileName="+res.counterpartSignList[i].authorizeFileName+"&url="+res.counterpartSignList[i].authorizeFileUrl+'&access_token='+this.getStore("accessToken");
 							}else{
 								counterpartSignList[i].fileDownUrl2 = "";
 							}
@@ -725,7 +725,7 @@
 			},
 			//相关附件下载
 			fileDown(v){
-				window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&accessToken="+this.getStore("accessToken"));
+				window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&access_token="+this.getStore("accessToken"));
 			}
         },
         mounted() {

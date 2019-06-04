@@ -190,7 +190,7 @@ export default {
     },
 		//相关附件下载
 		fileDown(v){
-			window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&accessToken="+this.getStore("accessToken"));
+			window.open("/zhfw/contract/draft/download?fileName="+v.fileName+"&url="+v.fileAddress+"&access_token="+this.getStore("accessToken"));
 		}
   },
   mounted() {

@@ -933,7 +933,7 @@ export default {
 								var obj = {name:"",url:"",fileDownUrl:""};
 								obj.name = arr[i];
 								obj.url = arr2[i];
-								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&access_token='+this.getStore("accessToken");
 								this.dictForm.uploadList.push(obj);
 							}
 						}

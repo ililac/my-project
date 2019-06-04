@@ -217,7 +217,7 @@ export default {
         this.dictForm[res.result.tag.split("-")[0]] = res.result.url;
         this.dictForm[res.result.tag.split("-")[1]] = res.result.name;
         this.$Message.success("上传文件 " + file.name + " 成功");
-				this.fildDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+"&accessToken="+this.getStore("accessToken");
+				this.fildDownUrl = "/zhfw/contract/draft/download?fileName="+res.result.name+"&url="+res.result.url+"&access_token="+this.getStore("accessToken");
       } else {
         this.$Message.error("上传文件 " + file.name + "失败");
 				document.getElementById("upload").innerHTML = "点击上传";
@@ -291,7 +291,7 @@ export default {
               newValue.fileName +
               "&url=" +
               newValue.modelAddress +
-              "&accessToken=" +
+              "&access_token=" +
               this.getStore("accessToken");
           }
         } else {
@@ -303,7 +303,7 @@ export default {
               newValue.fileName +
               "&url=" +
               newValue.modelAddress +
-              "&accessToken=" +
+              "&access_token=" +
               this.getStore("accessToken");
             // this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+oldValue.id+"&accessToken="+this.getStore("accessToken");
           }

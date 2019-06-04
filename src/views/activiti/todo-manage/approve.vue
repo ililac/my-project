@@ -557,7 +557,7 @@
 			},
             //文件下载
             fileDowm(name,url){
-               window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+url+"&accessToken="+this.getStore("accessToken"));
+               window.open("/zhfw/contract/draft/download?fileName="+name+"&url="+url+"&access_token="+this.getStore("accessToken"));
             },
 			//意见提交opinion
 			pass() {
@@ -667,7 +667,7 @@
 						}
 						this.dictForm.parentContractName = res.parentContractName;
 						this.dictForm.contractType = res.contractType;
-						this.fileDownUrl2 = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&accessToken='+this.getStore("accessToken");
+						this.fileDownUrl2 = '/zhfw/contract/draft/download?fileName='+this.dictForm.contentname+'&url='+this.dictForm.contracturl+'&access_token='+this.getStore("accessToken");
 						this.dictForm.uploadList = [];
 						if(res.contract.attachmentname){
 							let arr = this.dictForm.attachmentname.split(',');
@@ -676,7 +676,7 @@
 								let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 								obj.name = arr[i];
 								obj.url = arr2[i];
-								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&accessToken='+this.getStore("accessToken");
+								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&access_token='+this.getStore("accessToken");
 								this.dictForm.uploadList.push(obj);
 							}
 						}

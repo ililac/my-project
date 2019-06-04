@@ -716,7 +716,7 @@ export default {
           res.result[0].name +
           "&url=" +
           res.result[0].url +
-          "&accessToken=" +
+          "&access_token=" +
           this.getStore("accessToken");
         this.uploadList = this.$refs.upload.fileList;
       } else {

@@ -533,7 +533,7 @@ export default {
           this.searchForm.counterpartId +
           "&draftsManName=" +
           this.searchForm.draftsManName +
-          "&accessToken=" +
+          "&access_token=" +
           this.accessToken.accessToken
       );
     },
