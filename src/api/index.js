@@ -33,9 +33,15 @@ export const verificationNum = (params) =>{
 	}
 }
 //验证文本输入
-export const verifyText = (params,type) =>{
+export const verifyText = (inps,type) =>{
     if(type == 1){
-
+		let regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+		let	regCn = /[·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+		if(regEn.test(inps) || regCn.test(inps)) {
+			return true;
+		}else{
+			return false;
+		}
     }
 }
 // 登陆

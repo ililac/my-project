@@ -88,7 +88,7 @@
 				</div>
 				<div class="ul">
 					<FormItem label="合同名称" prop="name" class="lef">
-						<Input v-model="dictForm.name"/>
+						<Input v-model="dictForm.name" :maxlength="50" @on-change="verifyInput(dictForm.name)"/>
 					</FormItem>
 					<Form-item label="合同类型" prop="name" class="lef">
 						<contract-type style="width:365px" v-on:typeListen="typeChange" :typeDate.sync="formData1" :widthDate.sync="myStyle"></contract-type>
@@ -297,6 +297,7 @@
 		signedContract,
 		draftModelList,
 		intelligentAudit,
+		verifyText,
         chooseFile
     } from "@/api/index";
     export default {
@@ -676,6 +677,12 @@
             };
         },
         methods: {
+			verifyInput(value){
+				if(verifyText(value,1)){
+					this.$Message.error("不能输入特殊字符");
+					return;
+				}
+			},
 			//申请人选择事件
 			showSelect(e) {
 			    this.selectList = e;

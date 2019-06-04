@@ -465,6 +465,7 @@
 					for(var i = 0;i < this.personData.length;i++){
 					    this.form.assignees.push(this.personData[i].id);
 					};
+					this.opinion.assignees = this.form.assignees;
 				})
 			},
 			//申请人选择事件
@@ -568,11 +569,11 @@
 				if(this.dictForm.number){
 					contractNumber({id:this.$route.query.tableId,number:this.dictForm.number}).then(res => {
 						if (this.numberShow2) {
-					if (res.data != "true") {
-					this.$Message.error("合同编号重复");
-					return
-          			}
-				}
+							if (res.data != "true") {
+								this.$Message.error("合同编号重复");
+								return
+							}
+						}
 						this.opinion.number = this.dictForm.number;
 						if(this.assigneeListShow){
 							if(this.opinion.assignees){
@@ -584,6 +585,7 @@
 									}
 								})
 							}else{
+								console.log(this.opinion.assignees);
 								this.$Message.error("请选择下一审批人");
 							}
 						}else{
@@ -607,6 +609,7 @@
 								}
 							})
 						}else{
+							console.log(this.opinion.assignees);
 							this.$Message.error("请选择下一审批人");
 						}
 					}else{

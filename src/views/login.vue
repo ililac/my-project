@@ -213,6 +213,7 @@ export default {
             login({
               username: this.form.username,
               password: this.form.password,
+							loginType:"userLogin",
               saveLogin: this.saveLogin
             }).then(res => {
               if (res.success === true) {

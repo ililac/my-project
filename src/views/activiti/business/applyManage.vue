@@ -10,7 +10,7 @@
                 <Row>
                     <Form ref="searchForm" :model="searchForm" inline :label-width="60" class="search-form">
                         <Form-item label="合同名称">
-                            <Input type="text" v-model="searchForm.name" placeholder="请输入" clearable/>
+                            <Input type="text" v-model="searchForm.name" placeholder="请输入" :maxlength="50" clearable/>
                         </Form-item>
                         <Form-item label="开始时间">
                             <DatePicker
