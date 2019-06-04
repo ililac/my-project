@@ -611,10 +611,10 @@
 						}
 						this.detailForm.uploadList = [];
 						if(res.contract.attachmentname){
-							let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 							let arr = this.detailForm.attachmentname.split(',');
 							let arr2 = this.detailForm.accessoryurl.split(',');
 							for(let i = 0;i < arr.length;i++){
+								let obj = {name:"",url:"",status: "finished",fileDownUrl:""};
 								obj.name = arr[i];
 								obj.url = arr2[i];
 								obj.fileDownUrl = '/zhfw/contract/draft/download?fileName='+arr[i]+'&url='+arr2[i]+'&access_token='+this.getStore("accessToken");

@@ -38,7 +38,7 @@
 								    <span>{{detailForm.usedCount}}</span>
 								</FormItem>
 							</div>
-							<div class="ul txtar">
+							<div class="ul">
 								<FormItem label="备注：">
 									<p>{{detailForm.comment}}</p>
 								</FormItem>
@@ -126,7 +126,7 @@
 							if(res.success){
 								this.detailForm = res.result;
 								if(res.result.fileName){
-									this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+res.result.id+"&accessToken="+this.getStore("accessToken");
+									this.fildDownUrl = "/zhfw/contract/contractModel/download?id="+res.result.id+"&access_token="+this.getStore("accessToken");
 								}
 							}
 						});

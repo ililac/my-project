@@ -1389,8 +1389,13 @@
 				document.getElementById("attachmentname").innerHTML = "点击上传";
             },
             affixhandleBeforeUpload () {
+				if(this.uploadList.length >= 10){
+					this.$Message.error("最多只能上传10个附件");
+					document.getElementById("attachmentname").innerHTML = "点击上传";
+					return false;
+				}
 				document.getElementById("attachmentname").innerHTML = "文件上传中...";
-				return false;
+				
             },
 			//以上是附件上传的事件
 			//相对方重复验证
