@@ -376,13 +376,15 @@ export default {
         },
         {
           title: "序号",
+          width: 80,
           type: "index",
           align: "center"
         },
         {
           title: "范本名称",
           key: "modelName",
-					align: "center",
+          width:220,
+					align: "left",
           render: (h, params) => {
             return h("div", [
               h(
@@ -402,20 +404,24 @@ export default {
         {
           title: "合同类型",
           key: "contractTypeName",
-          align: "center"
+          width: 220,
+          align: "left"
         },
         {
           title: "使用次数",
           key: "usedCount",
+          width: 120,
           align: "center"
         },
          {
           title: "范本编号",
           key: "templateNumber",
+          width: 160,
           align: "center"
         },
          {
           title: "范本类型",
+          width: 120,
           key: "type",
           align: "center",
           render:(h,params) => {
@@ -433,6 +439,7 @@ export default {
         {
           title: "状态",
           // key: "status",
+          width: 120,
           align: "center",
           render: (h, params) => {
             let text = "",
@@ -457,18 +464,20 @@ export default {
         },
         {
           title: "发布人",
+          width: 120,
           key: "createBy",
           align: "center"
         },
         {
           title: "发布时间",
+          width: 120,
           key: "publishTime",
           align: "center"
         },
         {
           title: "操作",
           key: "action",
-          width: 160,
+          width: 180,
           align: "center",
           fixed: "right",
           render: (h, params) => {

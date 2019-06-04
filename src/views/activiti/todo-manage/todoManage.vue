@@ -63,12 +63,13 @@
 				columns: [{
 						title: "序号",
 						type: "index",
-						align: "center"
+						align: "center",
+						width:80
 					},
 					{
 						title: "合同名称",
 						key: "contractName",
-						align: "center"
+						align: "left"
 					},
 					{
 						title: "所属流程",

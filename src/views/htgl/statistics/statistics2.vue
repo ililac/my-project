@@ -7,6 +7,7 @@
   color: #108de9;
   line-height: 30px;
   font-size: 24px;
+  white-space: nowrap;
   font-weight: 650;
 }
 .card {
@@ -37,7 +38,7 @@
   <div>
     <Card>
       <Row type="flex" justify="space-between" class="code-row-bg">
-        <Col :span="24" style="height:35px;">
+        <Col :span="24" >
           <Form  inline :label-width="120" class="search-form">
             <Form-item label="合同生效日期">
               <DatePicker
@@ -50,12 +51,6 @@
               <Select v-model="month" placeholder="选择月" style="width:200px" clearable >
 								<Option v-for="item in monthList" :value="item">{{ item }}</Option>
 							</Select>
-              <!-- <DatePicker
-                type="month"
-                placeholder="选择月"
-                style="width: 200px"
-                @on-change="handleMonth"
-              ></DatePicker> -->
             </Form-item>
             <Form-item style="margin-left:-40px;">
               <Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
@@ -89,9 +84,9 @@
                 <p>已签署收款合同的总金额。</p>
               </div>
             </Tooltip>
-            <p class="desc">￥{{receiveInfo.factmoney}}（万元）</p>
+            <p class="desc">￥{{receiveInfo.factmoney}}(万元)</p>
             <div v-show="receiveInfo.actualmoney>0">
-              <p>已收金额￥{{receiveInfo.actualmoney}}（万元）</p>
+              <p>已收金额￥{{receiveInfo.actualmoney}}(万元)</p>
               <Progress :percent="receive" hide-info/>
             </div>
           </Card>
@@ -106,9 +101,9 @@
                 <p>已签署付款合同的总金额。</p>
               </div>
             </Tooltip>
-            <p class="desc">￥{{payInfo.factmoney}}（万元）</p>
+            <p class="desc">￥{{payInfo.factmoney}}(万元)</p>
             <div v-show="payInfo.actualmoney>0">
-              <p>已收金额￥{{payInfo.actualmoney}}（万元）</p>
+              <p>已收金额￥{{payInfo.actualmoney}}(万元)</p>
               <Progress :percent="pay" hide-info/>
             </div>
           </Card>
@@ -229,7 +224,7 @@ export default {
       counterPartInfo: {}, //相对方
         year: "",
         month: "",
-        monthList:['1','2','3','4','5','6','7','8','9','10','11','12']
+        monthList:[]
     };
   },
   computed: {
@@ -241,8 +236,20 @@ export default {
     }
   },
   methods: {
-    handleYear(y) {
-      this.year = y;
+    handleYear(v) {
+      this.year = v;
+      let date = new Date()
+				let year = date.getFullYear();
+				this.monthList = [];
+				if(v == year){
+					for(let i = 0;i <= date.getMonth();i++){
+						this.monthList.push(i+1+'');
+					};
+				}else{
+					for(let i = 0;i < 12;i++){
+						this.monthList.push(i+1+'');
+					};
+				}
     },
     handleSearch() {
       let time ='';
@@ -507,10 +514,13 @@ export default {
     }
   },
   mounted() {
-    let data = new Date()
-    let time = new Date().getFullYear()
+    let date = new Date()
+    let time = date.getFullYear()
     this.initCharts(time);
     this.year =time;
+			for(let i = 0;i <= date.getMonth();i++){
+				this.monthList.push(i+1+'');
+			};
   }
 };
 </script>
