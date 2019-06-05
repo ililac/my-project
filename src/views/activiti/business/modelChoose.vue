@@ -162,6 +162,43 @@
 					</FormItem>
 				</div>	
 				<div class="ul">
+					<FormItem label="是否公开招投标" class="lef">
+						<RadioGroup v-model="dictForm.openBidding">
+							<Radio label="0">是</Radio>
+							<Radio label="1">否</Radio>
+						</RadioGroup>
+					</FormItem>
+					<FormItem label="是否政府采购" class="lef">
+						<RadioGroup v-model="dictForm.governmentProcurement">
+							<Radio label="0">是</Radio>
+							<Radio label="1">否</Radio>
+						</RadioGroup>
+					</FormItem>
+				</div>
+				<div class="ul">
+					<FormItem class="lef">
+						<RadioGroup v-model="dictForm.majorContract">
+							<Radio label="0">是</Radio>
+							<Radio label="1">否</Radio>
+						</RadioGroup>
+						<div slot="label">
+							<span><i style="color: red;margin-right: 5px;font-size: 14px;">*</i>是否重大合同</span>
+							<Tooltip placement="bottom" max-width="300">
+								<Icon type="ios-alert-outline" size="15" color="#2d8cf0"/>
+								<div slot="content">
+									<p>下列合同属于重大合同：</p>
+									<p>（一）申请成立法人或其它社会组织的；</p>
+									<p>（二）对外设立产学研合作机构或重大项目的；</p>
+									<p>（三）开展对外合作办学重大项目的；</p>
+									<p>（四）对外从事投融资、大额资金借贷等经营性活动的；</p>
+									<p>（五）合同涉及“三重一大”事项的；</p>
+									<p>（六）其他法律关系较为复杂、合同标的额较大或对学校利益有重大影响的合同。</p>
+								</div>
+							</Tooltip>
+						</div>
+					</FormItem>
+				</div>
+				<div class="ul">
 					<FormItem label="备注">
 						<Input
 							type="textarea"

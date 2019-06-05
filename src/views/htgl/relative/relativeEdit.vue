@@ -206,6 +206,9 @@
           <Menu mode="horizontal" active-name="1" @on-select="navSelect"   v-if="dictForm.counterpartNatureId=='企业'">
             <MenuItem name="1">联系人信息</MenuItem>
             <MenuItem name="2" >股东信息</MenuItem>
+						<MenuItem name="5">
+							案件信息
+						</MenuItem>
           </Menu>
 		  <Menu mode="horizontal" active-name="1" @on-select="navSelect"   v-else>
             <MenuItem name="1">联系人信息</MenuItem>
@@ -315,6 +318,7 @@ import {
   relativeFromSave,
   animateWidths,
   relativeName,
+	caseDetail,
   modelRelativeDetail,
   getDictDataByType
 } from "@/api/index";
@@ -367,6 +371,11 @@ export default {
       findCompanyDate: {
         company: ""
       },
+			caseForm:{
+					pageNumber:1,
+					pageSize:10,
+					organizationParty:""
+				},
       //联系人
       link: [
         // 表头
@@ -512,7 +521,55 @@ export default {
           key: "defendant",
           align: "center"
         }
-      ]
+      ],
+			//失信信息
+				promises:[
+					{
+					    title: "序号",
+					    type: "index",
+						width: 60,
+					    align: "center"
+					},
+					{
+					    title: "案件名称",
+					    key: "Title",
+					    align: "center",
+						render: (h, params) => {
+						  return h("div", [
+						    h(
+						      "a",
+						      {
+						        on: {
+						          click: () => {
+						            this.see(params.row);
+						          }
+						        }
+						      },
+						      params.row.Title
+						    )
+						  ]);
+						}
+					},
+					{
+					    title: "案号",
+					    key: "CaseFlag",
+					    align: "center"
+					},
+					{
+					    title: "审理程序",
+					    key: "TrialStep",
+						width: 100,
+					    align: "center"
+					},
+					{
+					    title: "审结日期",
+					    key: "LastInstanceDate",
+						width: 120,
+					    align: "center"
+					}
+				],
+				promisesDate:[],  //案件信息
+				promisesTotal:0   //案件信息总数
     };
   },
   methods: {
@@ -559,6 +616,16 @@ export default {
       } else if (this.detailList == 3) {
       } else if (this.detailList == 4) {
       } else if (this.detailList == 5) {
+				if(this.dictForm.counterpartName){
+						this.caseForm.pageNumber = v;
+						this.caseForm.organizationParty = this.dictForm.counterpartName;
+						caseDetail(this.caseForm).then(res => {
+							if(res.success == "true"){
+								this.promisesDate = res.data;
+								this.promisesTotal = parseInt(res.count);
+							}
+						});
+					}
       }
     },
     //相对方相似验证
@@ -683,6 +750,17 @@ export default {
     },
     navSelect(v) {
       this.detailList = v;
+			if(v == 5){
+					if(this.dictForm.counterpartName){
+						this.caseForm.organizationParty = this.dictForm.counterpartName;
+						caseDetail(this.caseForm).then(res => {
+							if(res.success == "true"){
+								this.promisesDate = res.data;
+								this.promisesTotal = parseInt(res.count);
+							}
+						});
+					}
+				}
     },
     //资质证书上传之前
     handleBeforeUpload() {

@@ -321,7 +321,9 @@
                 searchForm: {
 					blackFlag:"",
                     counterpartName:"",
-					counterpartTypeId:""
+					counterpartTypeId:"",
+					pageNumber: 1,
+					pageSize: 10
                 },
                 stockholdersList : []
             };

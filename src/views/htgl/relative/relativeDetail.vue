@@ -89,6 +89,9 @@
 									<MenuItem name="4">
 										开庭公告
 									</MenuItem> -->
+									<MenuItem name="5">
+										案件信息
+									</MenuItem>
 								</Menu>
 							</div>
 							<div class="clear" v-show="detailList == 1">
@@ -115,6 +118,12 @@
 									<Page :total="detailForm.noticeTotal" show-total :page-size="10" @on-change="pageChange"/>
 								</Row>
 							</div>
+							<div class="clear" v-show="detailList == 5">
+								<Table border :columns="promises" :data="promisesDate" sortable="custom5" ref="table5"></Table>
+								<Row type="flex" justify="end" class="page">
+									<Page :total="promisesTotal" show-total :page-size="10" @on-change="pageChange"/>
+								</Row>
+							</div>
 						    <div style="clear: both;"></div>
 						</Form>
 					</Row>
@@ -132,6 +141,7 @@
 <script>
     import {
     	fromUp ,
+		caseDetail,
 		modelRelativeDetail
     } from "@/api/index";
     import circleLoading from "../../my-components/circle-loading.vue";
@@ -263,7 +273,55 @@
 					    key: "defendant",
 					    align: "center"
 					},
-				]
+				],
+				//失信信息
+				promises:[
+					{
+					    title: "序号",
+					    type: "index",
+						width: 60,
+					    align: "center"
+					},
+					{
+					    title: "案件名称",
+					    key: "Title",
+					    align: "center",
+						render: (h, params) => {
+						  return h("div", [
+						    h(
+						      "a",
+						      {
+						        on: {
+						          click: () => {
+						            this.see(params.row);
+						          }
+						        }
+						      },
+						      params.row.Title
+						    )
+						  ]);
+						}
+					},
+					{
+					    title: "案号",
+					    key: "CaseFlag",
+					    align: "center"
+					},
+					{
+					    title: "审理程序",
+					    key: "TrialStep",
+						width: 100,
+					    align: "center"
+					},
+					{
+					    title: "审结日期",
+					    key: "LastInstanceDate",
+						width: 120,
+					    align: "center"
+					}
+				],
+				promisesDate:[],  //案件信息
+				promisesTotal:0   //案件信息总数
             };
         },
         methods: {
@@ -272,10 +330,32 @@
         	},
 			navSelect(v){
 				this.detailList = v;
+				if(v == 5){
+					if(this.detailForm.counterpartName){
+						this.caseForm.organizationParty = this.detailForm.counterpartName;
+						caseDetail(this.caseForm).then(res => {
+							if(res.success == "true"){
+								this.promisesDate = res.data;
+								this.promisesTotal = parseInt(res.count);
+							}
+						});
+					}
+				}
 			},
 			//页码改变
 			pageChange(v){
-				console.log(v,this.detailList);
+				if(this.detailList == 5){
+					if(this.detailForm.counterpartName){
+						this.caseForm.pageNumber = v;
+						this.caseForm.organizationParty = this.detailForm.counterpartName;
+						caseDetail(this.caseForm).then(res => {
+							if(res.success == "true"){
+								this.promisesDate = res.data;
+								this.promisesTotal = parseInt(res.count);
+							}
+						});
+					}
+				}
 			},
             init() {
                 this.accessToken = {

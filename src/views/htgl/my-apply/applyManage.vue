@@ -1029,7 +1029,7 @@ export default {
           v.tableId +
           "&procInstId=" +
           v.procInstId +
-          "&accessToken=" +
+          "&access_token=" +
           this.getStore("accessToken")
       );
     },

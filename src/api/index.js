@@ -814,3 +814,19 @@ export const alterationBeforeDetail = (params) => {
 export const alterationAfterDetail = (params) => {
 	return getRequest('/contract/change/queryByChangeContractId',params)
 }
+//合同争议中的列表
+export const disputeList = (params) => {
+	return getRequest('/contract/dispute/findDisputePageList',params)
+}
+//合同争议信息的保存
+export const disputeSave = (params) => {
+	return postRequest('/contract/dispute/save',params)
+}
+//合同争议信息的保存
+export const disputeDelete = (params) => {
+	return postRequest('/contract/dispute/delete',params)
+}
+//相对方中的案件信息
+export const caseDetail = (params) => {
+	return getRequest('/contractModel/findCase',params)
+}

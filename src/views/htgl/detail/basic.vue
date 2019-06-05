@@ -72,6 +72,19 @@
         <p>{{detailForm.parentContractName}}</p>
       </FormItem>
     </div>
+		<div class="ul">
+			<FormItem label="是否公开招投标" class="lef">
+			  <p>{{detailForm.openBidding == 0?"是":"否"}}</p>
+			</FormItem>
+			<FormItem label="是否政府采购" class="lef">
+			  <p>{{detailForm.governmentProcurement == 0?"是":"否"}}</p>
+			</FormItem>
+		</div>
+		<div class="ul">
+			<FormItem label="是否重大合同" class="lef">
+			  <p>{{detailForm.majorContract == 0?"是":"否"}}</p>
+			</FormItem>
+		</div>
     <div class="ul txtar">
       <FormItem label="备注">
         <p>{{detailForm.description}}</p>
