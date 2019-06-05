@@ -822,7 +822,6 @@ export default {
   watch: {
     formData: {
       handler(newValue, oldValue) {
-        debugger
         if (newValue) {
           this.dictForm = newValue;
         } else {
