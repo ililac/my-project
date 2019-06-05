@@ -1016,7 +1016,7 @@ export default {
         this.$Message.error("流程实例ID不存在");
         return;
       }
-      let query = { id: v.procInstId, backRoute: this.$route.name ,tableId:v.tableId};
+      let query = { id: v.procInstId, backRoute: this.$route.name ,tableId:v.tableId,status:v.status};
       this.$router.push({
         name: "historic_detail",
         query: query
