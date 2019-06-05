@@ -580,9 +580,13 @@ export const nextExamine = (id,params) => {
 export const passExamine = (params) => {
     return postRequest('/active/actTask/pass', params)
 }
-//合同审批驳回
+//合同审批返回修改
 export const rejectExamine = (params) => {
     return postRequest('/active/actTask/back', params)
+}
+//合同审批驳回
+export const rejectExamine2 = (params) => {
+    return postRequest('/active/actTask/rollBackToAssignWorkFlow', params)
 }
 //合同审批历史
 export const historyExamine = (id,params) => {

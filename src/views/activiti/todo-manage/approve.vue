@@ -140,6 +140,7 @@
 								<div class="ul" style="padding: 30px 0 10px;">
 									<Button type="primary" @click="pass">通过</Button>
 									<Button type="primary" @click="reject">返回修改</Button>
+									<Button type="primary" @click="reject2">驳回</Button>
 									<Button type="primary" @click="seeProcess">查看流程</Button>
 								</div>
 							</div>
@@ -217,7 +218,8 @@
 		examineShow,
 		modelRelativeDetail,
 		passExamine, //通过
-		rejectExamine, //驳回
+		rejectExamine, //返回修改
+		rejectExamine2, //驳回
 		historyExamine, //历史
 		intelligentAudit,//智能审核地址
 		flowExample //流程实例
@@ -632,6 +634,21 @@
 				}
 				this.opinion2.comment = this.opinion.comment;
 				rejectExamine(this.opinion2).then(res => {
+					if (res.success) {
+						this.$Message.success("操作成功");
+						this.modalVisible = false;
+						this.closeCurrentPage();
+					}
+				})
+			},
+			//驳回
+			reject2() {
+				if(!this.opinion.comment){
+					this.$Message.error("审批意见必须填写");
+					return;
+				}
+				this.opinion2.comment = this.opinion.comment;
+				rejectExamine2({taskId:this.opinion2.id,destTaskkey:"contractStart"}).then(res => {
 					if (res.success) {
 						this.$Message.success("操作成功");
 						this.modalVisible = false;
