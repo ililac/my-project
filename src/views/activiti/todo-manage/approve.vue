@@ -648,7 +648,7 @@
 					return;
 				}
 				this.opinion2.comment = this.opinion.comment;
-				rejectExamine2({taskId:this.opinion2.id,destTaskkey:"contractStart"}).then(res => {
+				rejectExamine2({taskId:this.opinion2.id,destTaskkey:"contractStart",comment:this.opinion.comment}).then(res => {
 					if (res.success) {
 						this.$Message.success("操作成功");
 						this.modalVisible = false;
