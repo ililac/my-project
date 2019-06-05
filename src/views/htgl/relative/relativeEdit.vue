@@ -815,18 +815,25 @@ export default {
       this.dictForm.registerDate = "";
       this.dictForm.enterpriseId = "";
       this.dictForm.legalPersonName = "";
+      this.$refs.upload.fileList = [];
+      this.uploadList =this.$refs.upload.fileList;
     }
   },
   watch: {
     formData: {
       handler(newValue, oldValue) {
+        debugger
         if (newValue) {
           this.dictForm = newValue;
         } else {
           this.dictForm = oldValue;
         }
         // this.$refs.upload.fileList = this.dictForm.uploadList;
+        if(this.dictForm.uploadList.length>0){
         this.uploadList = this.dictForm.uploadList;
+        }else{
+        this.uploadList = this.$refs.upload.fileList;
+        }
         this.counterpartList = [];
       },
       deep: true

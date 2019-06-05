@@ -5,7 +5,7 @@ module.exports = {
         proxy: {
             '/zhfw': {
                 // target: 'http://192.168.4.209:7072',  // 请求本地 需要xboot后台项目
-                target: 'http://192.168.4.229:7072',
+                target: 'http://192.168.4.25:7072',
                 ws: false
             },
 			'/compare': {
@@ -18,7 +18,7 @@ module.exports = {
             '/ws':
             {
                 // target: 'http://139.198.16.175:8075',  // 请求本地 需要xboot后台项目
-                target: 'http://192.168.4.229:7072',
+                target: 'http://192.168.4.25:7072',
 				// target: 'http://192.168.4.209:7072',
                 ws: false
             }
