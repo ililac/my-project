@@ -41,11 +41,6 @@
                     <Button @click="add" type="primary" icon="md-add">添加数据</Button>
                     <Button @click="getDataList" icon="md-refresh">刷新数据</Button>
                 </Row>
-                <!-- <Row>
-                    <Alert show-icon>已选择
-                        <span class="select-count">{{selectCount}}</span> 项
-                    </Alert>
-                </Row> -->
                 <Row>
                     <Table
                             :loading="loading"
@@ -73,7 +68,6 @@
                 </Col>
             </Row>
         </Card>
-		<!-- <model-choose :formData33.sync="modalVisible" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm" :relativeType.sync="counterpartArr"></model-choose> -->
 		<model-choose :formData33.sync="modalVisible" :flag="true" v-on:listenApply="modalVisibleState" :formData1.sync="dictForm"></model-choose>
     </div>
 </template>
@@ -90,7 +84,6 @@
         findContractByParam,
 		lvxingDeleta,
 		getDictDataByType,
-//        examineManList,
 		contractModelquery,
         wordEdit,
 		detailList,
@@ -105,7 +98,6 @@
             return {
 				source:0,
                 accessToken: {}, // 上传token鉴权
-                // counterpartArr: [], //相对方数据列表
                 processData: {},
                 searchProcessForm: {
                     showLatest: true,
@@ -116,7 +108,6 @@
                     sort: "createTime", // 默认排序字段
                     order: "desc" // 默认排序方式
                 },
-//                assigneeList: [],
                 selectCount: 0,
                 modalVisible: false,
                 dictForm: {},
@@ -285,11 +276,6 @@
                     }
                 });
             },
-//            getDictDataType() {
-//                examineManList(this.processData.id).then(res => {
-//                    this.assigneeList = res.result.users;
-//                });
-//            },
             init() {
                 this.getProcessList();
                 this.accessToken = {
@@ -304,11 +290,6 @@
                     this.form_up.userName = res.nickName;
                     this.form_up.uName = res.userName;
                 });
-     //            eachOther().then(res => {
-					// if(res.success){
-					// 	this.counterpartArr = res.result.content;
-					// }
-     //            });
                 this.getDataList();
             },
             remove(v) {
@@ -363,7 +344,7 @@
                     number: "",
                     contentnum: 0,
                     counterpartnum: 0,
-                    totalnum: "",
+                    totalnum: 1,
                     chapter: "1",
                     description: "",
                     attachmentname: "",
@@ -374,7 +355,7 @@
                     //合同范本
                     source: "",
                     sourceArr: [],
-                    money: "",
+                    money: 0,
                     istopay: "1",
                     istime: "1",
                     isurgent: "1",
@@ -392,7 +373,10 @@
 						}
 					],
 					parentId:"",
-					uploadList:[]
+					uploadList:[],
+					openBidding:"0",
+					governmentProcurement:"0",
+					majorContract:"0"
                 };
                 this.modalVisible = true;
             },

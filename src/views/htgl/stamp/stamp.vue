@@ -62,7 +62,7 @@
 					<div class="ul">
 						<FormItem label="合同正文">
 							<!-- <p>{{dictForm.contentname}}</p> -->
-							<a :href="'/zhfw/contract/draft/download?fileName='+dictForm.contentname+'&url='+dictForm.contractUrl+'&accessToken='+access_token.accessToken">{{dictForm.contentname}}</a>
+							<a :href="'/zhfw/contract/draft/download?fileName='+dictForm.contentname+'&url='+dictForm.contractUrl+'&access_token='+accessToken.accessToken">{{dictForm.contentname}}</a>
 						</FormItem>
 					</div>
 					<div class="ul">
