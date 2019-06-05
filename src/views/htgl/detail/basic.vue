@@ -8,7 +8,7 @@
     <div class="ul">
       <FormItem label="合同正文" class="lef">
         <p v-show="fileDownUrl">
-          <a v-bind:href="fileDownUrl">{{detailForm.contentname}}</a>
+          <a target="_blank" v-bind:href="fileDownUrl">{{detailForm.contentname}}</a>
         </p>
       </FormItem>
     </div>

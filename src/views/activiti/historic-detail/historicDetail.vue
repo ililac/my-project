@@ -7,7 +7,7 @@
       <Col>
         <Card style="margin-bottom:10px;">
           <p slot="title" style="height:32px;">
-            <span>流程审批进度历史 <Button type="primary" style="float:right" @click="handleExport">下载审批单</Button></span>
+            <span>流程审批进度历史 <Button type="primary" style="float:right" v-show="isShow" @click="handleExport">下载审批单</Button></span>
           </p>
           <Row style="position:relative">
             <Table :loading="loading" border :columns="columns" :data="data" ref="table"></Table>
@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       type: 0,
+      isShow:false,
       loading: false, // 表单加载状态
       loadingImg: false,
       columns: [
@@ -168,6 +169,9 @@ export default {
         "&time=" +
         new Date();
       this.getDataList();
+      if (this.$route.query.status=='2') {
+      this.isShow = true
+    }
     },
     getDataList() {
       this.loading = true;
