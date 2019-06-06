@@ -548,7 +548,45 @@ export default {
 								    "查看进度"
 								  )
 								];
-							}else{
+							}else if(params.row.result == 4){
+								re = [
+									h(
+									  "Button",
+									  {
+									    props: {
+									      type: "primary",
+									      size: "small"
+									    },
+									    style: {
+									      marginRight: "5px"
+									    },
+									    on: {
+									      click: () => {
+									        this.apply(params.row);
+									      }
+									    }
+									  },
+									  "提交申请"
+									),
+								  h(
+								    "Button",
+								    {
+								      props: {
+								        size: "small"
+								      },
+								      style: {
+								        marginRight: "5px"
+								      },
+								      on: {
+								        click: () => {
+								          this.edit(params.row);
+								        }
+								      }
+								    },
+								    "编辑"
+								  )
+								];
+							} else{
 								re = [
 								  h(
 								    "Button",
