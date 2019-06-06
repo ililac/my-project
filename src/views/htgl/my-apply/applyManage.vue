@@ -165,6 +165,7 @@ import {
 	applyBusiness,
 	personSelect,
 	loadDepartment,
+	passExamine,
 	eachOther
 	// getDictDataByType
 } from "@/api/index";
@@ -183,6 +184,7 @@ export default {
 			submitSubmitClick:true, // 审批人是否显示
 			btnLoading4:false, //下一审批人中的提交按钮
 			applyCount:[],   //审批人添加
+			examineResult:4, //列表中的result值为4 的时候等于4否则为3
 			form: {
 			    procDefId: "",
 					procInstId:"",
@@ -384,9 +386,12 @@ export default {
               text = "已通过";
               color = "green";
             } else if (params.row.result == 3) {
+              text = "返回修改";
+              color = "red";
+            }else if (params.row.result == 4) {
               text = "已驳回";
               color = "red";
-            }
+            } 
             return h("div", [
               h(
                 "Tag",
@@ -562,7 +567,7 @@ export default {
 									    },
 									    on: {
 									      click: () => {
-									        this.apply(params.row);
+									        this.apply(params.row,4);
 									      }
 									    }
 									  },
@@ -910,14 +915,25 @@ export default {
     },
     handelSubmit() {
 			this.submitLoading = true;
-			applyBusiness(this.form).then(res => {
-			  this.submitLoading = false;
-			  if (res.success === true) {
-			    this.$Message.success("操作成功");
-			    this.getDataList();
-			    this.applyModalVisible = false;
-			  }
-			});
+			if(this.examineResult == 4){
+				console.log(this.form);
+				passExamine({id:this.form.taskId,procInstId:this.form.procInstId,assignees:this.form.assignees}).then(res => {
+					this.submitLoading = false;
+					if (res.success){
+						this.getDataList();
+						this.applyModalVisible = false;
+					}
+				})
+			}else{
+				applyBusiness(this.form).then(res => {
+				  this.submitLoading = false;
+				  if (res.success === true) {
+				    this.$Message.success("操作成功");
+				    this.getDataList();
+				    this.applyModalVisible = false;
+				  }
+				});
+			}
     },
     add() {
         this.chooseProcess(this.processData[0]);
@@ -986,11 +1002,16 @@ export default {
         query: query
       });
     },
-    apply(v) {
-			
+    apply(v,result) {
+			if(result == 4){
+				this.examineResult = 4;
+			}else{
+				this.examineResult = 3;
+			}
       this.form.id = v.id;
       this.form.tableId = v.tableId;
       this.form.procDefId = v.procDefId;
+      this.form.taskId = v.taskId;
 			
 			if(v.status == 0){
 				this.form.procInstId = "";
