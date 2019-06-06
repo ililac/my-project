@@ -76,9 +76,14 @@
 									</FormItem>
 								</div>
 								<div class="ul">
+									<FormItem label="用章类型" class="lef">
+										<p>{{dictForm.chapter == 1?"校章":"合同章"}}</p>
+									</FormItem>
 									<FormItem label="合同份数" class="lef">
 										<p>{{dictForm.totalnum}}</p>
 									</FormItem>
+								</div>
+								<div class="ul">
 									<FormItem label="关联主合同" class="lef">
 										<p>{{dictForm.parentContractName}}</p>
 									</FormItem>
@@ -296,14 +301,14 @@
 					contentnum: '',
 					counterpartnum: '',
 					totalnum: '',
-					chapter: '',
+					chapter: '1',
 					description: '',
 					//相关附件
 					draftsman: '',
 					draftsoutfit: '', //起草机构
 					draftsoutfitid: '',
 					//合同范本
-					source: '',
+					source: '1',
 					sourceName: '',
 					sourceArr: [],
 					money: '',
@@ -715,11 +720,17 @@
 					procInstId: "",
 					comment: ""
 				}
+				let that = this;
 				examinePerson({procInstId:this.$route.query.procInstId}).then(res => {
 					if(res.success){
 						if(res.result.length > 0){
-							this.applyCount = res.result;
-							console.log(this.applyCount);
+							that.applyCount = [...res.result];
+							this.form.assignees = [];
+							for(var i = 0;i < that.applyCount.length;i++){
+								this.form.assignees.push(that.applyCount[i].id);
+							};
+							this.opinion.assignees = this.form.assignees;
+							console.log(this.opinion.assignees);
 						}
 					}
 				})
