@@ -220,6 +220,7 @@
 		passExamine, //通过
 		rejectExamine, //返回修改
 		rejectExamine2, //驳回
+		examinePerson, //被驳回的审批人
 		historyExamine, //历史
 		intelligentAudit,//智能审核地址
 		flowExample //流程实例
@@ -675,11 +676,6 @@
 						} else if (res.contract.istopay == 2) {
 							this.istopayText = "不涉及";
 						}
-						// if(res.contract.systemNumber){
-						// 	this.numberShow = true;
-						// }else{
-						// 	this.numberShow = false;
-						// }
 						if(res.contract.source == 1){
 							this.dictForm.sourceName = "自行起草";
 						}else{
@@ -719,6 +715,14 @@
 					procInstId: "",
 					comment: ""
 				}
+				examinePerson({procInstId:this.$route.query.procInstId}).then(res => {
+					if(res.success){
+						if(res.result.length > 0){
+							this.applyCount = res.result;
+							console.log(this.applyCount);
+						}
+					}
+				})
 				examineShow({procDefId:this.$route.query.procDefId,procInstId:this.$route.query.procInstId}).then(res => {
 					if(res.result){
 						this.assigneeListShow = true;

@@ -588,6 +588,10 @@ export const rejectExamine = (params) => {
 export const rejectExamine2 = (params) => {
     return postRequest('/active/actTask/rollBackToAssignWorkFlow', params)
 }
+//获取驳回的审批人
+export const examinePerson = (params) => {
+    return getRequest('/active/actTask/queryNextTaskUser', params)
+}
 //合同审批历史
 export const historyExamine = (id,params) => {
     return getRequest(`/active/actTask/historicFlow/${id}`, params)
