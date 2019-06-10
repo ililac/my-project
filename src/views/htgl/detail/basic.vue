@@ -67,15 +67,13 @@
           style="line-height: 10px;margin:0 5px;text-align: center;display: inline-block;width: 20px;border-bottom: 1px solid #E3E5E8;"
         >{{detailForm.totalnum}}</span>
       </FormItem>
-			 <FormItem label="用章类型" class="lef">
+			 <!-- <FormItem label="用章类型" class="lef">
 			  <p>{{detailForm.chapter==1?"校章":"合同章"}}</p>
-			</FormItem>
-    </div>
-		<div class="ul">
-			<FormItem label="关联主合同" class="lef">
+			</FormItem> -->
+      	<FormItem label="关联主合同" class="lef">
 			  <p>{{detailForm.parentContractName}}</p>
 			</FormItem>
-		</div>
+    </div>
 		<div class="ul">
 			<FormItem label="是否公开招投标" class="lef">
 			  <p>{{detailForm.openBidding == 0?"是":"否"}}</p>

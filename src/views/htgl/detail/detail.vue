@@ -110,9 +110,9 @@
 										<FormItem label="用印份数" class="lef">
 											<span>{{printForm.totalnum}}</span>
 										</FormItem>
-										<FormItem label="用章类型" class="lef">
+										<!-- <FormItem label="用章类型" class="lef">
 											<span>{{printForm.chapter==1?"校章":"合同章"}}</span>
-										</FormItem>
+										</FormItem> -->
 									</div>
 									<div class="ul">
 										<FormItem label="用印人" class="lef">
