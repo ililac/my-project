@@ -146,7 +146,7 @@ export default {
           this.$route.query.tableId +
           "&procInstId=" +
           this.$route.query.id +
-          "&accessToken=" +
+          "&access_token=" +
          this.getStore("accessToken")
       );
     },
@@ -157,7 +157,7 @@ export default {
       this.imgUrl =
         getHighlightImg +
         this.id +
-        "?accessToken=" +
+        "?access_token=" +
         this.getStore("accessToken") +
         "&time=" +
         new Date();

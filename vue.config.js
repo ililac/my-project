@@ -4,8 +4,8 @@ module.exports = {
         port: 9999,
         proxy: {
             '/zhfw': {
-                // target: 'http://192.168.4.209:7072',  // 请求本地 需要xboot后台项目
-                target: 'http://192.168.4.25:7072',
+                target: 'http://192.168.4.229:7072',  // 请求本地 需要xboot后台项目
+                // target: 'http://192.168.4.25:7072',
                 ws: false
             },
 			'/compare': {
