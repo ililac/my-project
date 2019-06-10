@@ -100,13 +100,6 @@ export default {
 						}
         },
         {
-          title: "创建时间",
-          key: "createTime",
-          width: 150,
-          sortType: "asc",
-          sortable: true
-        },
-        {
           title: "完成时间",
           key: "endTime",
           width: 150,

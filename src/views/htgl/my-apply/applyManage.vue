@@ -333,12 +333,13 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 80,
+          width: 60,
           align: "center"
         },
         {
           title: "合同名称",
           key: "title",
+          width: 260,
           sortable: true,
 					render: (h, params) => {
 					  return h("div", [
@@ -364,14 +365,12 @@ export default {
         {
           title: "当前审批环节",
           key: "currTaskName",
-          width: 150,
           tooltip: true
         },
         {
           title: "结果",
           key: "result",
           align: "center",
-          width: 120,
           sortable: true,
           render: (h, params) => {
             let text = "未知",
@@ -408,14 +407,13 @@ export default {
         {
           title: "提交申请时间",
           key: "applyTime",
-          width: 180,
           sortable: true
         },
         {
           title: "操作",
           key: "action",
           align: "center",
-          width: 265,
+          width: 220,
           fixed: "right",
           render: (h, params) => {
             let re = "";
