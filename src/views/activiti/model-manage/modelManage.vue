@@ -399,7 +399,7 @@ export default {
     edit(v) {
       this.modelerUrl = `${this.domain}/zhfw/active/modeler.html?modelId=${
         v.id
-      }&accessToken=${this.getStore("accessToken")}&time=${new Date()}`;
+      }&access_token=${this.getStore("accessToken")}&time=${new Date()}`;
       this.showModeler = true;
       this.modelerLoading = true;
       let that = this;
@@ -458,7 +458,7 @@ export default {
     },
     export(v) {
       window.open(
-        exportModel + v.id + "?accessToken=" + this.getStore("accessToken")
+        exportModel + v.id + "?access_token=" + this.getStore("accessToken")
       );
     },
     remove(v) {

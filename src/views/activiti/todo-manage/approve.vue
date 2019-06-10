@@ -665,7 +665,7 @@
 			//查看流程
 			seeProcess() {
 				this.modalFlow = true;
-				this.imgUrl = `${flowExample}${this.opinion2.procInstId}?accessToken=${this.getStore("accessToken")}`
+				this.imgUrl = `${flowExample}${this.opinion2.procInstId}?access_token=${this.getStore("accessToken")}`
 			},
 			//详情查询
 			detailSearch(tableId) {

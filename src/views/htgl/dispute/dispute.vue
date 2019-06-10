@@ -664,10 +664,10 @@
 			    });
 			},
 			fileDowm(name,url){
-				window.open("/xboot/draft/download?fileName="+name+"&url="+url+"&accessToken="+this.getStore("accessToken"));
+				window.open("/xboot/draft/download?fileName="+name+"&url="+url+"&access_token="+this.getStore("accessToken"));
 			},
 			excelDown(){
-				window.open('/xboot/contract/dispute/exportXls?accessToken='+this.getStore("accessToken")+"&contractName="+this.searchForm2.contractName+"&summary="+this.searchForm2.summary+"&disputeModelId="+this.searchForm2.disputeModelId);
+				window.open('/xboot/contract/dispute/exportXls?access_token='+this.getStore("accessToken")+"&contractName="+this.searchForm2.contractName+"&summary="+this.searchForm2.summary+"&disputeModelId="+this.searchForm2.disputeModelId);
 			}
         },
         mounted() {

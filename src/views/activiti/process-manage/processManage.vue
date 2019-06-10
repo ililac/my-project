@@ -859,10 +859,10 @@ export default {
     },
     showResource(type, v) {
       if (type == 0) {
-        window.open(`${exportResource}?id=${v.id}&type=${type}&accessToken=${this.getStore("accessToken")}`);
+        window.open(`${exportResource}?id=${v.id}&type=${type}&access_token=${this.getStore("accessToken")}`);
       } else if (type == 1) {
         this.viewTitle = "流程图片预览(" + v.diagramName + ")";
-        this.diagramUrl = `${exportResource}?id=${v.id}&type=${type}&accessToken=${this.getStore("accessToken")}`;
+        this.diagramUrl = `${exportResource}?id=${v.id}&type=${type}&access_token=${this.getStore("accessToken")}`;
         this.viewImage = true;
       }
     },
