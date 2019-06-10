@@ -64,10 +64,11 @@
 						title: "序号",
 						type: "index",
 						align: "center",
-						width:80
+						width:60
 					},
 					{
 						title: "合同名称",
+						width:250,
 						key: "contractName",
 						align: "left"
 					},

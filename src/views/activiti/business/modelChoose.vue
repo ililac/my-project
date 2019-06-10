@@ -621,13 +621,13 @@
 				    {
 				        title: "序号",
 				        type: "index",
-				        width: 80,
+				        width: 60,
 				        align: "center"
 				    },
 				    {
 				        title: "合同名称",
 				        key: "name",
-				        width: 240,
+				        width: 250,
 						align: "center"
 				    },
 				    {

@@ -200,23 +200,25 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 60,
+          width: 80,
           align: "center"
         },
         {
           title: "合同名称",
-          width: 260,
+          width: 250,
           key: "name",
           align: "left"
         },
         {
           title: "合同编号",
+          tooltip: true,
           key: "number",
           align: "center"
         },
         {
           title: "合同金额",
           key: "money",
+          tooltip: true,
           align: "center"
         },
         {
@@ -227,27 +229,31 @@ export default {
         {
           title: "收付款方式",
           key: "istopayState",
+          tooltip: true,
           align: "center"
         },
         {
           title: "合同状态",
+          tooltip: true,
           key: "state",
           align: "center"
         },
         {
           title: "起草人",
+          tooltip: true,
           key: "draftsman",
           align: "center"
         },
         {
           title: "起草时间",
+          tooltip: true,
           key: "draftstime",
           align: "center"
         },
         {
           title: "操作",
           key: "action",
-          width: 160,
+          width: 100,
           align: "center",
           fixed: "right",
           render: (h, params) => {

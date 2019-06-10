@@ -418,12 +418,12 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 80,
+          width: 60,
           align: "center"
         },
         {
           title: "合同名称",
-          width: 280,
+          width: 250,
           key: "name",
           align: "left",
           render: (h, params) => {

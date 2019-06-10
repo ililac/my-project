@@ -556,7 +556,7 @@
                     },
                     {
                         title: "合同名称",
-                        width: 280,
+                        width: 250,
 						align: "left",
 						render: (h, params) => {
 						  return h("div", [
