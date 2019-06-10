@@ -7,7 +7,7 @@
       <Col>
         <Card style="margin-bottom:10px;">
           <p slot="title" style="height:32px;">
-            <span>流程审批进度历史 <Button type="primary" style="float:right" v-show="isShow" @click="handleExport">下载审批单</Button></span>
+            <span>审批历史 <Button type="primary" style="float:right" v-show="isShow" @click="handleExport">下载审批单</Button></span>
           </p>
           <Row style="position:relative">
             <Table :loading="loading" border :columns="columns" :data="data" ref="table"></Table>
@@ -98,13 +98,6 @@ export default {
 						    )
 						  ]);
 						}
-        },
-        {
-          title: "创建时间",
-          key: "createTime",
-          width: 150,
-          sortType: "asc",
-          sortable: true
         },
         {
           title: "完成时间",

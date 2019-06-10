@@ -200,54 +200,48 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 80,
+          width: 60,
           align: "center"
         },
         {
           title: "合同名称",
+          width: 260,
           key: "name",
           align: "left"
         },
         {
           title: "合同编号",
           key: "number",
-          width: 100,
           align: "center"
         },
         {
           title: "合同金额",
           key: "money",
-          width: 110,
           align: "center"
         },
         {
           title: "相对方",
           key: "counterpartname",
-          width: 220,
           align: "left"
         },
         {
           title: "收付款方式",
           key: "istopayState",
-          width: 120,
           align: "center"
         },
         {
           title: "合同状态",
           key: "state",
-          width: 150,
           align: "center"
         },
         {
           title: "起草人",
           key: "draftsman",
-          width: 110,
           align: "center"
         },
         {
           title: "起草时间",
           key: "draftstime",
-          width: 110,
           align: "center"
         },
         {

@@ -151,21 +151,19 @@
 					</FormItem>
 				</div>	
 				<div class="ul">
-					<FormItem label="用章类型" prop="name" class="lef">
+					<!-- <FormItem label="用章类型" prop="name" class="lef">
 						<RadioGroup v-model="dictForm.chapter">
 							<Radio label="1">校章</Radio>
 							<Radio label="2">合同章</Radio>
 						</RadioGroup>
-					</FormItem>
+					</FormItem> -->
 					<FormItem label="合同份数" prop="name" class="lef">
 						<InputNumber style="width: 100%;" :maxlength="10" :min="1" @on-change="nuMinput2(dictForm.totalnum,3)" v-model="dictForm.totalnum"></InputNumber>
 					</FormItem>
-				</div>	
-				<div class="ul">
 					<FormItem label="关联主合同" class="lef">
 						<Button style="display: block;width: 100%;" @click="relevance">{{dictForm.parentContractName?dictForm.parentContractName:"选择主合同"}}</Button>
 					</FormItem>
-				</div>
+				</div>	
 				<div class="ul">
 					<FormItem label="是否公开招投标" class="lef">
 						<RadioGroup v-model="dictForm.openBidding">

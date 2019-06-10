@@ -69,9 +69,9 @@
 						<FormItem label="用印份数" class="lef">
 							<p>{{dictForm.totalnum}}</p>
 						</FormItem>
-						<FormItem label="用章类型" class="lef">
+						<!-- <FormItem label="用章类型" class="lef">
 							<p>{{dictForm.chapter==1?"校章":"合同章"}}</p>
-						</FormItem>
+						</FormItem> -->
 					</div>
 					<div class="ul">
 						<FormItem label="备注">

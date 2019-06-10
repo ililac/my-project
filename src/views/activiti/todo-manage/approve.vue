@@ -76,15 +76,13 @@
 									</FormItem>
 								</div>
 								<div class="ul">
-									<FormItem label="用章类型" class="lef">
+									<!-- <FormItem label="用章类型" class="lef">
 										<p>{{dictForm.chapter == 1?"校章":"合同章"}}</p>
-									</FormItem>
+									</FormItem> -->
 									<FormItem label="合同份数" class="lef">
 										<p>{{dictForm.totalnum}}</p>
 									</FormItem>
-								</div>
-								<div class="ul">
-									<FormItem label="关联主合同" class="lef">
+										<FormItem label="关联主合同" class="lef">
 										<p>{{dictForm.parentContractName}}</p>
 									</FormItem>
 								</div>
@@ -117,7 +115,8 @@
 							<div v-show="opinionShow">
 								<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;"><span style="color: red;">*</span>审批意见</p>
 								<Input type="textarea" :maxlength="1000" :rows="5" style="width: 100%;" placeholder="请输入审批意见" v-model="opinion.comment" />
-								<div style="clear: both;height: 20px"></div>
+								<div style="clear: both;"></div>
+									<p style="font-weight: 600;height: 60px;line-height: 60px;font-size: 12px;">相关附件</p>
 								<Form>
 									<FormItem>
 										<Upload action="/zhfw/system/upload/file"
@@ -131,7 +130,9 @@
 											:show-upload-list="false"
 											ref="up"
 										>
-											<p id="fileName" class="upload">点击上传</p>
+											<p id="fileName" class="upload">
+                <Icon type="ios-cloud-upload-outline" size="20"/>
+												点击上传</p>
 										</Upload>
 										<p style="color: #d3d3d3;">支持扩展名：doc,.docx文件大小：<=10MB</p>
 										<p @click="fileDowm(opinion.fileName,opinion.fileAddress)" style="color: #2B85E4;cursor: pointer;">{{opinion.fileName}}</p>
