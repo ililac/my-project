@@ -125,13 +125,13 @@
                 columns: [
                     {
                         title: "序号",
-                        width:80,
+                        width:60,
                         type: "index",
                         align: "center"
                     },
                     {
                         title: "合同名称",
-                        width:280,
+                        width:250,
                         key: "name",
 						align: "left"
                     },
@@ -353,7 +353,7 @@
                     draftsoutfit: this.form_up.department, //起草机构
                     draftsoutfitid: "",
                     //合同范本
-                    source: "",
+                    source: "1",
                     sourceArr: [],
                     money: 0,
                     istopay: "1",

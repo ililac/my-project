@@ -333,13 +333,13 @@ export default {
         {
           title: "序号",
           type: "index",
-          width: 60,
+          width: 80,
           align: "center"
         },
         {
           title: "合同名称",
           key: "title",
-          width: 260,
+          width: 250,
           sortable: true,
 					render: (h, params) => {
 					  return h("div", [

@@ -90,7 +90,7 @@
           </FormItem>
           <FormItem label="身份证号:" v-show="dictForm.counterpartNatureId=='自然人'" class="lef code">
             <span class="span">*</span>
-            <input type="text" value v-model="dictForm.creditCode">
+            <Input type="text" @on-blur="checkCreditCode(dictForm.creditCode)" v-model="dictForm.creditCode"></Input>
           </FormItem>
 		  
 		</div>
@@ -575,11 +575,18 @@ export default {
   methods: {
     valiText(v) {
       if (!v) {
-        return;
+        return false;
       }
       if (!/^[\u4e00-\u9fa5]+$/gi.test(v)) {
-        this.$Message.error("只能输入文字");
-        return;
+        this.$Message.error("开户行只能输入文字");
+        return false;
+      }
+    },
+     checkCreditCode(v){
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; 
+      if(reg.test(v) === false) { 
+        this.$Message.error("身份证输入不合法");
+        return false; 
       }
     },
     init() {
@@ -646,7 +653,7 @@ export default {
     },
     handelSubmitDict() {
       if (!this.dictForm.counterpartName) {
-        this.$Message.error("相对方名称没有选择");
+        this.$Message.error("相对方名称没有输入");
         return;
       } else if (
         !this.dictForm.enterpriseId &&
@@ -661,6 +668,12 @@ export default {
         this.$Message.error("身份证号没有输入");
         return;
       } else {
+        if (this.checkCreditCode(this.dictForm.creditCode)==false) {
+          return
+        }
+        if (this.valiText(this.dictForm.openBank)==false) {
+          return
+        }
         this.btnLoading = true;
         if (!this.dictForm.counterpartId) {
           this.dictForm.counterpartId = "";

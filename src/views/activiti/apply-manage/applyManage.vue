@@ -350,32 +350,29 @@ export default {
         },
         {
           type: "index",
-          width: 60,
+          width: 80,
           align: "center"
         },
         {
           title: "标题",
           key: "title",
-          width: 150,
+          width: 250,
           sortable: true
         },
         {
           title: "所属流程",
           key: "processName",
-          width: 150,
           tooltip: true
         },
         {
           title: "当前审批环节",
           key: "currTaskName",
-          width: 150,
           tooltip: true
         },
         {
           title: "状态",
           key: "status",
           align: "center",
-          width: 120,
           sortable: true,
           render: (h, params) => {
             let text = "未知",
@@ -407,7 +404,6 @@ export default {
           title: "结果",
           key: "result",
           align: "center",
-          width: 120,
           sortable: true,
           render: (h, params) => {
             let text = "未知",
@@ -441,21 +437,19 @@ export default {
         {
           title: "创建时间",
           key: "createTime",
-          width: 150,
           sortType: "desc",
           sortable: true
         },
         {
           title: "提交申请时间",
           key: "applyTime",
-          width: 150,
           sortable: true
         },
         {
           title: "操作",
           key: "action",
           align: "center",
-          width: 265,
+          width: 220,
           fixed: "right",
           render: (h, params) => {
             let re = "";
