@@ -353,7 +353,7 @@
                     draftsoutfit: this.form_up.department, //起草机构
                     draftsoutfitid: "",
                     //合同范本
-                    source: "",
+                    source: "1",
                     sourceArr: [],
                     money: 0,
                     istopay: "1",

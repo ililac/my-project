@@ -24,7 +24,7 @@
 											<span v-else>打开中...</span>
 										</Button> -->
 										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi auditLef">
-											<span v-if="!btnLoading7">智能审核</span>
+											<span v-if="!btnLoading7">智能审核</span> 
 											<span v-else>打开中...</span>
 										</Button>
 										<Button style="margin-left: 20px;" type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
@@ -722,6 +722,8 @@
 					comment: ""
 				}
 				let that = this;
+				this.btnLoading7 = false;
+				this.btnLoading8= false;
 				examinePerson({procInstId:this.$route.query.procInstId}).then(res => {
 					if(res.success){
 						if(res.result.length > 0){

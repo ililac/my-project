@@ -93,7 +93,7 @@ export const todoList = (params) => {
 }
 // 获取已办列表
 export const doneList = (params) => {
-    return getRequest('/active/actTask/doneList', params)
+    return postRequest('/active/actTask/doneList', params)
 }
 // 获取流程流转历史
 export const historicFlow = (id, params) => {

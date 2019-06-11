@@ -44,16 +44,21 @@
 				</div>
 				<div class="ul">
 					<FormItem label="文本来源" prop="name">
-						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" v-model="dictForm.source" value="1"/> 自行起草</label>
-						<label class="redis-celect" ><input type="radio" @click="clean1" style="margin-right:0;cursor:pointer" v-model="dictForm.source" value="2"/> 标准文本 </label>
+						<RadioGroup v-model="dictForm.source" @on-change="clean1">
+							<Radio label="1">自行起草</Radio>
+							<Radio label="2">标准文本</Radio>
+						</RadioGroup>
+						<!-- <label class="redis-celect" >
+							<input type="radio" @click="clean1(1)" style="margin-right:0;cursor:pointer" v-model="dictForm.source" value="1"/> 自行起草</label>
+						<label class="redis-celect" ><input type="radio" @click="clean1(2)" style="margin-right:0;cursor:pointer" v-model="dictForm.source" value="2"/> 标准文本 </label> -->
 					</FormItem>
 				</div>
 				<div class="ul three">
-					<FormItem label="合同正文"  v-if="dictForm.source == 0" class="lef" prop="contentname">
+					<FormItem label="合同正文"  v-if="sourceShow" class="lef" prop="contentname">
 			            <span @click="draftBz" class="model-select" style="cursor:pointer">范本选择</span>
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
-					<FormItem label="合同正文" v-else="dictForm.source == 1" class="lef" prop="contentname">
+					<FormItem label="合同正文" v-else="sourceShow" class="lef" prop="contentname">
 						<Upload action="/zhfw/contract/draft/uploadFileNew"
 							:data='{"generalNo":dictForm.generalNo,"url":""}'
 			                :headers="accessToken"
@@ -353,6 +358,7 @@
 		},
         data() {
             return {
+				sourceShow:true,
 				modalTitle:'',
 				myStyle:{display:'flex',width:'365px'}, //合同类型宽度
 				defaultList:[],
@@ -492,7 +498,7 @@
                     draftsoutfit: "", //起草机构
                     draftsoutfitid: "",
                     //合同范本
-                    source: "",
+                    source: "1",
                     sourceName: "",
                     sourceArr: [],
                     money: 0,
@@ -776,10 +782,15 @@
                     };
 				})
 			},
-			clean1() {
+			clean1(index) {
+				if(index == 1){
+					this.sourceShow = true;
+				}else{
+					this.sourceShow = false;
+				}
 				this.dictForm.contentname = "";
-				this.dictForm.contracturl = "";
-				this.dictForm.name = "";
+					this.dictForm.contracturl = "";
+					this.dictForm.name = "";
 			},
 			// accessoryurl-attachmentname
 			handleSuccess(res, file) {
@@ -1529,6 +1540,8 @@
 						eachOther().then(res => {
 							this.counterpartArr = res.result.content;
 						});
+
+						
 					}
 		　　　　	},
 		　　　　	deep: true
@@ -1567,6 +1580,12 @@
 					}else{
 						this.modalTitle = "合同起草";
 					}
+					if(this.dictForm.source == 1){
+						this.sourceShow = true;
+					}else{
+						this.sourceShow = false;
+					}
+					console.log(this.dictForm)
 		　　　　	},
 		　　　　	deep: true
 		　　}
