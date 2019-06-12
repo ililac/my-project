@@ -81,10 +81,10 @@
 							<span v-if="!btnLoading6">在线编辑</span>
 							<span v-else>打开中...</span>
 						</Button> -->
-						<!-- <Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
+						<Button type="dashed" :loading="btnLoading7" @click="brainpowerAudit" icon="ios-create-outline" class="btnLi">
 							<span v-if="!btnLoading7">智能审核</span>
 							<span v-else>打开中...</span>
-						</Button> -->
+						</Button>
 						<Button type="dashed" :loading="btnLoading8" @click="fileCompare" icon="ios-create-outline">
 							<span v-if="!btnLoading8">文本对比</span>
 							<span v-else>打开中...</span>
