@@ -1,5 +1,5 @@
 // 统一请求路径前缀在libs/axios.js中修改
-import { getRequest, postRequest, putRequest, deleteRequest, importRequest, uploadFileRequest,getTextCompare } from '@/libs/axios';
+import { getRequest, postRequest,postRequest2, putRequest, deleteRequest, importRequest, uploadFileRequest,getTextCompare } from '@/libs/axios';
 
 
 // Vaptcha ID
@@ -45,8 +45,8 @@ export const verifyText = (inps,type) =>{
     }
 }
 // 登陆
-export const login = (params) => {
-    return postRequest('/login', params)
+export const login = (params) => { 
+    return postRequest2('/login', params)
 }
 // 获取用户登录信息
 export const userInfo = (params) => {

@@ -98,7 +98,18 @@ export const postRequest = (url, params) => {
         }
     });
 };
-
+export const postRequest2 = (url, params) => {
+    let accessToken = getStore("accessToken");
+    return axios({
+        method: 'post',
+        url: `${base}${url}`,
+        data: params,
+        headers: {
+            'access_token': accessToken,
+            'Authorization': 'Bearer '+accessToken
+        }
+    });
+};
 export const putRequest = (url, params) => {
     let accessToken = getStore("accessToken");
     return axios({
