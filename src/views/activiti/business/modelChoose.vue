@@ -54,7 +54,7 @@
 					</FormItem>
 				</div>
 				<div class="ul three">
-					<FormItem label="合同正文"  v-if="sourceShow" class="lef" prop="contentname">
+					<FormItem label="合同正文"  v-if="!sourceShow" class="lef" prop="contentname">
 			            <span @click="draftBz" class="model-select" style="cursor:pointer">范本选择</span>
 						<p v-show="fileDownUrl"><a v-bind:href="fileDownUrl">{{dictForm.contentname}}</a></p>
 					</FormItem>
@@ -126,7 +126,7 @@
 					<FormItem class="lef" v-show="dictForm.istopay != 2">
 						<span style="position: absolute;left: -67px;top: 0;"><b style="color: #ed4014;font-size: 14px;line-height: 33px;">*</b>合同金额</span>
 						<!-- <Input v-model="dictForm.money" v-on:input="nuMinput(dictForm.money)" style="width: calc(100% - 36px);"/> -->
-						<InputNumber style="width: calc(100% - 36px);" :maxlength="10" :min="0" @on-change="nuMinput(dictForm.money)" v-model="dictForm.money"></InputNumber>
+						<InputNumber style="width: calc(100% - 36px);" :maxlength="10" :max="1000000000"  :min="0" @on-change="nuMinput(dictForm.money)" v-model="dictForm.money"></InputNumber>
 						<b style="position: absolute;right: -30px;top: 0;color: #ed4014; width: 66px;">（万元）</b>
 					</FormItem>
 				</div>	
@@ -162,8 +162,8 @@
 							<Radio label="2">合同章</Radio>
 						</RadioGroup>
 					</FormItem> -->
-					<FormItem label="合同份数" prop="name" class="lef">
-						<InputNumber style="width: 100%;" :maxlength="10" :min="1" @on-change="nuMinput2(dictForm.totalnum,3)" v-model="dictForm.totalnum"></InputNumber>
+					<FormItem label="合同份数" class="lef">
+						<InputNumber style="width: 100%;" :maxlength="10" :max="1000000000" :min="1" @on-change="nuMinput2(dictForm.totalnum,3)" v-model="dictForm.totalnum"></InputNumber>
 					</FormItem>
 					<FormItem label="关联主合同" class="lef">
 						<Button style="display: block;width: 100%;" @click="relevance">{{dictForm.parentContractName?dictForm.parentContractName:"选择主合同"}}</Button>
