@@ -662,18 +662,16 @@ export default {
         this.$Message.error("企业类型没有选择");
         return;
       } else if (
-        !this.dictForm.creditCode &&
         this.dictForm.counterpartNatureId == "自然人"
       ) {
+        if (!this.dictForm.creditCode) {
         this.$Message.error("身份证号没有输入");
         return;
-      } else {
+        }
         if (this.checkCreditCode(this.dictForm.creditCode)==false) {
           return
         }
-        if (this.valiText(this.dictForm.openBank)==false) {
-          return
-        }
+      } else {
         this.btnLoading = true;
         if (!this.dictForm.counterpartId) {
           this.dictForm.counterpartId = "";
