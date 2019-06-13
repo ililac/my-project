@@ -837,5 +837,5 @@ export const disputeDelete = (params) => {
 }
 //相对方中的案件信息
 export const caseDetail = (params) => {
-	return getRequest('/contractModel/findCase',params)
+	return getRequest('/contract/contractModel/findCase',params)
 }
