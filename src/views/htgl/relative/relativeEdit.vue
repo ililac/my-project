@@ -114,7 +114,7 @@
               :headers="accessToken"
               :show-upload-list="false"
               :format="['pdf']"
-              :on-format-error="handleFormatError"
+              :on-format-error="handleFormatError" 
               :default-file-list="defaultList"
               :on-success="handleSuccess"
               :on-error="handleError"
@@ -170,7 +170,7 @@
             <input type="text" v-else v-model="dictForm.legalPersonName"/>
           </FormItem>
           <FormItem label="办公地址:" v-show="dictForm.counterpartNatureId!=='自然人'" class="lef">
-            <span class="input-disable"  v-if="dictForm.counterpartNatureId=='企业'">{{dictForm.officeAddress}}</span>
+            <span class="input-disable addr" :title="dictForm.officeAddress" v-if="dictForm.counterpartNatureId=='企业'">{{dictForm.officeAddress}}</span>
             <input type="text" v-else v-model="dictForm.officeAddress"/>
           </FormItem>
         </div>
@@ -272,7 +272,7 @@
           </Row>
         </div>
         <div class="clear btns">
-          <Button type="text" @click="modalVisible = false">取消</Button>
+          <Button type="text" @click="cancelHandel">取消</Button>
           <Button :loading="btnLoading" type="primary" @click="handelSubmitDict">
             <span v-if="!btnLoading">保存</span>
             <span v-else>Loading...</span>
@@ -662,15 +662,11 @@ export default {
         this.$Message.error("企业类型没有选择");
         return;
       } else if (
+        !this.dictForm.creditCode&&
         this.dictForm.counterpartNatureId == "自然人"
       ) {
-        if (!this.dictForm.creditCode) {
         this.$Message.error("身份证号没有输入");
         return;
-        }
-        if (this.checkCreditCode(this.dictForm.creditCode)==false) {
-          return
-        }
       } else {
         this.btnLoading = true;
         if (!this.dictForm.counterpartId) {
@@ -806,7 +802,7 @@ export default {
           res.result[0].url +
           "&access_token=" +
           this.getStore("accessToken");
-        this.uploadList = this.$refs.upload.fileList;
+        this.uploadList=this.$refs.upload.fileList;
       } else {
         this.$Message.error("上传失败");
       }
@@ -820,8 +816,7 @@ export default {
     //以下是附件上传的事件
     handleRemove(file) {
       let fileList = this.$refs.upload.fileList;
-      this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
-      this.uploadList = this.$refs.upload.fileList;
+      fileList.splice(fileList.indexOf(file), 1);
     },
     //相对方名称改变事件
     nameChange(value) {
@@ -838,6 +833,7 @@ export default {
       }
     },
     edit(v) {
+      this.isEdit = true;
       this.linkForm = { ...v };
       this.dictForm._index = v._index;
       this.linkFormValidate = true;
@@ -906,6 +902,10 @@ export default {
       this.dictForm.legalPersonName = "";
       this.$refs.upload.fileList = [];
       this.uploadList =this.$refs.upload.fileList;
+    },
+    cancelHandel(){
+      this.$refs.upload.fileList = [];
+      this.modalVisible = false;
     }
   },
   watch: {
@@ -916,12 +916,8 @@ export default {
         } else {
           this.dictForm = oldValue;
         }
-        // this.$refs.upload.fileList = this.dictForm.uploadList;
-        if(this.dictForm.uploadList.length>0){
-        this.uploadList = this.dictForm.uploadList;
-        }else{
+        this.$refs.upload.fileList = this.dictForm.uploadList;
         this.uploadList = this.$refs.upload.fileList;
-        }
         this.counterpartList = [];
       },
       deep: true
@@ -992,6 +988,11 @@ export default {
   background-color: #fff;
   line-height: 1.5;
   padding: 4px 7px;
+}
+.input-disable.addr{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .txtar .input-disable {
   border: 1px solid #dcdee2;

@@ -123,6 +123,8 @@
 											:headers="accessToken"
 											:on-success="handleSuccess"
 											:on-error="handleError"
+							:format="['doc','docx']"
+              :on-format-error="handleFormatError"
 											:max-size="5120"
 											:on-exceeded-size="handleMaxSize"
 											:before-upload="beforeUpload"
@@ -556,7 +558,7 @@
                 });
             },
             //合同正文中上传文件的格式错误
-            handleFormatError(){
+            handleFormatError(file){
                 this.$Notice.warning({
                     title: '格式错误',
                     desc: "所选文件‘ " + file.name + " ’格式错误"
