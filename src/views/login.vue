@@ -1,16 +1,16 @@
 <template>
-  <Row type="flex" justify="center" align="middle" class="login" @keydown.enter.native="submitLogin">
+  <Row type="flex" justify="start" align="middle" class="login" @keydown.enter.native="submitLogin">
     <Col :xs="{span:22}" style="width: 368px;">
     <Row class="header">
       <!-- <img src="@/assets/login.png" width="220px" /> -->
-      <div class="description">北大智能合同管理系统</div>
+      <div class="description"><span></span>法宝云合同</div>
     </Row>
-
+  
     <Alert type="error" show-icon v-if="error">{{errorMsg}}</Alert>
-
+  
     <Row class="login-form" v-if="!socialLogining">
       <Tabs v-model="tabName">
-        <TabPane label="账户登录" name="username" icon="md-person">
+        <TabPane label="账户登录" name="username">
           <Form ref="usernameLoginForm" :model="form" :rules="rules" class="form" v-if="tabName=='username'">
             <FormItem prop="username">
               <Input v-model="form.username" prefix="ios-contact" size="large" clearable placeholder="请输入用户名" autocomplete="off" />
@@ -38,7 +38,7 @@
           </Form>
         </TabPane> -->
       </Tabs>
-
+  
       <Row type="flex" justify="space-between">
         <Checkbox v-model="saveLogin" size="large">自动登录</Checkbox>
         <!-- <Dropdown trigger="click" @on-click="handleDropDown">
@@ -85,7 +85,7 @@
       <div class="rect5"></div>
       <!-- <span>用户数据加载中...</span> -->
     <!-- </div> -->
-
+  
    <!-- <Row class="foot">
       <Row type="flex" justify="space-around" class="help">
         <a class="item" href="https://github.com/Exrick/x-boot" target="_blank">帮助</a>
