@@ -345,7 +345,7 @@
                     contentnum: 0,
                     counterpartnum: 0,
                     totalnum: 1,
-                    chapter: "1",
+                    chapter: "2",
                     description: "",
                     attachmentname: "",
                     accessoryurl: "",

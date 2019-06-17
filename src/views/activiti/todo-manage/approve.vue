@@ -147,7 +147,7 @@
 								</div>
 								<div class="ul" style="padding: 30px 0 10px;">
 									<Button type="primary" @click="pass">通过</Button>
-									<Button type="primary" @click="reject">返回修改</Button>
+									<!-- <Button type="primary" @click="reject">返回修改</Button> -->
 									<Button type="primary" @click="reject2">驳回</Button>
 									<Button type="primary" @click="seeProcess">查看流程</Button>
 								</div>
@@ -304,7 +304,7 @@
 					contentnum: '',
 					counterpartnum: '',
 					totalnum: '',
-					chapter: '1',
+					chapter: '2',
 					description: '',
 					//相关附件
 					draftsman: '',

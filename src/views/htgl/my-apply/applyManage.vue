@@ -213,7 +213,7 @@ export default {
 			    contentnum: 0,
 			    counterpartnum: 0,
 			    totalnum: "",
-			    chapter: "",
+			    chapter: "2",
 			    description: "",
 			    //相关附件
 			    draftsman: "",

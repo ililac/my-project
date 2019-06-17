@@ -170,9 +170,11 @@
 					<a href="http://www.gsxt.gov.cn/index.html" target="_blank"><img src="../../assets/qyxxw.png" alt=""></a>
 				</div>
 				<div class="imgLi">
-					<a href="https://www.pku.edu.cn/" target="_blank"><img src="../../assets/bjdx.png" alt=""></a>
-					<a href="http://www.pkulaw.com/" target="_blank"><img src="../../assets/bdfb.png" alt=""></a>
+					<a href="http://zxgk.court.gov.cn/" target="_blank"><img style="display: block;width: 100%;height: 100%;" src="../../assets/zxxx.png" alt=""></a>
 				</div>
+				<!-- <div class="imgLi">
+					<a href="http://www.gsxt.gov.cn/index.html" target="_blank"><img src="../../assets/zxxx.png" alt=""></a>
+				</div> -->
 				<!-- <div class="imgLi">
 					<a href="http://casm.pkulaw.cn/dz1/text_compare_do.aspx" target="_blank" class="icon iconLef"><img src="../../assets/sh.png" alt=""></a>
 					<a href="http://139.198.16.175:8073/" target="_blank" class="icon iconRgh"><img src="../../assets/sjdb.png" alt=""></a>
