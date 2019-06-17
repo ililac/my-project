@@ -18,7 +18,8 @@ export const ws = "/ws"
 // 本地请求
 //export const wordEdit = "http://127.0.0.1:7072"
 //文本对比
-export const wordEdit = "http://139.198.16.175:8059"
+// export const wordEdit = "http://139.198.16.175:8059"  //北大使用环境
+export const wordEdit = "http://139.198.16.175:8057"  //演示环境
 //智能审核地址
 export const intelligentAudit = "http://139.198.16.175:8073"
 

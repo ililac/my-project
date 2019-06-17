@@ -5,11 +5,13 @@
 <template>
   <div class="main" :class="{'main-hide-text': shrink}">
     <div class="sidebar-menu-con menu-bar" :style="{width: shrink?'60px':'220px', overflow: shrink ? 'visible' : 'auto'}">
+			<img style="padding: 8px 25px;" v-show="!shrink" src="../assets/logo.png" key="max-logo" />
+			<div style="background-color: #363e4f;height: 5px;width: 100%;"></div>
       <shrinkable-menu :shrink="shrink" @on-change="handleSubmenuChange" :theme="menuTheme" :before-push="beforePush" :open-names="openedSubmenuArr" :menu-list="menuList">
-        <div slot="top" class="logo-con">
-          <!-- <img v-show="!shrink" src="../assets/logo.png" key="max-logo" />
-          <img v-show="shrink" src="../assets/logo-min.png" key="min-logo" /> -->
-					<p style="color: #fff;font-size: 20px;">智能合同管理</p>
+				<div slot="top" class="logo-con">
+					<!-- <div style="background-color: #363e4f;height: 10px;width: 100%;"></div> -->
+          <!-- <img v-show="shrink" src="../assets/logo-min.png" key="min-logo" /> -->
+					<p style="color: #fff;font-size: 18px;padding-top: 4px;">智能合同管理</p>
         </div>
       </shrinkable-menu>
     </div>
@@ -68,6 +70,18 @@
         </keep-alive>
       </div>
     </div>
+		<div style="clear: both;"></div>
+		<div class="foot">
+			<p>
+				<a href="http://ai.pkulaw.cn/about.html" target="_blank">英华介绍</a> | 
+				<a href="http://ai.pkulaw.cn/client.html" target="_blank">经典客户</a> | 
+				<a href="http://ai.pkulaw.cn/hiring.html" target="_blank">诚聘英才</a> | 
+				<a href="http://www.pkulaw.cn/css/websit_map.htm" target="_blank">法宝导航</a> | 
+				<a href="http://ai.pkulaw.cn/call.html" target="_blank">联系我们</a> | 
+				<a href="http://ai.pkulaw.cn/opinion.html" target="_blank">企业邮箱</a> 
+			</p>
+			<p>版本所有：北京北大英华科技有限公司 北京大学法制信息中心 京ICP证010230号</p>
+		</div>
   </div>
 </template>
 

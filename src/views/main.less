@@ -22,7 +22,7 @@
         z-index: 11000;
     }
     .sidebar-menu-con {
-        height: 100%;
+        height: calc(100% - 60px);
         position: fixed;
         top: 0;
         left: 0;
@@ -257,4 +257,19 @@
 
 .menu-bar::-webkit-scrollbar-track {
     background: #fff;
+}
+.foot{
+	background-color: #363e4f;
+	height: 60px;
+	padding: 14px;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	a{
+		color: #fff;
+	}
 }
