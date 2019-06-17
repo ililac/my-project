@@ -1,16 +1,16 @@
 <template>
-  <Row type="flex" justify="start" align="middle" class="login" @keydown.enter.native="submitLogin">
+  <Row type="flex" justify="center" align="middle" class="login" @keydown.enter.native="submitLogin">
     <Col :xs="{span:22}" style="width: 368px;">
     <Row class="header">
       <!-- <img src="@/assets/login.png" width="220px" /> -->
-      <div class="description"><span></span>法宝云合同</div>
+      <div class="description">北大智能合同管理系统</div>
     </Row>
   
     <Alert type="error" show-icon v-if="error">{{errorMsg}}</Alert>
   
     <Row class="login-form" v-if="!socialLogining">
       <Tabs v-model="tabName">
-        <TabPane label="账户登录" name="username">
+        <TabPane label="账户登录" name="username" icon="md-person">
           <Form ref="usernameLoginForm" :model="form" :rules="rules" class="form" v-if="tabName=='username'">
             <FormItem prop="username">
               <Input v-model="form.username" prefix="ios-contact" size="large" clearable placeholder="请输入用户名" autocomplete="off" />
@@ -213,10 +213,11 @@ export default {
             login({
               username: this.form.username,
               password: this.form.password,
+							loginType:"userLogin",
               saveLogin: this.saveLogin
             }).then(res => {
               if (res.success === true) {
-                this.setStore("accessToken", res.result);
+                this.setStore("accessToken", res.result.access_token);
                 // 获取用户信息
                 userInfo().then(res => {
                   if (res.success === true) {
