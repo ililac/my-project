@@ -912,6 +912,10 @@ export default {
       this.applyModalVisible = false;
     },
     handelSubmit() {
+			if(this.form.assignees.length < 1){
+				this.$Message.error("没有选择下一审批人");
+				return;
+			}
 			this.submitLoading = true;
 			if(this.examineResult == 4){
 				console.log(this.form);
@@ -1029,6 +1033,7 @@ export default {
         }
       });
       this.applyModalVisible = true;
+			this.form.assignees = [];
 			this.personData = [];
 			this.selectCount2 = 0;
 			this.treeData=[

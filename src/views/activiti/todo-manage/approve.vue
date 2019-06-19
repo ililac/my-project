@@ -382,6 +382,10 @@
 	    methods: {
 			//审批人提交
 			examineSubmit() {
+				if(this.form.assignees.length < 1){
+					this.$Message.error("没有选择下一审批人");
+					return;
+				}
 				this.applyCount = this.selectList;
 				this.btnLoading4 = true;
 				this.submitSubmitClick = false;
@@ -494,6 +498,7 @@
 				this.modalVisible3 = true;
 				this.personData = [];
 				this.selectCount = 0;
+				this.form.assignees = [];
 				this.treeData=[
 				    {
 				        createBy: "admin",

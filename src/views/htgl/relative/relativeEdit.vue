@@ -410,6 +410,8 @@ export default {
         }
       ],
       //股东信息
+
+
       stockholders: [
         // 表头
         {

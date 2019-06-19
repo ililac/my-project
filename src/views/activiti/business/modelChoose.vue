@@ -987,6 +987,7 @@
 									this.form.id = "";
 									this.form.tableId = res.data.contract.id;
 									this.modalVisible3 = true;
+									this.form.assignees = [];
 									this.getProcessList();
 									if(res.result=="success"){
 										this.handleCancel(3,{"dictFormId":res.data.id});
@@ -1010,6 +1011,7 @@
 									}
 									this.form.tableId = res.data.contract.id;
 									this.modalVisible3 = true;
+									this.form.assignees = [];
 									this.getProcessList();
 									if(res.result=="success"){
 										this.handleCancel(3,{"dictFormId":res.data.contract.id});
@@ -1031,6 +1033,7 @@
 									this.form.id = "";
 									this.form.tableId = res.data.contract.id;
 									this.modalVisible3 = true;
+									this.form.assignees = [];
 									this.getProcessList();
 									if(res.result=="success"){
 										this.handleCancel(3,{"dictFormId":res.data.id});
@@ -1135,6 +1138,7 @@
 					this.getDataList1();
 				}else if(res.type == 3){
 					this.modalVisible3 = true;
+					this.form.assignees = [];
 					this.dictForm.id = res.data.dictFormId;
 					this.form.tableId = res.data.dictFormId;
 				}
@@ -1235,10 +1239,15 @@
 //            },
             //审批人提交
             examineSubmit() {
+							if(this.form.assignees.length < 1){
+								this.$Message.error("没有选择下一审批人");
+								return;
+							}
 				this.btnLoading4 = true;
 				this.form.priority = 0;
 				this.form.procDefId = this.processData.id;
 				this.form.title = this.dictForm.name;
+				
 				applyBusiness(this.form).then(res => {
 				    this.loading = false;
 				    if (res.success === true) {
