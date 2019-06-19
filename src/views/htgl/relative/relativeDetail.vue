@@ -11,41 +11,47 @@
 						<Form ref="detailForm" :model="detailForm" :label-width="120">
 							<div class="ul">
 								<FormItem label="相对方名称:" class="lef" prop="counterpartName">
-									<p>{{detailForm.counterpartName}}</p>
+									<p>{{detailForm.counterpartName}}</p> 
 								</FormItem>
 								<FormItem label="相对方编号:" class="lef" prop="counterpartName">
 									<p>{{detailForm.counterpartNumber}}</p>
 								</FormItem>
 							</div>
 							<div class="ul">
-								<Form-item label="机构类型:" class="lef" prop="counterpartTypeId">
+								<!-- <Form-item label="机构类型:" class="lef" prop="counterpartTypeId">
 									<p>{{detailForm.counterpartTypeName}}</p>
-								</Form-item>
-								<FormItem label="企业类型:" class="lef" prop="enterpriseId">
+								</Form-item> -->
+								<FormItem label="企业类型:" class="lef"  v-show="detailForm.counterpartNatureId=='企业'" prop="enterpriseId">
 									<p>{{detailForm.enterpriseName}}</p>
 								</FormItem>
+								<FormItem label="身份证号:" v-show="detailForm.counterpartNatureId=='自然人'" class="lef code">
+								<p>{{detailForm.creditCode}}</p>
+         					 		</FormItem>
+									  <FormItem label="联系地址:" v-show="detailForm.counterpartNatureId=='自然人'" class="lef">
+								<p>{{detailForm.officeAddress}}</p>
+         						 </FormItem>
 							</div>
 							<div class="ul">
-								<FormItem label="统一社会信用代码:" class="lef">
+								<FormItem label="统一社会信用代码:" v-show="detailForm.counterpartNatureId=='企业'" class="lef">
 									<p>{{detailForm.creditCode}}</p>
 								</FormItem>
-								<FormItem label="资质证书:" class="lef">
+								<FormItem label="资质证书:">
 									<p>{{detailForm.qualificationInfoName}}</p>
 								</FormItem>
 							</div>
 							<div class="ul">
-								<FormItem label="成立时间:" class="lef" prop="estiblishTime">
+								<FormItem label="成立时间:" class="lef"  v-show="detailForm.counterpartNatureId=='企业'" prop="estiblishTime">
 									<p>{{detailForm.registerDate}}</p>
 								</FormItem>
-								<FormItem label="注册资本:" class="lef" prop="regCapital">
+								<FormItem label="注册资本:" class="lef"  v-show="detailForm.counterpartNatureId=='企业'" prop="regCapital">
 									<p>{{detailForm.registerCapital}}</p>
 								</FormItem>
 							</div>
 							<div class="ul">
-								<FormItem label="法定代表人:" class="lef">
+								<FormItem label="法定代表人:"  v-show="detailForm.counterpartNatureId!=='自然人'" class="lef">
 									<p>{{detailForm.legalPersonName}}</p>
 								</FormItem>
-								<FormItem label="办公地址:" class="lef">
+								<FormItem label="办公地址:"  v-show="detailForm.counterpartNatureId!=='自然人'" class="lef">
 									<p>{{detailForm.officeAddress}}</p>
 								</FormItem>
 								
@@ -59,12 +65,12 @@
 								</FormItem>
 							</div>
 							<div class="ul txtar">
-								<FormItem label="经营范围:">
+								<FormItem label="经营范围:"  v-if="detailForm.counterpartNatureId=='企业'">
 									<p>{{detailForm.comment}}</p>
 								</FormItem>
 							</div>
 							<div class="ul">
-								<FormItem label="创建人" class="lef">
+								<FormItem label="创建人" class="lef" >
 									<p>{{detailForm.updateBy}}</p>
 								</FormItem>
 								<FormItem label="创建时间" class="lef" v-show="detailForm.createTime">
