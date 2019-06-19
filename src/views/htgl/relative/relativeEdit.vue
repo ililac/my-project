@@ -767,14 +767,16 @@ export default {
       if (res.success) {
         file.url = res.result[0].url;
         file.name = res.result[0].name;
-        file.fileDownUrl =
-          "/zhfw/contract/draft/download?fileName=" +
-          res.result[0].name +
-          "&url=" +
-          res.result[0].url +
-          "&access_token=" +
-          this.getStore("accessToken");
-        this.uploadList=this.$refs.upload.fileList;
+				file.fileDownUrl = file.url+'?attname=&response-content-type=application/octet-stream';
+        // file.fileDownUrl =
+        //   "/zhfw/contract/draft/download?fileName=" +
+        //   res.result[0].name +
+        //   "&url=" +
+        //   res.result[0].url +
+        //   "&access_token=" +
+        //   this.getStore("accessToken");
+				let uploadList = {...this.$refs.upload.fileList};
+        this.uploadList = uploadList;
       } else {
         this.$Message.error("上传失败");
       }
@@ -789,6 +791,7 @@ export default {
     handleRemove(file) {
       let fileList = this.$refs.upload.fileList;
       fileList.splice(fileList.indexOf(file), 1);
+			this.uploadList = [...fileList];
     },
     //相对方名称改变事件
     nameChange(value) {

@@ -36,7 +36,8 @@
 									<p>{{detailForm.creditCode}}</p>
 								</FormItem>
 								<FormItem label="资质证书:">
-									<p>{{detailForm.qualificationInfoName}}</p>
+									<!-- <a :href="'/zhfw/contract/draft/download?fileName='+detailForm.qualificationInfoName+'&url='+detailForm.qualificationInfoAddr+'&access_token='+accessToken.accessToken">{{detailForm.qualificationInfoName}}</a> -->
+									<a :href="detailForm.qualificationInfoAddr+'?attname=&response-content-type=application/octet-stream'">{{detailForm.qualificationInfoName}}</a>
 								</FormItem>
 							</div>
 							<div class="ul">
@@ -66,6 +67,9 @@
 							</div>
 							<div class="ul txtar">
 								<FormItem label="经营范围:"  v-if="detailForm.counterpartNatureId=='企业'">
+									<p>{{detailForm.comment}}</p>
+								</FormItem>
+								<FormItem label="备注:"  v-if="detailForm.counterpartNatureId!=='企业'">
 									<p>{{detailForm.comment}}</p>
 								</FormItem>
 							</div>
