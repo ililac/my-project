@@ -86,7 +86,7 @@
 							</div>	
 							<div class="ul" style="margin-bottom: 20px;">
 								<!-- <span style="margin-right: 10px;">股东信息</span> -->
-								<Menu mode="horizontal" active-name="1" @on-select="navSelect">
+								<Menu mode="horizontal" :active-name="detailList" @on-select="navSelect">
 									<MenuItem name="1">
 										联系人信息
 									</MenuItem>
@@ -373,6 +373,7 @@
 				}
 			},
             init() {
+								this.detailList = "1";
                 this.accessToken = {
                     accessToken: this.getStore("accessToken")
                 };

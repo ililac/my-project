@@ -173,7 +173,7 @@
           </FormItem>
         </div>
         <div class="ul" style="margin-bottom: 20px;">
-          <Menu mode="horizontal" active-name="1" @on-select="navSelect"   v-if="dictForm.counterpartNatureId=='企业'">
+          <Menu mode="horizontal" :active-name="detailList" @on-select="navSelect"   v-if="dictForm.counterpartNatureId=='企业'">
             <MenuItem name="1">联系人信息</MenuItem>
             <MenuItem name="2" >股东信息</MenuItem>
 						<MenuItem name="5">
@@ -241,6 +241,12 @@
             <Page :total="dictForm.noticeTotal" show-total :page-size="10" @on-change="pageChange"/>
           </Row>
         </div>
+				<div class="clear" v-show="detailList == 5">
+					<Table border :columns="promises" :data="promisesDate" sortable="custom5" ref="table5"></Table>
+					<Row type="flex" justify="end" class="page">
+						<Page :total="promisesTotal" show-total :page-size="10" @on-change="pageChange"/>
+					</Row>
+				</div>
         <div class="clear btns">
           <Button type="text" @click="cancelHandel">取消</Button>
           <Button :loading="btnLoading" type="primary" @click="handelSubmitDict">
@@ -900,6 +906,7 @@ export default {
     visible: {
       handler(newValue, oldValue) {
         this.modalVisible = newValue;
+				this.detailList = "1";
       },
       deep: true
     },
