@@ -321,7 +321,12 @@
 					}
 				],
 				promisesDate:[],  //案件信息
-				promisesTotal:0   //案件信息总数
+				promisesTotal:0,   //案件信息总数
+				caseForm:{
+					pageNumber:1,
+					pageSize:10,
+					organizationParty:""
+				},
             };
         },
         methods: {

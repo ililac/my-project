@@ -77,6 +77,7 @@
     }
 	.main .single-page-con{
 		background-color: #d8d8d8!important;
+		padding-bottom: 60px!important;
 	}
 </style>
 <template style="width: 100%;height: 100%;">
