@@ -10,28 +10,28 @@
 					<Row>
 						<Form ref="detailForm" :model="detailForm" :label-width="120">
 							<div class="ul">
-								<FormItem label="相对方名称:" class="lef" prop="counterpartName">
-									<p>{{detailForm.counterpartName}}</p> 
+								<FormItem label="相对方类型:" class="lef" prop="counterpartName">
+									<p>{{detailForm.counterpartNatureId}}</p> 
 								</FormItem>
 								<FormItem label="相对方编号:" class="lef" prop="counterpartName">
 									<p>{{detailForm.counterpartNumber}}</p>
 								</FormItem>
 							</div>
 							<div class="ul">
-								<!-- <Form-item label="机构类型:" class="lef" prop="counterpartTypeId">
-									<p>{{detailForm.counterpartTypeName}}</p>
-								</Form-item> -->
+								<FormItem label="相对方名称:" class="lef" prop="counterpartName">
+									<p>{{detailForm.counterpartName}}</p>
+								</FormItem>
 								<FormItem label="企业类型:" class="lef"  v-show="detailForm.counterpartNatureId=='企业'" prop="enterpriseId">
 									<p>{{detailForm.enterpriseName}}</p>
 								</FormItem>
 								<FormItem label="身份证号:" v-show="detailForm.counterpartNatureId=='自然人'" class="lef code">
 								<p>{{detailForm.creditCode}}</p>
          					 		</FormItem>
-									  <FormItem label="联系地址:" v-show="detailForm.counterpartNatureId=='自然人'" class="lef">
-								<p>{{detailForm.officeAddress}}</p>
-         						 </FormItem>
 							</div>
 							<div class="ul">
+								<FormItem label="联系地址:" v-show="detailForm.counterpartNatureId=='自然人'" class="lef">
+								<p>{{detailForm.officeAddress}}</p>
+         						 </FormItem>
 								<FormItem label="统一社会信用代码:" v-show="detailForm.counterpartNatureId=='企业'" class="lef">
 									<p>{{detailForm.creditCode}}</p>
 								</FormItem>

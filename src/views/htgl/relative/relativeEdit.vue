@@ -56,24 +56,6 @@
               <span v-else>同步</span>
             </Button>
           </FormItem>
-          <!-- <FormItem
-            label="相对方名称:"
-            class="lef"
-            prop="counterpartName"
-            v-show="dictForm.counterpartNatureId=='企业'&&dictForm.disable"
-          >
-            <Input v-model="dictForm.counterpartName" style="float: left;width: 80%;" disabled></Input>
-            <Button
-              disabled
-              :loading="btnLoading2"
-              style="float: left;width: 20%;"
-              @click="findCompany"
-              icon="md-refresh"
-            >
-              <span v-if="!btnLoading2">同步</span>
-              <span v-else>同步</span>
-            </Button>
-          </FormItem> -->
           <FormItem
             label="相对方名称:"
             class="lef"
@@ -190,19 +172,7 @@
             <Input type="textarea" :maxlength="1000" v-model="dictForm.comment" :rows="5"/>
           </FormItem>
         </div>
-        <!-- <div class="ul">
-					<FormItem label="创建人" class="lef">
-						<p>{{form_up.userName}}</p>
-					</FormItem>
-					<FormItem label="创建时间" class="lef" v-show="dictForm.createTime">
-						<p>{{dictForm.createTime}}</p>
-					</FormItem>
-					<FormItem label="创建机构" class="lef">
-						<p>{{form_up.departmentTitle}}</p>
-					</FormItem>
-        </div>-->
         <div class="ul" style="margin-bottom: 20px;">
-          <!-- <span style="margin-right: 10px;">股东信息</span> -->
           <Menu mode="horizontal" active-name="1" @on-select="navSelect"   v-if="dictForm.counterpartNatureId=='企业'">
             <MenuItem name="1">联系人信息</MenuItem>
             <MenuItem name="2" >股东信息</MenuItem>
