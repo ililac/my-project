@@ -887,7 +887,11 @@ export default {
     cancelHandel(){
       this.$refs.upload.fileList = [];
       this.modalVisible = false;
-    }
+    },
+		//案件信息中查看案件
+			see(v){
+				window.open("https://www.pkulaw.com/pfnl/"+v.id+".html")
+			}
   },
   watch: {
     formData: {
