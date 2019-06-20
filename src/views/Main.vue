@@ -3,86 +3,72 @@
 </style>
 
 <template>
-  <div class="main" :class="{'main-hide-text': shrink}">
-    <div class="sidebar-menu-con menu-bar" :style="{width: shrink?'60px':'220px', overflow: shrink ? 'visible' : 'auto'}">
-			<img style="padding: 8px 25px;" v-show="!shrink" src="../assets/logo.png" key="max-logo" />
-			<div style="background-color: #363e4f;height: 5px;width: 100%;"></div>
-      <shrinkable-menu :shrink="shrink" @on-change="handleSubmenuChange" :theme="menuTheme" :before-push="beforePush" :open-names="openedSubmenuArr" :menu-list="menuList">
-				<div slot="top" class="logo-con">
-					<!-- <div style="background-color: #363e4f;height: 10px;width: 100%;"></div> -->
-          <!-- <img v-show="shrink" src="../assets/logo-min.png" key="min-logo" /> -->
-					<p style="color: #fff;font-size: 18px;padding-top: 4px;">智能合同管理</p>
+    <div class="main" :class="{'main-hide-text': shrink}">
+        <div class="sidebar-menu-con menu-bar" :style="{width: shrink?'60px':'220px', overflow: shrink ? 'visible' : 'auto'}">
+            <shrinkable-menu :shrink="shrink" @on-change="handleSubmenuChange" :theme="menuTheme" :before-push="beforePush" :open-names="openedSubmenuArr" :menu-list="menuList">
+                <div slot="top" class="logo-con">
+                    <!-- <img v-show="!shrink" src="../assets/logo.png" key="max-logo" />
+                    <img v-show="shrink" src="../assets/logo-min.png" key="min-logo" /> -->
+                    <p style="color: #fff;font-size: 20px;">智能合同管理</p>
+                </div>
+            </shrinkable-menu>
         </div>
-      </shrinkable-menu>
+        <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'220px'}">
+            <div class="main-header">
+                <div class="navicon-con">
+                    <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
+                        <Icon type="md-menu" size="32"></Icon>
+                    </Button>
+                </div>
+                <div class="header-middle-con">
+                    <div class="main-breadcrumb">
+                        <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
+                    </div>
+                </div>
+                <div class="header-avator-con">
+                    <a href="http://www.pkulaw.com/" target="_blank" style="font-size: 14px;font-weight: 600;margin-right:8px;">北大法宝</a>
+                    <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
+                    <!-- <Dropdown @on-click="handleLanDropdown" class="options">
+                      <Icon type="md-globe" :size="24" class="language"></Icon>
+                      <DropdownMenu slot="list">
+                        <DropdownItem name="zh-CN">中文</DropdownItem>
+                        <DropdownItem name="en-US">English</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown> -->
+
+                    <!-- <lock-screen></lock-screen> -->
+                    <message-tip v-model="mesCount"></message-tip>
+                    <div class="user-dropdown-menu-con">
+                        <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
+                            <Dropdown transfer trigger="hover" @on-click="handleClickUserDropdown">
+                                <a href="javascript:void(0)">
+                                    <span class="main-user-name">{{ username }}</span>
+                                    <Icon type="md-arrow-dropdown" />
+                                    <Avatar :src="avatarPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
+                                </a>
+                                <DropdownMenu slot="list">
+                                    <!-- <DropdownItem name="ownSpace">{{ $t('userCenter') }}</DropdownItem> -->
+                                    <DropdownItem name="ownSpaceOld">{{ $t('userCenterOld') }}</DropdownItem>
+                                    <DropdownItem name="changePass">{{ $t('changePass') }}</DropdownItem>
+                                    <DropdownItem name="loginout" divided>{{ $t('logout') }}</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </Row>
+                    </div>
+                </div>
+            </div>
+            <div class="tags-con">
+                <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
+            </div>
+        </div>
+        <div class="single-page-con" :style="{left: shrink?'60px':'220px'}">
+            <div class="single-page">
+                <keep-alive :include="cachePage">
+                    <router-view></router-view>
+                </keep-alive>
+            </div>
+        </div>
     </div>
-    <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'220px'}">
-      <div class="main-header">
-        <div class="navicon-con">
-          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
-                            <Icon type="md-menu" size="32"></Icon>
-                        </Button>
-        </div>
-        <div class="header-middle-con">
-          <div class="main-breadcrumb">
-            <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
-          </div>
-        </div>
-        <div class="header-avator-con">
-					<a href="http://www.pkulaw.com/" target="_blank" style="font-size: 14px;font-weight: 600;margin-right:8px;">北大法宝</a>
-          <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
-          <!-- <Dropdown @on-click="handleLanDropdown" class="options">
-            <Icon type="md-globe" :size="24" class="language"></Icon>
-            <DropdownMenu slot="list">
-              <DropdownItem name="zh-CN">中文</DropdownItem>
-              <DropdownItem name="en-US">English</DropdownItem>
-            </DropdownMenu>
-          </Dropdown> -->
-					
-          <!-- <lock-screen></lock-screen> -->
-          <message-tip v-model="mesCount"></message-tip>
-          <div class="user-dropdown-menu-con">
-            <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
-              <Dropdown transfer trigger="hover" @on-click="handleClickUserDropdown">
-                <a href="javascript:void(0)">
-                  <span class="main-user-name">{{ username }}</span>
-                  <Icon type="md-arrow-dropdown" />
-                  <Avatar :src="avatarPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
-                </a>
-                <DropdownMenu slot="list">
-                  <!-- <DropdownItem name="ownSpace">{{ $t('userCenter') }}</DropdownItem> -->
-                  <DropdownItem name="ownSpaceOld">{{ $t('userCenterOld') }}</DropdownItem>
-                  <DropdownItem name="changePass">{{ $t('changePass') }}</DropdownItem>
-                  <DropdownItem name="loginout" divided>{{ $t('logout') }}</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </Row>
-          </div>
-        </div>
-      </div>
-      <div class="tags-con">
-        <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
-      </div>
-    </div>
-    <div class="single-page-con" :style="{left: shrink?'60px':'220px'}">
-      <div class="single-page">
-        <keep-alive :include="cachePage">
-          <router-view></router-view>
-        </keep-alive>
-      </div>
-    </div>
-		<div style="clear: both;"></div>
-		<div class="foot">
-			<p>
-				<a href="http://ai.pkulaw.cn/about.html" target="_blank">英华介绍</a> | 
-				<a href="http://ai.pkulaw.cn/client.html" target="_blank">经典客户</a> | 
-				<a href="http://ai.pkulaw.cn/hiring.html" target="_blank">诚聘英才</a> | 
-				<a href="http://www.pkulaw.cn/css/websit_map.htm" target="_blank">法宝导航</a> | 
-				<a href="http://ai.pkulaw.cn/call.html" target="_blank">联系我们</a> | 
-				<a href="http://ai.pkulaw.cn/opinion.html" target="_blank">企业邮箱</a> 
-			</p>
-			<p>版本所有：北京北大英华科技有限公司 北京大学法制信息中心 京ICP证010230号</p>
-		</div>
-  </div>
 </template>
 
 <script>
