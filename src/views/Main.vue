@@ -138,7 +138,8 @@ export default {
       if (pathArr.length >= 2) {
         this.$store.commit("addOpenSubmenu", pathArr[1].name);
       }
-      let userInfo = JSON.parse(Cookies.get("userInfo"));
+	  // let userInfo = localStorage.getItem("userInfo");
+      let userInfo = JSON.parse(localStorage.getItem("userInfo"));
       this.username = userInfo.nickName;
       this.userId = userInfo.id;
       this.checkTag(this.$route.name);

@@ -322,7 +322,8 @@ util.initRouter = function (vm) {
     }];
 
     // 判断用户是否登录
-    let userInfo = Cookies.get('userInfo')
+    // let userInfo = Cookies.get('userInfo')
+	let userInfo = localStorage.getItem("userInfo");
     if (userInfo === null || userInfo === "" || userInfo === undefined) {
         // 未登录
         return;

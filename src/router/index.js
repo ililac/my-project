@@ -29,12 +29,13 @@ router.beforeEach((to, from, next) => {
         next(false);
     } else {
         // 白名单
-        if (!Cookies.get('userInfo') && to.name !== 'login' && to.name !== 'regist' && to.name !== 'regist-result' && to.name !== 'relate' && to.name !== 'reset') { 
+		let userInfo = localStorage.getItem("userInfo");
+        if (!userInfo && to.name !== 'login' && to.name !== 'regist' && to.name !== 'regist-result' && to.name !== 'relate' && to.name !== 'reset') { 
             // 判断是否已经登录且前往的页面不是登录页
             next({
                 name: 'login'
             });
-        } else if (Cookies.get('userInfo') && to.name === 'login') {
+        } else if (userInfo && to.name === 'login') {
             // 判断是否已经登录且前往的是登录页
             Util.title();
             next({

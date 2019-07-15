@@ -2,15 +2,14 @@
   <Row type="flex" justify="center" align="middle" class="login" @keydown.enter.native="submitLogin">
     <Col :xs="{span:22}" style="width: 368px;">
     <Row class="header">
-      <!-- <img src="@/assets/login.png" width="220px" /> -->
-      <div class="description">北大智能合同管理系统</div>
+      <div class="description" style="color: #333;"><img src="@/assets/logo1.png" style="float: left;margin-left: 50px;"/>法宝云平台</div>
     </Row>
 
     <Alert type="error" show-icon v-if="error">{{errorMsg}}</Alert>
-
+	
     <Row class="login-form" v-if="!socialLogining">
-      <Tabs v-model="tabName">
-        <TabPane label="账户登录" name="username" icon="md-person">
+      <Tabs v-model="tabName" style="width: 100%;text-align: center;">
+        <TabPane name="username"  label="账号登录" style="width: 100%;text-align: center;">
           <Form ref="usernameLoginForm" :model="form" :rules="rules" class="form" v-if="tabName=='username'">
             <FormItem prop="username">
               <Input v-model="form.username" prefix="ios-contact" size="large" clearable placeholder="请输入用户名" autocomplete="off" />
@@ -206,18 +205,19 @@ export default {
       }, 1000);
     },
     submitLogin() {
-      if (this.tabName === "username") {
-        this.$refs.usernameLoginForm.validate(valid => {
+		let that = this;
+      if (that.tabName === "username") {
+        that.$refs.usernameLoginForm.validate(valid => {
           if (valid) {
-            this.loading = true;
+            that.loading = true;
             login({
-              username: this.form.username,
-              password: this.form.password,
+              username: that.form.username,
+              password: that.form.password,
 							loginType:"userLogin",
-              saveLogin: this.saveLogin
+              saveLogin: that.saveLogin
             }).then(res => {
               if (res.success === true) {
-                this.setStore("accessToken", res.result.access_token);
+                that.setStore("accessToken", res.result.access_token);
                 // 获取用户信息
                 userInfo().then(res => {
                   if (res.success === true) {
@@ -227,9 +227,10 @@ export default {
                     res.result.roles.forEach(e => {
                       roles.push(e.name);
                     });
-                    this.setStore("roles", roles);
-                    this.setStore("saveLogin", this.saveLogin);
-                    if (this.saveLogin) {
+                    that.setStore("roles", roles);
+                    that.setStore("saveLogin", that.saveLogin);
+					localStorage.setItem("userInfo",JSON.stringify(res.result));
+                    if (that.saveLogin) {
                       // 保存7天
                       Cookies.set("userInfo", JSON.stringify(res.result), {
                         expires: 7
@@ -237,19 +238,19 @@ export default {
                     } else {
                       Cookies.set("userInfo", JSON.stringify(res.result));
                     }
-                    this.setStore("userInfo", res.result);
-                    this.$store.commit("setAvatarPath", res.result.avatar);
+                    that.setStore("userInfo", res.result);
+                    that.$store.commit("setAvatarPath", res.result.avatar);
                     // 加载菜单
-                    util.initRouter(this);
+                    util.initRouter(that);
                     this.$router.push({
                       name: "home_index"
                     });
                   } else {
-                    this.loading = false;
+                    that.loading = false;
                   }
                 });
               } else {
-                this.loading = false;
+                that.loading = false;
               }
             });
           }

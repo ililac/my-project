@@ -292,6 +292,9 @@ export default {
       userModalVisible: false,
       modalTitle: "",
       userForm: {
+		username:"",
+		email:"",
+		mobile:"",
         sex: 1,
         type: 0,
         roles: [],
@@ -781,8 +784,8 @@ export default {
       getUserListData(this.searchForm).then(res => {
         this.loading = false;
         if (res.success === true) {
-          this.data = res.result.content;
-          this.total = res.result.totalElements;
+          this.data = res.result.records;
+          this.total = res.result.total;
         }
       });
     },

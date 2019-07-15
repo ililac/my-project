@@ -621,8 +621,8 @@ export default {
       contractRelativequery(this.searchForm).then(res => {
         this.loading = false;
         if (res.success === true) {
-          this.data = res.result.content;
-          this.total = res.result.totalElements;
+          this.data = res.result.records;
+          this.total = res.result.total;
         }
       });
     }

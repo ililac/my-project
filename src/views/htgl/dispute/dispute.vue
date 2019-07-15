@@ -542,7 +542,7 @@
                 disputeList(this.searchForm).then(res => {
 					this.loading = false;
 					this.data = res.result.records;
-					// this.total = res.data.total;
+					this.total = res.result.total;
                 });
             },
 			//主合同数据

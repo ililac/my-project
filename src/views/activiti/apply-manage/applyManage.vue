@@ -670,7 +670,7 @@ export default {
       getProcessDataList(this.searchProcessForm).then(res => {
         this.processLoading = false;
         if (res.success) {
-          this.processData = res.result.content;
+          this.processData = res.result.records;
         }
       });
     },
