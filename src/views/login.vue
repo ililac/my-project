@@ -1,5 +1,5 @@
 <template>
-  <Row type="flex" justify="center" align="middle" class="login" @keydown.enter.native="submitLogin">
+  <Row type="flex" justify="start" align="middle" class="login" @keydown.enter.native="submitLogin">
     <Col :xs="{span:22}" style="width: 368px;">
     <Row class="header">
       <div class="description" style="color: #333;"><img src="@/assets/logo1.png" style="float: left;margin-left: 50px;"/>法宝云平台</div>
