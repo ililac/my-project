@@ -48,7 +48,7 @@ export const verifyText = (inps,type) =>{
 }
 // 登陆
 export const login = (params) => { 
-    return postRequest('/login', params)
+    return postRequest2('/login', params)
 }
 // 获取用户登录信息
 export const userInfo = (params) => {
