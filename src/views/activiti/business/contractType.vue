@@ -15,7 +15,8 @@
 <script>
 	import {
 		contractType,
-		contractTypeRapid
+		contractTypeRapid,
+		getDictDataByType
 	} from "@/api/index";
 	export default {
 		
@@ -39,8 +40,7 @@
 				this.initDepartmentTreeData();
 			},
 			initDepartmentTreeData() {
-				debugger
-			  contractType({dictId:"95313343841046528"}).then(res => {
+			  getDictDataByType("contract_type").then(res => {
 			    if (res.success === true) {
 			      res.result.forEach(function(e) {
 			        if (e.haveChild) {
