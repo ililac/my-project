@@ -1,7 +1,7 @@
 <template>
 	<Poptip trigger="click" placement="bottom" title="选择合同类型">
 	  <div :style="myStyle">
-	    <Input v-model="typeName" readonly style="margin-right:13px;"/>
+	    <Input v-model="typeName" placeholder="请选择" readonly style="margin-right:13px;"/>
 	    <!-- <Button icon="md-trash" @click="clearSelectDep">清空已选</Button> -->
 	  </div>
 	  <div slot="content" class="tree-bar">
@@ -39,6 +39,7 @@
 				this.initDepartmentTreeData();
 			},
 			initDepartmentTreeData() {
+				debugger
 			  contractType({dictId:"95313343841046528"}).then(res => {
 			    if (res.success === true) {
 			      res.result.forEach(function(e) {
