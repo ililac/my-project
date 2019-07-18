@@ -16,17 +16,8 @@
                   clearable
                 />
               </Form-item>
-              <Form-item label="类型">
-                <!-- <select
-                  id="sel"
-                  v-model="searchForm.contractTypeId"
-                  placeholder="请选择"
-                  clearable
-                  style="width: 200px"
-                >
-                  <option v-for="item in contract_type" :value="item.id">{{item.title}}</option>
-                </select> -->
-								<contract-type v-on:typeListen="typeChange" :widthDate.sync="myStyle" :typeDate.sync="formData1"></contract-type>
+              <Form-item label="合同类型">
+				<contract-type v-on:typeListen="typeChange" :widthDate.sync="myStyle" :typeDate.sync="formData1"></contract-type>
               </Form-item>
               <Form-item style="margin-left:-35px;" class="br">
                 <Button @click="handleSearch" type="primary" icon="ios-search">搜索</Button>
