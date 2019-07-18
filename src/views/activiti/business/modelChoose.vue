@@ -165,7 +165,7 @@
           </Form-item>
         </div>
         <div class="ul">
-          <FormItem label="收付款方式" prop="name" class="lef">
+          <FormItem label="收付款方式" class="lef">
             <Select v-model="dictForm.istopay">
               <Option value="1">收款</Option>
               <Option value="0">付款</Option>
@@ -337,7 +337,7 @@
       v-on:relativelisten="childShow2"
       v-on:listen="childShow"
     ></relative-edit>
-    <Modal title="组织机构选人" v-model="modalVisible3" :mask-closable="false" :width="700">
+    <Modal title="组织机构选人" v-model="modalVisible3" :mask-closable="false" :width="700"> 
       <div class="clear">
         <Col :span="24">
           <Col :span="12">
@@ -475,6 +475,8 @@ import md5 from "js-md5";
 import contractType from "./contractType.vue";
 import relativeEdit from "../../htgl/relative/relativeEdit.vue";
 import { getProcessDataList } from "@/api/activiti";
+import Cookies from "js-cookie";
+const queryString = require('query-string');
 import {
   addhtong,
   draftAddhtong,
@@ -487,6 +489,7 @@ import {
   eachOther,
   loadDepartment,
   getDictDataByType,
+  initDepartment,
   //        examineManList,
   wordEdit,
   relativeNumber,
@@ -844,26 +847,7 @@ export default {
         userName: "",
         uName: ""
       },
-      treeData: [
-        {
-          createBy: "admin",
-          createTime: "2019-01-08",
-          delFlag: 0,
-          haveChild: false,
-          id: "94930003292065792",
-          isParent: true,
-          parentId: "0",
-          parentTitle: "一级部门",
-          sortOrder: 4,
-          status: 0,
-          title: "北京大学",
-          updateBy: "admin",
-          updateTime: "2019-03-07",
-          users: null,
-          loading: false,
-          children: []
-        }
-      ],
+      treeData: [],
       http: "http://localhost:9999",
       personData: [],
       signedForm: {
@@ -1470,6 +1454,13 @@ export default {
         access_token: this.getStore("accessToken"),
         Authorization: "Bearer " + this.getStore("accessToken")
       };
+      initDepartment().then(res => {
+        if (res.success) {
+          this.treeData = res.result;
+          this.treeData[0].children = [];
+          this.treeData[0].loading = false;
+        }
+      });
       // 获取表单数据
       fromUp().then(res => {
         this.form_up.createTime = res.createTime;

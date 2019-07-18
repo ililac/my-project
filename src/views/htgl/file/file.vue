@@ -134,7 +134,7 @@
       <Form ref="dictForm" :model="dictForm" :label-width="120" :rules="dictFormValidate">
         <div class="ul">
           <FormItem label="档案编号" prop="number" class="lef">
-            <Input v-model="dictForm.number" style="width:320px"/>
+            <Input v-model="dictForm.number" style="width:320px" />
           </FormItem>
           <Form-item label="档案保管时间" prop="keepTime" class="lef">
             <DatePicker
@@ -204,7 +204,7 @@
         </Col>
         <div class="ul">
           <FormItem label="备注" prop="remark" style="width:930px">
-            <Input type="textarea" v-model="dictForm.remark" :rows="3"/>
+            <Input type="textarea" v-model="dictForm.remark" :rows="3" />
           </FormItem>
         </div>
       </Form>
@@ -269,7 +269,8 @@ import {
   loadDepartment,
   searchAchiveUser,
   getArchiveNumber,
-  fromUp
+  fromUp,
+  initDepartment
 } from "@/api/index";
 import circleLoading from "../../my-components/circle-loading.vue";
 export default {
@@ -286,26 +287,7 @@ export default {
       btnLoading3: false, //反馈中保存按钮
       submitLoading: false, // 添加或编辑提交状态
       applyModalVisible: false,
-      treeData: [
-        {
-          createBy: "admin",
-          createTime: "2019-01-08",
-          delFlag: 0,
-          haveChild: false,
-          id: "94930003292065792",
-          isParent: true,
-          parentId: "0",
-          parentTitle: "一级部门",
-          sortOrder: 4,
-          status: 0,
-          title: "北京大学",
-          updateBy: "admin",
-          updateTime: "2019-03-07",
-          users: null,
-          loading: false,
-          children: []
-        }
-      ],
+      treeData: [],
       columns1: [
         // // 表头
         // {
@@ -537,7 +519,10 @@ export default {
       this.$refs[name].validate(valid => {
         if (valid) {
           this.dictForm.materialsBill = this.isTopayList.join(",");
-          this.dictForm.keepTime = this._fmtDate("yyyy-MM-dd hh:mm:ss",this.dictForm.keepTime);
+          this.dictForm.keepTime = this._fmtDate(
+            "yyyy-MM-dd hh:mm:ss",
+            this.dictForm.keepTime
+          );
           let uploadList = this.uploadList.map((item, index) => {
             return {
               fileName: item.name,
@@ -563,14 +548,22 @@ export default {
       this.modalVisible = false;
       this.$refs.dictForm.resetFields();
       this.uploadList = [];
-      this.$refs.upload2.fileList = []
+      this.$refs.upload2.fileList = [];
       this.isTopayList = [];
     },
     init() {
       this.accessToken = {
-        'access_token': this.getStore("accessToken"),
-        'Authorization': 'Bearer '+this.getStore("accessToken")
+        access_token: this.getStore("accessToken"),
+        Authorization: "Bearer " + this.getStore("accessToken")
       };
+      //获取组织机构选人根数据
+      initDepartment().then(res => {
+        if (res.success) {
+          this.treeData = res.result;
+          this.treeData[0].children = [];
+          this.treeData[0].loading = false;
+        }
+      });
       // 获取表单数据
       fromUp().then(res => {
         this.form_up.updateBy = res.updateBy;
@@ -735,23 +728,31 @@ export default {
         }
       });
     },
-    _fmtDate(fmt,date) {
-      var date = new Date(date)
-       var o = {   
-    "M+" : date.getMonth()+1,                 //月份   
-    "d+" : date.getDate(),                    //日   
-    "h+" : date.getHours(),                   //小时   
-    "m+" : date.getMinutes(),                 //分   
-    "s+" : date.getSeconds(),                 //秒   
-    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
-    "S"  : date.getMilliseconds()             //毫秒   
-  };   
-  if(/(y+)/.test(fmt))   
-    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
-  for(var k in o)   
-    if(new RegExp("("+ k +")").test(fmt))   
-  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
-  return fmt;   
+    _fmtDate(fmt, date) {
+      var date = new Date(date);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
     }
   },
   mounted() {

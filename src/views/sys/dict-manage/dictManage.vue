@@ -183,7 +183,9 @@ export default {
         // 添加或编辑表单对象初始化数据
         status: 0,
         description: "",
-        sortOrder: 0
+        sortOrder: 0,
+        title:"",
+        value:""
       },
       dictFormValidate: {
         // 表单验证规则
