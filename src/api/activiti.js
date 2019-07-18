@@ -35,7 +35,7 @@ export const deleteModel = (ids, params) => {
 
 // 获取流程数据
 export const getProcessDataList = (params) => {
-    return getRequest('/active/actProcess/getByCondition', params)
+    return postRequest('/active/actProcess/getByCondition', params)
 }
 // 编辑流程信息
 export const updateInfo = (params) => {

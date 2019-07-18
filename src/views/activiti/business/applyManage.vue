@@ -38,7 +38,7 @@
                     </Form>
                 </Row>
                 <Row class="operation">
-                    <!-- <Button @click="add" type="primary" icon="md-add">添加数据</Button> -->
+                    <Button @click="add" type="primary" icon="md-add">添加数据</Button>
                     <Button @click="getDataList" icon="md-refresh">刷新数据</Button>
                 </Row>
                 <Row>
