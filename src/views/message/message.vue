@@ -41,6 +41,7 @@
 
 <script>
 import Cookies from "js-cookie";
+const queryString = require('query-string');
 import {
   getMessageSendData,
   editMessageSend,
@@ -197,7 +198,7 @@ export default {
     return {
       loading: true,
       params: {
-        userId: JSON.parse(Cookies.get("userInfo")).id,
+        userId: queryString.parse(Cookies.get("userInfo")).id,
         status: 0,
         pageNumber: 1, // 当前页数
         pageSize: 10, // 页面大小

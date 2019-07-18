@@ -731,7 +731,6 @@ export default {
 				usedCount:0
       };
       this.modalVisible = true;
-      // console.log(this.dictForm);
       document.getElementById("upload").innerHTML = "点击上传";
       // 				this.$nextTick(() => {
       // 					 this.$refs.dictForm.resetFields();

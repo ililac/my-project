@@ -37,6 +37,7 @@
 <script>
 import { userInfo } from "@/api/index";
 import Cookies from "js-cookie";
+const queryString = require('query-string');
 export default {
   data() {
     return {
@@ -53,11 +54,11 @@ export default {
             delete res.result.permissions;
             if (this.getStore("saveLogin")) {
               // 保存7天
-              Cookies.set("userInfo", JSON.stringify(res.result), {
+              Cookies.set("userInfo", queryString.stringify(res.result), {
                 expires: 7
               });
             } else {
-              Cookies.set("userInfo", JSON.stringify(res.result));
+              Cookies.set("userInfo", queryString.stringify(res.result));
             }
             this.setStore("userInfo", res.result);
             this.$router.push({

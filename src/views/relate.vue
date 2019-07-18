@@ -59,6 +59,7 @@
 
 <script>
 import Cookies from "js-cookie";
+const queryString = require('query-string');
 import { vaptchaID, relate, userInfo, getJWT } from "@/api/index";
 import util from "@/libs/util.js";
 var vaptchaObject;
@@ -120,7 +121,7 @@ export default {
                       });
                       this.setStore("roles", roles);
                       // 保存7天
-                      Cookies.set("userInfo", JSON.stringify(res.result), {
+                      Cookies.set("userInfo", queryString.stringify(res.result), {
                         expires: 7
                       });
                       this.setStore("userInfo", res.result);

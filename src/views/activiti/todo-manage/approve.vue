@@ -601,7 +601,6 @@
 									}
 								})
 							}else{
-								console.log(this.opinion.assignees);
 								this.$Message.error("请选择下一审批人");
 							}
 						}else{
@@ -625,7 +624,6 @@
 								}
 							})
 						}else{
-							console.log(this.opinion.assignees);
 							this.$Message.error("请选择下一审批人");
 						}
 					}else{
@@ -740,7 +738,6 @@
 								this.form.assignees.push(that.applyCount[i].id);
 							};
 							this.opinion.assignees = this.form.assignees;
-							console.log(this.opinion.assignees);
 						}
 					}
 				})
@@ -818,7 +815,6 @@
 // 			beforeRouteUpdate(to, from, next) {
 // 				const newId = to.query.tableId;
 // 				const oldId = from.query.tableId;
-// 				console.log(newId,oldId);
 // 				if(to.name == "contractApprove"){
 // 					this.init();
 // 					if(this.$route.query.key == "zhiNengDepartment"){

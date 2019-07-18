@@ -243,7 +243,6 @@ export default {
 			}
 		},
 		tip(v,type){
-			// console.log(v); 
 			let query = { type: type, id: v.id, backRoute: this.$route.name,procInstId:v.procInstId ,tableId:v.tableId,key:v.key};
 			this.$router.push({
 			  name: "contractApprove",
@@ -397,7 +396,6 @@ export default {
 				}
 			});
 			
-			// console.log(document.querySelector('.ivu-menu .ivu-menu'));
 			// setTimeout(function(){document.querySelector('.ivu-menu .ivu-menu').style.display = "block";}, 1500);
 		},
 	},

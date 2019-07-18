@@ -215,6 +215,7 @@ import {
   getDictDataByType
 } from "@/api/index";
 import Cookies from "js-cookie";
+const queryString = require('query-string');
 export default {
   name: "ownspace_index",
   data() {
@@ -316,7 +317,7 @@ export default {
       this.accessToken = {
         accessToken: this.getStore("accessToken")
       };
-      let v = JSON.parse(Cookies.get("userInfo"));
+      let v = queryString.parse(Cookies.get("userInfo"));
       // 转换null为""
       for (let attr in v) {
         if (v[attr] === null) {
@@ -681,11 +682,11 @@ export default {
           delete res.result.permissions;
           if (this.getStore("saveLogin")) {
             // 保存7天
-            Cookies.set("userInfo", JSON.stringify(res.result), {
+            Cookies.set("userInfo", queryString.stringify(res.result), {
               expires: 7
             });
           } else {
-            Cookies.set("userInfo", JSON.stringify(res.result));
+            Cookies.set("userInfo", queryString.stringify(res.result));
           }
           this.setStore("userInfo", res.result);
         }

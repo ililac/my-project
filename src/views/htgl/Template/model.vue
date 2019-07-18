@@ -200,7 +200,6 @@ export default {
     beforeUpload() {
       // document.getElementById("uploadMask").style.display = "block";
       document.getElementById("upload").innerHTML = "文件上传中...";
-			console.log(document.getElementById("upload").innerHTML);
       return true;
     },
     handleMaxSize(file) {

@@ -229,11 +229,11 @@ export default {
       loading: false, // 表单加载状态
       saveLoading: false,
       oss: {
-        serviceName: ""
+        serviceName:""
       },
       changedOssSK: false, // 是否修改oss的secrectKey
       sms: {
-        serviceName: "ALI_SMS"
+        serviceName:"ALI_SMS"
       },
       changedSmsSK: false, // 是否修改短信的secrectKey
       email: {},

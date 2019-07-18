@@ -290,7 +290,6 @@
             handleSearch() {
                 this.searchForm.pageNo = 1;
                 this.searchForm.pageSize = 10;
-				console.log(this.searchForm);
                 this.getDataList();
             },
 			//表格导出

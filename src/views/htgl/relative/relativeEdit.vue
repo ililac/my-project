@@ -62,9 +62,9 @@
             prop="counterpartName"
             v-show="dictForm.counterpartNatureId!=='企业'"
           >
-            <input type="text" value v-model="dictForm.counterpartName">
+            <input type="text" value v-model="dictForm.counterpartName" />
           </FormItem>
-		    <FormItem label="企业类型:" v-show="dictForm.counterpartNatureId=='企业'" class="lef code">
+          <FormItem label="企业类型:" v-show="dictForm.counterpartNatureId=='企业'" class="lef code">
             <span class="span">*</span>
             <Select v-model="dictForm.enterpriseId" placeholder="请选择" clearable>
               <Option v-for="item in ownership_type" :value="item.id">{{item.title}}</Option>
@@ -72,13 +72,16 @@
           </FormItem>
           <FormItem label="身份证号:" v-show="dictForm.counterpartNatureId=='自然人'" class="lef code">
             <span class="span">*</span>
-            <Input type="text" @on-blur="checkCreditCode(dictForm.creditCode)" v-model="dictForm.creditCode"></Input>
+            <Input
+              type="text"
+              @on-blur="checkCreditCode(dictForm.creditCode)"
+              v-model="dictForm.creditCode"
+            ></Input>
           </FormItem>
-		  
-		</div>
+        </div>
         <div class="ul">
           <FormItem label="联系地址:" v-show="dictForm.counterpartNatureId=='自然人'" class="lef">
-            <input type="text" v-model="dictForm.officeAddress">
+            <input type="text" v-model="dictForm.officeAddress" />
           </FormItem>
           <!-- <Form-item label="机构类型:" class="lef">
 						<select v-model="dictForm.counterpartTypeId" placeholder="请选择" >
@@ -96,7 +99,7 @@
               :headers="accessToken"
               :show-upload-list="false"
               :format="['pdf']"
-              :on-format-error="handleFormatError" 
+              :on-format-error="handleFormatError"
               :default-file-list="defaultList"
               :on-success="handleSuccess"
               :on-error="handleError"
@@ -108,7 +111,7 @@
               class="upload"
             >
               <p class="upload">
-                <Icon type="ios-cloud-upload-outline" size="20"/>
+                <Icon type="ios-cloud-upload-outline" size="20" />
                 <span id="qualificationInfoName">上传文件</span>
               </p>
             </Upload>
@@ -145,15 +148,22 @@
             <span class="input-disable">{{dictForm.registerCapital}}</span>
             <!-- <input type="text" value="" v-model="dictForm.registerCapital"/> -->
           </FormItem>
-		  </div>
+        </div>
         <div class="ul">
           <FormItem label="法定代表人:" v-show="dictForm.counterpartNatureId!=='自然人'" class="lef">
-            <span class="input-disable" v-if="dictForm.counterpartNatureId=='企业'">{{dictForm.legalPersonName}}</span>
-            <input type="text" v-else v-model="dictForm.legalPersonName"/>
+            <span
+              class="input-disable"
+              v-if="dictForm.counterpartNatureId=='企业'"
+            >{{dictForm.legalPersonName}}</span>
+            <input type="text" v-else v-model="dictForm.legalPersonName" />
           </FormItem>
           <FormItem label="办公地址:" v-show="dictForm.counterpartNatureId!=='自然人'" class="lef">
-            <span class="input-disable addr" :title="dictForm.officeAddress" v-if="dictForm.counterpartNatureId=='企业'">{{dictForm.officeAddress}}</span>
-            <input type="text" v-else v-model="dictForm.officeAddress"/>
+            <span
+              class="input-disable addr"
+              :title="dictForm.officeAddress"
+              v-if="dictForm.counterpartNatureId=='企业'"
+            >{{dictForm.officeAddress}}</span>
+            <input type="text" v-else v-model="dictForm.officeAddress" />
           </FormItem>
         </div>
         <div class="ul">
@@ -169,18 +179,21 @@
             <span class="input-disable">{{dictForm.comment}}</span>
           </FormItem>
           <FormItem label="备注:" v-if="dictForm.counterpartNatureId!=='企业'">
-            <Input type="textarea" :maxlength="1000" v-model="dictForm.comment" :rows="5"/>
+            <Input type="textarea" :maxlength="1000" v-model="dictForm.comment" :rows="5" />
           </FormItem>
         </div>
         <div class="ul" style="margin-bottom: 20px;">
-          <Menu mode="horizontal" :active-name="detailList" @on-select="navSelect"   v-if="dictForm.counterpartNatureId=='企业'">
+          <Menu
+            mode="horizontal"
+            :active-name="detailList"
+            @on-select="navSelect"
+            v-if="dictForm.counterpartNatureId=='企业'"
+          >
             <MenuItem name="1">联系人信息</MenuItem>
-            <MenuItem name="2" >股东信息</MenuItem>
-						<MenuItem name="5">
-							案件信息
-						</MenuItem>
+            <MenuItem name="2">股东信息</MenuItem>
+            <MenuItem name="5">案件信息</MenuItem>
           </Menu>
-		  <Menu mode="horizontal" active-name="1" @on-select="navSelect"   v-else>
+          <Menu mode="horizontal" active-name="1" @on-select="navSelect" v-else>
             <MenuItem name="1">联系人信息</MenuItem>
           </Menu>
         </div>
@@ -192,7 +205,7 @@
             @click="linkAdd"
           >+添加联系人</div>
           <Row type="flex" justify="end" class="page">
-            <Page :total="dictForm.linkTotal" show-total :page-size="10" @on-change="pageChange"/>
+            <Page :total="dictForm.linkTotal" show-total :page-size="10" @on-change="pageChange" />
           </Row>
         </div>
         <div class="clear" v-show="detailList == 2">
@@ -238,15 +251,15 @@
             ref="table4"
           ></Table>
           <Row type="flex" justify="end" class="page">
-            <Page :total="dictForm.noticeTotal" show-total :page-size="10" @on-change="pageChange"/>
+            <Page :total="dictForm.noticeTotal" show-total :page-size="10" @on-change="pageChange" />
           </Row>
         </div>
-				<div class="clear" v-show="detailList == 5">
-					<Table border :columns="promises" :data="promisesDate" sortable="custom5" ref="table5"></Table>
-					<Row type="flex" justify="end" class="page">
-						<Page :total="promisesTotal" show-total :page-size="10" @on-change="pageChange"/>
-					</Row>
-				</div>
+        <div class="clear" v-show="detailList == 5">
+          <Table border :columns="promises" :data="promisesDate" sortable="custom5" ref="table5"></Table>
+          <Row type="flex" justify="end" class="page">
+            <Page :total="promisesTotal" show-total :page-size="10" @on-change="pageChange" />
+          </Row>
+        </div>
         <div class="clear btns">
           <Button type="text" @click="cancelHandel">取消</Button>
           <Button :loading="btnLoading" type="primary" @click="handelSubmitDict">
@@ -268,14 +281,14 @@
     >
       <Form ref="linkForm" :model="linkForm" :label-width="120">
         <Form-item label="联系人姓名:" class="lef">
-          <Input v-model="linkForm.name"/>
+          <Input v-model="linkForm.name" />
         </Form-item>
         <Form-item label="部门及职位:" class="lef">
-          <Input v-model="linkForm.department"/>
+          <Input v-model="linkForm.department" />
         </Form-item>
         <FormItem label="联系电话:" class="lef">
           <!-- <Input v-model="linkForm.phone" @on-blur="phoneChange(linkForm.phone)"/> -->
-          <Input v-model="linkForm.phone"/>
+          <Input v-model="linkForm.phone" />
         </FormItem>
         <div class="clear"></div>
       </Form>
@@ -294,7 +307,7 @@ import {
   relativeFromSave,
   animateWidths,
   relativeName,
-	caseDetail,
+  caseDetail,
   modelRelativeDetail,
   getDictDataByType
 } from "@/api/index";
@@ -347,11 +360,11 @@ export default {
       findCompanyDate: {
         company: ""
       },
-			caseForm:{
-					pageNumber:1,
-					pageSize:10,
-					organizationParty:""
-				},
+      caseForm: {
+        pageNumber: 1,
+        pageSize: 10,
+        organizationParty: ""
+      },
       //联系人
       link: [
         // 表头
@@ -416,7 +429,6 @@ export default {
         }
       ],
       //股东信息
-
 
       stockholders: [
         // 表头
@@ -500,54 +512,54 @@ export default {
           align: "center"
         }
       ],
-			//失信信息
-				promises:[
-					{
-					    title: "序号",
-					    type: "index",
-						width: 60,
-					    align: "center"
-					},
-					{
-					    title: "案件名称",
-					    key: "Title",
-					    align: "center",
-						render: (h, params) => {
-						  return h("div", [
-						    h(
-						      "a",
-						      {
-						        on: {
-						          click: () => {
-						            this.see(params.row);
-						          }
-						        }
-						      },
-						      params.row.Title
-						    )
-						  ]);
-						}
-					},
-					{
-					    title: "案号",
-					    key: "CaseFlag",
-					    align: "center"
-					},
-					{
-					    title: "审理程序",
-					    key: "TrialStep",
-						width: 100,
-					    align: "center"
-					},
-					{
-					    title: "审结日期",
-					    key: "LastInstanceDate",
-						width: 120,
-					    align: "center"
-					}
-				],
-				promisesDate:[],  //案件信息
-				promisesTotal:0   //案件信息总数
+      //失信信息
+      promises: [
+        {
+          title: "序号",
+          type: "index",
+          width: 60,
+          align: "center"
+        },
+        {
+          title: "案件名称",
+          key: "Title",
+          align: "center",
+          render: (h, params) => {
+            return h("div", [
+              h(
+                "a",
+                {
+                  on: {
+                    click: () => {
+                      this.see(params.row);
+                    }
+                  }
+                },
+                params.row.Title
+              )
+            ]);
+          }
+        },
+        {
+          title: "案号",
+          key: "CaseFlag",
+          align: "center"
+        },
+        {
+          title: "审理程序",
+          key: "TrialStep",
+          width: 100,
+          align: "center"
+        },
+        {
+          title: "审结日期",
+          key: "LastInstanceDate",
+          width: 120,
+          align: "center"
+        }
+      ],
+      promisesDate: [], //案件信息
+      promisesTotal: 0 //案件信息总数
     };
   },
   methods: {
@@ -560,11 +572,11 @@ export default {
         return false;
       }
     },
-     checkCreditCode(v){
-      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; 
-      if(reg.test(v) === false) { 
+    checkCreditCode(v) {
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (reg.test(v) === false) {
         this.$Message.error("身份证输入不合法");
-        return false; 
+        return false;
       }
     },
     init() {
@@ -601,16 +613,16 @@ export default {
       } else if (this.detailList == 3) {
       } else if (this.detailList == 4) {
       } else if (this.detailList == 5) {
-				if(this.dictForm.counterpartName){
-						this.caseForm.pageNumber = v;
-						this.caseForm.organizationParty = this.dictForm.counterpartName;
-						caseDetail(this.caseForm).then(res => {
-							if(res.success == "true"){
-								this.promisesDate = res.data;
-								this.promisesTotal = parseInt(res.count);
-							}
-						});
-					}
+        if (this.dictForm.counterpartName) {
+          this.caseForm.pageNumber = v;
+          this.caseForm.organizationParty = this.dictForm.counterpartName;
+          caseDetail(this.caseForm).then(res => {
+            if (res.success == "true") {
+              this.promisesDate = res.data;
+              this.promisesTotal = parseInt(res.count);
+            }
+          });
+        }
       }
     },
     //相对方相似验证
@@ -640,7 +652,7 @@ export default {
         this.$Message.error("企业类型没有选择");
         return;
       } else if (
-        !this.dictForm.creditCode&&
+        !this.dictForm.creditCode &&
         this.dictForm.counterpartNatureId == "自然人"
       ) {
         this.$Message.error("身份证号没有输入");
@@ -735,17 +747,17 @@ export default {
     },
     navSelect(v) {
       this.detailList = v;
-			if(v == 5){
-					if(this.dictForm.counterpartName){
-						this.caseForm.organizationParty = this.dictForm.counterpartName;
-						caseDetail(this.caseForm).then(res => {
-							if(res.success == "true"){
-								this.promisesDate = res.data;
-								this.promisesTotal = parseInt(res.count);
-							}
-						});
-					}
-				}
+      if (v == 5) {
+        if (this.dictForm.counterpartName) {
+          this.caseForm.organizationParty = this.dictForm.counterpartName;
+          caseDetail(this.caseForm).then(res => {
+            if (res.success == "true") {
+              this.promisesDate = res.data;
+              this.promisesTotal = parseInt(res.count);
+            }
+          });
+        }
+      }
     },
     //资质证书上传之前
     handleBeforeUpload() {
@@ -773,7 +785,8 @@ export default {
       if (res.success) {
         file.url = res.result[0].url;
         file.name = res.result[0].name;
-				file.fileDownUrl = file.url+'?attname=&response-content-type=application/octet-stream';
+        file.fileDownUrl =
+          file.url + "?attname=&response-content-type=application/octet-stream";
         // file.fileDownUrl =
         //   "/zhfw/contract/draft/download?fileName=" +
         //   res.result[0].name +
@@ -781,7 +794,7 @@ export default {
         //   res.result[0].url +
         //   "&access_token=" +
         //   this.getStore("accessToken");
-				let uploadList = {...this.$refs.upload.fileList};
+        let uploadList = { ...this.$refs.upload.fileList };
         this.uploadList = uploadList;
       } else {
         this.$Message.error("上传失败");
@@ -797,7 +810,7 @@ export default {
     handleRemove(file) {
       let fileList = this.$refs.upload.fileList;
       fileList.splice(fileList.indexOf(file), 1);
-			this.uploadList = [...fileList];
+      this.uploadList = [...fileList];
     },
     //相对方名称改变事件
     nameChange(value) {
@@ -848,7 +861,6 @@ export default {
       // 	this.$Message.error("手机格式错误");
       // 	return;
       // }
-      console.log(this.dictForm._index);
       if (this.dictForm._index >= 0) {
         this.dictForm.linkMans.splice(this.dictForm._index, 1);
       }
@@ -862,7 +874,6 @@ export default {
     },
     //添加联系人后点击了取消
     linkcancel() {
-      console.log(111);
     },
     visiblechange(v) {
       this.$emit("relativelisten", v);
@@ -882,16 +893,16 @@ export default {
       this.dictForm.enterpriseId = "";
       this.dictForm.legalPersonName = "";
       this.$refs.upload.fileList = [];
-      this.uploadList =this.$refs.upload.fileList;
+      this.uploadList = this.$refs.upload.fileList;
     },
-    cancelHandel(){
+    cancelHandel() {
       this.$refs.upload.fileList = [];
       this.modalVisible = false;
     },
-		//案件信息中查看案件
-			see(v){
-				window.open("https://www.pkulaw.com/pfnl/"+v.id+".html")
-			}
+    //案件信息中查看案件
+    see(v) {
+      window.open("https://www.pkulaw.com/pfnl/" + v.id + ".html");
+    }
   },
   watch: {
     formData: {
@@ -910,7 +921,7 @@ export default {
     visible: {
       handler(newValue, oldValue) {
         this.modalVisible = newValue;
-				this.detailList = "1";
+        this.detailList = "1";
       },
       deep: true
     },
@@ -975,7 +986,7 @@ export default {
   line-height: 1.5;
   padding: 4px 7px;
 }
-.input-disable.addr{
+.input-disable.addr {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

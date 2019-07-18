@@ -60,9 +60,6 @@ export default {
                 }
             },
             uploadSuccess (response, file, fileList) { // 文件上传回调 上传成功后删除待上传文件
-                console.log(response) // 后端返回数据
-                console.log(file)   // 当前上传文件
-                console.log(fileList) // 整个input file 里的文件数组
             },
   },
   mounted() {

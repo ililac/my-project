@@ -852,7 +852,6 @@
 					this.$Message.error("签约人没有填写");
 					return;
 				}
-				console.log(this.counterpartSignList);
 				for(var value of this.counterpartSignList){
 					if(!value.counterpartName){
 						this.$Message.error("相对方名称没有填写");

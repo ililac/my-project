@@ -155,7 +155,6 @@ export default {
       //this.connectSrv();
     },
     onConnected(frame) {
-      // console.log("连接ws成功: " + frame);
       // 订阅广播系统通知
       this.$stompClient.subscribe(
         "/topic/subscribe",
@@ -177,7 +176,6 @@ export default {
       this.connetWM(ws, headers, this.onConnected, this.onFailed);
     },
     responseCallback(frame) {
-      // console.log("收到消息：" + frame.body);
       this.$store.commit("setMessageCount", this.mesCount + 1);
     },
     disconnect() {

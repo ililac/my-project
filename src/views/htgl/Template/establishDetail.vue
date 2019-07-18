@@ -122,7 +122,6 @@
 					this.procDefId = this.$route.query.id;
 					if(this.procDefId){
 						modelRelativeDetail({id:this.procDefId,type:this.type}).then(res=>{
-							console.log(res);
 							if(res.success){
 								this.detailForm = res.result;
 								if(res.result.fileName){

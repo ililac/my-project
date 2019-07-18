@@ -796,7 +796,6 @@ export default {
 		},
 		//申请人中的树状结构中的节点选中事件personData
 		selectTree(v){
-			console.log(this.form);
 			personSelect({procDefId:this.form.procDefId,departmentId:v[0].id,procInstId:this.form.procInstId}).then(res => {
 				// this.personData = res.result.userList
 				let personData = res.result.userList;
@@ -819,7 +818,6 @@ export default {
 			for(var i = 0;i < e.length;i++){
 				this.form.assignees.push(e[i].id);
 			};
-			console.log(this.form);
 		},
     init() {
       this.getDataList();
@@ -873,7 +871,6 @@ export default {
       if (v) {
         this.searchForm.startDate = v[0];
         this.searchForm.endDate = v[1];
-				console.log(this.searchForm);
       }
     },
     getDataList() {
@@ -918,7 +915,6 @@ export default {
 			}
 			this.submitLoading = true;
 			if(this.examineResult == 4){
-				console.log(this.form);
 				passExamine({id:this.form.taskId,procInstId:this.form.procInstId,assignees:this.form.assignees}).then(res => {
 					this.submitLoading = false;
 					if (res.success){

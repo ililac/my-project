@@ -74,7 +74,6 @@ export default {
   watch: {
     // 监听路由变化
     $route(to, from) {
-			console.log(this.$route.matched[0].name)
 			if(this.$route.matched[0].name == "otherRouter"){
 				this.singleOpenName = ["htgl"];
 			}else{
@@ -84,7 +83,6 @@ export default {
     }
   },
   mounted() {
-		console.log(this.$route.matched[0].name)
 		if(this.$route.matched[0].name == "otherRouter"){
 			this.singleOpenName = ["htgl"];
 		}else{

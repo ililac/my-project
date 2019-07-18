@@ -1,25 +1,48 @@
 <template>
   <Row type="flex" justify="start" align="middle" class="login" @keydown.enter.native="submitLogin">
     <Col :xs="{span:22}" style="width: 368px;">
-    <Row class="header">
-      <div class="description" style="color: #333;"><img src="@/assets/logo1.png" style="float: left;margin-left: 50px;"/>法宝云平台</div>
-    </Row>
+      <Row class="header">
+        <div class="description" style="color: #333;">
+          <img src="@/assets/logo1.png" style="float: left;margin-left: 50px;" />法宝云平台
+        </div>
+      </Row>
 
-    <Alert type="error" show-icon v-if="error">{{errorMsg}}</Alert>
-	
-    <Row class="login-form" v-if="!socialLogining">
-      <Tabs v-model="tabName" style="width: 100%;text-align: center;">
-        <TabPane name="username"  label="账号登录" style="width: 100%;text-align: center;">
-          <Form ref="usernameLoginForm" :model="form" :rules="rules" class="form" v-if="tabName=='username'">
-            <FormItem prop="username">
-              <Input v-model="form.username" prefix="ios-contact" size="large" clearable placeholder="请输入用户名" autocomplete="off" />
-            </FormItem>
-            <FormItem prop="password">
-              <Input type="password" v-model="form.password" prefix="ios-lock" size="large" clearable placeholder="请输入密码" autocomplete="off" />
-            </FormItem>
-          </Form>
-        </TabPane>
-        <!-- <TabPane label="手机号登录" name="mobile" icon="ios-phone-portrait">
+      <Alert type="error" show-icon v-if="error">{{errorMsg}}</Alert>
+
+      <Row class="login-form" v-if="!socialLogining">
+        <Tabs v-model="tabName" style="width: 100%;text-align: center;">
+          <TabPane name="username" label="账号登录" style="width: 100%;text-align: center;">
+            <Form
+              ref="usernameLoginForm"
+              :model="form"
+              :rules="rules"
+              class="form"
+              v-if="tabName=='username'"
+            >
+              <FormItem prop="username">
+                <Input
+                  v-model="form.username"
+                  prefix="ios-contact"
+                  size="large"
+                  clearable
+                  placeholder="请输入用户名"
+                  autocomplete="off"
+                />
+              </FormItem>
+              <FormItem prop="password">
+                <Input
+                  type="password"
+                  v-model="form.password"
+                  prefix="ios-lock"
+                  size="large"
+                  clearable
+                  placeholder="请输入密码"
+                  autocomplete="off"
+                />
+              </FormItem>
+            </Form>
+          </TabPane>
+          <!-- <TabPane label="手机号登录" name="mobile" icon="ios-phone-portrait">
           <Form ref="mobileLoginForm" :model="form" :rules="rules" class="form" v-if="tabName=='mobile'">
             <FormItem prop="mobile">
               <Input v-model="form.mobile" prefix="ios-phone-portrait" size="large" clearable placeholder="请输入手机号" />
@@ -35,12 +58,12 @@
               </Row>
             </FormItem>
           </Form>
-        </TabPane> -->
-      </Tabs>
+          </TabPane>-->
+        </Tabs>
 
-      <Row type="flex" justify="space-between">
-        <Checkbox v-model="saveLogin" size="large">自动登录</Checkbox>
-        <!-- <Dropdown trigger="click" @on-click="handleDropDown">
+        <Row type="flex" justify="space-between">
+          <Checkbox v-model="saveLogin" size="large">自动登录</Checkbox>
+          <!-- <Dropdown trigger="click" @on-click="handleDropDown">
           <a class="forget-pass">
             忘记密码
           </a>
@@ -49,15 +72,22 @@
             <DropdownItem name="resetByMobile">使用手机号重置密码(付费)</DropdownItem>
             <DropdownItem name="resetByEmail">使用邮箱重置密码(付费)</DropdownItem>
           </DropdownMenu>
-        </Dropdown> -->
-      </Row>
-      <Row>
-        <Button class="login-btn" type="primary" size="large" :loading="loading" @click="submitLogin" long>
-          <span v-if="!loading">登录</span>
-          <span v-else>登录中...</span>
-        </Button>
-      </Row>
-      <!-- <Row type="flex" justify="space-between" class="other-login">
+          </Dropdown>-->
+        </Row>
+        <Row>
+          <Button
+            class="login-btn"
+            type="primary"
+            size="large"
+            :loading="loading"
+            @click="submitLogin"
+            long
+          >
+            <span v-if="!loading">登录</span>
+            <span v-else>登录中...</span>
+          </Button>
+        </Row>
+        <!-- <Row type="flex" justify="space-between" class="other-login">
         <div class="other-way icons">
           其它方式登录
           <div class="other-icon" @click="toGithubLogin">
@@ -74,18 +104,18 @@
           </div>
         </div>
         <router-link to="/regist"><a class="forget-pass">注册账户</a></router-link>
-      </Row> -->
-    </Row>
-    <!-- <div v-if="socialLogining" class="spinner">
+        </Row>-->
+      </Row>
+      <!-- <div v-if="socialLogining" class="spinner">
       <div class="rect1"></div>
       <div class="rect2"></div>
       <div class="rect3"></div>
       <div class="rect4"></div>
       <div class="rect5"></div>
-      <!-- <span>用户数据加载中...</span> -->
-    <!-- </div> -->
+      <!-- <span>用户数据加载中...</span>-->
+      <!-- </div> -->
 
-    <!-- <Row class="foot">
+      <!-- <Row class="foot">
        <Row type="flex" justify="space-around" class="help">
          <a class="item" href="https://github.com/Exrick/x-boot" target="_blank">帮助</a>
          <a class="item" href="https://github.com/Exrick/x-boot" target="_blank">隐私</a>
@@ -94,13 +124,14 @@
        <Row type="flex" justify="center" class="copyright">
          Copyright © 2018 - Present <a href="http://exrick.cn" target="_blank" style="margin:0 5px;">Exrick</a> 版权所有
        </Row>
-     </Row> -->
+      </Row>-->
     </Col>
   </Row>
 </template>
 
 <script>
 import Cookies from "js-cookie";
+const queryString = require('query-string');
 import {
   login,
   userInfo,
@@ -179,7 +210,7 @@ export default {
       this.$refs.mobileLoginForm.validate(valid => {
         if (valid) {
           this.sending = true;
-          sendSms(this.form.mobile, {type: 1}).then(res => {
+          sendSms(this.form.mobile, { type: 1 }).then(res => {
             this.sending = false;
             if (res.success) {
               this.$Message.success("发送短信验证码成功");
@@ -205,7 +236,7 @@ export default {
       }, 1000);
     },
     submitLogin() {
-		let that = this;
+      let that = this;
       if (that.tabName === "username") {
         that.$refs.usernameLoginForm.validate(valid => {
           if (valid) {
@@ -213,14 +244,14 @@ export default {
             login({
               username: that.form.username,
               password: that.form.password,
-							loginType:"userLogin",
+              loginType: "userLogin",
               saveLogin: that.saveLogin
             }).then(res => {
-              if (res.success === true) {
+              if (res.success) {
                 that.setStore("accessToken", res.result.access_token);
                 // 获取用户信息
                 userInfo().then(res => {
-                  if (res.success === true) {
+                  if (res.success) {
                     // 避免超过大小限制
                     delete res.result.permissions;
                     let roles = [];
@@ -229,14 +260,17 @@ export default {
                     });
                     that.setStore("roles", roles);
                     that.setStore("saveLogin", that.saveLogin);
-					localStorage.setItem("userInfo",JSON.stringify(res.result));
+                    localStorage.setItem(
+                      "userInfo",
+                      JSON.stringify(res.result)
+                    );
                     if (that.saveLogin) {
                       // 保存7天
-                      Cookies.set("userInfo", JSON.stringify(res.result), {
+                      Cookies.set("userInfo", queryString.stringify(res.result), {
                         expires: 7
                       });
                     } else {
-                      Cookies.set("userInfo", JSON.stringify(res.result));
+                      Cookies.set("userInfo", queryString.stringify(res.result));
                     }
                     that.setStore("userInfo", res.result);
                     that.$store.commit("setAvatarPath", res.result.avatar);
@@ -281,11 +315,11 @@ export default {
                     this.setStore("roles", roles);
                     if (this.saveLogin) {
                       // 保存7天
-                      Cookies.set("userInfo", JSON.stringify(res.result), {
+                      Cookies.set("userInfo", queryString.stringify(res.result), {
                         expires: 7
                       });
                     } else {
-                      Cookies.set("userInfo", JSON.stringify(res.result));
+                      Cookies.set("userInfo", queryString.stringify(res.result));
                     }
                     this.setStore("userInfo", res.result);
                     this.$store.commit("setAvatarPath", res.result.avatar);
@@ -364,7 +398,7 @@ export default {
                   });
                   this.setStore("roles", roles);
                   // 保存7天
-                  Cookies.set("userInfo", JSON.stringify(res.result), {
+                  Cookies.set("userInfo", queryString.stringify(res.result), {
                     expires: 7
                   });
                   this.setStore("userInfo", res.result);
@@ -416,7 +450,8 @@ export default {
     showMessage() {
       this.$Notice.success({
         title: "已升级至iView3.0",
-        desc: "完善多项功能，包括数据权限、部门管理、定时任务、数据字典、前端模版等 修复已知BUG",
+        desc:
+          "完善多项功能，包括数据权限、部门管理、定时任务、数据字典、前端模版等 修复已知BUG",
         duration: 5
       });
     }

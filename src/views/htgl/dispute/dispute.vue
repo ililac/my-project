@@ -629,7 +629,6 @@
 				if(res.message == "success"){
 					this.disputeForm.fileUrl = res.result.url;
 					this.disputeForm.fileName = res.result.name;
-					console.log(this.disputeForm);
 					document.getElementById("contentname").innerHTML = "点击上传";
 				}else{
 					this.$Message.error("上传文件 " + file.name + " 失败");

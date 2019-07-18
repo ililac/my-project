@@ -264,7 +264,7 @@
             getProcessList() {
                 getProcessDataList(this.searchProcessForm).then(res => {
                     if (res.message=="success") {
-						let arr = res.result.content;
+						let arr = res.result.content?res.result.content:[];
 						for(var i = 0;i<arr.length;i++){
 							if(arr[i].processKey == "contract_approve"){
 								this.processData = arr[i];
