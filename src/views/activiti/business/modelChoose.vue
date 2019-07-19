@@ -1400,7 +1400,7 @@ export default {
         let that = this;
         getProcessDataList(this.searchProcessForm).then(res => {
           if (res.message == "success") {
-            let arr = res.result.content;
+            let arr = res.result.records;
             if (message == "true") {
               for (let i = 0; i < arr.length; i++) {
                 if (arr[i].processKey == "contract_approve_zhiNeng") {
