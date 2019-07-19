@@ -157,6 +157,7 @@ import {
   getFirstNode,
   getBusinessDataList,
   deleteBusiness,
+  initDepartment,
   cancelApply
 } from "@/api/activiti";
 import { 
@@ -827,6 +828,13 @@ export default {
 			eachOther().then(res => {
 			    this.counterpartArr = res.result.content
 			});
+			initDepartment().then(res => {
+			  if (res.success) {
+			    this.treeData = res.result;
+			    this.treeData[0].children = [];
+			    this.treeData[0].loading = false;
+			  }
+			});
     },
     getDictDataType() {
       getDictDataByType("priority").then(res => {
@@ -1035,26 +1043,33 @@ export default {
 			this.form.assignees = [];
 			this.personData = [];
 			this.selectCount2 = 0;
-			this.treeData=[
-			    {
-			        createBy: "admin",
-					createTime: "2019-01-08",
-					delFlag: 0,
-					haveChild: false,
-					id: "94930003292065792",
-					isParent: true,
-					parentId: "0",
-					parentTitle: "一级部门",
-					sortOrder: 4,
-					status: 0,
-					title: "北京大学",
-					updateBy: "admin",
-					updateTime: "2019-03-07",
-					users: null,
-					loading: false,
-			        children: []
-			    }
-			]
+			initDepartment().then(res => {
+			  if (res.success) {
+			    this.treeData = res.result;
+			    this.treeData[0].children = [];
+			    this.treeData[0].loading = false;
+			  }
+			});
+			// this.treeData=[
+			//     {
+			//         createBy: "admin",
+			// 		createTime: "2019-01-08",
+			// 		delFlag: 0,
+			// 		haveChild: false,
+			// 		id: "94930003292065792",
+			// 		isParent: true,
+			// 		parentId: "0",
+			// 		parentTitle: "一级部门",
+			// 		sortOrder: 4,
+			// 		status: 0,
+			// 		title: "北京大学",
+			// 		updateBy: "admin",
+			// 		updateTime: "2019-03-07",
+			// 		users: null,
+			// 		loading: false,
+			//         children: []
+			//     }
+			// ]
     },
     cancel(v) {
       this.cancelForm.id = v.id;
