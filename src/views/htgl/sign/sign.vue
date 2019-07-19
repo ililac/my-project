@@ -917,8 +917,12 @@
 						this.btnLoading4 = false;
 					});
 				}else if(click == 1){
+					debugger
 					this.btnLoading3 = true;
+        			delete signForm.id;
+        			delete signForm.tenantId;
 					signForm.isuse = 1;
+					signForm.contractid = this.signForm.contractId;
 					signAture(signForm).then(res => {
 						this.modalSign = false
 						this.getDataList();
