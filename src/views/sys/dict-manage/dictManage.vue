@@ -349,11 +349,10 @@ export default {
       });
     },
 		loadData (item, callback) {
-			console.log(item);
 			this.searchForm.dictId = item.id;
 			getAllDictDataList(this.searchForm).then(res => {
 			  if (res.success === true) {
-						let arr = res.result.content;
+						let arr = res.result.records;
 						for(var i = 0;i<arr.length;i++){
 							if(arr[i].haveChild){
 								arr[i].children = [];
