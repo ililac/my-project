@@ -157,7 +157,6 @@ import {
   getFirstNode,
   getBusinessDataList,
   deleteBusiness,
-  initDepartment,
   cancelApply
 } from "@/api/activiti";
 import { 
@@ -165,6 +164,7 @@ import {
 	detailList,
 	applyBusiness,
 	personSelect,
+	initDepartment,
 	loadDepartment,
 	passExamine,
 	eachOther
