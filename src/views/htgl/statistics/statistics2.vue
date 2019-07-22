@@ -265,10 +265,8 @@ export default {
             time = this.year+'-'+month
          }
       }else{
-        if (this.month.length>0) {
-          return
-        }
-        time = this.time
+        this.$Message.error('请选择年')
+        return
       }
       this.initCharts(time);
     },
@@ -517,7 +515,7 @@ export default {
     let date = new Date()
     let time = date.getFullYear()
     this.initCharts(time);
-    this.year =time;
+    this.year =time+'';
 			for(let i = 0;i <= date.getMonth();i++){
 				this.monthList.push(i+1+'');
 			};
