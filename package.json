@@ -14,7 +14,7 @@
     "clipboard": "^2.0.1",
     "countup": "^1.8.2",
     "cropperjs": "^1.4.1",
-    "dplayer": "^1.25.0",
+    "dplayer": "^1.27.0",
     "echarts": "^4.1.0",
     "element-ui": "^2.4.11",
     "gitalk": "^1.4.0",
@@ -38,11 +38,11 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@vue/cli-plugin-babel": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-service": "^5.0.8",
     "babel-plugin-component": "^1.1.1",
     "less": "^3.0.4",
-    "less-loader": "^4.1.0",
+    "less-loader": "^11.1.0",
     "vue-lazyload": "^1.2.6",
     "vue-template-compiler": "^2.5.17"
   }
